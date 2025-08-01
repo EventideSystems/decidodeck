@@ -10,12 +10,13 @@
 #  deleted_at                                                    :datetime
 #  deprecated_allow_sustainable_development_goal_alignment_cards :boolean          default(FALSE)
 #  deprecated_allow_transition_cards                             :boolean          default(TRUE)
+#  deprecated_expires_on                                         :date
+#  deprecated_expiry_warning_sent_on                             :date
 #  deprecated_solution_ecosystem_maps                            :boolean
 #  deprecated_weblink                                            :string
 #  deprecated_welcome_message                                    :text
 #  description                                                   :string
-#  expires_on                                                    :date
-#  expiry_warning_sent_on                                        :date
+#  log_data                                                      :jsonb
 #  max_scorecards                                                :integer          default(1)
 #  max_users                                                     :integer          default(1)
 #  name                                                          :string
@@ -29,19 +30,29 @@
 #  transition_card_model_name                                    :string           default("Transition Card")
 #  created_at                                                    :datetime         not null
 #  updated_at                                                    :datetime         not null
+#  account_id                                                    :bigint
+#
+# Indexes
+#
+#  index_workspaces_on_account_id  (account_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (account_id => accounts.id)
 #
 class Workspace < ApplicationRecord
+  acts_as_paranoid
+  has_logidze
+
   include Searchable
 
-  has_paper_trail
-  acts_as_paranoid
-
   EXPIRY_WARNING_PERIOD = 30.days
+
+  belongs_to :account, optional: true
 
   # Direct associations
   has_many :workspaces_users, dependent: :destroy
   has_many :communities, dependent: :destroy
-  has_many :focus_area_groups, dependent: :destroy # TODO: Remove when all focus_area_groups have an impact card model
   has_many :data_models, dependent: :destroy
   has_many :organisations, dependent: :destroy
   has_many :scorecards, dependent: :destroy
@@ -67,6 +78,8 @@ class Workspace < ApplicationRecord
           where(expires_on: Time.zone.today..(Time.zone.today + EXPIRY_WARNING_PERIOD)).order(created_at: :asc)
         }
 
+  delegate :expired?, to: :account, allow_nil: true
+
   def add_user(user, workspace_role)
     workspaces_users.create(user:, workspace_role:)
   end
@@ -77,7 +90,7 @@ class Workspace < ApplicationRecord
     max_users - workspaces_users.count
   end
 
-  def max_users_reached?
+  def max_users_reached?(be)
     return false if max_users.zero? || max_users.blank?
 
     users.count >= max_users
@@ -85,10 +98,6 @@ class Workspace < ApplicationRecord
 
   def data_models_in_use
     scorecards.map(&:data_model).uniq
-  end
-
-  def expired?
-    expires_on.present? && expires_on < Time.zone.today
   end
 
   private

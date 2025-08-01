@@ -37,7 +37,7 @@ class FocusArea < ApplicationRecord
   }
 
   belongs_to :focus_area_group, inverse_of: :focus_areas
-  has_many :characteristics, -> { order(position: :desc) }, dependent: :restrict_with_error, inverse_of: :focus_area
+  has_many :characteristics, -> { order(position: :desc) }, dependent: :destroy, inverse_of: :focus_area
 
   # TODO: Add validations to the database schema (taking into account the deleted_at column)
   validates :position, presence: true, uniqueness: { scope: :focus_area_group } # rubocop:disable Rails/UniqueValidationWithoutIndex

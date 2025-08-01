@@ -1,0 +1,55 @@
+<div class="mx-auto max-w-6xl">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <div class="w-full">
+      <%= page_header_tag 'Account Details' %>
+      <div class="flex justify-between items-center mt-4">
+        <div class="flex gap-6 py-6">
+        <%= render partial: 'resource_summary', locals: { name: @account.name, background_color: 'bg-green-700' } %>
+          <div class="space-y-1.5">
+            <div class="text-base/6 font-semibold dark:text-white">
+              <%= @account.name %>
+            </div>
+            <div class="text-xs/6 text-zinc-500 min-h-4">
+              <%= @account.description %>
+            </div>
+
+            <%= account_subscription_type_badge(@account) %>
+            <%- if @account.expired? %>
+              <div class="inline-flex rounded-lg items-center justify-center bg-red-600 dark:bg-red-600 text-white" title="Expired">
+                <p class="py-1 px-2 text-xs whitespace-nowrap">Expired</p>
+              </div>
+            <%- end %>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="flex justify-end items-center mb-4 gap-4" data-controller="switch-account">
+
+            <%- if policy(@account).edit? %>
+              <%= link_to_primary 'Edit Account', edit_account_path(@account) %>
+            <%- end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= horizontal_rule(class: 'my-10 mt-6') %>
+  <%= render 'show_page_section', title: 'Overview' do %>
+    <%= definition_list_element('Description', @account.description) %>
+  <% end %>
+
+  <%= render 'show_page_section', title: 'Status' do %>
+    <%= definition_list_element('Active', !@account.expired?) %>
+    <%= definition_list_element('Expires on', @account.expires_on) %>
+    <%= definition_list_element('Expiry reminder sent on', @account.expiry_reminder_sent_on) %>
+  <% end %>
+
+  <%= render 'show_page_section', title: 'Restrictions' do %>
+    <%= definition_list_element('Max team members', limit_text(@account.max_users)) %>
+    <%= definition_list_element('Max impact cards', limit_text(@account.max_impact_cards)) %>
+  <% end %>
+
+  <%= render 'show_page_section', title: 'Other Settings' do %>
+    <%= definition_list_element('Default workspace grid mode', @account.default_workspace_grid_mode.titleize) %>
+  <% end %>
+</div>
+

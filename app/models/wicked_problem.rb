@@ -5,7 +5,7 @@
 # Table name: wicked_problems
 #
 #  id           :integer          not null, primary key
-#  color        :string           default("#910669"), not null
+#  color        :string           default("#a87884"), not null
 #  deleted_at   :datetime
 #  description  :string
 #  name         :string
@@ -27,7 +27,7 @@ class WickedProblem < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :workspace
-  has_many :scorecards, dependent: :restrict_with_error
+  has_many :scorecards, dependent: :destroy
 
   validates :workspace, presence: true
   # TODO: Add validation to datbase schema

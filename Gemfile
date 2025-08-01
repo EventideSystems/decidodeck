@@ -67,9 +67,6 @@ gem 'csv'
 gem 'rubyzip', '>= 1.3.0'
 gem 'scenic'
 
-# gem 'marcel'
-# gem 'shrine', '>= 3.3.0'
-
 gem 'aws-sdk-lambda'
 gem 'aws-sdk-rails'
 
@@ -77,10 +74,14 @@ gem 'data_migrate'
 
 gem 'net-http'
 gem 'pagy'
-gem 'paper_trail'
+gem 'paper_trail' # NOTE: We will be dropping this in favor of logidze
 gem 'paranoia'
 gem 'ransack'
 gem 'recaptcha'
+
+# Change tracking
+gem 'fx'
+gem 'logidze'
 
 # Monitoring related
 gem 'appsignal'
