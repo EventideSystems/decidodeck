@@ -90,7 +90,7 @@ class Workspace < ApplicationRecord
     max_users - workspaces_users.count
   end
 
-  def max_users_reached?(be)
+  def max_users_reached?(_be)
     return false if max_users.zero? || max_users.blank?
 
     users.count >= max_users
