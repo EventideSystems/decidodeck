@@ -1,0 +1,24 @@
+# config/appsignal.yml
+# Define the "defaults" anchor
+default: &defaults
+  name: "Decidodeck"
+  # Supports ERB
+  push_api_key: "<%= ENV['APPSIGNAL_PUSH_API_KEY'] %>"
+
+production:
+  # Loads the defaults in the production environment by referencing the anchor
+  <<: *defaults
+  # production environment specific configuration
+  active: true
+
+staging:
+  # Loads the defaults in the production environment by referencing the anchor
+  <<: *defaults
+  # production environment specific configuration
+  active: true
+
+development:
+  # Loads the defaults in the development environment by referencing the anchor
+  <<: *defaults
+  # development environment specific configuration
+  active: true
