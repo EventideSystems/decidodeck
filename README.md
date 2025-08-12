@@ -33,9 +33,7 @@ The source code for Decidodeck is written using [Ruby on Rails](https://rubyonra
 
 ## Current Features
 
-### Tracking Changes
-
-### Model Your Initiatives and Track Progress 
+### Model Initiatives and Track Progress 
 
 Use Decidodeck to define the objectives behind your strategic efforts and record the actions you take toward achieving them.
 
