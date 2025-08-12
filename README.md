@@ -1,3 +1,9 @@
+> ****************************************************
+> NOTE: We are in the process of merging this project with the original Decidodeck, itself renamed to 'decidodeck-prototype'
+> 
+> See https://github.com/EventideSystems/decidodeck-prototype
+> ****************************************************
+
 # Obsekio: the Tool for Systemic Change
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
