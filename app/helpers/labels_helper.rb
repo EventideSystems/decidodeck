@@ -2,9 +2,29 @@
 
 # Helper for labels, specifically for calculating luminance of a hex color. Probably should be renamed to ColorHelper.
 module LabelsHelper
-  def hex_to_rgb(hex)
+  def hex_to_rgb(hex) # rubocop:disable Metrics/MethodLength
     return [0, 0, 0] if hex.blank?
 
+    # Map common color names to hex values
+    color_map = {
+      'blue' => '#0000FF',
+      'teal' => '#14b8a6',
+      'red' => '#FF0000',
+      'green' => '#00FF00',
+      'yellow' => '#FFFF00',
+      'orange' => '#FFA500',
+      'purple' => '#800080',
+      'pink' => '#FF69B4',
+      'black' => '#000000',
+      'white' => '#FFFFFF',
+      'gray' => '#808080',
+      'grey' => '#808080',
+      'brown' => '#A52A2A',
+      'cyan' => '#00FFFF',
+      'magenta' => '#FF00FF'
+    }
+
+    hex = color_map[hex.downcase.strip] if color_map.key?(hex.downcase.strip)
     hex = hex.delete('#')
     r = hex[0..1].to_i(16)
     g = hex[2..3].to_i(16)
