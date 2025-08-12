@@ -48,7 +48,6 @@
   <%= render 'show_page_section', title: 'Status' do %>
     <%= definition_list_element('Deactivated', @workspace.deactivated) %>
     <%= definition_list_element('Expires on', @workspace.expires_on) %>
-    <%= definition_list_element('Expiry warning sent on', @workspace.expiry_warning_sent_on) %>
   <% end %>
 
   <%= render 'show_page_section', title: 'Restrictions' do %>

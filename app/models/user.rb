@@ -59,15 +59,17 @@ class User < ApplicationRecord
 
   has_many :active_workspaces,
            lambda {
-             where('workspaces.expires_on IS NULL OR workspaces.expires_on >= ?', Time.zone.today)
+             joins(:account)
+               .where('accounts.expires_on IS NULL OR accounts.expires_on >= ?', Time.zone.today)
            },
            through: :workspaces_users,
            source: :workspace
 
   has_many :active_workspaces_with_admin_role,
            lambda {
+             joins(:account)
              where(workspaces_users: { workspace_role: :admin })
-               .where('workspaces.expires_on IS NULL OR workspaces.expires_on >= ?', Time.zone.today)
+               .where('accounts.expires_on IS NULL OR accounts.expires_on >= ?', Time.zone.today)
            },
            through: :workspaces_users,
            source: :workspace
@@ -101,7 +103,7 @@ class User < ApplicationRecord
   end
 
   def default_workspace
-    active_workspaces.first || workspaces.first
+    active_workspaces.first || workspaces.first || (admin? ? workspaces.first : nil)
   end
 
   def primary_workspace_name

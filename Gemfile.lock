@@ -205,6 +205,9 @@ GEM
     ffi (1.17.2-x86-linux-gnu)
     ffi (1.17.2-x86_64-darwin)
     ffi (1.17.2-x86_64-linux-gnu)
+    fx (0.9.0)
+      activerecord (>= 7.0)
+      railties (>= 7.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     htmlentities (4.3.4)
@@ -230,6 +233,9 @@ GEM
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
+    logidze (1.4.1)
+      activerecord (>= 6.0)
+      railties (>= 6.0)
     loofah (2.24.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -537,9 +543,11 @@ DEPENDENCIES
   factory_bot_rails
   fast_jsonparser
   ffaker
+  fx
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
+  logidze
   mailjet
   net-http
   ostruct
@@ -649,6 +657,7 @@ CHECKSUMS
   ffi (1.17.2-x86-linux-gnu) sha256=95d8f9ebea23c39888e2ab85a02c98f54acb2f4e79b829250d7267ce741dc7b0
   ffi (1.17.2-x86_64-darwin) sha256=981f2d4e32ea03712beb26e55e972797c2c5a7b0257955d8667ba58f2da6440e
   ffi (1.17.2-x86_64-linux-gnu) sha256=05d2026fc9dbb7cfd21a5934559f16293815b7ce0314846fee2ac8efbdb823ea
+  fx (0.9.0) sha256=9197b8ab2f7814da17d137cd98eb7a72706d7ab87aacf803237ed014baa06d0a
   globalid (1.2.1) sha256=70bf76711871f843dbba72beb8613229a49429d1866828476f9c9d6ccc327ce9
   htmlentities (4.3.4) sha256=125a73c6c9f2d1b62100b7c3c401e3624441b663762afa7fe428476435a673da
   i18n (1.14.7) sha256=ceba573f8138ff2c0915427f1fc5bdf4aa3ab8ae88c8ce255eb3ecf0a11a5d0f
@@ -662,6 +671,7 @@ CHECKSUMS
   language_server-protocol (3.17.0.5) sha256=fd1e39a51a28bf3eec959379985a72e296e9f9acfce46f6a79d31ca8760803cc
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
+  logidze (1.4.1) sha256=6303fbeff030e21cd2f143aa5f7dba300978236509327cbee41447cb2af5e368
   loofah (2.24.1) sha256=655a30842b70ec476410b347ab1cd2a5b92da46a19044357bbd9f401b009a337
   mail (2.8.1) sha256=ec3b9fadcf2b3755c78785cb17bc9a0ca9ee9857108a64b6f5cfc9c0b5bfc9ad
   mailjet (1.8.1) sha256=644d36e726ce93eeb387ca4aa570e7ce296f977800404a225d5786cee4b56b2a
