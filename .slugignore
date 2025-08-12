@@ -8,3 +8,4 @@
 # Ignore files used in development
 /.rubocop.yml
 /config/brakeman.ignore
+/doc
