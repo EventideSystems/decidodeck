@@ -8,10 +8,10 @@ HEROKU_STAGING_DEPLOY = <<~BASH
 BASH
 
 HEROKU_PRODUCTION_DEPLOY = <<~BASH
-  git push -f tool-for-systemic-change-prod main:main && \
-  heroku run rake db:migrate -a tool-for-systemic-change-prod && \
-  heroku run rake data:migrate -a tool-for-systemic-change-prod && \
-  heroku restart -a tool-for-systemic-change-prod
+  git push -f decidodeck-production main:main && \
+  heroku run rake db:migrate -a decidodeck-production && \
+  heroku run rake data:migrate -a decidodeck-production && \
+  heroku restart -a decidodeck-production
 BASH
 
 namespace :deploy do # rubocop:disable Metrics/BlockLength
