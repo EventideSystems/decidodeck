@@ -54,13 +54,13 @@ Start with pre-built data-collection models - like the United Nations’ Sustain
 
 Get a clear overview of your related initiatives with Decidodeck. Compare progress across projects, spot gaps in effort, and stay aligned as your strategy evolves.
 
-![grid view of initiatives](app/assets/images/screenshot.png)
+[Example screenshot →](app/assets/images/screenshot.png)
 
 ### Map Stakeholder Influence
 
 Use Decidodeck to visualize how stakeholders connect across your initiatives. Identify who holds the most influence within your ecosystem, and understand how each party shapes the outcomes of your tracked projects.
 
-![stakeholder graph](app/assets/images/graph.png)
+[Example screenshot →](app/assets/images/graph.png)
 
 ## Planned Features
 
@@ -96,6 +96,7 @@ So, thank you to everyone!
 ## License & Attribution
 
 Copyright © 2023 Wicked Lab
+
 Copyright © 2025 Eventide Systems Pty Ltd
 
 This software is licensed under the GNU Affero General Public License, version 3 ("AGPL-3.0"). See the [LICENSE](LICENSE.md) file for details.  
@@ -125,4 +126,4 @@ Decidodeck welcomes contributors from design, strategy, and open-source backgrou
 
 Before contributing, please familiarize yourself with the project's [License](LICENSE) and [Code of Conduct](/doc/CODE_OF_CONDUCT.md).
 
-You can find details the current state of the Decidodeck's [project board](https://github.com/orgs/EventideSystems/projects/1).
+You can view Decidodeck’s latest development progress on the [Github project board](https://github.com/orgs/EventideSystems/projects/1).
