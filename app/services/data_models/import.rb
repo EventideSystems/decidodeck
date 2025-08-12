@@ -22,16 +22,16 @@ module DataModels
         data_model.focus_area_groups.update_all(position: nil) # rubocop:disable Rails/SkipsModelValidations
 
         source[:goals].each_with_index do |goal_source, goal_position|
-          goal = find_or_create_goal(data_model, goal_source, goal_position)
+          goal = find_or_create_goal(data_model, goal_source, goal_position + 1)
           goal.focus_areas.update_all(position: nil) # rubocop:disable Rails/SkipsModelValidations
 
           goal_source[:targets].each_with_index do |target_source, target_position|
-            target = find_or_create_target(goal, target_source, target_position)
+            target = find_or_create_target(goal, target_source, target_position + 1)
             target.characteristics.update_all(position: nil) # rubocop:disable Rails/SkipsModelValidations
 
             target_source[:indicators].each_with_index do |indicator_source, indicator_position|
               target.characteristics.find_or_create_by(name: indicator_source[:name]) do |indicator|
-                update_element!(indicator, indicator_source, indicator_position)
+                update_element!(indicator, indicator_source, indicator_position + 1)
               end
             end
           end

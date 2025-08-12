@@ -31,6 +31,8 @@
 # Foreign Keys
 #
 #  fk_rails_...  (data_model_id => data_models.id)
+#
+#  fk_rails_...  (data_model_id => data_models.id)
 
 require 'ostruct'
 

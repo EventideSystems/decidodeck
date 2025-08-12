@@ -14,7 +14,7 @@ union
 
 select
   initiatives.scorecard_id as scorecard_id,
-  checklist_items.created_at as occurred_at,
+  checklist_item_changes.created_at as occurred_at,
   initiatives.name as initiative_name,
   characteristics.name as characteristic_name,
   checklist_item_changes.action as action,
