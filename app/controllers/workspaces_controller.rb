@@ -27,14 +27,14 @@ class WorkspacesController < ApplicationController
   end
 
   def new
-    @workspace = Workspace.new(expires_on: Time.zone.today + 1.year)
+    @workspace = current_account.workspaces.build
     authorize(@workspace)
   end
 
   def edit; end
 
   def create
-    @workspace = Workspace.new(workspace_params)
+    @workspace = current_account.workspaces.build(workspace_params)
     authorize(@workspace)
 
     if @workspace.save
@@ -77,11 +77,7 @@ class WorkspacesController < ApplicationController
     params.fetch(:workspace, {}).permit(
       :name,
       :description,
-      :classic_grid_mode,
-      :deactivated,
-      :expires_on,
-      :max_users,
-      :max_scorecards
+      :deactivated
     )
   end
 end

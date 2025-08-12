@@ -15,16 +15,14 @@
       </div>
     </div>
 
-    <%- if policy(User).invite_with_system_role? %>
-      <div>
-        <%= f.label :initial_system_role, class: 'block text-sm font-medium text-gray-700 dark:text-gray-700' %>
-        <%= f.select :initial_system_role, options_for_select(User.system_roles.keys.map { |key| [key.capitalize, key]}, User.system_roles.keys.first) %>
-      </div>
-    <%- end %>
+    <div>
+      <%= custom_label_tag :account_role, "Role in '#{current_account.name}' account", class: 'block text-sm font-medium text-gray-700 dark:text-gray-700' %>
+      <%= custom_select_tag :account_role, options_for_account_roles_select %>
+    </div>
 
     <div>
-      <%= f.label :initial_workspace_role, class: 'block text-sm font-medium text-gray-700 dark:text-gray-700' %>
-      <%= f.select :initial_workspace_role, options_for_select(WorkspacesUser.workspace_roles.keys.map { |key| [key.capitalize, key]}, WorkspacesUser.workspace_roles.keys.first) %>
+      <%= custom_label_tag :workspace_role, "Role in '#{current_workspace.name}' workspace", class: 'block text-sm font-medium text-gray-700 dark:text-gray-700' %>
+      <%= custom_select_tag :workspace_role, options_for_select(WorkspaceMember.workspace_roles.keys.map { |key| [key.capitalize, key]}, WorkspaceMember.workspace_roles.keys.first) %>
     </div>
 
     <div>

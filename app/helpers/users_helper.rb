@@ -9,10 +9,21 @@ module UsersHelper
     return '' if workspace_role.blank?
 
     badge_class = role_in_current_workspace_badge_class(workspace_role)
-    member_since = WorkspacesUser.find_by(user: user, workspace: current_workspace).created_at.strftime('%b. %Y')
+    member_since = WorkspaceMember.find_by(user: user, workspace: current_workspace).created_at.strftime('%b. %Y')
 
     content_tag(:span, "Workspace #{workspace_role.titleize}", class: badge_class,
                                                                title: "Member since #{member_since}")
+  end
+
+  def role_in_current_account_badge(user)
+    account_role = role_in_current_account(user)
+    return '' if account_role.blank?
+
+    badge_class = role_in_current_account_badge_class(account_role)
+    member_since = AccountMember.find_by(user: user, account: current_account).created_at.strftime('%b. %Y')
+
+    content_tag(:span, "Account #{account_role.titleize}", class: badge_class,
+                                                           title: "Member since #{member_since}")
   end
 
   def user_system_role_badge(user)
@@ -46,6 +57,27 @@ module UsersHelper
 
   private
 
+  def role_in_current_account(user)
+    account_member = AccountMember.where(user: user, account: current_account).first
+    account_member.try(:role)
+  end
+
+  def role_in_current_account_badge_class(account_role)
+    case account_role.to_sym
+    when :owner
+      "#{BADGE_BASE_CLASS} bg-blue-400"
+    when :admin
+      "#{BADGE_BASE_CLASS} bg-yellow-400"
+    when :member
+      "#{BADGE_BASE_CLASS} bg-green-400"
+    end
+  end
+
+  def role_in_current_workspace(user)
+    workspace_member = WorkspaceMember.where(user: user, workspace: current_workspace).first
+    workspace_member.try(:workspace_role)
+  end
+
   def role_in_current_workspace_badge_class(workspace_role)
     case workspace_role.to_sym
     when :admin
@@ -53,11 +85,6 @@ module UsersHelper
     when :member
       "#{BADGE_BASE_CLASS} bg-lime-400"
     end
-  end
-
-  def role_in_current_workspace(user)
-    workspaces_user = WorkspacesUser.where(user: user, workspace: current_workspace).first
-    workspaces_user.try(:workspace_role)
   end
 
   def user_system_role_badge_class(system_role)

@@ -51,6 +51,13 @@ class Characteristic < ApplicationRecord
       )
   }
 
+  def display_name
+    base_name = short_name.presence || name
+    base_name = base_name.sub(/^#{Regexp.escape(code)}\s*/, '') if code.present? && base_name.start_with?(code)
+    default_name = [code, base_name].compact_blank.join(' ')
+    default_name.presence || name
+  end
+
   # TODO: Check if this is needed
   def identifier
     "#{focus_area.position}.#{position}"

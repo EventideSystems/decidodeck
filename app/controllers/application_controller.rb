@@ -21,6 +21,12 @@ class ApplicationController < ActionController::Base
 
   sidebar_item :home
 
+  def current_account
+    current_workspace&.account
+  end
+
+  helper_method :current_account
+
   def current_workspace
     return nil if current_user.blank?
 
@@ -52,7 +58,7 @@ class ApplicationController < ActionController::Base
         :email,
         :name,
         :system_role,
-        { workspaces_users_attributes: %i[workspace_id workspace_role] }
+        { workspace_members_attributes: %i[workspace_id workspace_role] }
       ]
     )
   end

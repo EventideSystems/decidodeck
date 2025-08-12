@@ -78,10 +78,14 @@ gem 'data_migrate'
 
 gem 'net-http'
 gem 'pagy'
-gem 'paper_trail'
+gem 'paper_trail' # NOTE: We will be dropping this in favor of logidze
 gem 'paranoia'
 gem 'ransack'
 gem 'recaptcha'
+
+# Change tracking
+gem 'fx'
+gem 'logidze'
 
 # Monitoring related
 gem 'appsignal'

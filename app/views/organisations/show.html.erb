@@ -33,7 +33,7 @@
   </div>
   <%= horizontal_rule(class: 'my-10 mt-6') %>
 
-  <%= render 'show_page_section', title: 'Contact Details' do %>
+  <%= render 'show_page_dl_section', title: 'Contact Details' do %>
     <%= definition_list_element('Weblink', link_to_external_url(@organisation.weblink)) %>
   <% end %>
 </div>

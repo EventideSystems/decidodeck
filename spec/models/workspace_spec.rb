@@ -10,12 +10,13 @@
 #  deleted_at                                                    :datetime
 #  deprecated_allow_sustainable_development_goal_alignment_cards :boolean          default(FALSE)
 #  deprecated_allow_transition_cards                             :boolean          default(TRUE)
+#  deprecated_expires_on                                         :date
+#  deprecated_expiry_warning_sent_on                             :date
 #  deprecated_solution_ecosystem_maps                            :boolean
 #  deprecated_weblink                                            :string
 #  deprecated_welcome_message                                    :text
 #  description                                                   :string
-#  expires_on                                                    :date
-#  expiry_warning_sent_on                                        :date
+#  log_data                                                      :jsonb
 #  max_scorecards                                                :integer          default(1)
 #  max_users                                                     :integer          default(1)
 #  name                                                          :string
@@ -29,6 +30,15 @@
 #  transition_card_model_name                                    :string           default("Transition Card")
 #  created_at                                                    :datetime         not null
 #  updated_at                                                    :datetime         not null
+#  account_id                                                    :bigint
+#
+# Indexes
+#
+#  index_workspaces_on_account_id  (account_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (account_id => accounts.id)
 #
 require 'rails_helper'
 

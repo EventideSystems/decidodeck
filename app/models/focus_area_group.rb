@@ -44,7 +44,7 @@ class FocusAreaGroup < ApplicationRecord
   # TODO: Remove 'optional: true' when all focus_area_groups have an impact card data model
   belongs_to :data_model, optional: true
 
-  has_many :focus_areas, dependent: :restrict_with_error
+  has_many :focus_areas, dependent: :destroy
 
   validates :position, presence: true # TODO: Scope uniqueness to data_model
 

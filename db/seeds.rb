@@ -42,9 +42,9 @@ org1 = Organisation.find_or_create_by!(name: 'Acme Corp', workspace: ws1, stakeh
 org2 = Organisation.find_or_create_by!(name: 'Globex Inc', workspace: ws2, stakeholder_type: st2)
 
 # Assign users to workspaces
-WorkspacesUser.find_or_create_by!(user: admin, workspace: ws1, workspace_role: 'admin')
-WorkspacesUser.find_or_create_by!(user: user1, workspace: ws1, workspace_role: 'member')
-WorkspacesUser.find_or_create_by!(user: user2, workspace: ws2, workspace_role: 'admin')
+WorkspaceMember.find_or_create_by!(user: admin, workspace: ws1, workspace_role: 'admin')
+WorkspaceMember.find_or_create_by!(user: user1, workspace: ws1, workspace_role: 'member')
+WorkspaceMember.find_or_create_by!(user: user2, workspace: ws2, workspace_role: 'admin')
 
 # --- Import Data Models from YAML ---
 Dir.glob(Rails.root.join('db/data_models/*.yml')).each do |yml|
