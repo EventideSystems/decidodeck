@@ -25,6 +25,21 @@ Decidodeck is a rewrite of [Wicked Lab's](https://web.archive.org/web/2024032920
 
 The source code for Decidodeck is written using [Ruby on Rails](https://rubyonrails.org/) and is available under the [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.en.html) open source license.
 
+## Who is Decidodeck For?
+
+- Strategy and program evaluation professionals working in complex systems  
+- Funders and grantees seeking participatory evaluation methods  
+- Social justice orgs rethinking traditional planning formats  
+- Cross-disciplinary teams who want a shared, reflective space for change modeling
+
+## Philosophy
+
+Decidodeck is more than a planning tool - it’s built on the understanding that change is complex and often messy. It recognizes that strategy involves emotion, that contradictions can spark new insights, and that learning rarely follows a straight path.
+
+Instead of chasing clarity for its own sake, Decidodeck holds space for complexity and desire. It helps teams map not only what they aim to do - but also what they're not willing to betray in the process.
+
+This is strategy with care. With contradiction. With ghosts. [Read the full document →](/doc/PHILOSOPHY.md)
+
 ## Current Features
 
 ### Model Initiatives and Track Progress 
@@ -33,7 +48,7 @@ Use Decidodeck to define the objectives behind your strategic efforts and record
 
 Start with pre-built data-collection models - like the United Nations’ Sustainable Development Goals - or customize them to fit your needs. Build your own models from scratch to reflect the unique contours of your work.
 
-![example of data entry](app/assets/images/data_entry.png)
+[Example screenshot →](app/assets/images/data_entry.png)
 
 ### Measure Impact
 
@@ -66,6 +81,7 @@ Track how your intended outcomes evolve over time - spot where things stay align
 Store, remix, and document frameworks used across your organization. Choose the right tools for the moment, adapt as needed, and keep evolving practice within your team.
 
 For more details, refer to our [design documentation →](/doc/DESIGN.md)
+
 
 ## Acknowledgments
 
