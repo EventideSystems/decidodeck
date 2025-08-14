@@ -9,9 +9,8 @@ class AccountPolicy < ApplicationPolicy
       if system_admin?
         scope.all
       else
-        member_account_ids = AccountsUser.where(user: current_user).includes(:account).pluck(&:account_id)
-        owned_account_ids = Account.where(owner: current_user).pluck(:id)
-        scope.where(id: member_account_ids + owned_account_ids)
+        account_ids = AccountsUser.where(user: current_user).includes(:account).pluck(&:account_id)
+        scope.where(id: account_ids)
       end
     end
   end

@@ -42,17 +42,8 @@
   </div>
   <%= horizontal_rule(class: 'my-10 mt-6') %>
   <%= render 'show_page_section', title: 'Overview' do %>
+    <%= definition_list_element('Account', @workspace.account.name) %>
     <%= definition_list_element('Description', @workspace.description) %>
-  <% end %>
-
-  <%= render 'show_page_section', title: 'Status' do %>
-    <%= definition_list_element('Deactivated', @workspace.deactivated) %>
-    <%= definition_list_element('Expires on', @workspace.expires_on) %>
-  <% end %>
-
-  <%= render 'show_page_section', title: 'Restrictions' do %>
-    <%= definition_list_element('Max team members', limit_text(@workspace.max_users)) %>
-    <%= definition_list_element('Max impact cards', limit_text(@workspace.max_scorecards)) %>
   <% end %>
 
   <%= render 'show_page_section', title: 'Other Settings' do %>
