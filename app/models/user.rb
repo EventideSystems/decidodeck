@@ -45,10 +45,9 @@ class User < ApplicationRecord
   include Searchable
 
   has_paper_trail
+  acts_as_paranoid
 
   enum :system_role, %i[member admin], default: :member # rubocop:disable Rails/EnumHash
-
-  acts_as_paranoid
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

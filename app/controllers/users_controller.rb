@@ -88,8 +88,10 @@ class UsersController < ApplicationController # rubocop:disable Metrics/ClassLen
   end
 
   def impersonate
-    self.current_workspace = @user.workspaces.first
+    self.current_workspace = @user.workspaces.first unless @user.workspaces.include?(current_workspace)
+
     impersonate_user(@user)
+    authorize current_workspace, :show?
 
     redirect_to root_path, flash: { notice: "You are now impersonating #{current_user.name}" }
   end
