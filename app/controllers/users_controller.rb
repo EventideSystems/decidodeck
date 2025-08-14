@@ -91,7 +91,7 @@ class UsersController < ApplicationController # rubocop:disable Metrics/ClassLen
     self.current_workspace = @user.workspaces.first
     impersonate_user(@user)
 
-    redirect_to root_path, flash: { notice: "You are now impersonating #{current_user.name}." }
+    redirect_to root_path, flash: { notice: "You are now impersonating #{current_user.name}" }
   end
 
   def stop_impersonating
@@ -103,7 +103,7 @@ class UsersController < ApplicationController # rubocop:disable Metrics/ClassLen
 
   def undelete
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully undeleted.' }
+      format.html { redirect_to users_url, notice: 'User was successfully undeleted' }
       format.json { head :no_content }
     end
   end

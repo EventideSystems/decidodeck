@@ -149,7 +149,7 @@ Rails.application.routes.draw do
   end
 
   get 'dashboard', to: 'dashboard#index'
-  get 'reports', to: 'reports#index'
+#  get 'reports', to: 'reports#index'
   get 'activities', to: 'activities#index'
   get 'privacy', to: 'home#privacy'
   get 'cookie', to: 'home#cookie'

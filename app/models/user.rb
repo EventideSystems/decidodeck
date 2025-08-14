@@ -68,7 +68,7 @@ class User < ApplicationRecord
   has_many :active_workspaces_with_admin_role,
            lambda {
              joins(:account)
-             where(workspaces_users: { workspace_role: :admin })
+               .where(workspaces_users: { workspace_role: :admin })
                .where('accounts.expires_on IS NULL OR accounts.expires_on >= ?', Time.zone.today)
            },
            through: :workspaces_users,
