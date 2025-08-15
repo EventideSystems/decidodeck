@@ -52,7 +52,7 @@ class Characteristic < ApplicationRecord
   }
 
   def display_name
-    short_name.presence || name
+    [code, short_name].compact_blank.join(' ').presence || name
   end
 
   # TODO: Check if this is needed
