@@ -33,70 +33,83 @@
     </div>
   </div>
   <%= horizontal_rule(class: 'my-10 mt-6') %>
-  <%= render 'show_page_section', title: 'Overview' do %>
+  <%= render 'show_page_dl_section', title: 'Overview' do %>
     <%= definition_list_element('Description', @account.description) %>
   <% end %>
 
-  <%= render 'show_page_section', title: 'Status' do %>
+  <%= render 'show_page_dl_section', title: 'Status' do %>
     <%= definition_list_element('Active', !@account.expired?) %>
     <%= definition_list_element('Expires on', @account.expires_on) %>
     <%= definition_list_element('Expiry reminder sent on', @account.expiry_reminder_sent_on) %>
   <% end %>
 
-  <%= render 'show_page_section', title: 'Restrictions' do %>
+  <%= render 'show_page_dl_section', title: 'Restrictions' do %>
     <%= definition_list_element('Max team members', limit_text(@account.max_users)) %>
     <%= definition_list_element('Max impact cards', limit_text(@account.max_impact_cards)) %>
   <% end %>
 
-  <%= render 'show_page_section', title: 'Other Settings' do %>
+  <%= render 'show_page_dl_section', title: 'Other Settings' do %>
     <%= definition_list_element('Default workspace grid mode', @account.default_workspace_grid_mode.titleize) %>
   <% end %>
 
-  <%= render 'show_page_section', title: 'Account Members' do %>
-    <ul class="divide-y divide-zinc-200 dark:divide-zinc-700">
-      <li class="py-2">
-            <div class="grid grid-cols-2 gap-24 font-semibold text-zinc-700 dark:text-zinc-200 text-sm">
-              <div class="text-left">Member</div>
-              <div class="text-left">Role</div>
+  <%= render 'section', first_section: false do %>
+    <%= render 'section_header', title: 'Account Members' %>
+    <%= render 'section_body' do %>
+      <div class="sm:col-span-8">
+        <div class="w-full">
+          <ul class="divide-y divide-zinc-200 dark:divide-zinc-700">
+            <li class="py-2">
+              <div class="grid grid-cols-2 font-semibold text-zinc-700 dark:text-zinc-200 text-sm">
+                <div class="text-left">Member</div>
+                <div class="text-left">Role</div>
+              </div>
+            </li>
+            <% @account.account_members.includes(:user).each do |member| %>
+              <li class="py-2">
+                <div class="grid grid-cols-2 items-center text-sm">
+                  <div>
+                    <%= link_to member.user.display_name, user_path(member.user), class: "font-semibold text-blue-700 dark:text-blue-300 hover:underline" %>
+                  </div>
+                  <div>
+                    <span class="ml-2 text-xs text-zinc-500">(<%= member.role.titleize %>)</span>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
         </div>
-      </li>
-      <% @account.account_members.includes(:user).each do |member| %>
-        <li class="py-2">
-              <div class="grid grid-cols-2 gap-24 items-center text-sm">
-                <div>
-                  <%= link_to member.user.display_name, user_path(member.user), class: "font-semibold text-blue-700 dark:text-blue-300 hover:underline" %>
-                </div>
-                <div>
-                  <span class="ml-2 text-xs text-zinc-500">(<%= member.role.titleize %>)</span>
-                </div>
-          </div>
-        </li>
-      <% end %>
-    </ul>
+      </div>
+    <% end %>
   <% end %>
 
-
-  <%= render 'show_page_section', title: 'Workspaces' do %>
-    <ul class="divide-y divide-zinc-200 dark:divide-zinc-700">
-      <li class="py-2">
-        <div class="grid grid-cols-2 gap-24 font-semibold text-zinc-700 dark:text-zinc-200 text-sm">
-          <div class="text-left">Workspace</div>
-          <div class="text-left">Description</div>
+  <%= render 'section', first_section: false do %>
+    <%= render 'section_header', title: 'Workspaces' %>
+    <%= render 'section_body' do %>
+      <div class="sm:col-span-8">
+        <div class="w-full">
+          <ul class="divide-y divide-zinc-200 dark:divide-zinc-700">
+            <li class="py-2">
+              <div class="grid grid-cols-2 font-semibold text-zinc-700 dark:text-zinc-200 text-sm">
+                <div class="text-left">Workspace</div>
+                <div class="text-left">Description</div>
+              </div>
+            </li>
+            <% @account.workspaces.each do |workspace| %>
+              <li class="py-2">
+                <div class="grid grid-cols-2 items-center text-sm">
+                  <div>
+                    <%= link_to workspace.name, workspace_path(workspace), class: "font-semibold text-blue-700 dark:text-blue-300 hover:underline" %>
+                  </div>
+                  <div>
+                    <span class="ml-2 text-xs text-zinc-500"><%= workspace.description %></span>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
         </div>
-      </li>
-      <% @account.workspaces.each do |workspace| %>
-        <li class="py-2">
-          <div class="grid grid-cols-2 gap-24 items-center text-sm">
-            <div>
-              <%= link_to workspace.name, workspace_path(workspace), class: "font-semibold text-blue-700 dark:text-blue-300 hover:underline" %>
-            </div>
-            <div>
-              <span class="ml-2 text-xs text-zinc-500"><%= workspace.description %></span>
-            </div>
-          </div>
-        </li>
-      <% end %>
-    </ul>
+      </div>
+    <% end %>
   <% end %>
 </div>
 
