@@ -51,6 +51,10 @@ class Characteristic < ApplicationRecord
       )
   }
 
+  def display_name
+    short_name.presence || name
+  end
+
   # TODO: Check if this is needed
   def identifier
     "#{focus_area.position}.#{position}"
