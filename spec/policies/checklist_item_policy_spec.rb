@@ -15,8 +15,8 @@ RSpec.describe(ChecklistItemPolicy) do # rubocop:disable RSpec/MultipleMemoizedH
   let(:initiative) { create(:initiative, scorecard:) }
 
   before do
-    workspace.workspaces_users.create(user: workspace_admin_user, workspace_role: :admin)
-    workspace.workspaces_users.create(user: workspace_member_user, workspace_role: :member)
+    workspace.workspace_members.create(user: workspace_admin_user, workspace_role: :admin)
+    workspace.workspace_members.create(user: workspace_member_user, workspace_role: :member)
   end
 
   permissions '.scope' do

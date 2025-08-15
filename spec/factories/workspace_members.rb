@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: workspaces_users
+# Table name: workspace_members
 #
 #  id             :integer          not null, primary key
 #  workspace_role :integer          default("member")
@@ -13,12 +13,12 @@
 #
 # Indexes
 #
-#  index_workspaces_users_on_user_id                   (user_id)
-#  index_workspaces_users_on_workspace_id              (workspace_id)
-#  index_workspaces_users_on_workspace_id_and_user_id  (workspace_id,user_id) UNIQUE
+#  index_workspace_members_on_user_id                   (user_id)
+#  index_workspace_members_on_workspace_id              (workspace_id)
+#  index_workspace_members_on_workspace_id_and_user_id  (workspace_id,user_id) UNIQUE
 #
 FactoryBot.define do
-  factory :workspaces_user do
+  factory :workspace_member do
     # workspace
     # user
     workspace_role { :member }

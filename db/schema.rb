@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_14_133635) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_15_011433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "hstore"
@@ -419,6 +419,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_14_133635) do
     t.index ["workspace_id"], name: "index_wicked_problems_on_workspace_id"
   end
 
+  create_table "workspace_members", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "workspace_id"
+    t.integer "workspace_role", default: 0
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["user_id"], name: "index_workspace_members_on_user_id"
+    t.index ["workspace_id", "user_id"], name: "index_workspace_members_on_workspace_id_and_user_id", unique: true
+    t.index ["workspace_id"], name: "index_workspace_members_on_workspace_id"
+  end
+
   create_table "workspaces", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -447,17 +458,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_14_133635) do
     t.bigint "account_id"
     t.jsonb "log_data"
     t.index ["account_id"], name: "index_workspaces_on_account_id"
-  end
-
-  create_table "workspaces_users", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "workspace_id"
-    t.integer "workspace_role", default: 0
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["user_id"], name: "index_workspaces_users_on_user_id"
-    t.index ["workspace_id", "user_id"], name: "index_workspaces_users_on_workspace_id_and_user_id", unique: true
-    t.index ["workspace_id"], name: "index_workspaces_users_on_workspace_id"
   end
 
   add_foreign_key "accounts", "workspaces", column: "default_workspace_id"

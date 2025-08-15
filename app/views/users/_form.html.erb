@@ -67,7 +67,7 @@
                     form.select(
                       :workspace_role, 
                       options_for_select(
-                        WorkspacesUser.workspace_roles.keys.map { |key| [key.capitalize, key]}, 
+                        WorkspaceMember.workspace_roles.keys.map { |key| [key.capitalize, key]}, 
                         role_in_current_workspace(user)
                       )
                     ) 

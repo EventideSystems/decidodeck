@@ -6,7 +6,7 @@ class WorkspacePolicy < ApplicationPolicy # rubocop:disable Style/Documentation
       if system_admin?
         scope.all
       else
-        scope.where(id: WorkspacesUser.where(user: current_user).pluck(:workspace_id))
+        scope.where(id: WorkspaceMember.where(user: current_user).pluck(:workspace_id))
       end
     end
   end

@@ -51,14 +51,15 @@ class Workspace < ApplicationRecord
   belongs_to :account, optional: true
 
   # Direct associations
-  has_many :workspaces_users, dependent: :destroy
+  has_many :workspace_members, dependent: :destroy
+  has_many :members, through: :workspace_members, source: :user
   has_many :communities, dependent: :destroy
   has_many :data_models, dependent: :destroy
   has_many :organisations, dependent: :destroy
   has_many :scorecards, dependent: :destroy
   has_many :stakeholder_types, dependent: :destroy
   has_many :subsystem_tags, dependent: :destroy
-  has_many :users, through: :workspaces_users
+  has_many :users, through: :workspace_members
   has_many :wicked_problems, dependent: :destroy
 
   # Through associations
@@ -81,13 +82,13 @@ class Workspace < ApplicationRecord
   delegate :expired?, :expires_on, to: :account, allow_nil: true
 
   def add_user(user, workspace_role)
-    workspaces_users.create(user:, workspace_role:)
+    workspace_members.create(user:, workspace_role:)
   end
 
-  def workspaces_users_remaining
+  def workspace_members_remaining
     return :unlimited if max_users.zero?
 
-    max_users - workspaces_users.count
+    max_users - workspace_members.count
   end
 
   def max_users_reached?

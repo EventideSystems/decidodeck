@@ -11,7 +11,7 @@ class UserPolicy < ApplicationPolicy # rubocop:disable Style/Documentation
     end
 
     def base_scope
-      scope.joins(:workspaces_users).where('workspaces_users.workspace_id' => current_workspace.id)
+      scope.joins(:workspace_members).where('workspace_members.workspace_id' => current_workspace.id)
     end
   end
 

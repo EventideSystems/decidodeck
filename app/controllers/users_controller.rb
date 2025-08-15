@@ -51,7 +51,7 @@ class UsersController < ApplicationController # rubocop:disable Metrics/ClassLen
     elsif current_workspace.max_users_reached?
       redirect_to users_path, alert: 'You have reached the maximum number of users for this workspace.'
     else
-      @user.workspaces_users.build(workspace: current_workspace, role: workspace_role)
+      @user.workspace_members.build(workspace: current_workspace, role: workspace_role)
 
       authorize @user
 
@@ -75,12 +75,12 @@ class UsersController < ApplicationController # rubocop:disable Metrics/ClassLen
   end
 
   def remove_from_workspace
-    workspaces_user = WorkspacesUser
-                      .where(user: @user, workspace: current_workspace)
-                      .where.not(user: current_user)
-                      .first
+    workspace_member = WorkspaceMember
+                       .where(user: @user, workspace: current_workspace)
+                       .where.not(user: current_user)
+                       .first
 
-    if workspaces_user.present? && workspaces_user.destroy
+    if workspace_member.present? && workspace_member.destroy
       redirect_to users_path, notice: 'User was successfully removed.'
     else
       redirect_to users_path, error: 'User could not be removed.'
@@ -122,7 +122,7 @@ class UsersController < ApplicationController # rubocop:disable Metrics/ClassLen
   private
 
   def set_workspace_role
-    current_workspace_user = @user.workspaces_users.find_by(workspace_id: current_workspace.id)
+    current_workspace_user = @user.workspace_members.find_by(workspace_id: current_workspace.id)
     @user.workspace_role = current_workspace_user.present? ? current_workspace_user.workspace_role : 'member'
   end
 
@@ -144,12 +144,12 @@ class UsersController < ApplicationController # rubocop:disable Metrics/ClassLen
 
     return unless workspace_role.present? && policy(user).change_workspace_role?
 
-    current_workspace_user = user.workspaces_users.find_by(workspace_id: current_workspace.id)
+    current_workspace_user = user.workspace_members.find_by(workspace_id: current_workspace.id)
 
     if current_workspace_user
       current_workspace_user.update(workspace_role: workspace_role)
     else
-      user.workspaces_users.build(workspace: current_workspace, workspace_role: workspace_role)
+      user.workspace_members.build(workspace: current_workspace, workspace_role: workspace_role)
     end
   end
 
@@ -187,17 +187,17 @@ class UsersController < ApplicationController # rubocop:disable Metrics/ClassLen
   #     ]
 
   #     users.each do |user|
-  #       user.workspaces_users.each do |workspaces_user|
-  #         next unless workspace_ids.include?(workspaces_user.workspace_id)
+  #       user.workspace_members.each do |workspace_member|
+  #         next unless workspace_ids.include?(workspace_member.workspace_id)
 
   #         csv << [
   #           user.name,
   #           user.email,
-  #           workspaces_user.workspace.name,
-  #           workspaces_user.workspace.created_at.strftime('%d/%m/%Y'),
-  #           workspaces_user.workspace.expires_on&.strftime('%d/%m/%Y') || '',
+  #           workspace_member.workspace.name,
+  #           workspace_member.workspace.created_at.strftime('%d/%m/%Y'),
+  #           workspace_member.workspace.expires_on&.strftime('%d/%m/%Y') || '',
   #           user.system_role.titleize,
-  #           workspaces_user.workspace_role.titleize,
+  #           workspace_member.workspace_role.titleize,
   #           user.last_sign_in_at&.strftime('%d/%m/%Y') || ''
   #         ]
   #       end

@@ -53,27 +53,27 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :workspaces_users, dependent: :destroy
-  has_many :workspaces, through: :workspaces_users
+  has_many :workspace_members, dependent: :destroy
+  has_many :workspaces, through: :workspace_members
 
   has_many :active_workspaces,
            lambda {
              joins(:account)
                .where('accounts.expires_on IS NULL OR accounts.expires_on >= ?', Time.zone.today)
            },
-           through: :workspaces_users,
+           through: :workspace_members,
            source: :workspace
 
   has_many :active_workspaces_with_admin_role,
            lambda {
              joins(:account)
-               .where(workspaces_users: { workspace_role: :admin })
+               .where(workspace_members: { workspace_role: :admin })
                .where('accounts.expires_on IS NULL OR accounts.expires_on >= ?', Time.zone.today)
            },
-           through: :workspaces_users,
+           through: :workspace_members,
            source: :workspace
 
-  accepts_nested_attributes_for :workspaces_users, allow_destroy: true
+  accepts_nested_attributes_for :workspace_members, allow_destroy: true
 
   # Virtual attributes used when inviting or updating users
   attr_accessor :initial_workspace_role, :initial_system_role, :workspace_role

@@ -52,7 +52,7 @@ class ApplicationController < ActionController::Base
         :email,
         :name,
         :system_role,
-        { workspaces_users_attributes: %i[workspace_id workspace_role] }
+        { workspace_members_attributes: %i[workspace_id workspace_role] }
       ]
     )
   end
