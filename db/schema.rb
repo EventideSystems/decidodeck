@@ -10,13 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_14_043056) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_14_133635) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "hstore"
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
   enable_extension "tablefunc"
+
+  create_table "account_members", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
+    t.string "role", default: "member", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "user_id"], name: "index_account_members_on_account_id_and_user_id"
+    t.index ["account_id"], name: "unique_owner_per_account", unique: true, where: "((role)::text = 'owner'::text)"
+    t.index ["user_id", "account_id"], name: "index_account_members_on_user_id_and_account_id"
+  end
 
   create_table "accounts", force: :cascade do |t|
     t.citext "name", null: false
@@ -37,18 +49,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_14_043056) do
     t.jsonb "log_data"
     t.index ["default_workspace_id"], name: "index_accounts_on_default_workspace_id"
     t.index ["name"], name: "index_accounts_on_name", unique: true, where: "(deleted_at IS NULL)"
-  end
-
-  create_table "accounts_users", force: :cascade do |t|
-    t.bigint "account_id", null: false
-    t.bigint "user_id", null: false
-    t.string "role", default: "member", null: false
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id", "user_id"], name: "index_accounts_users_on_account_id_and_user_id"
-    t.index ["account_id"], name: "unique_owner_per_account", unique: true, where: "((role)::text = 'owner'::text)"
-    t.index ["user_id", "account_id"], name: "index_accounts_users_on_user_id_and_account_id"
   end
 
   create_table "action_text_rich_texts", force: :cascade do |t|

@@ -40,12 +40,12 @@ class Account < ApplicationRecord
   string_enum subscription_type: %i[invoiced free]
   string_enum default_workspace_grid_mode: %i[classic per_status]
 
-  belongs_to :owner, class_name: 'User', optional: true
   belongs_to :default_workspace, class_name: 'Workspace', optional: true
 
   has_many :workspaces, dependent: :destroy
-  has_many :accounts_users, dependent: :destroy
-  has_many :users, through: :accounts_users
+
+  has_many :account_members, dependent: :destroy
+  has_many :members, through: :account_members, source: :user
 
   validates :name, presence: true, uniqueness: { case_sensitive: false, conditions: -> { where(deleted_at: nil) } }
 
@@ -64,11 +64,12 @@ class Account < ApplicationRecord
   end
 
   def owner
-    accounts_users.find(role: 'owner')
+    account_members.find(role: 'owner')&.user
   end
 
   private
 
+  # TODO: Move account setup to a service object, or subclass accounts and place specific logic there
   def create_default_workspace
     return if default_workspace.present?
 
