@@ -81,7 +81,7 @@ class AccountsController < ApplicationController
       :deactivated,
       :expires_on,
       :max_users,
-      :max_scorecards
+      :max_impact_cards
     )
   end
 end
