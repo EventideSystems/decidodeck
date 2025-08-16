@@ -7,7 +7,7 @@ module WorkspacesHelper
   end
 
   def lookup_workspace_roles
-    WorkspacesUser.workspace_roles.keys
+    WorkspaceMember.workspace_roles.keys
   end
 
   def lookup_system_roles

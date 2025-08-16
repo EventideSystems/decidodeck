@@ -1,6 +1,9 @@
 <%= turbo_frame_tag dom_id(@checklist_item) do %>
   <span class="w-3 h-3 mr-2 inline-block rounded-sm <%= checklist_list_item_status_color(@checklist_item.status) %>"></span>
-  <%= @checklist_item.characteristic.name %>
+  <%= @checklist_item.characteristic.display_name %>
+  <% if @checklist_item.characteristic.short_name.present? %>
+    <div class="text-gray-500 ml-6"><%= @checklist_item.characteristic.name %></div>
+  <% end %>
 
   <div class="p-3">
     <%- if @checklist_item.comment.present? %>

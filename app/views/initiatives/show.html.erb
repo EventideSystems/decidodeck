@@ -37,19 +37,19 @@
 
   <%= horizontal_rule(class: 'my-10 mt-6') %>
 
-  <%= render 'show_page_section', title: 'Contact Details' do %>
+  <%= render 'show_page_dl_section', title: 'Contact Details' do %>
     <%= definition_list_element('Contact position', @initiative.contact_position) %>
     <%= definition_list_element('Contact name', @initiative.contact_name) %>
     <%= definition_list_element('Contact email', mail_to_contact_email(@initiative) ) %>
     <%= definition_list_element('Contact website', link_to_external_url(@initiative.contact_website)) %>
   <% end %>
 
-  <%= render 'show_page_section', title: 'Applicable Date Range' do %>
+  <%= render 'show_page_dl_section', title: 'Applicable Date Range' do %>
     <%= definition_list_element('Started at', @initiative.started_at) %>
     <%= definition_list_element('Finished at', @initiative.finished_at) %>
   <% end %>
 
-  <%= render 'show_page_section', title: 'Stakeholders' do %>
+  <%= render 'show_page_dl_section', title: 'Stakeholders' do %>
     <% @initiative.organisations.order('lower(trim(name))').each do |organisation| %>
       <%= definition_list_element(organisation.name, sanitize(organisation.description)) %>
     <% end %>

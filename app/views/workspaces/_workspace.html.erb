@@ -11,12 +11,12 @@
           <%= highlight(workspace.description, params.dig(:q, :name_or_description_cont)) %>
         </div>
         <div class="text-xs/6 text-zinc-600">
-          <%- if workspace.expired? %>
+          <%= account_badge(workspace.account) %>
+          <%- if workspace.account.expired? %>
             <div class="inline-flex rounded-lg items-center justify-center bg-red-600 dark:bg-red-600 text-white" title="Expired">
               <p class="py-1 px-2 text-xs whitespace-nowrap">Expired</p>
             </div>
           <%- end %>
-          <%= max_users(workspace) %>; <%= max_impact_cards(workspace) %>; <%= expires_on(workspace) %>
         </div>
       </div>
     </div>

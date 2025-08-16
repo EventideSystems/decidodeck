@@ -9,7 +9,7 @@ module UsersHelper
     return '' if workspace_role.blank?
 
     badge_class = role_in_current_workspace_badge_class(workspace_role)
-    member_since = WorkspacesUser.find_by(user: user, workspace: current_workspace).created_at.strftime('%b. %Y')
+    member_since = WorkspaceMember.find_by(user: user, workspace: current_workspace).created_at.strftime('%b. %Y')
 
     content_tag(:span, "Workspace #{workspace_role.titleize}", class: badge_class,
                                                                title: "Member since #{member_since}")
@@ -56,8 +56,8 @@ module UsersHelper
   end
 
   def role_in_current_workspace(user)
-    workspaces_user = WorkspacesUser.where(user: user, workspace: current_workspace).first
-    workspaces_user.try(:workspace_role)
+    workspace_member = WorkspaceMember.where(user: user, workspace: current_workspace).first
+    workspace_member.try(:workspace_role)
   end
 
   def user_system_role_badge_class(system_role)

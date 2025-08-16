@@ -5,7 +5,7 @@
 # Table name: subsystem_tags
 #
 #  id           :integer          not null, primary key
-#  color        :string           default("#84ddcc"), not null
+#  color        :string           default("#e4f4ec"), not null
 #  deleted_at   :datetime
 #  description  :string
 #  name         :string

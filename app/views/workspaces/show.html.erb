@@ -41,23 +41,41 @@
     </div>
   </div>
   <%= horizontal_rule(class: 'my-10 mt-6') %>
-  <%= render 'show_page_section', title: 'Overview' do %>
+  <%= render 'show_page_dl_section', title: 'Overview' do %>
+    <%= definition_list_element('Account', @workspace.account.name) %>
     <%= definition_list_element('Description', @workspace.description) %>
   <% end %>
 
-  <%= render 'show_page_section', title: 'Status' do %>
-    <%= definition_list_element('Deactivated', @workspace.deactivated) %>
-    <%= definition_list_element('Expires on', @workspace.expires_on) %>
-    <%= definition_list_element('Expiry warning sent on', @workspace.expiry_warning_sent_on) %>
-  <% end %>
-
-  <%= render 'show_page_section', title: 'Restrictions' do %>
-    <%= definition_list_element('Max team members', limit_text(@workspace.max_users)) %>
-    <%= definition_list_element('Max impact cards', limit_text(@workspace.max_scorecards)) %>
-  <% end %>
-
-  <%= render 'show_page_section', title: 'Other Settings' do %>
+  <%= render 'show_page_dl_section', title: 'Other Settings' do %>
     <%= definition_list_element('Classic grid mode', @workspace.classic_grid_mode) %>
+  <% end %>
+
+  <%= render 'section', first_section: false do %>
+    <%= render 'section_header', title: 'Workspace Members' %>
+    <%= render 'section_body' do %>
+      <div class="sm:col-span-8">
+        <div class="w-full">
+          <ul class="divide-y divide-zinc-200 dark:divide-zinc-700">
+            <li class="py-2">
+              <div class="grid grid-cols-2 font-semibold text-zinc-700 dark:text-zinc-200 text-sm">
+                <div class="text-left">Member</div>
+                <div class="text-left">Role</div>
+              </div>
+            </li>
+            <% @workspace.workspace_members.each do |workspace_member| %>
+              <li class="py-2">
+                <div class="grid grid-cols-2 text-zinc-600 dark:text-zinc-300 text-sm">
+                  <div class="text-left">
+                    <%= link_to workspace_member.user.display_name, user_path(workspace_member.user), class: "font-semibold text-blue-700 dark:text-blue-300 hover:underline" %>
+                  </div>
+                  <div class="text-left"><%= workspace_member.workspace_role.titleize %></div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
 

@@ -27,13 +27,13 @@ class ApplicationPolicy # rubocop:disable Style/Documentation
     def workspace_admin?(workspace)
       return false unless workspace
 
-      WorkspacesUser.where(user: current_user, workspace: workspace).first.try(:admin?)
+      WorkspaceMember.where(user: current_user, workspace: workspace).first.try(:admin?)
     end
 
     def workspace_member?(workspace)
       return false unless workspace
 
-      WorkspacesUser.where(user: current_user, workspace: workspace).first.try(:member?)
+      WorkspaceMember.where(user: current_user, workspace: workspace).first.try(:member?)
     end
   end
 
@@ -101,13 +101,13 @@ class ApplicationPolicy # rubocop:disable Style/Documentation
   def workspace_admin?(workspace)
     return false unless workspace
 
-    WorkspacesUser.where(user: current_user, workspace: workspace).first.try(:admin?)
+    WorkspaceMember.where(user: current_user, workspace: workspace).first.try(:admin?)
   end
 
   def workspace_member?(workspace)
     return false unless workspace
 
-    WorkspacesUser.where(user: current_user, workspace: workspace).first.try(:member?)
+    WorkspaceMember.where(user: current_user, workspace: workspace).first.try(:member?)
   end
 
   def workspace_any_role?(workspace)

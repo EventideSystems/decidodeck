@@ -16,7 +16,7 @@ class InvitationsController < Devise::InvitationsController
       elsif current_workspace.max_users_reached?
         redirect_to users_path, alert: 'You have reached the maximum number of users for this workspace.'
       else
-        WorkspacesUser.create!(user: user, workspace: current_workspace, workspace_role: workspace_role)
+        WorkspaceMember.create!(user: user, workspace: current_workspace, workspace_role: workspace_role)
         redirect_to users_path, notice: 'User was successfully invited.'
       end
     elsif current_workspace.max_users_reached?
@@ -24,7 +24,7 @@ class InvitationsController < Devise::InvitationsController
     else
       super do |resource|
         if resource.errors.empty?
-          WorkspacesUser.create!(user: resource, workspace: current_workspace, workspace_role: workspace_role)
+          WorkspaceMember.create!(user: resource, workspace: current_workspace, workspace_role: workspace_role)
         end
       end
     end
