@@ -92,7 +92,7 @@ RSpec.describe CustomFormBuilder, type: :helper do
       it 'returns a label tag with the default class' do
         expect(
           builder.label(method, 'Label Text')
-        ).to match(/class="block text-sm font-medium leading-6 text-gray-900 dark:text-white"/)
+        ).to match(%r{class="block text-sm/6 font-medium text-gray-900 dark:text-white"})
       end
     end
 
@@ -100,7 +100,7 @@ RSpec.describe CustomFormBuilder, type: :helper do
       it 'merges any class values from content with the default classes' do
         expect(
           builder.label(method, class: 'text-red-900 dark:text-green-400')
-        ).to match(/class="block text-sm font-medium leading-6 text-red-900 dark:text-green-400"/)
+        ).to match(%r{class="block text-sm/6 font-medium text-red-900 dark:text-green-400"})
       end
 
       it 'preserves any other options' do
@@ -120,7 +120,7 @@ RSpec.describe CustomFormBuilder, type: :helper do
       it 'merges any class values from content with the default classes' do
         expect(
           builder.label(method, 'Label Text', class: 'text-red-900 dark:text-green-400')
-        ).to match(/class="block text-sm font-medium leading-6 text-red-900 dark:text-green-400"/)
+        ).to match(%r{class="block text-sm/6 font-medium text-red-900 dark:text-green-400"})
       end
 
       it 'preserves any other options' do
@@ -140,13 +140,13 @@ RSpec.describe CustomFormBuilder, type: :helper do
       it 'merges any class values from content with the default classes' do
         expect(
           builder.label(method, { class: 'text-red-900 dark:text-green-400' }, { id: 'custom-id' })
-        ).to match(/class="block text-sm font-medium leading-6 text-red-900 dark:text-green-400"/)
+        ).to match(%r{class="block text-sm/6 font-medium text-red-900 dark:text-green-400"})
       end
 
       it 'merges any class values from options with the default classes' do
         expect(
           builder.label(method, { id: 'custom-id' }, { class: 'text-red-900 dark:text-green-400' })
-        ).to match(/class="block text-sm font-medium leading-6 text-red-900 dark:text-green-400"/)
+        ).to match(%r{class="block text-sm/6 font-medium text-red-900 dark:text-green-400"})
       end
 
       it 'preserves any other options' do

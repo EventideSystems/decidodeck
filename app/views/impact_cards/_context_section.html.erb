@@ -4,18 +4,16 @@
     <div class="sm:col-span-6">
       <%= turbo_frame_tag :select_community do %>          
         <%= form.label :community_id %>
-        <div class="mt-2">
-          <%= 
-            form.collection_select(
-              :community_id, 
-              current_workspace.communities.order(:name), 
-              :id, 
-              :name, 
-              include_blank: true, 
-              prompt: 'Select a community'
-            ) 
-          %>
-        </div>
+        <%= 
+          form.collection_select(
+            :community_id, 
+            current_workspace.communities.order(:name), 
+            :id, 
+            :name, 
+            include_blank: true, 
+            prompt: 'Select a community'
+          ) 
+        %>
       <% end %>
 
       <%= turbo_frame_tag :new_impact_cards_communities_form do %>
@@ -26,18 +24,16 @@
     <div class="sm:col-span-6">
       <%= turbo_frame_tag :select_wicked_problem do %> 
         <%= form.label :wicked_problem_id, 'Problem / Opportunity' %>
-        <div class="mt-2">
-          <%= 
-            form.collection_select(
-              :wicked_problem_id, 
-              current_workspace.wicked_problems.order(:name), 
-              :id, 
-              :name, 
-              include_blank: true, 
-              prompt: 'Select a problem / opportunity'
-            ) 
-          %>
-        </div>
+        <%= 
+          form.collection_select(
+            :wicked_problem_id, 
+            current_workspace.wicked_problems.order(:name), 
+            :id, 
+            :name, 
+            include_blank: true, 
+            prompt: 'Select a problem / opportunity'
+          ) 
+        %>
       <% end %>
 
       <%= turbo_frame_tag :new_impact_cards_wicked_problems_form do %>

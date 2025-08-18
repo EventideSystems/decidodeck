@@ -21,8 +21,4 @@ module ComponentsHelper
     GHOST = ComponentsHelper::GHOST_CLASSES
     DESTRUCTIVE = ComponentsHelper::DESTRUCTIVE_CLASSES
   end
-
-  # Shadcn-styled alert helper, currently empty
-  module Alert
-  end
 end

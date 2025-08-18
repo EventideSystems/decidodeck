@@ -44,6 +44,10 @@ module ApplicationHelper
     render 'application/definition_list_element', term: term, definition: definition
   end
 
+  def html_lang
+    I18n.locale == I18n.default_locale ? 'en' : I18n.locale.to_s
+  end
+
   private
 
   def current_active_tab

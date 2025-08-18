@@ -1,6 +1,6 @@
 <%= turbo_stream.append dom_id(@data_model, :goals_list) do %>
   <%= turbo_frame_tag dom_id(@goal) do %>
-    <div class="mb-4 w-full rounded-lg border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-800">
+    <div class="mb-4 w-full rounded-lg border border-zinc-200 bg-white p-4 shadow-xs dark:border-zinc-700 dark:bg-zinc-800">
       <%= turbo_frame_tag dom_id(@goal, :link) do %>
         <%= render partial: 'link', locals: { goal: @goal } %>
       <% end %>

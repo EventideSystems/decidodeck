@@ -7,18 +7,12 @@
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
             <%= form.label :name %>
-            <div class="mt-2">
-              <%=
-                form.text_field(:name, placeholder: 'Account name', autofocus: true, required: true)
-              %>
-            </div>
+            <%= form.text_field(:name, placeholder: 'Account name', autofocus: true, required: true) %>
           </div>
 
           <div class="sm:col-span-4">
             <%= form.label :description  %>
-            <div class="mt-2">
-              <%= form.text_area :description %>
-            </div>
+            <%= form.text_area :description %>
           </div>
 
         <% end %>
@@ -30,23 +24,17 @@
           <% if policy(@account).update_protected_attributes? %>
             <div class="sm:col-span-4">
               <%= form.label :expires_on %>
-              <div class="mt-2">
-                <%= form.date_field :expires_on %>
-              </div>
+              <%= form.date_field :expires_on %>
             </div>
 
             <div class="sm:col-span-4">
               <%= form.label :expiry_initial_reminder_sent_on %>
-              <div class="mt-2">
-                <%= form.date_field :expiry_initial_reminder_sent_on, readonly: true, disabled: true, class: 'bg-slate-200 dark:bg-slate-600' %>
-              </div>
+              <%= form.date_field :expiry_initial_reminder_sent_on, readonly: true, disabled: true, class: 'bg-slate-200 dark:bg-slate-600' %>
             </div>
 
             <div class="sm:col-span-4">
               <%= form.label :expiry_final_reminder_sent_on %>
-              <div class="mt-2">
-                <%= form.date_field :expiry_final_reminder_sent_on, readonly: true, disabled: true, class: 'bg-slate-200 dark:bg-slate-600' %>
-              </div>
+              <%= form.date_field :expiry_final_reminder_sent_on, readonly: true, disabled: true, class: 'bg-slate-200 dark:bg-slate-600' %>
             </div>
           <% end %>
         <% end %>
@@ -58,17 +46,13 @@
           <% if policy(@account).update_protected_attributes? %>
             <div class="sm:col-span-4">
               <%= form.label :max_users, "Max team members" %>
-              <div class="mt-2">
-                <%= form.number_field :max_users, min: 0 %>
-              </div>
+              <%= form.number_field :max_users, min: 0 %>
               <p class="text-sm/6 text-gray-600">Set to zero (0) to indicate unlimited team members.</p>
             </div>
 
             <div class="sm:col-span-4">
               <%= form.label :max_impact_cards, 'Max impact cards' %>
-              <div class="mt-2">
-                <%= form.number_field :max_impact_cards, min: 0 %>
-              </div>
+              <%= form.number_field :max_impact_cards, min: 0 %>
               <p class="text-sm/6 text-gray-600">Set to zero (0) to indicate unlimited impact cards.</p>
             </div>
           <% end %>
@@ -80,8 +64,7 @@
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
             <%= form.label :default_workspace_grid_mode %>
-            <div class="mt-2">
-              <%= form.select :default_workspace_grid_mode, options_for_default_workspace_grid_mode  %>
+            <%= form.select :default_workspace_grid_mode, options_for_default_workspace_grid_mode  %>
             </div>
           </div>
         <% end %>

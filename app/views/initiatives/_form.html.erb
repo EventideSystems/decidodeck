@@ -10,28 +10,20 @@
             <%= form.label :impact_card_id %>
             <% if @impact_card.present? %>
               <%= hidden_field_tag(:impact_card_id, @impact_card.id) %>
-              <div class="mt-2">
-                <%= custom_text_field_tag(:name, @impact_card.name, readonly: true, class: 'bg-slate-200 dark:bg-slate-600') %>
-              </div>
+              <%= custom_text_field_tag(:name, @impact_card.name, readonly: true, class: 'bg-slate-200 dark:bg-slate-600') %>
             <% else %>
-              <div class="mt-2">
-                <%= select_impact_card_tag(:impact_card_id, workspace: current_workspace, autofocus: true, required: true, prompt: 'Select an impact card') %>
-              </div>
+              <%= select_impact_card_tag(:impact_card_id, workspace: current_workspace, autofocus: true, required: true, prompt: 'Select an impact card') %>
             <% end %>
           </div>
 
           <div class="sm:col-span-4">
             <%= form.label :name %>
-            <div class="mt-2">
-              <%= form.text_field(:name, placeholder: 'Initiative name', autofocus: @impact_card.blank?, required: true) %>
-            </div>
+            <%= form.text_field(:name, placeholder: 'Initiative name', autofocus: @impact_card.blank?, required: true) %>
           </div>
 
           <div class="col-span-full">
             <%= form.label :description %>
-            <div class="mt-2">
-              <%= form.rich_textarea :description, rows: 3, placeholder: 'Initiative description' %>
-            </div>
+            <%= form.rich_textarea :description, rows: 3, placeholder: 'Initiative description' %>
             <p class="text-sm/6 text-gray-600 dark:text-gray-400">A brief description of the initiative (optional).</p>
           </div>
         <% end %>
@@ -55,30 +47,22 @@
         <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
           <div class="sm:col-span-3">
             <%= form.label :contact_name %>
-            <div class="mt-2">
-              <%= form.text_field :contact_name %>
-            </div>
+            <%= form.text_field :contact_name %>
           </div>
 
           <div class="sm:col-span-3">
             <%= form.label :contact_email %>
-            <div class="mt-2">
-              <%= form.text_field :contact_email %>
-            </div>
+            <%= form.text_field :contact_email %>
           </div>
 
           <div class="sm:col-span-3">
             <%= form.label :contact_website %>
-            <div class="mt-2">
-              <%= form.text_field :contact_website %>
-            </div>
+            <%= form.text_field :contact_website %>
           </div>
 
           <div class="sm:col-span-3">
             <%= form.label :contact_position %>
-            <div class="mt-2">
-              <%= form.text_field :contact_position %>
-            </div>
+            <%= form.text_field :contact_position %>
           </div>
         </div>
       </div>
@@ -92,16 +76,12 @@
         <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
           <div class="sm:col-span-3">
             <%= form.label :started_at %>
-            <div class="mt-2">
-              <%= form.date_field :started_at %>
-            </div>
+            <%= form.date_field :started_at %>
           </div>
 
           <div class="sm:col-span-3">
             <%= form.label :finished_at %>
-            <div class="mt-2">
-              <%= form.date_field :finished_at %>
-            </div>
+            <%= form.date_field :finished_at %>
           </div>
         </div>
       </div>
@@ -119,9 +99,7 @@
         <%= render 'section_body' do %>
           <div class="sm:col-span-8">
             <%= form.label :notes %>
-            <div class="mt-2">
-              <%= form.rich_textarea :notes %>
-            </div>
+            <%= form.rich_textarea :notes %>
           </div>
         <%- end %>
       <%- end %>

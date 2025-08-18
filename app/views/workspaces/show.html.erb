@@ -23,7 +23,7 @@
                 link_to_primary(
                   'Switch To', 
                   switch_workspace_path(@workspace), 
-                  class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
+                  class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
                   data: { 
                     action: 'click->switch-workspace#handleClick',
                     turbo: false
@@ -68,7 +68,7 @@
                   <div class="text-left">
                     <%= link_to workspace_member.user.display_name, user_path(workspace_member.user), class: "font-semibold text-blue-700 dark:text-blue-300 hover:underline" %>
                   </div>
-                  <div class="text-left"><%= workspace_member.workspace_role.titleize %></div>
+                  <div class="text-left"><%= workspace_member.workspace_role&.titleize || 'Unassigned' %></div>
                 </div>
               </li>
             <% end %>

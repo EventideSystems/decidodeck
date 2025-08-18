@@ -4,19 +4,19 @@
     <div>
       <%= f.label :password, class: 'block text-sm font-medium text-gray-700' %>
       <div class="mt-1">
-        <%= f.password_field :password, required: true, class: "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm" %>
+        <%= f.password_field :password, required: true, class: "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-xs focus:border-teal-500 focus:outline-hidden focus:ring-teal-500 sm:text-sm" %>
       </div>
     </div>
 
     <div>
       <%= f.label :password_confirmation, class: 'block text-sm font-medium text-gray-700' %>
       <div class="mt-1">
-        <%= f.password_field :password_confirmation, required: true, class: "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm" %>
+        <%= f.password_field :password_confirmation, required: true, class: "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-xs focus:border-teal-500 focus:outline-hidden focus:ring-teal-500 sm:text-sm" %>
       </div>
     </div>
 
     <div>
-      <%= f.submit  t("devise.invitations.edit.submit_button"), class: "flex w-full justify-center rounded-md border border-transparent bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2" %>
+      <%= f.submit  t("devise.invitations.edit.submit_button"), class: "flex w-full justify-center rounded-md border border-transparent bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-xs hover:bg-teal-700 focus:outline-hidden focus:ring-2 focus:ring-teal-500 focus:ring-offset-2" %>
     </div>
   <% end %>
 <% end %>

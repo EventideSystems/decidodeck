@@ -88,7 +88,7 @@ module ChecklistItemsHelper
 
   def checklist_list_item_grid_element_base_options(checklist_item_data, element_class)
     {
-      class: 'p-1.5 h-2 rounded-sm',
+      class: 'p-1.5 h-2 rounded-xs',
       title: checklist_item_data[:name],
       data: {
         status: checklist_item_data[:status],

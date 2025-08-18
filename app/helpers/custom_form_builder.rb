@@ -4,37 +4,6 @@
 class CustomFormBuilder < ActionView::Helpers::FormBuilder # rubocop:disable Metrics/ClassLength
   include TailwindClasses
 
-  # BASE_COLOR_CLASSES = %w[
-  #   bg-red-500
-  #   bg-orange-500
-  #   bg-amber-500
-  #   bg-yellow-500
-  #   bg-lime-500
-  #   bg-green-500
-  #   bg-emerald-500
-  #   bg-teal-500
-  #   bg-cyan-500
-  #   bg-sky-500
-  #   bg-blue-500
-  #   bg-indigo-500
-  #   bg-violet-500
-  #   bg-purple-500
-  #   bg-fuchsia-500
-  #   bg-pink-500
-  #   bg-rose-500
-  # ].freeze
-
-  # BASE_COLOR_SELECT_DATA_ATTRIBUTES = {
-  #   action: 'base-color-select#change',
-  #   base_color_select_target: 'select'
-  # }.freeze
-
-  # OPTIONS_FOR_BASE_COLOR_SELECT = \
-  #   BASE_COLOR_CLASSES.map do |color_class|
-  #     color_name = color_class.split('-').second
-  #     [color_name.capitalize, color_name, { class: color_class }]
-  #   end
-
   MULTI_SELECT_OPTION_TEMPLATE = <<~HTML
     <div class="flex justify-between items-center w-full">
       <div class="flex">
@@ -82,7 +51,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder # rubocop:disable Met
     focus:ring-blue-500
     before:absolute
     before:inset-0
-    before:z-[1]
+    before:z-1
     dark:bg-neutral-900
     dark:border-gray-600
     dark:text-neutral-400
@@ -121,7 +90,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder # rubocop:disable Met
     cursor-pointer
     hover:bg-gray-100
     rounded-lg
-    focus:outline-none
+    focus:outline-hidden
     focus:bg-gray-100
     dark:bg-neutral-900
     dark:hover:bg-neutral-800
@@ -187,9 +156,18 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder # rubocop:disable Met
     wrap_field(method) { super(method, merge_options, checked_value, unchecked_value) }
   end
 
-  def collection_select(method, collection, value_method, text_method, options = {}, html_options = {}) # rubocop:disable Metrics/ParameterLists
+  def collection_select(method, collection, value_method, text_method, options = {}, html_options = {}) # rubocop:disable Metrics/ParameterLists,Metrics/MethodLength
     merged_html_options = merge_options(method: method, options: html_options, default_class: SELECT_FIELD_CLASS)
-    wrap_field(method) { super(method, collection, value_method, text_method, options, merged_html_options) }
+    wrap_field(method, classes: 'mt-2 grid grid-cols-1') do
+      @template.concat(super(method, collection, value_method, text_method, options, merged_html_options))
+      @template.concat(
+        <<~HTML.html_safe # rubocop:disable Rails/OutputSafety
+          <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400">
+            <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+          </svg>
+        HTML
+      )
+    end
   end
 
   # TODO: Add 'dark:[color-scheme:dark]' to the end of the class string to support dark mode.
@@ -253,10 +231,19 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder # rubocop:disable Met
     wrap_field(method) { super(method, merge_options(method:, options:)) }
   end
 
-  def select(method, choices = nil, options = {}, html_options = {}, &block)
+  def select(method, choices = nil, options = {}, html_options = {}, &block) # rubocop:disable Metrics/MethodLength
     merged_html_options = merge_options(method:, options: html_options, default_class: SELECT_FIELD_CLASS)
 
-    wrap_field(method) { super(method, choices, options, merged_html_options, &block) }
+    wrap_field(method, classes: 'mt-2 grid grid-cols-1') do
+      @template.concat(super(method, choices, options, merged_html_options, &block))
+      @template.concat(
+        <<~HTML.html_safe # rubocop:disable Rails/OutputSafety
+          <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400">
+            <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+          </svg>
+        HTML
+      )
+    end
   end
 
   def submit(value = nil, options = {})
@@ -337,8 +324,8 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder # rubocop:disable Met
     "#{base_text}(#{diff}) selected"
   end
 
-  def wrap_field(method)
-    @template.content_tag(:div) do
+  def wrap_field(method, classes: 'mt-2')
+    @template.content_tag(:div, class: classes) do
       @template.concat(yield)
       append_error_message(@object, method)
     end

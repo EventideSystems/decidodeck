@@ -44,10 +44,15 @@ module CustomFormTagHelper
   end
 
   def custom_select_tag(name, option_tags = nil, options = {})
-    default_class = "#{SELECT_FIELD_CLASS} mt-2"
-
-    content_tag(:div) do
-      select_tag(name, option_tags, merge_options(options:, default_class:))
+    content_tag(:div, class: 'mt-2 grid grid-cols-1') do
+      concat(select_tag(name, option_tags, merge_options(options:, default_class: SELECT_FIELD_CLASS)))
+      concat(
+        <<~HTML.html_safe # rubocop:disable Rails/OutputSafety
+          <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400">
+            <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+          </svg>
+        HTML
+      )
     end
   end
 

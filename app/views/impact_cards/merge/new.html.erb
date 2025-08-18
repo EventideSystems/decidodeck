@@ -8,16 +8,12 @@
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
             <%= form.label :name %>
-            <div class="mt-2">
-              <%= form.text_field(:name, readonly: true) %>
-            </div>
+            <%= form.text_field(:name, readonly: true) %>
           </div>
 
           <div class="col-span-full">
             <%= form.label :description %>
-            <div class="mt-2">
-              <%= form.text_area :description, readonly: true %>
-            </div>
+            <%= form.text_area :description, readonly: true %>
 
           </div>
         <% end %>
@@ -28,9 +24,7 @@
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
             <%= form.label :name %>
-            <div class="mt-2">
-              <%= custom_select_tag :source_id, options_from_collection_for_select(@sources, 'id', 'name'), prompt: 'Select an impact card', autofocus: true, required: true %>
-            </div>
+            <%= custom_select_tag :source_id, options_from_collection_for_select(@sources, 'id', 'name'), prompt: 'Select an impact card', autofocus: true, required: true %>
           </div>
         <% end %>
       <% end %>

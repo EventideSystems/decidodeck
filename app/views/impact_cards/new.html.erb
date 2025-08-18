@@ -8,16 +8,14 @@
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
             <%= form.label :type, 'Data model' %>
-            <div class="mt-2">
-              <%=
-                form.select(
-                  :data_model_id,
-                  options_from_collection_for_select(current_workspace.data_models, :id, :name),
-                  include_blank: 'Select a data model',
-                  required: true
-                )
-                %>
-            </div>
+            <%=
+              form.select(
+                :data_model_id,
+                options_from_collection_for_select(current_workspace.data_models, :id, :name),
+                include_blank: 'Select a data model',
+                required: true
+              )
+            %>
           </div>
         <% end %>
       <% end %>
@@ -32,15 +30,13 @@
           <%= render 'section_body' do %>
             <div class="sm:col-span-4">
               <%= form.label :impact_card_source, 'Impact Card Source' %>
-              <div class="mt-2">
-                <%=
-                  custom_select_tag(
-                    :impact_card_source_id,
-                    options_from_collection_for_select(policy_scope(Scorecard), :id, :name),
-                    include_blank: 'Select an impact card'
-                  )
-                 %>
-              </div>
+              <%=
+                custom_select_tag(
+                  :impact_card_source_id,
+                  options_from_collection_for_select(policy_scope(Scorecard), :id, :name),
+                  include_blank: 'Select an impact card'
+                )
+               %>
               <p class="text-sm/6 text-gray-600 mt-1">Impact card to use as a template for initiatives (optional).</p>
             </div>
           <% end %>
@@ -59,16 +55,12 @@
           <%= render 'section_body' do %>
             <div class="sm:col-span-4">
               <%= initiatives_form.label :name %>
-              <div class="mt-2">
-                <%= initiatives_form.text_field :name, placeholder: 'Initiative name' %>
-              </div>
+              <%= initiatives_form.text_field :name, placeholder: 'Initiative name' %>
             </div>
 
             <div class="col-span-full">
               <%= initiatives_form.label :description %>
-              <div class="mt-2">
-                <%= initiatives_form.rich_textarea :description, rows: 3, placeholder: 'Initiative description' %>
-              </div>
+              <%= initiatives_form.rich_textarea :description, rows: 3, placeholder: 'Initiative description' %>
             </div>
           <% end %>
         <% end %>
@@ -82,30 +74,22 @@
           <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
             <div class="sm:col-span-3">
               <%= initiatives_form.label :contact_name %>
-              <div class="mt-2">
-                <%= initiatives_form.text_field :contact_name %>
-              </div>
+              <%= initiatives_form.text_field :contact_name %>
             </div>
 
             <div class="sm:col-span-3">
               <%= initiatives_form.label :contact_email %>
-              <div class="mt-2">
-                <%= initiatives_form.text_field :contact_email %>
-              </div>
+              <%= initiatives_form.text_field :contact_email %>
             </div>
 
             <div class="sm:col-span-3">
               <%= initiatives_form.label :contact_website %>
-              <div class="mt-2">
-                <%= initiatives_form.text_field :contact_website %>
-              </div>
+              <%= initiatives_form.text_field :contact_website %>
             </div>
 
             <div class="sm:col-span-3">
               <%= initiatives_form.label :contact_position %>
-              <div class="mt-2">
-                <%= initiatives_form.text_field :contact_position %>
-              </div>
+              <%= initiatives_form.text_field :contact_position %>
             </div>
           </div>
         </div>
@@ -119,16 +103,12 @@
           <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
             <div class="sm:col-span-3">
               <%= initiatives_form.label :started_at %>
-              <div class="mt-2">
-                <%= initiatives_form.date_field :started_at %>
-              </div>
+              <%= initiatives_form.date_field :started_at %>
             </div>
 
             <div class="sm:col-span-3">
               <%= initiatives_form.label :finished_at %>
-              <div class="mt-2">
-                <%= initiatives_form.date_field :finished_at %>
-              </div>
+              <%= initiatives_form.date_field :finished_at %>
             </div>
           </div>
         </div>

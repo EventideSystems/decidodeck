@@ -7,18 +7,12 @@
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
             <%= form.label :name %>
-            <div class="mt-2">
-              <%=
-                form.text_field(:name, placeholder: 'Workspace name', autofocus: true, required: true)
-              %>
-            </div>
+            <%= form.text_field(:name, placeholder: 'Workspace name', autofocus: true, required: true) %>
           </div>
 
           <div class="sm:col-span-4">
             <%= form.label :description  %>
-            <div class="mt-2">
-              <%= form.text_area :description %>
-            </div>
+            <%= form.text_area :description %>
           </div>
 
         <% end %>
@@ -29,9 +23,7 @@
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
             <%= form.label :classic_grid_mode %>
-            <div class="mt-2">
-              <%= form.checkbox :classic_grid_mode %>
-            </div>
+            <%= form.checkbox :classic_grid_mode %>
           </div>
         <% end %>
       <% end %>
@@ -39,3 +31,4 @@
     <% end %>
   <% end %>
 </div>
+

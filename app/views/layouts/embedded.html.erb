@@ -6,13 +6,16 @@
     <meta charset="utf-8">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= render partial: '/layouts/shared/favicons' %>
   </head>
-  <body data-controller="theme">
-    <%= render 'layouts/shared/flash_messages' %>
+  <body>
+    <div id="flash-notifications" class="fixed top-4 right-4 z-50 space-y-2">
+      <%= render 'flash_notifications' %>
+    </div>
+
     <div class="relative isolate flex min-h-svh w-full bg-white max-lg:flex-col lg:bg-zinc-100 dark:bg-zinc-900 dark:lg:bg-zinc-950 print:bg-white print:dark:bg-white">
       <main class="flex flex-1 flex-col pb-2 lg:min-w-0 m-3 print:m-0 print:p-0">
         <div class="grow lg:bg-white lg:p-10 dark:bg-zinc-900 print:bg-white dark:print:bg-white">

@@ -5,7 +5,7 @@
       f.search_field(
         (local_assigns[:search_field].present? ? search_field : :name_or_description_cont),
         placeholder:,
-        class: "form-input w-60 border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white",
+        class: "form-input w-60 border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white",
         oninput: 'this.form.requestSubmit()',
         autofocus: true,
         autocomplete: 'off'
@@ -16,7 +16,7 @@
       <%= 
         f.checkbox(
           :current_workspace,
-          class: "form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600",
+          class: "form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded-sm focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600",
           checked: (params[:current_workspace] == 'true') || (params[:other_workspaces].blank? && params[:public_models].blank?),
           id: 'current_workspace',
           onchange: 'this.form.requestSubmit()'
@@ -30,7 +30,7 @@
         <%= 
           f.checkbox(
             :other_workspaces,
-            class: "form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600",
+            class: "form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded-sm focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600",
             checked: params[:other_workspaces] == 'true',
             id: 'other_workspaces',
             onchange: 'this.form.requestSubmit()'
@@ -44,7 +44,7 @@
       <%= 
         f.checkbox(
           :public_models,
-          class: "form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600",
+          class: "form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded-sm focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600",
           checked: params[:public_models] == 'true',
           id: 'public_models',
           onchange: 'this.form.requestSubmit()'

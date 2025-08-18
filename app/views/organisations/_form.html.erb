@@ -7,16 +7,12 @@
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
             <%= form.label :name %>
-            <div class="mt-2">
-              <%= form.text_field(:name, placeholder: 'Stakeholder name', autofocus: true, required: true) %>
-            </div>
+            <%= form.text_field(:name, placeholder: 'Stakeholder name', autofocus: true, required: true) %>
           </div>
 
           <div class="col-span-full">
             <%= form.label :description %>
-            <div class="mt-2">
-              <%= form.rich_textarea :description, rows: 3, placeholder: '' %>
-            </div>
+            <%= form.rich_textarea :description, rows: 3, placeholder: '' %>
             <p class="text-sm/6 text-gray-600 dark:text-gray-400">A brief description of the stakeholder (optional).</p>
           </div>
         <% end %>
@@ -27,9 +23,7 @@
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
             <%= form.label :stakeholder_type_id %>
-            <div class="mt-2">
-              <%= form.collection_select :stakeholder_type_id, current_workspace.stakeholder_types.order(:name), :id, :name, {} %>
-            </div>
+            <%= form.collection_select :stakeholder_type_id, current_workspace.stakeholder_types.order(:name), :id, :name, {} %>
           </div>
         <% end %>
       <% end %>
@@ -39,9 +33,7 @@
          <%= render 'section_body' do %>
           <div class="sm:col-span-4">
             <%= form.label :weblink %>
-            <div class="mt-2">
-              <%= form.text_field(:weblink, placeholder: 'Website URL', autofocus: true) %>
-            </div>
+            <%= form.text_field(:weblink, placeholder: 'Website URL', autofocus: true) %>
           </div>
         <% end %>
       <% end %>

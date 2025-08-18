@@ -38,42 +38,11 @@ module TailwindClasses
     dark:hover:text-white
   CSS
 
-  CHECK_BOX_CLASS = 'h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
+  CHECK_BOX_CLASS = 'h-4 w-4 rounded-sm border-gray-300 text-blue-600 focus:outline-blue-600'
 
-  COMMON_FIELD_CLASS = <<~CSS.squish
-    form-input
-    w-full
-    border
-    border-gray-300
-    rounded-md
-    bg-white/5
-    px-3
-    py-1
-    text-sm
-    focus:ring-2
-    focus:ring-blue-500
-    dark:border-gray-600
-    dark:text-white
-  CSS
+  COMMON_FIELD_CLASS = 'block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-blue-500' # rubocop:disable Layout/LineLength
 
-  SELECT_FIELD_CLASS = <<~CSS.squish.freeze
-    py-1.5
-    text-gray-900
-    dark:text-white
-    ring-inset
-    ring-gray-300
-    block
-    w-full
-    border
-    rounded-md
-    bg-white/5
-    shadow-sm
-    focus:ring-2
-    focus:ring-inset
-    focus:ring-blue-500
-    sm:text-sm/6
-    [&_*]:text-black
-  CSS
+  SELECT_FIELD_CLASS = 'col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-blue-500' # rubocop:disable Layout/LineLength
 
   SUBMIT_BUTTON_CLASS = <<~CSS.squish
     rounded-md
@@ -99,5 +68,5 @@ module TailwindClasses
 
   ERROR_BORDER_CLASS = 'border-2 border-red-500'
   ERROR_MESSAGE_CLASS = 'h-2 mt-2 mb-4 text-xs text-red-500 dark:text-red-500'
-  LABEL_CLASS = 'block text-sm font-medium leading-6 text-gray-900 dark:text-white'
+  LABEL_CLASS = 'block text-sm/6 font-medium text-gray-900 dark:text-white'
 end

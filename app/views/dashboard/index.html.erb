@@ -3,7 +3,7 @@
   <h2 class="text-lg font-semibold text-zinc-950 sm:text-lg text-black dark:text-white">Welcome to the '<%= current_workspace&.name %>' workspace</h2>
 
   <%- if current_workspace.expired? %>
-    <div class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+    <div class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-sm relative" role="alert">
       <strong class="font-bold">Your workspace has expired!</strong>
       <%- if role_in_current_workspace(current_user) == 'admin' %>
         <span class="block sm:inline">

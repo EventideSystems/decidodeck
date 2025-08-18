@@ -80,12 +80,6 @@
                   link_to "My profile", user_path(current_user), class: "block w-full text-sm"
                 end
               %>
-
-              <%=
-                dropdown_menu_item do
-                  link_to "Dark mode &checkmark;".html_safe, '', data: { controller: 'theme-toggle', theme_toggle_target: 'toggle', action: 'theme-toggle#toggle' }, class: 'block w-full'
-                end
-              %>
               <hr/>
               <%- if current_user != true_user %>
                 <%=
