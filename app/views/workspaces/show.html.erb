@@ -62,7 +62,7 @@
                 <div class="text-left">Role</div>
               </div>
             </li>
-            <% @workspace.workspace_members.each do |workspace_member| %>
+            <% @workspace.workspace_members.select { |wm| wm.user.present? }.each do |workspace_member| %>
               <li class="py-2">
                 <div class="grid grid-cols-2 text-zinc-600 dark:text-zinc-300 text-sm">
                   <div class="text-left">
