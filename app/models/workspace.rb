@@ -71,12 +71,16 @@ class Workspace < ApplicationRecord
 
   scope :active,
         lambda {
-          where(expires_on: nil).or(::Workspace.where(expires_on: Time.zone.today..)).order(created_at: :asc)
+          joins(:account)
+            .where(account: { expires_on: nil }).or(::Workspace.where(account: { expires_on: Time.zone.today.. }))
+            .order(created_at: :asc)
         }
 
   scope :expiring_soon,
         lambda {
-          where(expires_on: Time.zone.today..(Time.zone.today + EXPIRY_WARNING_PERIOD)).order(created_at: :asc)
+          joins(:account)
+            .where(account: { expires_on: Time.zone.today..(Time.zone.today + EXPIRY_WARNING_PERIOD) })
+            .order(created_at: :asc)
         }
 
   delegate :expired?, :expires_on, :max_users_reached?, to: :account, allow_nil: true
