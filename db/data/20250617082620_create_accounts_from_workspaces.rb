@@ -6,16 +6,16 @@ class CreateAccountsFromWorkspaces < ActiveRecord::Migration[8.0]
 
     Workspace.order(:created_at).all.each do |workspace|
       existing_account = accounts.find do |account|
-        account.users.intersect?(workspace.users).present?
+        account.members.intersect?(workspace.users).present?
       end
 
       if existing_account
         existing_account.workspaces << workspace
-        existing_account.users |= workspace.users
+        existing_account.members |= workspace.users
       else
         new_account = Account.new(name: workspace.name)
         new_account.workspaces << workspace
-        new_account.users = workspace.users
+        new_account.members = workspace.users
         accounts << new_account
       end
     end
