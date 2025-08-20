@@ -17,8 +17,8 @@
   <div class="mx-auto max-w-7xl px-6 pb-16 pt-8 sm:pb-16 lg:flex lg:px-8 lg:pt-40">
     <div class="mx-auto max-w-2xl shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
       <%= render_branding %>
-      <h2 class="mt-10 text-3xl font-bold tracking-tight text-white sm:text-4xl">The Tool for Systemic Change</h2>
-      <p class="mt-6 text-lg leading-8 text-gray-300">Tackle the toughest challenges with Obsekio, the Tool for Systemic Change. Create lasting solutions through evidence-based planning and collaboration.</p>
+      <h2 class="mt-10 text-3xl font-bold tracking-tight text-white sm:text-4xl">Free SDG</h2>
+      <p class="mt-6 text-lg leading-8 text-gray-300">Ground your initiatives in the UN’s SDG framework to design lasting impact through evidence-based strategy, cross-sector collaboration, and values-driven transformation.</p>
       <div class="mt-10 flex items-center gap-x-6">
         <%= link_to new_user_session_path, class: 'text-sm font-semibold leading-6 text-white', data: { turbo: false } do %>
           Already have an account? <span class="text-yellow-400">Sign in <span aria-hidden="true">→</span></span>
@@ -32,7 +32,7 @@
     </div>
     <div class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
       <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
-        <%= image_tag 'nodes.png', class: "w-[56rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10", title: 'Application screenshot' %>
+        <%= image_tag 'landing_pages/free_sdg.png', class: "w-[56rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10", title: 'Application screenshot' %>
       </div>
     </div>
   </div>
@@ -45,11 +45,15 @@
   <div class="mx-auto max-w-2xl text-center">
     <h2 class="text-base font-semibold leading-7 text-yellow-400">Create impact</h2>
     <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-      Address complex problems with the Tool for Systemic Change
+      Navigate complexity with Free SDG
     </p>
     <p class="mt-6 text-lg leading-8 text-gray-300">
-      Define your goals, identify key stakeholders, and map out your strategy.
-      Gather evidence, make informed decisions, and monitor progress to ensure your initiatives are impactful and effective.
+      Clarify your goals through the lens of the UN’s Sustainable Development Goals. 
+      Identify stakeholders, align initiatives, and trace strategic pathways. 
+    </p>    
+    <p class="mt-6 text-lg leading-8 text-gray-300">
+      Use Free SDG to gather evidence, make informed decisions, and track progress - 
+      ensuring your efforts remain resonant, accountable, and transformative.
     </p>
   </div>
   <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
@@ -81,7 +85,7 @@
         </dt>
         <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
           <p class="flex-auto">
-            Connect with stakeholders and build relationships to drive change. Use Obsekio to identify key players in your network and understand the relationships between them.                
+            Connect with stakeholders and build relationships to drive change. Use Free SDG to identify key players in your network and understand the relationships between them.                
           </p>
           <%# <p class="mt-6">
             <a href="#" class="text-sm font-semibold leading-6 text-yellow-400">Learn more <span aria-hidden="true">→</span></a>
@@ -96,10 +100,11 @@
           Community driven
         </dt>
         <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
-          <p class="flex-auto">Obsekio is an open-source project designed with community needs at its core. It thrives on collaborative input, ensuring the software evolves to serve and benefits the community.</p>
-          <%# <p class="mt-6">
-            <a href="#" class="text-sm font-semibold leading-6 text-yellow-400">Learn more <span aria-hidden="true">→</span></a>
-          </p> %>
+          <p class="flex-auto">
+            Free SDG is part of <%= link_to 'Deciodeck', 'https://github.com/EventideSystems/decidodeck', class: 'text-yellow-400' %>, 
+            an open-source project designed with community needs at its core. It thrives on collaborative input, ensuring the software 
+            evolves to serve and benefits the community.
+          </p>
         </dd>
       </div>
     </dl>
@@ -234,7 +239,7 @@
   <div class="mx-auto max-w-2xl text-center">
     <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Work together to drive change.</h2>
     <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
-      Contact us to discuss your goals and challenges, and together we'll figure out how Obsekio can help. Let's start the conversation today.
+      Contact us to discuss your goals and challenges, and together we'll figure out how Free SDG can help. Let's start the conversation today.
     </p>
     <div class="mt-10 flex items-center justify-center gap-x-6">
       <%= link_to new_contact_path, class: 'text-sm font-semibold leading-6 text-white', data: { turbo: false } do %>

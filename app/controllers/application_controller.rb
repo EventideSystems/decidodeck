@@ -27,6 +27,23 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_account
 
+  def current_theme # rubocop:disable Metrics/MethodLength
+    target_source = params[:theme] || request.host
+
+    case target_source
+    when /free[-|_]?sdg/
+      :free_sdg
+    when /obsekio/
+      :obsekio
+    when /tool[-|_]?for[-|_]?systemic[-|_]?change/
+      :toolfor_systemic_change
+    else
+      :other
+    end
+  end
+
+  helper_method :current_theme
+
   def current_workspace
     return nil if current_user.blank?
 
