@@ -1,5 +1,6 @@
 Feature: Stakeholder Type management
 
+@javascript
 Scenario: Create stakeholder type
 Given a workspace named "Default Workspace" exists
 And I am an admin user for the "Default Workspace" workspace
