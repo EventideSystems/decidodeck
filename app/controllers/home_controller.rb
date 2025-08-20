@@ -10,6 +10,13 @@ class HomeController < ApplicationController
 
   def index
     redirect_to(dashboard_path) if user_signed_in?
+
+    case current_theme
+    when :free_sdg
+      render 'home/landing_pages/free_sdg' and return
+    else
+      render 'index'
+    end
   end
 
   def privacy; end

@@ -97,7 +97,7 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
 
-  gem 'factory_bot_rails', require: false
+  gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'rspec-rails'
   gem 'rubocop', require: false
@@ -118,14 +118,18 @@ group :development do
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
+  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
+  gem 'rubocop-rails-omakase', require: false
 end
 
 group :test do
   gem 'capybara'
   gem 'cucumber-rails', require: false
+  gem 'cuprite'
   gem 'database_cleaner'
-  gem 'rails-controller-testing'
+
+  # gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
-  gem 'selenium-webdriver'
+  # gem 'selenium-webdriver'
   gem 'timecop'
 end
