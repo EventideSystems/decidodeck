@@ -58,12 +58,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :characteristics do
-    member do
-      get 'description'
-    end
-  end
-
   resources :contacts, only: %i[new create] do
     collection do
       get 'privacy'
