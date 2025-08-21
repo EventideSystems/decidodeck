@@ -12,7 +12,12 @@ module ApplicationHelper
   end
 
   def render_branding
-    render 'branding'
+    case current_theme
+    when :free_sdg
+      render 'branding', brand_image_path: 'themes/free_sdg/brand.png', brand_text: 'Free SDG'
+    else
+      render 'branding', brand_image_path: 'logo-small.png', brand_text: 'Obsekio'
+    end
   end
 
   def page_header_tag(title)
