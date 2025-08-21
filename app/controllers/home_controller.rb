@@ -9,15 +9,23 @@ class HomeController < ApplicationController
   sidebar_item :home
 
   def index
-    redirect_to(dashboard_path) if user_signed_in?
-
-    case current_theme
-    when :free_sdg
-      render 'home/landing_pages/free_sdg' and return
+    if user_signed_in?
+      redirect_to(dashboard_path)
     else
-      render 'index' and return
+      render landing_page_template
     end
   end
 
   def privacy; end
+
+  private
+
+  def landing_page_template
+    case current_theme
+    when :free_sdg
+      'home/landing_pages/free_sdg'
+    else
+      'index'
+    end
+  end
 end
