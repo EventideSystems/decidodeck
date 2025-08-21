@@ -15,7 +15,7 @@ class HomeController < ApplicationController
     when :free_sdg
       render 'home/landing_pages/free_sdg' and return
     else
-      render 'index'
+      render 'index' and return
     end
   end
 
