@@ -64,7 +64,7 @@
                 <div class="text-left">Role</div>
               </div>
             </li>
-            <% @account.account_members.includes(:user).each do |member| %>
+            <% @account.account_members.includes(:user).select { |member| member.present? }.each do |member| %>
               <li class="py-2">
                 <div class="grid grid-cols-2 items-center text-sm">
                   <div>
