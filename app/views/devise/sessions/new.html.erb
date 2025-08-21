@@ -14,14 +14,14 @@
 <%= render layout: "layouts/devise_page", locals: { title: "Sign in" } do %>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'space-y-6' }, data: { turbo: false }) do |f| %>
     <div>
-      <%= f.label :email, class: 'text-black dark:text-black' %>
+      <%= f.label :email %>
       <div class="mt-1">
         <%= f.email_field :email, autofocus: true, autocomplete: "email", type: 'email', required: true %>
       </div>
     </div>
 
     <div>
-      <%= f.label :password, class: 'text-black dark:text-black' %>
+      <%= f.label :password %>
       <div class="mt-1">
         <%= f.password_field :password, autocomplete: "current-password", required: true %>
       </div>
