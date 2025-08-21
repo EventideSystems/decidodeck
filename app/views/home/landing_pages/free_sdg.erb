@@ -4,6 +4,14 @@
   <div class="text-right mt-10 mr-10">
     <%= 
       link_to(
+        "Register", 
+        new_user_session_path, 
+        class: 'text-lg font-semibold leading-6 text-white bg-teal-900 hover:bg-teal-700 px-4 py-2 rounded-sm', 
+        data: { turbo: false }
+      )
+    %>
+    <%= 
+      link_to(
         "Sign in", 
         new_user_session_path, 
         class: 'text-lg font-semibold leading-6 text-white bg-teal-900 hover:bg-teal-700 px-4 py-2 rounded-sm', 
