@@ -9,4 +9,4 @@ Feature: Free SDG Landing Page
     And I visit the site using a domain containing 'free-sdg'
     Then I should see the Free SDG landing page
     And I should see information about the Free SDG programme
-    And I should see a call to action to get started or learn more
+    And I should see a call to action to find out more

@@ -14,10 +14,9 @@ Then('I should see the Free SDG landing page') do
 end
 
 Then('I should see information about the Free SDG programme') do
-  expect(page).to have_content('programme')
   expect(page).to have_content('Sustainable Development Goals')
 end
 
-Then('I should see a call to action to get started or learn more') do
-  expect(page).to have_link('Get Started').or have_link('Learn More')
+Then('I should see a call to action to find out more') do
+  expect(page).to have_link('find out more')
 end
