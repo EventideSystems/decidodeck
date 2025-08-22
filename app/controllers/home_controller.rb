@@ -23,7 +23,7 @@ class HomeController < ApplicationController
   def landing_page_template
     case current_theme
     when :free_sdg
-      'home/landing_pages/free_sdg'
+      'themes/free_sdg/landing_page'
     else
       'index'
     end

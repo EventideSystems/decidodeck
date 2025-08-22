@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Base controller for the application
-class ApplicationController < ActionController::Base
+class ApplicationController < ActionController::Base # rubocop:disable Metrics/ClassLength
   include Pundit::Authorization
   include ActiveSidebarItem
   include Pagy::Backend
@@ -38,11 +38,26 @@ class ApplicationController < ActionController::Base
     when /tool[-|_]?for[-|_]?systemic[-|_]?change/
       :toolfor_systemic_change
     else
-      :other
+      :decidodeck
     end
   end
 
   helper_method :current_theme
+
+  def current_theme_display_name
+    case current_theme
+    when :free_sdg
+      'Free SDG'
+    when :obsekio
+      'Obsekio'
+    when :toolfor_systemic_change
+      'Obsekio'
+    else
+      'Decidodeck'
+    end
+  end
+
+  helper_method :current_theme_display_name
 
   def current_workspace
     return nil if current_user.blank?

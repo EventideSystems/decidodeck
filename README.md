@@ -21,9 +21,17 @@ Drawing from business, software development, manufacturing, and systems thinking
 
 Decidodeck helps teams visualize connections between stakeholders, sense misalignment, and reshape strategy as the terrain unfolds. It promotes a shared understanding of complex problems and the strategies needed to address them.
 
+The Decidodeck platform can be customized to support a wide range of systemic change initiatives. It forms the basis of these online applications, each expressing different facets of Decidodeck's architecture: 
+
+* [FreeSDG.org](https://freesdg.org) - a simplified module for tracking initiatives against the UN Sustainable Development Goals.
+* [Obsekio.com](https://obsekio) - management of business workflows through customizable, checklist-driven processes.
+* [ToolForSystemicChange.com](https://toolforsystemicchange.com) - evidence-based planning and collaborative action on complex societal problems.
+
+Additionally, a default implementation of the platform can be found at [Decidodeck.com](https://decidodeck.com). **NB:** All implementations share a common infrastructure, allowing users to "mix and match" services across Decidodeck themes - combining SDG tracking, compliance management, and strategic modeling as needed.
+
 Decidodeck is a rewrite of [Wicked Lab's](https://web.archive.org/web/20240329200630/https://www.wickedlab.co/) **Tool for Systemic Change**. It enhances the original Tool, improving its performance and accessiblity.
 
-The source code for Decidodeck is written using [Ruby on Rails](https://rubyonrails.org/) and is available under the [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.en.html) open source license.
+Decidodeck is written using [Ruby on Rails](https://rubyonrails.org/) and is available under the [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.en.html) open source license.
 
 ## Who is Decidodeck For?
 
@@ -34,7 +42,7 @@ The source code for Decidodeck is written using [Ruby on Rails](https://rubyonra
 
 ## Philosophy
 
-Decidodeck is more than a planning tool - it’s built on the understanding that change is complex and often messy. It recognizes that strategy involves emotion, that contradictions can spark new insights, and that learning rarely follows a straight path.
+Decidodeck is more than a planning tool - it's built on the understanding that change is complex and often messy. It recognizes that strategy involves emotion, that contradictions can spark new insights, and that learning rarely follows a straight path.
 
 Instead of chasing clarity for its own sake, Decidodeck holds space for complexity and desire. It helps teams map not only what they aim to do - but also what they're not willing to betray in the process.
 
@@ -46,7 +54,7 @@ This is strategy with care. With contradiction. With ghosts. [Read the full docu
 
 Use Decidodeck to define the objectives behind your strategic efforts and record the actions you take toward achieving them.
 
-Start with pre-built data-collection models - like the United Nations’ Sustainable Development Goals - or customize them to fit your needs. Build your own models from scratch to reflect the unique contours of your work.
+Start with pre-built data-collection models - like the United Nations' Sustainable Development Goals - or customize them to fit your needs. Build your own models from scratch to reflect the unique contours of your work.
 
 [Example screenshot →](app/assets/images/data_entry.png)
 
@@ -126,4 +134,4 @@ Decidodeck welcomes contributors from design, strategy, and open-source backgrou
 
 Before contributing, please familiarize yourself with the project's [License](LICENSE) and [Code of Conduct](/doc/CODE_OF_CONDUCT.md).
 
-You can view Decidodeck’s latest development progress on the [Github project board](https://github.com/orgs/EventideSystems/projects/1).
+You can view Decidodeck's latest development progress on the [Github project board](https://github.com/orgs/EventideSystems/projects/1).

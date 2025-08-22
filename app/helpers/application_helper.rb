@@ -6,9 +6,23 @@ module ApplicationHelper
   include TailwindClasses
 
   def application_title
-    return 'Obsekio' if Rails.env.production?
+    return current_theme_display_name if Rails.env.production?
 
-    "Obsekio - #{Rails.env.titleize}"
+    "#{current_theme_display_name} - #{Rails.env.titleize}"
+  end
+
+  def render_branding(title: nil) # rubocop:disable Metrics/MethodLength
+    brand_text = title || current_theme_display_name
+    case current_theme
+    when :free_sdg
+      render 'branding', brand_image_path: 'themes/free_sdg/brand.png', brand_text:
+    when :obsekio
+      render 'branding', brand_image_path: 'logo-small.png', brand_text:
+    when :toolfor_systemic_change
+      render 'branding', brand_image_path: 'logo-small.png', brand_text:
+    else
+      render 'branding', brand_image_path: 'logo-small.png', brand_text:
+    end
   end
 
   def render_branding
@@ -48,6 +62,7 @@ module ApplicationHelper
     render 'application/definition_list_element', term: term, definition: definition
   end
 
+  # NOTE: Not currently in use
   def html_lang
     I18n.locale == I18n.default_locale ? 'en' : I18n.locale.to_s
   end
