@@ -25,10 +25,6 @@ module ApplicationHelper
     end
   end
 
-  def render_branding
-    render 'branding'
-  end
-
   def page_header_tag(title)
     content_tag :h1, title, class: 'text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white'
   end
