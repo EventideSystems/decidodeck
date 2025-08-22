@@ -9,11 +9,9 @@ class HomeController < ApplicationController
   sidebar_item :home
 
   def index
-    if user_signed_in?
-      redirect_to(dashboard_path)
-    else
-      render landing_page_template
-    end
+    redirect_to(dashboard_path) and return if user_signed_in?
+
+    render landing_page_template and return
   end
 
   def privacy; end
