@@ -16,16 +16,17 @@
 #  log_data                        :jsonb
 #  max_impact_cards                :integer          default(1)
 #  max_users                       :integer          default(1)
-#  name                            :citext           not null
+#  name                            :citext
 #  subscription_type               :string           default("invoiced"), not null
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #  default_workspace_id            :bigint
+#  owner_id                        :integer
 #
 # Indexes
 #
 #  index_accounts_on_default_workspace_id  (default_workspace_id)
-#  index_accounts_on_name                  (name) UNIQUE WHERE (deleted_at IS NULL)
+#  index_accounts_on_owner_id              (owner_id)
 #
 # Foreign Keys
 #

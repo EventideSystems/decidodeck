@@ -8,4 +8,6 @@ class UserContext
     @user = user
     @workspace = workspace
   end
+
+  delegate :account, to: :workspace
 end

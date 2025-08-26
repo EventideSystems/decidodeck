@@ -11,18 +11,12 @@ module ApplicationHelper
     "#{current_theme_display_name} - #{Rails.env.titleize}"
   end
 
-  def render_branding(title: nil) # rubocop:disable Metrics/MethodLength
+  def render_branding(logo_class: 'h-16 w-auto', title: nil, title_class: nil)
     brand_text = title || current_theme_display_name
-    case current_theme
-    when :free_sdg
-      render 'branding', brand_image_path: 'themes/free_sdg/brand.png', brand_text:
-    when :obsekio
-      render 'branding', brand_image_path: 'logo-small.png', brand_text:
-    when :toolfor_systemic_change
-      render 'branding', brand_image_path: 'logo-small.png', brand_text:
-    else
-      render 'branding', brand_image_path: 'logo-small.png', brand_text:
-    end
+    brand_text_class = merge_tailwind_class('text-4xl font-bold tracking-tight text-white sm:text-6xl', title_class)
+    brand_image_path = brand_text_class_for_current_theme
+
+    render 'branding', brand_image_path:, brand_text:, brand_text_class:, logo_class:
   end
 
   def page_header_tag(title)
@@ -64,6 +58,19 @@ module ApplicationHelper
   end
 
   private
+
+  def brand_text_class_for_current_theme
+    case current_theme
+    when :free_sdg
+      'themes/free_sdg/brand.png'
+    when :obsekio
+      'logo-small.png'
+    when :toolfor_systemic_change
+      'logo-small.png'
+    else
+      'logo-small.png'
+    end
+  end
 
   def current_active_tab
     return nil unless controller.respond_to?(:active_tab_item)

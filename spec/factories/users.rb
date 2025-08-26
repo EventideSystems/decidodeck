@@ -5,6 +5,9 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  confirmation_sent_at   :datetime
+#  confirmation_token     :string
+#  confirmed_at           :datetime
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :inet
 #  deleted_at             :datetime
@@ -27,12 +30,14 @@
 #  sign_in_count          :integer          default(0), not null
 #  system_role            :integer          default("member")
 #  time_zone              :string           default("Adelaide")
+#  unconfirmed_email      :string
 #  created_at             :datetime
 #  updated_at             :datetime
 #  invited_by_id          :integer
 #
 # Indexes
 #
+#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE WHERE (deleted_at IS NULL)
 #  index_users_on_invitation_token      (invitation_token) UNIQUE
 #  index_users_on_invitations_count     (invitations_count)
@@ -47,5 +52,6 @@ FactoryBot.define do
     email { FFaker::Internet.email }
     password { 'example' }
     password_confirmation { 'example' }
+    confirmed_at { Time.zone.now }
   end
 end

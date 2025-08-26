@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_15_011433) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_29_062829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "hstore"
@@ -26,12 +26,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_011433) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id", "user_id"], name: "index_account_members_on_account_id_and_user_id"
-    t.index ["account_id"], name: "unique_owner_per_account", unique: true, where: "((role)::text = 'owner'::text)"
     t.index ["user_id", "account_id"], name: "index_account_members_on_user_id_and_account_id"
   end
 
   create_table "accounts", force: :cascade do |t|
-    t.citext "name", null: false
+    t.citext "name"
     t.string "description"
     t.bigint "default_workspace_id"
     t.string "default_workspace_grid_mode", default: "classic", null: false
@@ -47,8 +46,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_011433) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "log_data"
+    t.integer "owner_id"
     t.index ["default_workspace_id"], name: "index_accounts_on_default_workspace_id"
-    t.index ["name"], name: "index_accounts_on_name", unique: true, where: "(deleted_at IS NULL)"
+    t.index ["owner_id"], name: "index_accounts_on_owner_id"
   end
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -385,6 +385,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_011433) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.string "time_zone", default: "Adelaide"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true, where: "(deleted_at IS NULL)"
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
@@ -422,7 +427,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_011433) do
   create_table "workspace_members", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "workspace_id"
-    t.integer "workspace_role", default: 0
+    t.string "role", default: "member"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_workspace_members_on_user_id"

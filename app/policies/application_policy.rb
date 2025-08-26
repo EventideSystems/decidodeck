@@ -90,6 +90,10 @@ class ApplicationPolicy # rubocop:disable Style/Documentation
     current_user.admin? || workspace_admin?(user_context.workspace)
   end
 
+  def current_account_admin?
+    current_user.admin? || account_admin?(user_context.account)
+  end
+
   def current_workspace_member?
     workspace_member?(user_context.workspace)
   end
@@ -101,7 +105,19 @@ class ApplicationPolicy # rubocop:disable Style/Documentation
   def workspace_admin?(workspace)
     return false unless workspace
 
-    WorkspaceMember.where(user: current_user, workspace: workspace).first.try(:admin?)
+    WorkspaceMember.exists?(user: current_user, workspace: workspace, role: :admin)
+  end
+
+  def account_admin?(account)
+    return false unless account
+
+    AccountMember.exists?(user: current_user, account: account, role: :admin)
+  end
+
+  def account_owner(account)
+    return false unless account
+
+    account.owner == current_user
   end
 
   def workspace_member?(workspace)

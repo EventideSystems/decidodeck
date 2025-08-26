@@ -28,5 +28,5 @@ Given('I am an admin user for the {string} workspace') do |workspace_name|
     )
   end
 
-  workspace.workspace_members.create(user: @user, workspace_role: :admin)
+  workspace.workspace_members.create(user: @user, role: :admin)
 end

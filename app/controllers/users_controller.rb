@@ -123,7 +123,7 @@ class UsersController < ApplicationController # rubocop:disable Metrics/ClassLen
 
   def set_workspace_role
     current_workspace_user = @user.workspace_members.find_by(workspace_id: current_workspace.id)
-    @user.workspace_role = current_workspace_user.present? ? current_workspace_user.workspace_role : 'member'
+    @user.workspace_role = current_workspace_user.present? ? current_workspace_user.role : 'member'
   end
 
   def set_user

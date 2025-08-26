@@ -16,16 +16,17 @@
 #  log_data                        :jsonb
 #  max_impact_cards                :integer          default(1)
 #  max_users                       :integer          default(1)
-#  name                            :citext           not null
+#  name                            :citext
 #  subscription_type               :string           default("invoiced"), not null
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #  default_workspace_id            :bigint
+#  owner_id                        :integer
 #
 # Indexes
 #
 #  index_accounts_on_default_workspace_id  (default_workspace_id)
-#  index_accounts_on_name                  (name) UNIQUE WHERE (deleted_at IS NULL)
+#  index_accounts_on_owner_id              (owner_id)
 #
 # Foreign Keys
 #
@@ -37,17 +38,16 @@ class Account < ApplicationRecord
 
   include Searchable
 
-  string_enum subscription_type: %i[invoiced free]
+  string_enum subscription_type: %i[invoiced free_sdg]
   string_enum default_workspace_grid_mode: %i[classic per_status]
 
   belongs_to :default_workspace, class_name: 'Workspace', optional: true
+  belongs_to :owner, class_name: 'User', optional: true
 
   has_many :workspaces, dependent: :destroy
 
   has_many :account_members, dependent: :destroy
   has_many :members, through: :account_members, source: :user
-
-  validates :name, presence: true, uniqueness: { case_sensitive: false, conditions: -> { where(deleted_at: nil) } }
 
   after_create :create_default_workspace
 
@@ -57,14 +57,14 @@ class Account < ApplicationRecord
           where(expires_on: Time.zone.today..(Time.zone.today + EXPIRY_WARNING_PERIOD)).order(created_at: :asc)
         }
 
+  def display_name
+    name.presence || "Account for #{owner.display_name}"
+  end
+
   def expired? = expires_on.present? && expires_on < Time.zone.today
 
   def expiry_reminder_sent_on
     [expiry_initial_reminder_sent_on, expiry_final_reminder_sent_on].compact_blank.max
-  end
-
-  def owner
-    account_members.find(role: 'owner')&.user
   end
 
   def max_users_reached?

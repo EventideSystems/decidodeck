@@ -5,14 +5,26 @@ class DataModelPolicy < ApplicationPolicy
   # Scope class for LabelPolicy
   class Scope < Scope
     def resolve
-      scope.where(workspace_id: workspace_ids).or(DataModel.where(public_model: true))
+      if system_admin?
+        scope.all
+      else
+        scope.where(workspace_id: workspace_ids).or(DataModel.where(public_model: true))
+      end
     end
 
     def workspace_ids
-      current_user.workspace_ids.to_a.then do |workspace_ids|
-        workspace_ids.push(current_workspace.id) if system_admin?
-        workspace_ids.uniq
-      end
+      WorkspacePolicy::Scope.new(user_context, Workspace).scope.ids
+    end
+
+    private
+
+    # Duplicated in WorkspacePolicy
+    def current_user_available_workspace_ids
+      (
+        current_user.workspaces_from_admin_accounts.ids +
+        current_user.workspaces_from_owned_accounts.ids +
+        current_user.workspaces.ids
+      ).uniq
     end
   end
 

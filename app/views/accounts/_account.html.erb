@@ -2,10 +2,10 @@
   <%= horizontal_rule %>
   <div class="flex items-center justify-between">
     <div class="flex gap-6 py-6">
-      <%= render partial: 'resource_summary', locals: { name: account.name, background_color: 'bg-green-700' } %>
+      <%= render partial: 'resource_summary', locals: { name: account.display_name, background_color: 'bg-green-700' } %>
       <div class="space-y-1.5">
         <div class="text-base/6 font-semibold dark:text-white">
-          <%= link_to highlight(account.name, params.dig(:q, :name_or_description_cont)), account_path(account), data: { turbo: false } %>
+          <%= link_to highlight(account.display_name, params.dig(:q, :name_or_description_cont)), account_path(account), data: { turbo: false } %>
         </div>
         <div class="text-xs/6 text-zinc-500 min-h-4">
           <%= highlight(account.description, params.dig(:q, :name_or_description_cont)) %>

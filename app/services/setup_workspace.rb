@@ -14,43 +14,41 @@ class SetupWorkspace
 
   def call
     create_stakeholder_types
-    create_focus_area_groups
+    create_data_models
   end
 
   private
 
-  def create_stakeholder_types
-    StakeholderType.system_stakeholder_types.each do |template|
-      template
-        .dup
-        .tap { |s| s.workspace = workspace }
-        .save!
+  DEFAULT_STAKEHOLDER_TYPES = [
+    ['Business', '#FF6D24'],
+    ['Education', '#FF5353'],
+    ['Federal government', '#1CB85D'],
+    ['Formal community group', '#914bb4'],
+    ['Individual', '#FD9ACA'],
+    ['Informal community group', '#7993F2'],
+    ['Local government', '#008C8C'],
+    ['Non-government Organisations', '#2E74BA'],
+    ['Not for profit', '#009BCC'],
+    ['Social Enterprise', '#F7C80B'],
+    ['State government', '#00CCAA']
+  ].freeze
+
+  def create_data_models
+    case workspace.account.subscription_type.to_sym
+    when :free_sdg
+      DataModels::Import.call(
+        filename: Rails.root.join('db/data_models/sustainable_development_goals_and_targets.yml'), workspace: workspace
+      )
+    else
+      Dir.glob(Rails.root.join('db/data_models/*.yml')).each do |yml|
+        DataModels::Import.call(filename: yml, workspace: workspace)
+      end
     end
   end
 
-  def create_focus_area_groups
-    # FocusAreaGroup.where(workspace: nil).find_each do |focus_area_group|
-    #   new_focus_area_group = \
-    #     FocusAreaGroup
-    #     .create(
-    #       focus_area_group
-    #         .attributes.except('id', 'created_at', 'updated_at')
-    #     )
-
-    #   focus_area_group.focus_areas.each do |focus_area|
-    #     new_focus_area = \
-    #       new_focus_area_group
-    #       .focus_areas
-    #       .build(focus_area.attributes.except('id', 'focus_area_group_id', 'created_at', 'updated_at'))
-
-    #     focus_area.characteristics.each do |characteristic|
-    #       new_focus_area
-    #         .characteristics
-    #         .build(characteristic.attributes.except('id', 'focus_area_id', 'created_at', 'updated_at'))
-    #     end
-
-    #     new_focus_area_group.save!
-    #   end
-    # end
+  def create_stakeholder_types
+    DEFAULT_STAKEHOLDER_TYPES.each do |name, color|
+      workspace.stakeholder_types.create!(name: name, color: color, workspace: workspace)
+    end
   end
 end

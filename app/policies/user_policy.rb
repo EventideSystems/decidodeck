@@ -16,7 +16,7 @@ class UserPolicy < ApplicationPolicy # rubocop:disable Style/Documentation
   end
 
   def show?
-    system_admin? || current_workspace_any_role?
+    system_admin? || record_is_current_user? || current_workspace_any_role?
   end
 
   def create?

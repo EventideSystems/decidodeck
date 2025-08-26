@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
 module DataModels
-  # Load data model from YAML file
+  # Load data model from YAML file into workspace. If no workspace given, model is assumed to be public (system) model
   class Import
-    attr_reader :filename
+    attr_reader :filename, :workspace
 
-    def initialize(filename:)
+    def initialize(filename:, workspace: nil)
       @filename = filename
+      @workspace = workspace
     end
 
-    def self.call(filename:)
-      new(filename:).call
+    def self.call(filename:, workspace: nil)
+      new(filename:, workspace:).call
     end
 
     def call # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
@@ -41,12 +42,18 @@ module DataModels
 
     private
 
+    def data_model_params
+      params = workspace.nil? ? {} : { workspace: workspace }
+      params.merge(public_model: public_model?)
+    end
+
     def find_or_create_data_model(data_model_source)
-      DataModel.where(public_model: true).find_or_create_by(name: data_model_source[:name]) do |model|
+      DataModel.where(data_model_params).find_or_create_by(name: data_model_source[:name]) do |model|
         model.description = data_model_source[:description]
         model.license = data_model_source[:license]
         model.author = data_model_source[:author]
-        model.public_model = true
+        model.public_model = public_model?
+        model.workspace = workspace
         model.save!
       end
     end
@@ -61,6 +68,10 @@ module DataModels
       goal.focus_areas.find_or_create_by(name: target_source[:name]) do |target|
         update_element!(target, target_source, position)
       end
+    end
+
+    def public_model?
+      workspace.nil?
     end
 
     def update_element!(element, source, position)

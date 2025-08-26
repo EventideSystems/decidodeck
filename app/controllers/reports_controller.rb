@@ -94,7 +94,7 @@ class ReportsController < ApplicationController
   def cross_workspace_percent_actual
     authorize(:report, :cross_workspace_percent_actual?)
 
-    @workspaces = current_user.active_workspaces_with_admin_role
+    @workspaces = policy_scope(Workspace)
     @report = Reports::CrossWorkspacePercentActual.new(@workspaces)
     send_data(
       @report.to_xlsx.read,
@@ -106,7 +106,7 @@ class ReportsController < ApplicationController
   def cross_workspace_percent_actual_by_focus_area
     authorize(:report, :cross_workspace_percent_actual_by_focus_area?)
 
-    @workspaces = current_user.active_workspaces_with_admin_role
+    @workspaces = policy_scope(Workspace)
     @report = Reports::CrossWorkspacePercentActualByFocusArea.new(@workspaces)
     send_data(
       @report.to_xlsx.read,
@@ -118,7 +118,7 @@ class ReportsController < ApplicationController
   def cross_workspace_percent_actual_by_focus_area_tabbed
     authorize(:report, :cross_workspace_percent_actual_by_focus_area_tabbed?)
 
-    @workspaces = current_user.active_workspaces_with_admin_role
+    @workspaces = policy_scope(Workspace)
     @report = Reports::CrossWorkspacePercentActualByFocusAreaTabbed.new(@workspaces)
     send_data(
       @report.to_xlsx.read,

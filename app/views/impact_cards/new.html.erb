@@ -7,11 +7,11 @@
         <%= render 'section_header', title: 'Data Collection', subtitle: 'Choose a data model to track activity.' %>
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
-            <%= form.label :type, 'Data model' %>
+            <%= form.label :data_model_id, 'Data model' %>
             <%=
-              form.select(
+              form.collection_select(
                 :data_model_id,
-                options_from_collection_for_select(current_workspace.data_models, :id, :name),
+                current_workspace.data_models, :id, :name,
                 include_blank: 'Select a data model',
                 required: true
               )

@@ -1,11 +1,11 @@
 <%# Single notification for Turbo Stream rendering %>
-<div class="<%= notification_classes(type) %> rounded-lg shadow-lg p-4"
-     data-controller="notification"
-     data-notification-type-value="<%= type %>"
-     data-notification-message-value="<%= message %>"
-     data-notification-duration-value="<%= duration %>"
-     data-notification-dismissible-value="true"
-     data-notification-allow-browser-notification-value="<%= should_use_browser_notification?(type) %>">
+<div class="<%= notification_classes(type) %> rounded-lg shadow-lg p-4 bg-white/90 dark:bg-zinc-900/90"
+      data-controller="notification"
+      data-notification-type-value="<%= type %>"
+      data-notification-message-value="<%= message %>"
+      data-notification-duration-value="<%= notification_duration(type) %>"
+      data-notification-dismissible-value="true"
+      data-notification-allow-browser-notification-value="<%= should_use_browser_notification?(type) %>">
   
   <div class="flex items-start">
     <div class="shrink-0">

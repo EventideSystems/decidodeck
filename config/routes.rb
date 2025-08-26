@@ -49,8 +49,9 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    invitations: 'invitations'
-   }
+    invitations: 'users/invitations',
+    registrations: 'users/registrations'
+  }
 
   resources :workspaces do
     member do
@@ -143,7 +144,6 @@ Rails.application.routes.draw do
   end
 
   get 'dashboard', to: 'dashboard#index'
-#  get 'reports', to: 'reports#index'
   get 'activities', to: 'activities#index'
   get 'privacy', to: 'home#privacy'
   get 'cookie', to: 'home#cookie'

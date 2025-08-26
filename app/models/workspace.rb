@@ -67,8 +67,6 @@ class Workspace < ApplicationRecord
 
   validates :name, presence: true
 
-  after_create :setup_workspace
-
   scope :active,
         lambda {
           joins(:account)
@@ -88,8 +86,4 @@ class Workspace < ApplicationRecord
   def data_models_in_use
     scorecards.map(&:data_model).uniq
   end
-
-  private
-
-  def setup_workspace = SetupWorkspace.call(workspace: self)
 end

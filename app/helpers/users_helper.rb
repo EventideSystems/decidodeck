@@ -75,7 +75,7 @@ module UsersHelper
 
   def role_in_current_workspace(user)
     workspace_member = WorkspaceMember.where(user: user, workspace: current_workspace).first
-    workspace_member.try(:workspace_role)
+    workspace_member.try(:role)
   end
 
   def role_in_current_workspace_badge_class(workspace_role)

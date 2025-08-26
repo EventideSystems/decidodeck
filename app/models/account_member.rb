@@ -17,22 +17,10 @@
 #
 #  index_account_members_on_account_id_and_user_id  (account_id,user_id)
 #  index_account_members_on_user_id_and_account_id  (user_id,account_id)
-#  unique_owner_per_account                         (account_id) UNIQUE WHERE ((role)::text = 'owner'::text)
 #
 class AccountMember < ApplicationRecord
-  string_enum role: %i[member admin owner]
+  string_enum role: %i[member admin]
 
   belongs_to :user
   belongs_to :account
-
-  validate :only_one_owner_per_account
-
-  private
-
-  def only_one_owner_per_account
-    return unless role == 'owner' && self.class.where(account_id: account_id,
-                                                      role: 'owner').where.not(user: user).exists?
-
-    errors.add(:role, 'There can only be one owner per account')
-  end
 end

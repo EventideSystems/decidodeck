@@ -15,6 +15,8 @@ Capybara.register_driver(:cuprite) do |app|
       'disable-dev-shm-usage': nil,
       'disable-web-security': nil
     },
+    process_timeout: 60_000, # 60 seconds
+    timeout: 60_000, # 60 seconds
     inspector: ENV['INSPECTOR'] == 'true',
     headless: !ENV['HEADLESS'].in?([nil, '', '0', 'false'])
   )

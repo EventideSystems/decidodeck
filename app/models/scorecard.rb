@@ -98,6 +98,8 @@ class Scorecard < ApplicationRecord
       end
     end
 
+    # NOTE: This is our only use of OpenStruct (and the only reason why ostruct is in the Gemfile). We
+    # should try to refactor this to a plain Ruby object or a struct.
     OpenStruct.new(stakeholder_network_cache.deep_symbolize_keys)
   end
 

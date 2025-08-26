@@ -6,8 +6,23 @@ class WorkspacePolicy < ApplicationPolicy # rubocop:disable Style/Documentation
       if system_admin?
         scope.all
       else
-        scope.where(id: WorkspaceMember.where(user: current_user).pluck(:workspace_id))
+        scope
+          .joins(:account)
+          .where(
+            workspaces: { id: current_user_available_workspace_ids },
+            accounts: { expires_on: [nil, Time.zone.now..] }
+          )
       end
+    end
+
+    private
+
+    def current_user_available_workspace_ids
+      (
+        current_user.workspaces_from_admin_accounts.ids +
+        current_user.workspaces_from_owned_accounts.ids +
+        current_user.workspaces.ids
+      ).uniq
     end
   end
 

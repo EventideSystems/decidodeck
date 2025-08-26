@@ -43,19 +43,21 @@
 require 'rails_helper'
 
 RSpec.describe Workspace, type: :model do
-  describe 'create workspace' do
+  describe 'create workspace' do # rubocop:disable RSpec/EmptyExampleGroup
     # rubocop:disable RSpec/IndexedLet,RSpec/LetSetup,Naming/VariableNumber
     let!(:stakeholder_type_1) { create(:stakeholder_type, name: 'StakeholderType 1', workspace_id: nil) }
     let!(:stakeholder_type_2) { create(:stakeholder_type, name: 'StakeholderType 2', workspace_id: nil) }
     # rubocop:enable RSpec/IndexedLet,RSpec/LetSetup,Naming/VariableNumber
 
-    it 'creates stakeholder_types for the workspace' do # rubocop:disable RSpec/MultipleExpectations
-      workspace = described_class.create(name: 'Test Workspace')
+    # NOTE: No longer applicable, as the workspace setup is in the SetupWorkspace service.
+    # We should write specs for that class, moving this test over to that.
+    # it 'creates stakeholder_types for the workspace' do
+    #   workspace = described_class.create(name: 'Test Workspace')
 
-      expect(workspace.stakeholder_types.count).to eq(2)
-      expect(StakeholderType.count).to eq(4)
-      expect(workspace.stakeholder_types.first.name).to eq('StakeholderType 1')
-      expect(workspace.stakeholder_types.first.id).not_to eq(stakeholder_type_1.id)
-    end
+    #   expect(workspace.stakeholder_types.count).to eq(2)
+    #   expect(StakeholderType.count).to eq(4)
+    #   expect(workspace.stakeholder_types.first.name).to eq('StakeholderType 1')
+    #   expect(workspace.stakeholder_types.first.id).not_to eq(stakeholder_type_1.id)
+    # end
   end
 end
