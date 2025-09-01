@@ -42,7 +42,7 @@ Decidodeck is written using [Ruby on Rails](https://rubyonrails.org/) and is ava
 
 ## ☕ Support Decidodeck
 
-If Decidodeck resonates with your work, consider [buying us a coffee](https://buymeacoffee.com/eventidesystems) to help keep the lights on and the ideas flowing. Your support helps us build thoughtful tools for systemic change.
+If Decidodeck resonates with your work, consider [buying us a coffee](https://buymeacoffee.com/decidodeck) to help keep the lights on and the ideas flowing. Your support helps us build thoughtful tools for systemic change.
 
 ## Philosophy
 
