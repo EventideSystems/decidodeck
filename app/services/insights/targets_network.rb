@@ -89,7 +89,7 @@ module Insights
 
         {
           id: "focus-area-#{node.id}",
-          label: node.code.presence || node.short_name,
+          label: label_for_node(node),
           color: node.color,
           stakeholders:,
           initiatives:,
@@ -121,7 +121,7 @@ module Insights
 
         {
           id: "characteristic-#{node.id}",
-          label: node.code.presence || node.short_name,
+          label: label_for_node(node),
           color: node.focus_area.color,
           characteristic_id: node.id,
           stakeholders:,
@@ -130,6 +130,10 @@ module Insights
           size: 6
         }
       end
+    end
+
+    def label_for_node(node)
+      node.code.presence || node.short_name
     end
 
     def organisations_and_intitiatives

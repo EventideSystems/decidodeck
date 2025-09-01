@@ -24,7 +24,7 @@ Decidodeck helps teams visualize connections between stakeholders, sense misalig
 The Decidodeck platform can be customized to support a wide range of systemic change initiatives. It forms the basis of these online applications, each expressing different facets of Decidodeck's architecture: 
 
 * [FreeSDG.org](https://freesdg.org) - a simplified module for tracking initiatives against the UN Sustainable Development Goals.
-* [Obsekio.com](https://obsekio) - management of business workflows through customizable, checklist-driven processes.
+* [Obsek.io](https://obsek.io) - management of business workflows through customizable, checklist-driven processes.
 * [ToolForSystemicChange.com](https://toolforsystemicchange.com) - evidence-based planning and collaborative action on complex societal problems.
 
 Additionally, a default implementation of the platform can be found at [Decidodeck.com](https://decidodeck.com). **NB:** All implementations share a common infrastructure, allowing users to "mix and match" services across Decidodeck themes - combining SDG tracking, compliance management, and strategic modeling as needed.
@@ -39,6 +39,10 @@ Decidodeck is written using [Ruby on Rails](https://rubyonrails.org/) and is ava
 - Funders and grantees seeking participatory evaluation methods  
 - Social justice orgs rethinking traditional planning formats  
 - Cross-disciplinary teams who want a shared, reflective space for change modeling
+
+## ☕ Support Decidodeck
+
+If Decidodeck resonates with your work, consider [buying us a coffee](https://buymeacoffee.com/eventidesystems) to help keep the lights on and the ideas flowing. Your support helps us build thoughtful tools for systemic change.
 
 ## Philosophy
 
