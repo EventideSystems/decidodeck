@@ -130,34 +130,34 @@ GEM
     connection_pool (2.5.3)
     crass (1.0.6)
     csv (3.3.5)
-    cucumber (9.2.1)
+    cucumber (10.1.0)
+      base64 (~> 0.2)
       builder (~> 3.2)
       cucumber-ci-environment (> 9, < 11)
-      cucumber-core (> 13, < 14)
-      cucumber-cucumber-expressions (~> 17.0)
-      cucumber-gherkin (> 24, < 28)
+      cucumber-core (> 15, < 17)
+      cucumber-cucumber-expressions (> 17, < 19)
       cucumber-html-formatter (> 20.3, < 22)
-      cucumber-messages (> 19, < 25)
       diff-lcs (~> 1.5)
+      logger (~> 1.6)
       mini_mime (~> 1.1)
       multi_test (~> 1.1)
-      sys-uname (~> 1.2)
+      sys-uname (~> 1.3)
     cucumber-ci-environment (10.0.1)
-    cucumber-core (13.0.3)
-      cucumber-gherkin (>= 27, < 28)
-      cucumber-messages (>= 20, < 23)
+    cucumber-core (15.2.1)
+      cucumber-gherkin (> 27, < 33)
+      cucumber-messages (> 26, < 30)
       cucumber-tag-expressions (> 5, < 7)
-    cucumber-cucumber-expressions (17.1.0)
+    cucumber-cucumber-expressions (18.0.1)
       bigdecimal
-    cucumber-gherkin (27.0.0)
-      cucumber-messages (>= 19.1.4, < 23)
+    cucumber-gherkin (32.2.0)
+      cucumber-messages (> 25, < 28)
     cucumber-html-formatter (21.14.0)
       cucumber-messages (> 19, < 28)
-    cucumber-messages (22.0.0)
-    cucumber-rails (3.1.1)
-      capybara (>= 3.11, < 4)
-      cucumber (>= 5, < 10)
-      railties (>= 5.2, < 9)
+    cucumber-messages (27.2.0)
+    cucumber-rails (4.0.0)
+      capybara (>= 3.25, < 4)
+      cucumber (>= 7, < 11)
+      railties (>= 6.1, < 9)
     cucumber-tag-expressions (6.1.2)
     cuprite (0.17)
       capybara (~> 3.0)
@@ -260,6 +260,7 @@ GEM
       yajl-ruby
     marcel (1.0.4)
     matrix (0.4.3)
+    memoist (0.16.2)
     method_source (1.1.0)
     mini_magick (5.3.1)
       logger
@@ -465,8 +466,9 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.7)
-    sys-uname (1.3.1)
+    sys-uname (1.4.0)
       ffi (~> 1.1)
+      memoist (~> 0.16.2)
     tailwind_merge (0.16.0)
       sin_lru_redux (~> 2.5)
     tailwindcss-rails (4.3.0)
@@ -620,14 +622,14 @@ CHECKSUMS
   connection_pool (2.5.3) sha256=cfd74a82b9b094d1ce30c4f1a346da23ee19dc8a062a16a85f58eab1ced4305b
   crass (1.0.6) sha256=dc516022a56e7b3b156099abc81b6d2b08ea1ed12676ac7a5657617f012bd45d
   csv (3.3.5) sha256=6e5134ac3383ef728b7f02725d9872934f523cb40b961479f69cf3afa6c8e73f
-  cucumber (9.2.1) sha256=fa4161391485bca15362871c04c241e8c761580d0ad52ec54703368ecd0b7131
+  cucumber (10.1.0) sha256=bd9f5783b6cc2f1113ed4e64822459d4e73c973063f2325d89b5d555e4fe3e05
   cucumber-ci-environment (10.0.1) sha256=bb6e3fcec85c981dff4561997e8675a7123eead5fe9e587d2ad7568adbe18631
-  cucumber-core (13.0.3) sha256=e01c28d658dc0a8d5804507e0b63b58ba0e4fbe8e7d50f8f19c17b44872c5344
-  cucumber-cucumber-expressions (17.1.0) sha256=a1be9df1e5d787f62ff89e5a96c9a78e2e3b989cef7bf698f22cd5efd699d391
-  cucumber-gherkin (27.0.0) sha256=2e6a8212c1d0107f95d75082e8bd5f05ace4e42dd77a396c7b713be3a8067718
+  cucumber-core (15.2.1) sha256=636a329f877c7ba478b5d9090f810c1b21796f9b601fa33532133ad1910b8588
+  cucumber-cucumber-expressions (18.0.1) sha256=8398a0bf636af33ff3b61e459a309295eb02745b9e21bd7af0eaaa2a1e6be3e5
+  cucumber-gherkin (32.2.0) sha256=a33699d3be9c7fe1b6d4a26c1aa18150f274a90c871a6bc1811d5795a52e4ad6
   cucumber-html-formatter (21.14.0) sha256=7fbaeb38c76e982848cf144136544853102ed906b6e54070bba409e505742267
-  cucumber-messages (22.0.0) sha256=d08a6c228675dd036896bebe82a29750cbdc4dacd461e39edd1199dfa36da719
-  cucumber-rails (3.1.1) sha256=b9234147d94699638b77471256d0f06e9d1fe21803aee12cd12c9e7524c9aa02
+  cucumber-messages (27.2.0) sha256=46e2a1454620db3d0811ad990b9a96cd47bfdb5e2ad4f2ae0b41822332979fff
+  cucumber-rails (4.0.0) sha256=b2fe07af16f74e7c6ef7cec5bb238a358443a91af019fba8586d936f49c47cf2
   cucumber-tag-expressions (6.1.2) sha256=f790e4e820b80d453e83c6a462ed6de36b9477b046543322f646c1e8c275916d
   cuprite (0.17) sha256=b140d5dc70d08b97ad54bcf45cd95d0bd430e291e9dffe76fff851fddd57c12b
   data_migrate (11.3.0) sha256=92fbe774b3de0930df9aee81933a7a5abd2183d8adab7359c1579ebbc6b96459
@@ -676,6 +678,7 @@ CHECKSUMS
   mailjet (1.8.1) sha256=644d36e726ce93eeb387ca4aa570e7ce296f977800404a225d5786cee4b56b2a
   marcel (1.0.4) sha256=0d5649feb64b8f19f3d3468b96c680bae9746335d02194270287868a661516a4
   matrix (0.4.3) sha256=a0d5ab7ddcc1973ff690ab361b67f359acbb16958d1dc072b8b956a286564c5b
+  memoist (0.16.2) sha256=a52c53a3f25b5875151670b2f3fd44388633486dc0f09f9a7150ead1e3bf3c45
   method_source (1.1.0) sha256=181301c9c45b731b4769bc81e8860e72f9161ad7d66dd99103c9ab84f560f5c5
   mini_magick (5.3.1) sha256=29395dfd76badcabb6403ee5aff6f681e867074f8f28ce08d78661e9e4a351c4
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
@@ -761,7 +764,7 @@ CHECKSUMS
   sin_lru_redux (2.5.2) sha256=feed104c943afaeeecb1ad83f3f63562088b9785a816625c32b2305eccbd9963
   stimulus-rails (1.3.4) sha256=765676ffa1f33af64ce026d26b48e8ffb2e0b94e0f50e9119e11d6107d67cb06
   stringio (3.1.7) sha256=5b78b7cb242a315fb4fca61a8255d62ec438f58da2b90be66048546ade4507fa
-  sys-uname (1.3.1) sha256=b7b3eb817a9dd4a2f26a8b616a4f150ab1b79f4682d7538ceb992c8b7346f49c
+  sys-uname (1.4.0) sha256=a7ad7655d218faa686c45f21b9e5d94a05f66686706c24fae8d8d6a04b075a53
   tailwind_merge (0.16.0) sha256=e2a2b26aaef57ae6af6d0e98380bbcbf324ce4e9778cd56df8e837c30e66005c
   tailwindcss-rails (4.3.0) sha256=1e7bf788b8724ba76fec7c43c151a8bca2a39f5d52484aef867f75322df3a6d5
   tailwindcss-ruby (4.1.12) sha256=cdb8ffbeedc8292e311c3a450d471e159c126998c562c8b89e608d679c1d7c7c
