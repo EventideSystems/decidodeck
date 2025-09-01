@@ -89,7 +89,7 @@ module Insights
 
         {
           id: "focus-area-#{node.id}",
-          label: node.code || node.short_name,
+          label: node.code.presence || node.short_name,
           color: node.color,
           stakeholders:,
           initiatives:,
