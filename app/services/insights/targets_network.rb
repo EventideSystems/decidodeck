@@ -121,7 +121,7 @@ module Insights
 
         {
           id: "characteristic-#{node.id}",
-          label: node.short_name,
+          label: node.code.presence || node.short_name,
           color: node.focus_area.color,
           characteristic_id: node.id,
           stakeholders:,
