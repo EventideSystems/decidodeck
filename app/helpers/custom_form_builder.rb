@@ -156,17 +156,15 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder # rubocop:disable Met
     wrap_field(method) { super(method, merge_options, checked_value, unchecked_value) }
   end
 
-  def collection_select(method, collection, value_method, text_method, options = {}, html_options = {}) # rubocop:disable Metrics/ParameterLists,Metrics/MethodLength
+  def collection_select(method, collection, value_method, text_method, options = {}, html_options = {}) # rubocop:disable Metrics/ParameterLists
     merged_html_options = merge_options(method: method, options: html_options, default_class: SELECT_FIELD_CLASS)
     wrap_field(method, classes: 'mt-2 grid grid-cols-1') do
-      @template.concat(super(method, collection, value_method, text_method, options, merged_html_options))
-      @template.concat(
+      super(method, collection, value_method, text_method, options, merged_html_options) +
         <<~HTML.html_safe # rubocop:disable Rails/OutputSafety
           <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400">
             <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
           </svg>
         HTML
-      )
     end
   end
 
@@ -231,18 +229,16 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder # rubocop:disable Met
     wrap_field(method) { super(method, merge_options(method:, options:)) }
   end
 
-  def select(method, choices = nil, options = {}, html_options = {}, &block) # rubocop:disable Metrics/MethodLength
+  def select(method, choices = nil, options = {}, html_options = {}, &block)
     merged_html_options = merge_options(method:, options: html_options, default_class: SELECT_FIELD_CLASS)
 
     wrap_field(method, classes: 'mt-2 grid grid-cols-1') do
-      @template.concat(super(method, choices, options, merged_html_options, &block))
-      @template.concat(
+      super(method, choices, options, merged_html_options, &block) +
         <<~HTML.html_safe # rubocop:disable Rails/OutputSafety
           <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400">
             <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
           </svg>
         HTML
-      )
     end
   end
 
