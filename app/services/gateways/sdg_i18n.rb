@@ -14,7 +14,7 @@ module Gateways
   #
   # NOTE: This is a very simple client. It does not handle error handling in a robust way.
   # It is assumed that the data is always available and in the correct format.
-  class SdgI18n
+  class SDGI18n
     BASE_URI = 'https://raw.githubusercontent.com/consuldemocracy/consuldemocracy/refs/heads/master/config/locales/en/sdg.yml'
 
     def fetch_indicators

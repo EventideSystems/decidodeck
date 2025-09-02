@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-namespace :data_models do # rubocop:disable Metrics/BlockLength
-  namespace :system do # rubocop:disable Metrics/BlockLength
+namespace :data_models do
+  namespace :system do
     desc 'Import SDG indicators from unstats.un.org'
-    task import_sdgs: :environment do # rubocop:disable Metrics/BlockLength
-      simple_data_model = DataModel.where(public_model: true).find_or_create_by(name: 'Sustainable Development Goals and Targets') do |model| # rubocop:disable Layout/LineLength
+    task import_sdgs: :environment do
+      simple_data_model = DataModel.where(public_model: true).find_or_create_by(name: 'Sustainable Development Goals and Targets') do |model|
         model.description = 'Two-level SDGs data model, focusing on Goals and Targets'
         model.public_model = true
       end
@@ -22,13 +22,13 @@ namespace :data_models do # rubocop:disable Metrics/BlockLength
 
       simple_data_model_group = simple_data_model.focus_area_groups.find_by(code: 'SDG')
 
-      # deep_data_model = DataModel.where(public_model: true).find_or_create_by(name: 'Sustainable Development Goals, Targets and Indicators') do |model| # rubocop:disable Layout/LineLength
+      # deep_data_model = DataModel.where(public_model: true).find_or_create_by(name: 'Sustainable Development Goals, Targets and Indicators') do |model|
       #   model.description = 'Three-level SDGs data model, focusing on Goals, Targets and Indicators'
       #   model.public_model = true
       # end
       # deep_data_model.save!
 
-      api = Gateways::SdgApi.new
+      api = Gateways::SDGApi.new
 
       goals = api.fetch_goals
       targets = api.fetch_targets
@@ -72,7 +72,7 @@ namespace :data_models do # rubocop:disable Metrics/BlockLength
       # indicators = api.fetch_indicators
 
       # puts "Fetched #{indicators.size} indicators, #{goals.size} goals, and #{targets.size} targets from SDG API."
-      # puts "Importing #{indicators.size} indicators, #{goals.size} goals, and #{targets.size} targets into the database." # rubocop:disable Layout/LineLength
+      # puts "Importing #{indicators.size} indicators, #{goals.size} goals, and #{targets.size} targets into the database."
     end
   end
 end

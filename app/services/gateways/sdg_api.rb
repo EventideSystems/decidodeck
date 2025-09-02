@@ -8,8 +8,8 @@ module Gateways
   # It provides methods to fetch data related to SDGs, targets, and indicators.
   #
   # NOTE: This is a very simple API client. It does not handle error handling in a robust way.
-  class SdgApi
-    BASE_URI = 'https://unstats.un.org/SDGAPI/v1/sdg/'
+  class SDGApi
+    BASE_URI = 'https://unstats.un.org/SDGApi/v1/sdg/'
 
     def fetch_indicators
       get_data('Indicator/List')
