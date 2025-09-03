@@ -15,7 +15,7 @@
             <%= form.text_field :email, disabled: true, read_only: true, class: 'bg-slate-200 dark:bg-slate-600' %>
             <div class="h-2 mt-2 mb-4 text-xs text-gray-600 dark:text-gray-400">
               Note: Email address is read-only. If a change is required, please contact a system administrator.
-            <div>
+            </div>
           </div>
         <% end %>
       <% end %>
@@ -54,7 +54,7 @@
                 <%= form.label :workspace_role %>
                 <%= form.select :workspace_role, options_for_workspace_roles_select %>
               </div>
-            </div>
+            <%- end %>
           <% end %>
         <% end %>
       <% end %>
