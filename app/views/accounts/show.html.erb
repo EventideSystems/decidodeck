@@ -35,7 +35,7 @@
   <%= horizontal_rule(class: 'my-10 mt-6') %>
   <%= render 'show_page_dl_section', title: 'Overview' do %>
     <%= definition_list_element('Description', @account.description) %>
-    <%= definition_list_element('Owner', @account.owner.display_name) %>
+    <%= definition_list_element('Owner', @account.owner.display_name) if @account.owner.present? %>
   <% end %>
 
   <%= render 'show_page_dl_section', title: 'Status' do %>
