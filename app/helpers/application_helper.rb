@@ -14,16 +14,18 @@ module ApplicationHelper
   def link_to_registration
     params = params&.key?(:theme) ? { theme: current_theme } : {}
     link_to(
-      "Get Started", 
-      new_user_registration_path(params), 
-      class: 'rounded-sm bg-teal-900 px-4 py-2 text-lg leading-6 font-semibold text-white hover:bg-teal-700', 
+      'Get Started',
+      new_user_registration_path(params),
+      class: 'rounded-sm bg-teal-900 px-4 py-2 text-lg leading-6 font-semibold text-white hover:bg-teal-700',
       data: { turbo: false }
     )
   end
 
   def render_branding(logo_class: 'h-16 w-auto', title: nil, title_class: nil)
     brand_text = title || current_theme_display_name
-    brand_text_class = merge_tailwind_class('text-4xl font-bold tracking-tight text-zinc-950 sm:text-6xl dark:text-white', title_class)
+    brand_text_class = merge_tailwind_class(
+      'text-4xl font-bold tracking-tight text-zinc-950 sm:text-6xl dark:text-white', title_class
+    )
     brand_image_path = brand_text_class_for_current_theme
 
     render 'branding', brand_image_path:, brand_text:, brand_text_class:, logo_class:
@@ -46,7 +48,7 @@ module ApplicationHelper
     render "icons/#{icon}", classes:
   end
 
-  def render_sidebar_item(title:, path:, icon:, active_group:, classes: '', count: nil)
+  def render_sidebar_item(title:, path:, icon:, active_group:, classes: '', count: nil) # rubocop:disable Metrics/ParameterLists
     active = active_group == controller.active_sidebar_item
 
     render 'layouts/shared/sidebar_item', title:, path:, icon:, active:, classes:, count:

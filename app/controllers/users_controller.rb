@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Controller for managing users
-class UsersController < ApplicationController
+class UsersController < ApplicationController # rubocop:disable Metrics/ClassLength
   include VerifyPolicies
 
   before_action :authenticate_user!
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   # TODO: Refactor this so that if a user already exists in the system they are sent an invitation to join the workspace
   # not created as a new user. This will allow for the user to be added to multiple workspaces. Maybe move this to a
   # service object.
-  def create
+  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @user = User.new(user_params)
     # SMELL: Move the user_params to the policy
     user_params.delete(:system_role) unless policy(User).invite_with_system_role?
@@ -153,7 +153,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_params
+  def user_params # rubocop:disable Metrics/MethodLength
     params.fetch(:user, {}).permit(
       :name,
       :email,

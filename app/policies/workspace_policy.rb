@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# Policy for Workspace
 class WorkspacePolicy < ApplicationPolicy
+  # Policy for Workspace scopes
   class Scope < Scope
     def resolve
       if system_admin?

@@ -33,7 +33,7 @@ module AccountsHelper
 
   private
 
-  ACCOUNT_BADGE_BASE_CLASS = 'inline-flex items-center gap-x-1.5 rounded-md px-1.5 py-0.5 text-sm/5 font-medium sm:text-xs/5 forced-colors:outline text-black'
+  ACCOUNT_BADGE_BASE_CLASS = 'inline-flex items-center gap-x-1.5 rounded-md px-1.5 py-0.5 text-sm/5 font-medium sm:text-xs/5 forced-colors:outline text-black' # rubocop:disable Layout/LineLength
 
   private_constant :ACCOUNT_BADGE_BASE_CLASS
 

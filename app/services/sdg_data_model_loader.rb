@@ -11,7 +11,7 @@
 # @see FocusAreaGroup
 # @see FocusArea
 # @see Indicator
-class SDGDataModelLoader 
+class SDGDataModelLoader # rubocop:disable Metrics/ClassLength
   def self.call
     new.call
   end
@@ -61,8 +61,8 @@ class SDGDataModelLoader
     @sdg_goal_translations = sdg_i18n.fetch_goals_and_targets
   end
 
-  def load_two_tier_sdg_data_model
-    ActiveRecord::Base.transaction do
+  def load_two_tier_sdg_data_model # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    ActiveRecord::Base.transaction do # rubocop:disable Metrics/BlockLength
       data_model = \
         DataModel
         .where(public_model: true)
@@ -80,7 +80,7 @@ class SDGDataModelLoader
 
       goal.focus_areas.update_all(position: nil) # rubocop:disable Rails/SkipsModelValidations
 
-      sdg_goals.each do |sdg_goal|
+      sdg_goals.each do |sdg_goal| # rubocop:disable Metrics/BlockLength
         FocusArea.upsert( # rubocop:disable Rails/SkipsModelValidations
           {
             focus_area_group_id: goal.id,
@@ -113,7 +113,7 @@ class SDGDataModelLoader
         target.characteristics.update_all(position: nil) # rubocop:disable Rails/SkipsModelValidations
         target.characteristics.reload.sort_by do |characteristic|
           characteristic.code.split('.').last
-        end.each_with_index do |characteristic, index|
+        end.each_with_index do |characteristic, index| # rubocop:disable Style/MultilineBlockChain
           characteristic.update(position: index)
           characteristic.save!
         end
@@ -121,8 +121,8 @@ class SDGDataModelLoader
     end
   end
 
-  def load_three_tier_sdg_data_model
-    ActiveRecord::Base.transaction do
+  def load_three_tier_sdg_data_model # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength
+    ActiveRecord::Base.transaction do # rubocop:disable Metrics/BlockLength
       data_model = \
         DataModel
         .where(public_model: true)
@@ -134,7 +134,7 @@ class SDGDataModelLoader
 
       data_model.focus_area_groups.update_all(position: nil) # rubocop:disable Rails/SkipsModelValidations
 
-      sdg_goals.each do |sdg_goal|
+      sdg_goals.each do |sdg_goal| # rubocop:disable Metrics/BlockLength
         FocusAreaGroup.upsert( # rubocop:disable Rails/SkipsModelValidations
           {
             data_model_id: data_model.id,
@@ -151,7 +151,7 @@ class SDGDataModelLoader
 
         goal = data_model.focus_area_groups.find_by(code: sdg_goal['code'])
 
-        sdg_targets.select { |t| t['goal'] == sdg_goal['code'] }.each do |sdg_target|
+        sdg_targets.select { |t| t['goal'] == sdg_goal['code'] }.each do |sdg_target| # rubocop:disable Metrics/BlockLength
           FocusArea.upsert( # rubocop:disable Rails/SkipsModelValidations
             {
               focus_area_group_id: goal.id,

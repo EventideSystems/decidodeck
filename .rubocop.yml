@@ -7,10 +7,10 @@ plugins:
   - rubocop-rspec_rails
 AllCops:
   NewCops: disable
-  TargetRubyVersion: 3.3
+  TargetRubyVersion: 3.4
   Exclude:
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
     - 'bin/{bundle,rails,rake,importmap,setup,brakeman,rubocop}'
-    - 'lib/tasks/cucumber.rake'
+    - 'lib/tasks/*.rake'

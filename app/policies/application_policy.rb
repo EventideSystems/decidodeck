@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# Base policy class
 class ApplicationPolicy
+  # Base policy scope class
   class Scope
     attr_reader :user_context, :scope
 

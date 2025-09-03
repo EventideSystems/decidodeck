@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Base controller for the application
-class ApplicationController < ActionController::Base
+class ApplicationController < ActionController::Base # rubocop:disable Metrics/ClassLength
   include Pundit::Authorization
   include ActiveSidebarItem
   include Pagy::Backend
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_account
 
-  def current_theme
+  def current_theme # rubocop:disable Metrics/MethodLength
     target_source = params[:theme] || request.host
 
     case target_source

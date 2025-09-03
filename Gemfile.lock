@@ -82,7 +82,7 @@ GEM
       rack (>= 2.0.0)
     ast (2.4.3)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1153.0)
+    aws-partitions (1.1154.0)
     aws-sdk-core (3.232.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -600,7 +600,7 @@ CHECKSUMS
   appsignal (4.7.0) sha256=9037199709e91aa0315c9c3d7f6ad5a6417922c0d60cdd3b587bce98612500af
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   aws-eventstream (1.4.0) sha256=116bf85c436200d1060811e6f5d2d40c88f65448f2125bc77ffce5121e6e183b
-  aws-partitions (1.1153.0) sha256=545fa62d2fc6a893dffb6e47947b8dffb9d829d2767410335197bbaa6d11d722
+  aws-partitions (1.1154.0) sha256=be80a8e07b87ce6c936eb251a8f371a887e07ed21ca7f45e5e1b66949eb77294
   aws-sdk-core (3.232.0) sha256=05291ae0da4fb69e9b6494fcc2d839584e8345714a93cd01f0f1bf11475619f2
   aws-sdk-lambda (1.160.0) sha256=abb99459230e20958f0d949622406524f97f3ac33d8566eda4af6a2be43dd847
   aws-sdk-rails (5.1.0) sha256=8cffd3b60142e12a6747c91a7a609f668276b1082fc0c10810d5da3d14b13189

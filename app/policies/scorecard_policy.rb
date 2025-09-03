@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# Policy for Scorecard - aka ImpactCard
 class ScorecardPolicy < ApplicationPolicy
+  # Policy for Scorecard / ImpactCard scopes
   class Scope < Scope
     def resolve
       resolve_to_current_workspace
@@ -16,7 +18,7 @@ class ScorecardPolicy < ApplicationPolicy
   end
 
   def create?
-    system_admin? || 
+    system_admin? ||
       (current_workspace_admin? && max_scorecards_not_reached? && current_workspace_not_expired?)
   end
 
@@ -73,6 +75,7 @@ class ScorecardPolicy < ApplicationPolicy
 
   def export_stakeholders?
     return false if current_user.blank?
+
     system_admin? || current_workspace_admin?
   end
 
