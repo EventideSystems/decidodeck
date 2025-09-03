@@ -2,14 +2,7 @@
 <!-- Hero section -->
 <div class="relative isolate overflow-hidden">
   <div class="text-right mt-10 mr-10">
-    <%= 
-      link_to(
-        "Get Started", 
-        new_user_registration_path(params[:theme]), 
-        class: 'text-lg font-semibold leading-6 text-white bg-teal-900 hover:bg-teal-700 px-4 py-2 rounded-sm', 
-        data: { turbo: false }
-      )
-    %>
+    <%= link_to_registration %>
     <%= 
       link_to(
         "Sign In", 

@@ -117,6 +117,6 @@ class User < ApplicationRecord
   # the user record that is checked on the controller level.
   def default_workspace
     user_context = UserContext.new(self, nil)
-    WorkspacePolicy::Scope.new(user_context, Workspace).scope.first
+    WorkspacePolicy::Scope.new(user_context, Workspace).resolve.first
   end
 end

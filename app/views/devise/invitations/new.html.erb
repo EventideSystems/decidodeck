@@ -22,7 +22,7 @@
 
     <div>
       <%= custom_label_tag :workspace_role, "Role in '#{current_workspace.name}' workspace", class: 'block text-sm font-medium text-gray-700 dark:text-gray-700' %>
-      <%= custom_select_tag :workspace_role, options_for_select(WorkspaceMember.workspace_roles.keys.map { |key| [key.capitalize, key]}, WorkspaceMember.workspace_roles.keys.first) %>
+      <%= custom_select_tag :workspace_role, options_for_workspace_roles_select %>
     </div>
 
     <div>

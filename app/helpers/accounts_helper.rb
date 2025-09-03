@@ -26,15 +26,14 @@ module AccountsHelper
     end
   end
 
-  # Limit account roles, removing 'owner'
   def options_for_account_roles_select
-    roles = AccountMember.roles.except('owner')
-    options_for_select(roles.keys.map { |role| [role.capitalize, role] }, roles.keys.first)
+    roles = AccountMember.roles
+    options_for_select(AccountMember.roles.keys.map { |role| [role.capitalize, role] }, roles.keys.first)
   end
 
   private
 
-  ACCOUNT_BADGE_BASE_CLASS = 'inline-flex items-center gap-x-1.5 rounded-md px-1.5 py-0.5 text-sm/5 font-medium sm:text-xs/5 forced-colors:outline text-black' # rubocop:disable Layout/LineLength
+  ACCOUNT_BADGE_BASE_CLASS = 'inline-flex items-center gap-x-1.5 rounded-md px-1.5 py-0.5 text-sm/5 font-medium sm:text-xs/5 forced-colors:outline text-black'
 
   private_constant :ACCOUNT_BADGE_BASE_CLASS
 

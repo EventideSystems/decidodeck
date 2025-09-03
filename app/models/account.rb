@@ -45,6 +45,7 @@ class Account < ApplicationRecord
   belongs_to :owner, class_name: 'User', optional: true
 
   has_many :workspaces, dependent: :destroy
+  has_many :scorecards, through: :workspaces
 
   has_many :account_members, dependent: :destroy
   has_many :members, through: :account_members, source: :user

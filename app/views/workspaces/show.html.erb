@@ -68,7 +68,7 @@
                   <div class="text-left">
                     <%= link_to workspace_member.user.display_name, user_path(workspace_member.user), class: "font-semibold text-blue-700 dark:text-blue-300 hover:underline" %>
                   </div>
-                  <div class="text-left"><%= workspace_member.workspace_role&.titleize || 'Unassigned' %></div>
+                  <div class="text-left"><%= workspace_member.role&.titleize || 'Unassigned' %></div>
                 </div>
               </li>
             <% end %>

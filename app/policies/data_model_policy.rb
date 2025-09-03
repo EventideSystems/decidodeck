@@ -13,7 +13,7 @@ class DataModelPolicy < ApplicationPolicy
     end
 
     def workspace_ids
-      WorkspacePolicy::Scope.new(user_context, Workspace).scope.ids
+      WorkspacePolicy::Scope.new(user_context, Workspace).resolve.ids
     end
 
     private

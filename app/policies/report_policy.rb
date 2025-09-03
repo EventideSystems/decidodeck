@@ -17,6 +17,6 @@ class ReportPolicy < ApplicationPolicy
   private
 
   def user_has_multiple_active_workspaces?
-    WorkspacePolicy::Scope.new(user_context, Workspace).scope.count.positive?
+    WorkspacePolicy::Scope.new(user_context, Workspace).resolve.count > 1
   end
 end

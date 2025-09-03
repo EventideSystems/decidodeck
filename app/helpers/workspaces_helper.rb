@@ -32,4 +32,9 @@ module WorkspacesHelper
   def limit_text(value)
     value.zero? ? 'unlimited' : value
   end
+
+  def options_for_workspace_roles_select
+    roles = WorkspaceMember.roles
+    options_for_select(roles.keys.map { |role| [role.capitalize, role] }, roles.keys.first)
+  end
 end

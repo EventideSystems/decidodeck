@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Base controller for the application
-class ApplicationController < ActionController::Base # rubocop:disable Metrics/ClassLength
+class ApplicationController < ActionController::Base
   include Pundit::Authorization
   include ActiveSidebarItem
   include Pagy::Backend
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
 
   helper_method :current_account
 
-  def current_theme # rubocop:disable Metrics/MethodLength
+  def current_theme
     target_source = params[:theme] || request.host
 
     case target_source
@@ -119,8 +119,9 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
 
     WorkspacePolicy::Scope
       .new(UserContext.new(current_user, nil), Workspace)
-      .scope
+      .resolve
       .find_by(id: session[:workspace_id])
+      .presence
   end
 
   def fetch_default_workspace_and_set_session

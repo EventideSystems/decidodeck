@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class ApplicationPolicy # rubocop:disable Style/Documentation
-  class Scope # rubocop:disable Style/Documentation
+class ApplicationPolicy
+  class Scope
     attr_reader :user_context, :scope
 
     delegate :user, :workspace, to: :user_context, prefix: :current
@@ -87,11 +87,11 @@ class ApplicationPolicy # rubocop:disable Style/Documentation
   end
 
   def current_workspace_admin?
-    current_user.admin? || workspace_admin?(user_context.workspace)
+    current_user.admin? || current_account_admin? || workspace_admin?(user_context.workspace)
   end
 
   def current_account_admin?
-    current_user.admin? || account_admin?(user_context.account)
+    current_user.admin? || account_admin?(user_context.account) || account_owner(user_context.account)
   end
 
   def current_workspace_member?
@@ -126,8 +126,14 @@ class ApplicationPolicy # rubocop:disable Style/Documentation
     WorkspaceMember.where(user: current_user, workspace: workspace).first.try(:member?)
   end
 
+  def workspace_owner?(workspace)
+    return false unless workspace
+
+    workspace.owner == current_user
+  end
+
   def workspace_any_role?(workspace)
-    workspace_admin?(workspace) || workspace_member?(workspace)
+    workspace_admin?(workspace) || workspace_member?(workspace) || workspace_owner?(workspace)
   end
 
   private

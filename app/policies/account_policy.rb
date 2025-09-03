@@ -9,9 +9,14 @@ class AccountPolicy < ApplicationPolicy
       if system_admin?
         scope.all
       else
-        account_ids = AccountMember.where(user: current_user).includes(:account).pluck(&:account_id)
-        scope.where(id: account_ids)
+        scope.where(id: current_user_account_ids, expires_on: [nil, Time.zone.now..])
       end
+    end
+
+    private
+
+    def current_user_account_ids
+      (current_user.owned_accounts.ids + current_user.accounts.ids).uniq
     end
   end
 

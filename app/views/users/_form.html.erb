@@ -40,7 +40,7 @@
                 <%=
                   form.select(
                     :system_role, 
-                    options_for_select(
+                    options_for_select( 
                       User.system_roles.keys.map { |key| [key.capitalize, key]}, 
                       user.system_role
                     )
@@ -52,16 +52,8 @@
             <%- if policy(user).change_workspace_role? %>
               <div class="sm:col-span-4">
                 <%= form.label :workspace_role %>
-                <%= 
-                  form.select(
-                    :workspace_role, 
-                    options_for_select(
-                      WorkspaceMember.workspace_roles.keys.map { |key| [key.capitalize, key]}, 
-                      role_in_current_workspace(user)
-                    )
-                  ) 
-                %>
-              <%- end %>
+                <%= form.select :workspace_role, options_for_workspace_roles_select %>
+              </div>
             </div>
           <% end %>
         <% end %>

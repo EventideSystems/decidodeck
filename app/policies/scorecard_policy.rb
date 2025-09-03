@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class ScorecardPolicy < ApplicationPolicy # rubocop:disable Style/Documentation
-  class Scope < Scope # rubocop:disable Style/Documentation
+class ScorecardPolicy < ApplicationPolicy
+  class Scope < Scope
     def resolve
       resolve_to_current_workspace
     end
@@ -16,7 +16,8 @@ class ScorecardPolicy < ApplicationPolicy # rubocop:disable Style/Documentation
   end
 
   def create?
-    system_admin? || (current_workspace_admin? && max_scorecards_not_reached? && current_workspace_not_expired?)
+    system_admin? || 
+      (current_workspace_admin? && max_scorecards_not_reached? && current_workspace_not_expired?)
   end
 
   def update?
@@ -44,7 +45,7 @@ class ScorecardPolicy < ApplicationPolicy # rubocop:disable Style/Documentation
   end
 
   def merge?
-    system_admin? || (current_workspace_admin? && current_workspace_not_expired?)
+    system_admin? || current_workspace_admin? && current_workspace_not_expired?
   end
 
   def merge_options?
@@ -65,9 +66,14 @@ class ScorecardPolicy < ApplicationPolicy # rubocop:disable Style/Documentation
 
   def max_scorecards_not_reached?
     return false if current_workspace.blank?
-    return true if current_workspace.max_scorecards.zero? # NOTE: magic number, meaning no limit
+    return true if current_workspace.account.max_impact_cards.zero? # NOTE: magic number, meaning no limit
 
-    current_workspace.scorecards.count < current_workspace.max_scorecards
+    current_workspace.account.scorecards.count < current_workspace.account.max_impact_cards
+  end
+
+  def export_stakeholders?
+    return false if current_user.blank?
+    system_admin? || current_workspace_admin?
   end
 
   alias add_initiative? edit?

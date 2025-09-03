@@ -65,6 +65,8 @@ class Workspace < ApplicationRecord
   # Through associations
   has_many :initiatives, through: :scorecards
 
+  delegate :owner, to: :account
+
   validates :name, presence: true
 
   scope :active,
