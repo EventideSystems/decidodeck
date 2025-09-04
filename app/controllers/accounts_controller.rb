@@ -23,6 +23,7 @@ class AccountsController < ApplicationController
 
   def show
     @account.readonly!
+    @account_workspaces = policy_scope(Workspace).where(account: @account).order(:name)
     render 'show'
   end
 

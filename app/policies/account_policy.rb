@@ -30,13 +30,21 @@ class AccountPolicy < ApplicationPolicy
 
   def update_protected_attributes? = system_admin?
 
+  def list_members?
+    system_admin? || account_admin? || account_owner?
+  end
+
   private
 
   def account_owner?
-    record.account_members.where(user: current_user, role: 'owner').exists?
+    record.owner == current_user
   end
 
   def account_member?
-    record.account_members.where(user: current_user)
+    record.account_members.where(user: current_user).exists?
+  end
+
+  def account_admin?
+    record.account_members.where(user: current_user, role: 'admin').exists?
   end
 end

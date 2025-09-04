@@ -53,7 +53,7 @@
     <%= definition_list_element('Default workspace grid mode', @account.default_workspace_grid_mode.titleize) %>
   <% end %>
 
-  <%- if @account.account_members.any? %>
+  <%- if policy(@account).list_members? && @account.account_members.any? %>
     <%= render 'section', first_section: false do %>
       <%= render 'section_header', title: 'Account Members' %>
       <%= render 'section_body' do %>
@@ -85,33 +85,35 @@
     <% end %>
   <%- end %>
 
-  <%= render 'section', first_section: false do %>
-    <%= render 'section_header', title: 'Workspaces' %>
-    <%= render 'section_body' do %>
-      <div class="sm:col-span-8">
-        <div class="w-full">
-          <ul class="divide-y divide-zinc-200 dark:divide-zinc-700">
-            <li class="py-2">
-              <div class="grid grid-cols-2 font-semibold text-zinc-700 dark:text-zinc-200 text-sm">
-                <div class="text-left">Workspace</div>
-                <div class="text-left">Description</div>
-              </div>
-            </li>
-            <% @account.workspaces.each do |workspace| %>
+  <%- if @account_workspaces.any? %>
+    <%= render 'section', first_section: false do %>
+      <%= render 'section_header', title: 'Workspaces' %>
+      <%= render 'section_body' do %>
+        <div class="sm:col-span-8">
+          <div class="w-full">
+            <ul class="divide-y divide-zinc-200 dark:divide-zinc-700">
               <li class="py-2">
-                <div class="grid grid-cols-2 items-center text-sm">
-                  <div>
-                    <%= link_to workspace.name, workspace_path(workspace), class: "font-semibold text-blue-700 dark:text-blue-300 hover:underline" %>
-                  </div>
-                  <div>
-                    <span class="ml-2 text-xs text-zinc-500"><%= workspace.description %></span>
-                  </div>
+                <div class="grid grid-cols-2 font-semibold text-zinc-700 dark:text-zinc-200 text-sm">
+                  <div class="text-left">Workspace</div>
+                  <div class="text-left">Description</div>
                 </div>
               </li>
-            <% end %>
-          </ul>
+              <% @account_workspaces.each do |workspace| %>
+                <li class="py-2">
+                  <div class="grid grid-cols-2 items-center text-sm">
+                    <div>
+                      <%= link_to workspace.name, workspace_path(workspace), class: "font-semibold text-blue-700 dark:text-blue-300 hover:underline" %>
+                    </div>
+                    <div>
+                      <span class="ml-2 text-xs text-zinc-500"><%= workspace.description %></span>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>
