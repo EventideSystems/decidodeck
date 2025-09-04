@@ -21,9 +21,19 @@
       <%= render 'section' do %>
         <%= render 'section_header', title: 'Other Settings' %>
         <%= render 'section_body' do %>
-          <div class="sm:col-span-4">
-            <%= form.label :classic_grid_mode %>
+          <div class="sm:col-span-4 flex items-center space-x-2">
             <%= form.checkbox :classic_grid_mode %>
+            <%= form.label :classic_grid_mode, class: "mb-0" %>
+          </div>
+
+          <div class="sm:col-span-4 flex items-center space-x-2">
+            <%= form.checkbox :community_labels %>
+            <%= form.label :community_labels, class: "mb-0" %>
+          </div>
+
+          <div class="sm:col-span-4 flex items-center space-x-2">
+            <%= form.checkbox :problem_opportunity_labels %>
+            <%= form.label :problem_opportunity_labels, 'Problem / opportunity labels', class: "mb-0" %>
           </div>
         <% end %>
       <% end %>

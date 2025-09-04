@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_29_062829) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_04_025032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "hstore"
@@ -462,6 +462,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_062829) do
     t.boolean "classic_grid_mode", default: false
     t.bigint "account_id"
     t.jsonb "log_data"
+    t.boolean "community_labels", default: false
+    t.boolean "problem_opportunity_labels", default: false
     t.index ["account_id"], name: "index_workspaces_on_account_id"
   end
 

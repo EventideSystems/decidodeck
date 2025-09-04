@@ -48,6 +48,8 @@
 
   <%= render 'show_page_dl_section', title: 'Other Settings' do %>
     <%= definition_list_element('Classic grid mode', @workspace.classic_grid_mode) %>
+    <%= definition_list_element('Community labels', @workspace.community_labels) %>
+    <%= definition_list_element('Problem / opportunity labels', @workspace.problem_opportunity_labels) %>
   <% end %>
 
   <%= render 'section', first_section: false do %>

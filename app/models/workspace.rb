@@ -6,6 +6,7 @@
 #
 #  id                                                            :integer          not null, primary key
 #  classic_grid_mode                                             :boolean          default(FALSE)
+#  community_labels                                              :boolean          default(FALSE)
 #  deactivated                                                   :boolean
 #  deleted_at                                                    :datetime
 #  deprecated_allow_sustainable_development_goal_alignment_cards :boolean          default(FALSE)
@@ -20,6 +21,7 @@
 #  max_scorecards                                                :integer          default(1)
 #  max_users                                                     :integer          default(1)
 #  name                                                          :string
+#  problem_opportunity_labels                                    :boolean          default(FALSE)
 #  sdgs_alignment_card_characteristic_model_name                 :string           default("Targets")
 #  sdgs_alignment_card_focus_area_group_model_name               :string           default("Focus Area Group")
 #  sdgs_alignment_card_focus_area_model_name                     :string           default("Focus Area")

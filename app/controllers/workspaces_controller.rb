@@ -77,7 +77,9 @@ class WorkspacesController < ApplicationController
     params.fetch(:workspace, {}).permit(
       :name,
       :description,
-      :deactivated
+      :classic_grid_mode,
+      :community_labels,
+      :problem_opportunity_labels
     )
   end
 end
