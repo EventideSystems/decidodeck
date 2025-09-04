@@ -74,7 +74,7 @@ class ImpactCardsController < ApplicationController
     end
   end
 
-  def new
+  def new # rubocop:disable Metrics/AbcSize
     @impact_card = current_workspace.scorecards.build
 
     authorize(@impact_card, policy_class: ScorecardPolicy)
