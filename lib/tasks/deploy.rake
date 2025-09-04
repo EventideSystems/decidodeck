@@ -18,7 +18,7 @@ namespace :deploy do # rubocop:disable Metrics/BlockLength
   def print_warning(deploy_environment)
     printf <<~TEXT
       \033[31m
-      WARNING! You are about to deploy to the tool-for-systemic-change '#{deploy_environment}' environment.
+      WARNING! You are about to deploy to the Decidodeck '#{deploy_environment}' environment.
       \033[0m
     TEXT
   end

@@ -16,7 +16,13 @@ class OrganisationPolicy < ApplicationPolicy # rubocop:disable Style/Documentati
 
   def create?
     system_admin? ||
-      ((current_workspace_admin? || current_account_admin? || current_account_owner?) && current_workspace_not_expired?)
+      (
+        (
+          current_workspace_admin? ||
+          current_account_admin? ||
+          current_workspace_owner?
+        ) && current_workspace_not_expired?
+      )
   end
 
   def import?
