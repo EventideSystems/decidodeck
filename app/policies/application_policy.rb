@@ -26,6 +26,12 @@ class ApplicationPolicy
       user_context.user.admin?
     end
 
+    def workspace_owner?(workspace)
+      return false unless workspace
+
+      user_context.workspace&.account&.owner == current_user
+    end
+
     def workspace_admin?(workspace)
       return false unless workspace
 
@@ -100,8 +106,12 @@ class ApplicationPolicy
     workspace_member?(user_context.workspace)
   end
 
+  def current_workspace_owner?
+    workspace_owner?(user_context.workspace)
+  end
+
   def current_workspace_any_role?
-    current_workspace_admin? || current_workspace_member?
+    current_workspace_admin? || current_workspace_member? || current_workspace_owner?
   end
 
   def workspace_admin?(workspace)

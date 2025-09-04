@@ -3,7 +3,7 @@
 class InitiativePolicy < ApplicationPolicy # rubocop:disable Style/Documentation
   class Scope < Scope # rubocop:disable Style/Documentation
     def resolve # rubocop:disable Metrics/AbcSize
-      if current_workspace && (system_admin? || workspace_admin?(current_workspace))
+      if current_workspace && (system_admin? || workspace_admin?(current_workspace) || workspace_owner?(current_workspace)) # rubocop:disable Layout/LineLength
         scope.joins(:scorecard).where('scorecards.workspace_id': current_workspace.id)
       elsif current_workspace && workspace_member?(current_workspace)
         scope.joins(:scorecard).not_archived.where('scorecards.workspace_id': current_workspace.id)
