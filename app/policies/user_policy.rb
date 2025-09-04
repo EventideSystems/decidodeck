@@ -24,7 +24,7 @@ class UserPolicy < ApplicationPolicy # rubocop:disable Style/Documentation
   end
 
   def invite?
-    create?
+    system_admin? || (current_workspace_admin? && !current_workspace.account.max_users_reached?)
   end
 
   def invite_with_system_role?

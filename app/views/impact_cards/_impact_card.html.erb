@@ -13,8 +13,8 @@
 
         <div class="flex space-x-2">
           <%= render 'impact_card_type_badge', impact_card: impact_card %>
-          <%= render 'label_badge', label: impact_card.community if impact_card.community.present? %>
-          <%= render 'label_badge', label: impact_card.wicked_problem if impact_card.wicked_problem.present? %>
+          <%= render 'label_badge', label: impact_card.community if policy(Community).index? && impact_card.community.present? %>
+          <%= render 'label_badge', label: impact_card.wicked_problem if policy(WickedProblem).index? && impact_card.wicked_problem.present? %>
         </div>
 
       </div>

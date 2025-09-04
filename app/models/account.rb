@@ -71,7 +71,7 @@ class Account < ApplicationRecord
   def max_users_reached?
     return false if max_users.zero? || max_users.blank?
 
-    members.count >= max_users
+    (members + [owner]).compact_blank.uniq.count >= max_users
   end
 
   private

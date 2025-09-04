@@ -16,7 +16,7 @@ module Users
       super do |resource|
         if resource.persisted?
           subscription_type = params[:subscription_type] || 'free_sdg'
-          account = Account.create(owner: resource, subscription_type:)
+          account = Account.create(owner: resource, subscription_type:, max_impact_cards: 2, max_users: 3)
           account.reload.default_workspace.tap do |workspace|
             SetupWorkspace.call(workspace:)
           end

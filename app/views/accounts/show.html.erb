@@ -4,10 +4,10 @@
       <%= page_header_tag 'Account Details' %>
       <div class="flex justify-between items-center mt-4">
         <div class="flex gap-6 py-6">
-        <%= render partial: 'resource_summary', locals: { name: @account.name, background_color: 'bg-green-700' } %>
+        <%= render partial: 'resource_summary', locals: { name: @account.display_name, background_color: 'bg-green-700' } %>
           <div class="space-y-1.5">
             <div class="text-base/6 font-semibold dark:text-white">
-              <%= @account.name %>
+              <%= @account.display_name %>
             </div>
             <div class="text-xs/6 text-zinc-500 min-h-4">
               <%= @account.description %>
@@ -53,35 +53,37 @@
     <%= definition_list_element('Default workspace grid mode', @account.default_workspace_grid_mode.titleize) %>
   <% end %>
 
-  <%= render 'section', first_section: false do %>
-    <%= render 'section_header', title: 'Account Members' %>
-    <%= render 'section_body' do %>
-      <div class="sm:col-span-8">
-        <div class="w-full">
-          <ul class="divide-y divide-zinc-200 dark:divide-zinc-700">
-            <li class="py-2">
-              <div class="grid grid-cols-2 font-semibold text-zinc-700 dark:text-zinc-200 text-sm">
-                <div class="text-left">Member</div>
-                <div class="text-left">Role</div>
-              </div>
-            </li>
-            <% @account.account_members.includes(:user).select { |member| member.user.present? }.each do |member| %>
+  <%- if @account.account_members.any? %>
+    <%= render 'section', first_section: false do %>
+      <%= render 'section_header', title: 'Account Members' %>
+      <%= render 'section_body' do %>
+        <div class="sm:col-span-8">
+          <div class="w-full">
+            <ul class="divide-y divide-zinc-200 dark:divide-zinc-700">
               <li class="py-2">
-                <div class="grid grid-cols-2 items-center text-sm">
-                  <div>
-                    <%= link_to member.user.display_name, user_path(member.user), class: "font-semibold text-blue-700 dark:text-blue-300 hover:underline" %>
-                  </div>
-                  <div>
-                    <span class="ml-2 text-xs text-zinc-500">(<%= member.role.titleize %>)</span>
-                  </div>
+                <div class="grid grid-cols-2 font-semibold text-zinc-700 dark:text-zinc-200 text-sm">
+                  <div class="text-left">Member</div>
+                  <div class="text-left">Role</div>
                 </div>
               </li>
-            <% end %>
-          </ul>
+              <% @account.account_members.includes(:user).select { |member| member.user.present? }.each do |member| %>
+                <li class="py-2">
+                  <div class="grid grid-cols-2 items-center text-sm">
+                    <div>
+                      <%= link_to member.user.display_name, user_path(member.user), class: "font-semibold text-blue-700 dark:text-blue-300 hover:underline" %>
+                    </div>
+                    <div>
+                      <span class="ml-2 text-xs text-zinc-500">(<%= member.role.titleize %>)</span>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
+  <%- end %>
 
   <%= render 'section', first_section: false do %>
     <%= render 'section_header', title: 'Workspaces' %>

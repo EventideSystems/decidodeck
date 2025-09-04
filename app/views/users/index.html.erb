@@ -13,6 +13,10 @@
           <div>
             <%= link_to_primary 'Invite Team Member', new_user_invitation_path %>
           </div>
+        <%- else %>
+          <div>
+            <p class="text-sm text-zinc-500">You have reached the maximum number of team members.</p>
+          </div>
         <% end %>
       </div>
     </div>
