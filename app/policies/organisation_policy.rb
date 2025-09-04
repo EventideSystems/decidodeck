@@ -8,11 +8,15 @@ class OrganisationPolicy < ApplicationPolicy # rubocop:disable Style/Documentati
   end
 
   def show?
-    system_admin? || workspace_admin?(record.workspace) || workspace_member?(record.workspace)
+    system_admin? ||
+      workspace_admin?(record.workspace) ||
+      workspace_member?(record.workspace) ||
+      workspace_owner?(record.workspace)
   end
 
   def create?
-    system_admin? || (current_workspace_admin? && current_workspace_not_expired?)
+    system_admin? ||
+      ((current_workspace_admin? || current_account_admin? || current_account_owner?) && current_workspace_not_expired?)
   end
 
   def import?
@@ -20,7 +24,8 @@ class OrganisationPolicy < ApplicationPolicy # rubocop:disable Style/Documentati
   end
 
   def update?
-    system_admin? || (workspace_admin?(record.workspace) && current_workspace_not_expired?)
+    system_admin? ||
+      ((workspace_admin?(record.workspace) || workspace_owner?(record.workspace)) && !record.workspace.expired?)
   end
 
   def destroy?
