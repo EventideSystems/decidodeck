@@ -25,7 +25,7 @@ class AccountPolicy < ApplicationPolicy
   end
 
   def create? = system_admin?
-  def show? = system_admin? || account_member?
+  def show? = system_admin? || record_in_scope?
   def update? = system_admin? || account_owner?
 
   def update_protected_attributes? = system_admin?
