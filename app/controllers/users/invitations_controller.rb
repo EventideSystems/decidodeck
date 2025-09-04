@@ -18,7 +18,7 @@ module Users
           redirect_to users_path, alert: 'You have reached the maximum number of users for this workspace.'
         else
           AccountMember.create!(user: user, account: current_account, role: account_role)
-          WorkspaceMember.create!(user: user, workspace: current_workspace, workspace_role: workspace_role)
+          WorkspaceMember.create!(user: user, workspace: current_workspace, role: workspace_role)
 
           redirect_to users_path, notice: 'User was successfully invited.'
         end
@@ -28,7 +28,7 @@ module Users
         super do |resource|
           if resource.errors.empty?
             AccountMember.create!(user: resource, account: current_account, role: account_role)
-            WorkspaceMember.create!(user: resource, workspace: current_workspace, workspace_role: workspace_role)
+            WorkspaceMember.create!(user: resource, workspace: current_workspace, role: workspace_role)
           end
         end
       end

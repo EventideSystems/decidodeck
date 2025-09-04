@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
 
   before_action :set_session_workspace_id
   before_action :authenticate_user!
-
   before_action :set_paper_trail_whodunnit
+  before_action :set_actionmailer_host
 
   # protect_from_forgery with: :exception
   protect_from_forgery prepend: true
@@ -129,6 +129,10 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
     default_workspace = Workspace.active.first if default_workspace.blank? && current_user.system_role == 'admin'
     session[:workspace_id] = default_workspace&.id
     default_workspace
+  end
+
+  def set_actionmailer_host
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end
 
   def set_session_workspace_id

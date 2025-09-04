@@ -79,6 +79,7 @@ class ImpactCardsController < ApplicationController
 
     authorize(@impact_card, policy_class: ScorecardPolicy)
 
+    @impact_card.data_model = current_workspace.data_models.first if current_workspace.data_models.count == 1
     @impact_card.initiatives.build.initiatives_organisations.build
     @impact_card.initiatives.first.initiatives_subsystem_tags.build
   end
@@ -236,88 +237,6 @@ class ImpactCardsController < ApplicationController
         notes
       ] # TODO: Remove duplicated initiatives_organisations_attributes / initiatives_subsystem_tags_attributes
     )
-  end
-
-  def scorecard_params # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
-    params.require(impact_card_param).permit( # rubocop:disable Metrics/BlockLength
-      :name,
-      :description,
-      :notes,
-      :linked_scorecard_id,
-      :share_ecosystem_map,
-      :share_thematic_network_map,
-      initiatives_attributes: [
-        :_destroy,
-        :name,
-        :description,
-        :scorecard_id,
-        :started_at,
-        :finished_at,
-        :archived_on,
-        :dates_confirmed,
-        :contact_name,
-        :contact_email,
-        :contact_phone,
-        :contact_website,
-        :contact_position,
-        :notes,
-        :type,
-        {
-          initiatives_organisations_attributes: %i[
-            _destroy
-            organisation_id
-          ],
-          initiatives_subsystem_tags_attributes: %i[
-            _destroy
-            subsystem_tag_id
-          ]
-        }
-      ]
-    ).tap do |params| # NOTE: Dupe of code in initiatives controller
-      params[:type] = scorecard_class_name
-
-      if params[:initiatives_attributes].present?
-        params[:initiatives_attributes].each_key do |initiative_key|
-          next if params.dig(:initiatives_attribute, initiative_key, :initiatives_organisations_attributes).blank?
-
-          params[:initiatives_attributes][initiative_key][:initiatives_organisations_attributes].reject! do |key, value|
-            value[:_destroy] != '1' && (
-              value[:organisation_id].blank? || (
-                value[:id].blank? &&
-                params[:initiatives_attributes][initiative_key][:initiatives_organisations_attributes].to_h.any? do |selected_key, selected_value| # rubocop:disable Layout/LineLength
-                  selected_key != key &&
-                  selected_value[:_destroy] != '1' &&
-                  selected_value[:organisation_id] == value[:organisation_id]
-                end
-              )
-            )
-          end
-        end
-      end
-
-      if params[:initiatives_attributes].present?
-        params[:initiatives_attributes].each_key do |initiative_key|
-          next if params.dig(
-            :initiatives_attributes,
-            initiative_key,
-            :initiatives_subsystem_tags_attributes
-          ).blank?
-
-          params[:initiatives_attributes][initiative_key][:initiatives_subsystem_tags_attributes].reject! do |key, value| # rubocop:disable Layout/LineLength
-            value[:_destroy] != '1' && (
-              value[:subsystem_tag_id].blank? || (
-                value[:id].blank? &&
-                params[:initiatives_attributes][initiative_key][:initiatives_subsystem_tags_attributes].to_h.any? do |selected_key, selected_value| # rubocop:disable Layout/LineLength
-                  selected_key != key &&
-                  selected_value[:_destroy] != '1' &&
-                  selected_value[:subsystem_tag_id] == value[:subsystem_tag_id]
-                end
-              )
-            )
-          end
-        end
-      end
-    end
   end
 
   def checklist_items_to_csv(checklist_items) # rubocop:disable Metrics/MethodLength
