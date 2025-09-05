@@ -11,12 +11,29 @@ module ApplicationHelper
     "#{current_theme_display_name} - #{Rails.env.titleize}"
   end
 
-  def link_to_registration
+  def landing_page_body_bg_class_for_current_theme
+    case current_theme
+    when :free_sdg
+      'bg-amber-800'
+    when :obsekio
+      'bg-teal-800'
+    when :toolfor_systemic_change
+      'bg-teal-800'
+    else
+      'bg-teal-800'
+    end
+  end
+
+  def link_to_registration(link_class: '')
     params = params&.key?(:theme) ? { theme: current_theme } : {}
+    link_class = merge_tailwind_class(
+      'text-lg font-semibold leading-6 text-white bg-teal-900 hover:bg-teal-700 px-4 py-2 rounded-sm', link_class
+    )
+
     link_to(
       'Get Started',
       new_user_registration_path(params),
-      class: 'rounded-sm bg-teal-900 px-4 py-2 text-lg leading-6 font-semibold text-white hover:bg-teal-700',
+      class: link_class,
       data: { turbo: false }
     )
   end
