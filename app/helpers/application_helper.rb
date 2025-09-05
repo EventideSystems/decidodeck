@@ -11,19 +11,6 @@ module ApplicationHelper
     "#{current_theme_display_name} - #{Rails.env.titleize}"
   end
 
-  def landing_page_body_bg_class_for_current_theme
-    case current_theme
-    when :free_sdg
-      'bg-amber-800'
-    when :obsekio
-      'bg-teal-800'
-    when :toolfor_systemic_change
-      'bg-teal-800'
-    else
-      'bg-teal-800'
-    end
-  end
-
   def link_to_registration(link_class: '')
     params = params&.key?(:theme) ? { theme: current_theme } : {}
     link_class = merge_tailwind_class(
@@ -36,16 +23,6 @@ module ApplicationHelper
       class: link_class,
       data: { turbo: false }
     )
-  end
-
-  def render_branding(logo_class: 'h-16 w-auto', title: nil, title_class: nil)
-    brand_text = title || current_theme_display_name
-    brand_text_class = merge_tailwind_class(
-      'text-4xl font-bold tracking-tight text-zinc-950 sm:text-6xl dark:text-white', title_class
-    )
-    brand_image_path = brand_text_class_for_current_theme
-
-    render 'branding', brand_image_path:, brand_text:, brand_text_class:, logo_class:
   end
 
   def page_header_tag(title)
@@ -87,19 +64,6 @@ module ApplicationHelper
   end
 
   private
-
-  def brand_text_class_for_current_theme
-    case current_theme
-    when :free_sdg
-      'themes/free_sdg/brand.png'
-    when :obsekio
-      'logo-small.png'
-    when :toolfor_systemic_change
-      'logo-small.png'
-    else
-      'logo-small.png'
-    end
-  end
 
   def current_active_tab
     return nil unless controller.respond_to?(:active_tab_item)

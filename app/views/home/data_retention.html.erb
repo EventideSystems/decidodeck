@@ -5,9 +5,9 @@
   </div>
   <div class="mx-auto max-w-7xl px-6 pb-16 pt-8 sm:pb-16 lg:px-8 lg:pt-40 flex flex-col">
     <div class="flex items-center gap-x-6 ml-8 mb-8">
-      <%= render_branding title: "#{current_theme_display_name} Data Retention Policy" %>
+      <%= brand_for_current_theme title: "#{current_theme_display_name} Data Retention Policy" %>
     </div>
-    <div class="text-white bg-teal-900 rounded-lg p-8 w-full">
+    <div class="text-white <%= document_bg_class_for_current_theme %> rounded-lg p-8 w-full">
       <p class="my-4 text-gray-300">
         We are committed to safeguarding user data while balancing operational requirements and compliance with applicable laws. 
         This policy outlines how data is retained, accessed, and managed.
