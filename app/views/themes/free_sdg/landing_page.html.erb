@@ -28,7 +28,7 @@
       <%= render_branding %>
       <h2 class="mt-10 text-3xl font-bold tracking-tight text-white sm:text-4xl">A free tool to track your work against the UN's Sustainable Development Goals</h2>
       <p class="mt-6 text-lg leading-8 text-gray-300">
-        Log notes. Spot patterns. Identify stakeholders. Stay aligned.
+        Log what matters. Find the patterns. Map who's involved. Keep your strategy in view.
       </p>
       <div class="mt-10 flex items-center gap-x-6">
         <%= link_to new_user_session_path, class: 'text-sm font-semibold leading-6 text-white', data: { turbo: false } do %>
@@ -156,9 +156,17 @@
     <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
       Contact us to discuss your goals and challenges, and together we'll figure out how Free SDG can help. Let's start the conversation today.
     </p>
-    <div class="mt-10 flex items-center justify-center gap-x-6">
+    <div class="mt-5 flex items-center justify-center gap-x-6">
       <%= link_to new_contact_path, class: 'text-sm font-semibold leading-6 text-white', data: { turbo: false } do %>
-        Get in touch <span aria-hidden="true">→</span>
+        Get in touch and talk to us about your project <span aria-hidden="true">→</span>
+      <% end %>
+    </div>
+    <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
+      Or, if you're ready to dive right in...
+    </p>
+    <div class="mt-5 flex items-center justify-center gap-x-6">
+      <%= link_to new_user_registration_path, class: 'text-sm font-semibold leading-6 text-white', data: { turbo: false } do %>
+        Register a free account and start mapping your impact <span aria-hidden="true">→</span>
       <% end %>
     </div>
   </div>
