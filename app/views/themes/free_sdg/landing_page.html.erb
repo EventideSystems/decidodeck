@@ -1,16 +1,23 @@
 <!-- Hero section -->
 <div class="bg-amber-800 relative isolate overflow-hidden">
   <div id="sticky-header" class="transition-colors duration-300 w-full">
-    <div class="flex justify-end items-center pr-10 py-6 w-full">
-      <%= link_to_registration link_class: 'bg-amber-900 hover:bg-amber-700' %>
-      <%= 
-        link_to(
-          "Sign In", 
-          new_user_session_path, 
-          class: 'ml-4 text-lg font-semibold leading-6 text-white bg-amber-900 hover:bg-amber-700 px-4 py-2 rounded-sm', 
-          data: { turbo: false }
-        )
-      %>
+    <div class="flex items-center pr-10 py-6 w-full">
+      <div id="sticky-branding" class="pl-10 hidden">
+        <%= image_tag 'themes/free_sdg/brand.png', class: 'h-8 w-auto mr-2', alt: "Free SDG logo" %>
+        <span class="text-xl font-bold text-white">Free SDG</span>
+      </div>
+      <div class="flex-grow"></div>
+      <div class="flex items-center justify-end">
+        <%= link_to_registration link_class: 'bg-amber-900 hover:bg-amber-700' %>
+        <%= 
+          link_to(
+            "Sign In", 
+            new_user_session_path, 
+            class: 'ml-4 text-lg font-semibold leading-6 text-white bg-amber-900 hover:bg-amber-700 px-4 py-2 rounded-sm', 
+            data: { turbo: false }
+          )
+        %>
+      </div>
     </div>
   </div>
   <div class="absolute left-[calc(50%-4rem)] top-10 -z-10 transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)]" aria-hidden="true">
@@ -171,6 +178,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var header = document.getElementById('sticky-header');
+    var branding = document.getElementById('sticky-branding');
     var initialOffset = header.offsetTop;
     var isSticky = false;
     window.addEventListener('scroll', function() {
@@ -179,6 +187,8 @@
           header.classList.add('fixed', 'top-0', 'left-0', 'w-full', 'z-[100]', 'bg-amber-950', 'shadow-lg');
           header.classList.remove('mt-10');
           header.style.boxShadow = '0 2px 8px rgba(0,0,0,0.12)';
+          branding.classList.remove('hidden');
+          branding.classList.add('flex', 'items-center');
           isSticky = true;
         }
       } else {
@@ -186,6 +196,8 @@
           header.classList.remove('fixed', 'top-0', 'left-0', 'w-full', 'z-[100]', 'bg-amber-950', 'shadow-lg');
           header.classList.add('mt-10');
           header.style.boxShadow = '';
+          branding.classList.add('hidden');
+          branding.classList.remove('flex', 'items-center');
           isSticky = false;
         }
       }
