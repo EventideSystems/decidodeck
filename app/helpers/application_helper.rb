@@ -11,6 +11,16 @@ module ApplicationHelper
     "#{current_theme_display_name} - #{Rails.env.titleize}"
   end
 
+  def brand_for_current_theme(logo_class: 'h-16 w-auto', title: nil, title_class: nil)
+    brand_text = title || current_theme_display_name
+    brand_text_class = merge_tailwind_class(
+      'text-4xl font-bold tracking-tight text-zinc-950 sm:text-6xl dark:text-white', title_class
+    )
+    brand_image_path = brand_text_class_for_current_theme
+
+    render 'branding', brand_image_path:, brand_text:, brand_text_class:, logo_class:
+  end
+
   def link_to_registration(link_class: '')
     params = params&.key?(:theme) ? { theme: current_theme } : {}
     link_class = merge_tailwind_class(

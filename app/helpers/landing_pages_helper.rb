@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-# Helper methods related to themes
-module ThemesHelper
-  def brand_for_current_theme(logo_class: 'h-16 w-auto', title: nil, title_class: nil)
+# Helper methods related to landing pages and other pages accessible without logging in (privacy, terms, etc)
+module LandingPagesHelper
+  def landing_pages_h1(title: nil, title_class: nil)
     brand_text = title || current_theme_display_name
     brand_text_class = merge_tailwind_class(
-      'text-4xl font-bold tracking-tight text-zinc-950 sm:text-6xl dark:text-white', title_class
+      'text-4xl font-bold tracking-tight text-zinc-50 sm:text-6xl', title_class
     )
-    brand_image_path = brand_text_class_for_current_theme
+    brand_image_path = brand_image_path_for_current_theme
 
-    render 'branding', brand_image_path:, brand_text:, brand_text_class:, logo_class:
+    render 'branding', brand_image_path:, brand_text:, brand_text_class:, logo_class: 'h-16 w-auto'
   end
 
-  def big_button_link_to_for_current_theme(text, url, options = {})
+  def landing_pages_top_level_link_to(text, url, options = {})
     link_to(
       text,
       url,
@@ -20,6 +20,10 @@ module ThemesHelper
         class: "text-lg font-semibold leading-6 text-white px-4 py-2 rounded-s #{button_bg_class_for_current_theme}"
       )
     )
+  end
+
+  def landing_pages_form_submit(form, name)
+    form.submit(name, class: button_bg_class_for_current_theme)
   end
 
   def landing_page_body_bg_class_for_current_theme
@@ -35,16 +39,24 @@ module ThemesHelper
     end
   end
 
+  def landing_pages_form_secondary_link(text, url)
+    link_to(
+      text,
+      url,
+      class: 'text-sm/6 font-semibold text-gray-100'
+    )
+  end
+
   def document_bg_class_for_current_theme
     case current_theme
     when :free_sdg
       'bg-amber-900'
     when :obsekio
-      'bg-teal-900 '
+      'bg-teal-900'
     when :toolfor_systemic_change
-      'bg-teal-900 '
+      'bg-teal-900'
     else
-      'bg-teal-900 '
+      'bg-teal-900'
     end
   end
 
@@ -57,7 +69,7 @@ module ThemesHelper
 
   private
 
-  def brand_text_class_for_current_theme
+  def brand_image_path_for_current_theme
     case current_theme
     when :free_sdg
       'themes/free_sdg/brand.png'
@@ -73,13 +85,13 @@ module ThemesHelper
   def button_bg_class_for_current_theme
     case current_theme
     when :free_sdg
-      'bg-amber-900 hover:bg-amber-700'
+      'bg-amber-900 hover:bg-amber-700 dark:bg-amber-900 dark:hover:bg-amber-700'
     when :obsekio
-      'bg-teal-900 hover:bg-teal-700'
+      'bg-teal-900 hover:bg-teal-700 dark:bg-teal-900 dark:hover:bg-teal-700'
     when :toolfor_systemic_change
-      'bg-teal-900 hover:bg-teal-700'
+      'bg-teal-900 hover:bg-teal-700 dark:bg-teal-900 dark:hover:bg-teal-700'
     else
-      'bg-teal-900 hover:bg-teal-700'
+      'bg-teal-900 hover:bg-teal-700 dark:bg-teal-900 dark:hover:bg-teal-700'
     end
   end
 

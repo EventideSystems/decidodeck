@@ -1,6 +1,6 @@
 <div class="flex justify-between mt-10 ml-10 mr-10">
-  <%= big_button_link_to_for_current_theme("< Home", root_path, data: { turbo: false }) %>
+  <%= landing_pages_top_level_link_to("< Home", root_path, data: { turbo: false }) %>
   <%- unless signed_in? %>
-    <%= big_button_link_to_for_current_theme("Sign in", new_user_session_path, data: { turbo: false }) %>
+    <%= landing_pages_top_level_link_to("Sign in", new_user_session_path, data: { turbo: false }) %>
   <% end %>
 </div>

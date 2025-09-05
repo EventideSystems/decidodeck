@@ -18,7 +18,7 @@
   </div>
 
   <div class="mt-6 flex items-center justify-end gap-x-6">
-    <%= link_to 'Cancel', root_path, class: "text-sm/6 font-semibold text-gray-200 dark:text-gray-700" %>
-    <%= form.submit 'Post', class: 'bg-teal-900 dark:bg-teal-900 hover:bg-teal-700 dark:hover:bg-teal-700' %>
+    <%= landing_pages_form_secondary_link 'Cancel', root_path %>
+    <%= landing_pages_form_submit form, 'Post' %>
   </div>
 <%- end %>
