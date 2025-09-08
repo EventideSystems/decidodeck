@@ -75,6 +75,9 @@
           Goal focused
         </dt>
         <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
+          <div class="mx-auto max-w-2xl py-3">
+            <%= image_tag 'themes/free_sdg/data_entry.png', class: "rounded-xl shadow-2xl ring-1 ring-white/10", title: 'App screenshot' %>
+          </div>
           <p class="flex-auto">
             Keep tabs on your initiatives and monitor progress to ensure you're on track to meet your goals. Use the tool to gather data to make informed decisions and adjust your strategy as needed.
           </p>
@@ -90,6 +93,9 @@
           Social network oriented
         </dt>
         <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
+          <div class="mx-auto max-w-2xl py-3">
+            <%= image_tag 'themes/free_sdg/ecosystem_map.png', class: "rounded-xl shadow-2xl ring-1 ring-white/10", title: 'App screenshot' %>
+          </div>
           <p class="flex-auto">
             Connect with stakeholders and build relationships to drive change. Use Free SDG to identify key players in your network and understand the relationships between them.                
           </p>
@@ -99,10 +105,14 @@
         <dt class="text-base font-semibold leading-7 text-white">
           <div class="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-500">
             <%= render_icon :open_source %>
+            Community driven
           </div>
           Community driven
         </dt>
         <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
+          <div class="mx-auto max-w-2xl py-3">
+            <%= image_tag 'themes/free_sdg/open_source.png', class: "rounded-xl shadow-2xl ring-1 ring-white/10", title: 'App screenshot' %>
+          </div>
           <p class="flex-auto">
             Free SDG is part of <%= link_to 'Decidodeck', 'https://github.com/EventideSystems/decidodeck', class: 'text-yellow-400' %>, 
             an open-source project designed with community needs at its core. It thrives on collaborative input, ensuring the software 
@@ -114,24 +124,6 @@
   </div> 
 </div>
 
-<!-- Feature section -->
-<div class="mt-32 sm:mt-40">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl sm:text-center">
-      <h2 class="text-base font-semibold leading-7 text-yellow-400">Map stakeholders</h2>
-      <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">Identify key people</p>
-      <p class="mt-6 text-lg leading-8 text-gray-300">
-        Find significant participants in your network and understand the relationships between them. 
-        Use connections to boost your strategy and drive change.</p>
-      </p>
-    </div>
-  </div>
-  <div class="overflow-hidden pt-16">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <%= image_tag 'graph.png', class: "rounded-xl shadow-2xl ring-1 ring-white/10", title: 'App screenshot' %>
-    </div>
-  </div>
-</div>
 
 <%= render 'sponsors' %>
 
