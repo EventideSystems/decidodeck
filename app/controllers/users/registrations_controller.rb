@@ -12,11 +12,17 @@ module Users
     # end
 
     # POST /resource
-    def create
+    def create # rubocop:disable Metrics/MethodLength
       super do |resource|
         if resource.persisted?
+          # TODO: Move set up into a background job
+          # to avoid slowing down the registration process.
+          # TODO: Handle errors during setup process.
+          # TODO: Create strategy pattern for different setup processes
+          # based on subscription type.
           subscription_type = params[:subscription_type] || 'free_sdg'
           account = Account.create(owner: resource, subscription_type:, max_impact_cards: 2, max_users: 3)
+          account.account_members.create(user: resource, role: 'admin')
           account.reload.default_workspace.tap do |workspace|
             workspace.workspace_members.create(user: resource, role: 'admin')
             SetupWorkspace.call(workspace:)

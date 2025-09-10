@@ -82,7 +82,7 @@ GEM
       rack (>= 2.0.0)
     ast (2.4.3)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1155.0)
+    aws-partitions (1.1157.0)
     aws-sdk-core (3.232.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -198,6 +198,8 @@ GEM
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
+    faraday-multipart (1.1.1)
+      multipart-post (~> 2.0)
     faraday-net_http (3.4.1)
       net-http (>= 0.5.0)
     fast_jsonparser (0.6.0)
@@ -253,11 +255,10 @@ GEM
       net-imap
       net-pop
       net-smtp
-    mailjet (1.8.2)
-      activesupport (>= 5.0.0)
+    mailgun-ruby (1.3.10)
       faraday (~> 2.1)
-      rack (>= 1.4.0)
-      yajl-ruby
+      faraday-multipart (~> 1.1.0)
+      mini_mime
     marcel (1.0.4)
     matrix (0.4.3)
     memoist3 (1.0.0)
@@ -268,6 +269,7 @@ GEM
     minitest (5.25.5)
     msgpack (1.8.0)
     multi_test (1.1.0)
+    multipart-post (2.4.1)
     net-http (0.6.0)
       uri
     net-imap (0.5.10)
@@ -324,7 +326,7 @@ GEM
       date
       stringio
     public_suffix (6.0.2)
-    puma (7.0.1)
+    puma (7.0.2)
       nio4r (~> 2.0)
     pundit (2.5.0)
       activesupport (>= 3.0.0)
@@ -486,9 +488,9 @@ GEM
       railties (>= 7.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    unicode-display_width (3.1.5)
-      unicode-emoji (~> 4.0, >= 4.0.4)
-    unicode-emoji (4.0.4)
+    unicode-display_width (3.2.0)
+      unicode-emoji (~> 4.1)
+    unicode-emoji (4.1.0)
     uri (1.0.3)
     useragent (0.16.11)
     view_component (4.0.2)
@@ -508,7 +510,6 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    yajl-ruby (1.4.3)
     zeitwerk (2.7.3)
 
 PLATFORMS
@@ -546,7 +547,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   logidze
-  mailjet
+  mailgun-ruby
   net-http
   ostruct
   pagy
@@ -600,7 +601,7 @@ CHECKSUMS
   appsignal (4.7.0) sha256=9037199709e91aa0315c9c3d7f6ad5a6417922c0d60cdd3b587bce98612500af
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   aws-eventstream (1.4.0) sha256=116bf85c436200d1060811e6f5d2d40c88f65448f2125bc77ffce5121e6e183b
-  aws-partitions (1.1155.0) sha256=cb40eba09118492c81277e7c11bffb06e2c97cd6cac7b1af3300e7e03f57754e
+  aws-partitions (1.1157.0) sha256=86a22b93bc60044a7c6dd5fd4392f0ff976a884bb1a6cf3d2ecee5315513546f
   aws-sdk-core (3.232.0) sha256=05291ae0da4fb69e9b6494fcc2d839584e8345714a93cd01f0f1bf11475619f2
   aws-sdk-lambda (1.160.0) sha256=abb99459230e20958f0d949622406524f97f3ac33d8566eda4af6a2be43dd847
   aws-sdk-rails (5.1.0) sha256=8cffd3b60142e12a6747c91a7a609f668276b1082fc0c10810d5da3d14b13189
@@ -646,6 +647,7 @@ CHECKSUMS
   factory_bot (6.5.5) sha256=ce59295daee1b4704dab8a2fee6816f513d467c6aa3bc587860767d74a66efbe
   factory_bot_rails (6.5.1) sha256=d3cc4851eae4dea8a665ec4a4516895045e710554d2b5ac9e68b94d351bc6d68
   faraday (2.13.4) sha256=c719ff52cfd0dbaeca79dd83ed3aeea3f621032abf8bc959d1c05666157cac26
+  faraday-multipart (1.1.1) sha256=77a18ff40149030fd1aef55bb4fc7a67ce46419a8a3fcd010e28c2526e8d8903
   faraday-net_http (3.4.1) sha256=095757fae7872b94eac839c08a1a4b8d84fd91d6886cfbe75caa2143de64ab3b
   fast_jsonparser (0.6.0) sha256=8f6fb292a9627431f5174eab2dd55f82682c020f2bb1a40609a1cf37e41d3ebd
   ferrum (0.17.1) sha256=51d591120fc593e5a13b5d9d6474389f5145bb92a91e36eab147b5d096c8cbe7
@@ -673,7 +675,7 @@ CHECKSUMS
   logidze (1.4.1) sha256=6303fbeff030e21cd2f143aa5f7dba300978236509327cbee41447cb2af5e368
   loofah (2.24.1) sha256=655a30842b70ec476410b347ab1cd2a5b92da46a19044357bbd9f401b009a337
   mail (2.8.1) sha256=ec3b9fadcf2b3755c78785cb17bc9a0ca9ee9857108a64b6f5cfc9c0b5bfc9ad
-  mailjet (1.8.2) sha256=9f106ad02df492c25463838df8e5827b010baaf56b56fcf12781f364e7c740b5
+  mailgun-ruby (1.3.10) sha256=1917d8fb8506cd7b26c04eba23b8b94e1393e9611fe6146b7008e435c267ca57
   marcel (1.0.4) sha256=0d5649feb64b8f19f3d3468b96c680bae9746335d02194270287868a661516a4
   matrix (0.4.3) sha256=a0d5ab7ddcc1973ff690ab361b67f359acbb16958d1dc072b8b956a286564c5b
   memoist3 (1.0.0) sha256=686e42402cf150a362050c23143dc57b0ef88f8c344943ff8b7845792b50d56f
@@ -683,6 +685,7 @@ CHECKSUMS
   minitest (5.25.5) sha256=391b6c6cb43a4802bfb7c93af1ebe2ac66a210293f4a3fb7db36f2fc7dc2c756
   msgpack (1.8.0) sha256=e64ce0212000d016809f5048b48eb3a65ffb169db22238fb4b72472fecb2d732
   multi_test (1.1.0) sha256=e9e550cdd863fb72becfe344aefdcd4cbd26ebf307847f4a6c039a4082324d10
+  multipart-post (2.4.1) sha256=9872d03a8e552020ca096adadbf5e3cb1cd1cdd6acd3c161136b8a5737cdb4a8
   net-http (0.6.0) sha256=9621b20c137898af9d890556848c93603716cab516dc2c89b01a38b894e259fb
   net-imap (0.5.10) sha256=f84d206a296bff48a3a10507567fc38b050d2a40c92ea0d448164f64e60d6205
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
@@ -714,7 +717,7 @@ CHECKSUMS
   propshaft (1.2.1) sha256=e9b91daf52f21152f851a59f8621af53ffb4dc4401f9b5f8fe16065190b98654
   psych (5.2.6) sha256=814328aa5dcb6d604d32126a20bc1cbcf05521a5b49dbb1a8b30a07e580f316e
   public_suffix (6.0.2) sha256=bfa7cd5108066f8c9602e0d6d4114999a5df5839a63149d3e8b0f9c1d3558394
-  puma (7.0.1) sha256=80f9a1843c9b663471937bd456c821f2c61b40d0389ac793fee0d01ba7ecfbc1
+  puma (7.0.2) sha256=cb419624b3dbd122852ca4d7ced87e40a51c2b08c6166b302c49ef5b3de20c82
   pundit (2.5.0) sha256=4fb6b8ad3fbfe6c34e4be172a1eac03dfcb36c29d6a1214574517af5a605beda
   racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
   rack (3.2.1) sha256=30af3f7e5ec21b0d14d822cf24446048dba5f651b617c7e97405b604f20a9e33
@@ -774,8 +777,8 @@ CHECKSUMS
   timeout (0.4.3) sha256=9509f079b2b55fe4236d79633bd75e34c1c1e7e3fb4b56cb5fda61f80a0fe30e
   turbo-rails (2.0.16) sha256=d24e1b60f0c575b3549ecda967e5391027143f8220d837ed792c8d48ea0ea38d
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
-  unicode-display_width (3.1.5) sha256=bf566817855ee7ee3adcf7bace0d5906cb14401417db59193f8a5fcedf02dd4e
-  unicode-emoji (4.0.4) sha256=2c2c4ef7f353e5809497126285a50b23056cc6e61b64433764a35eff6c36532a
+  unicode-display_width (3.2.0) sha256=0cdd96b5681a5949cdbc2c55e7b420facae74c4aaf9a9815eee1087cb1853c42
+  unicode-emoji (4.1.0) sha256=4997d2d5df1ed4252f4830a9b6e86f932e2013fbff2182a9ce9ccabda4f325a5
   uri (1.0.3) sha256=e9f2244608eea2f7bc357d954c65c910ce0399ca5e18a7a29207ac22d8767011
   useragent (0.16.11) sha256=700e6413ad4bb954bb63547fa098dddf7b0ebe75b40cc6f93b8d54255b173844
   view_component (4.0.2) sha256=80eb4a8ecf8ff4cf152aea4821a8748d071a2e3af04f0532efcbf5011e8e9f65
@@ -785,7 +788,6 @@ CHECKSUMS
   websocket-driver (0.8.0) sha256=ed0dba4b943c22f17f9a734817e808bc84cdce6a7e22045f5315aa57676d4962
   websocket-extensions (0.1.5) sha256=1c6ba63092cda343eb53fc657110c71c754c56484aad42578495227d717a8241
   xpath (3.2.0) sha256=6dfda79d91bb3b949b947ecc5919f042ef2f399b904013eb3ef6d20dd3a4082e
-  yajl-ruby (1.4.3) sha256=8c974d9c11ae07b0a3b6d26efea8407269b02e4138118fbe3ef0d2ec9724d1d2
   zeitwerk (2.7.3) sha256=b2e86b4a9b57d26ba68a15230dcc7fe6f040f06831ce64417b0621ad96ba3e85
 
 RUBY VERSION

@@ -41,6 +41,17 @@ Rails.application.configure do
   # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV['MAILGUN_API_KEY'],
+    domain: ENV['MAILGUN_DOMAIN'],
+    # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
+    # timeout: 20 # Default depends on rest-client, whose default is 60s. Added in 1.2.3.
+  }
+
   # Set localhost to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 

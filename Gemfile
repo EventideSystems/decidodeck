@@ -58,7 +58,7 @@ gem 'fast_jsonparser'
 # Authentication and authorisation
 gem 'devise'
 gem 'devise_invitable'
-gem 'mailjet'
+gem 'mailgun-ruby'
 gem 'pretender'
 gem 'pundit'
 
