@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= yield(:subject) || "Decidodeck" %></title>
+  </head>
+  <body style="margin:0; padding:0; background-color:#f9fafb; color:#1a202c; font-family:Arial, Helvetica, sans-serif;">
+    <div style="width:100%; background-color:#f9fafb; padding:0;">
+      <div style="max-width:600px; margin:0 auto; background-color:#fff; border-radius:0.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.05); overflow:hidden;">
+        <div style="padding:1.5rem; text-align:center; background-color:#78350f; color:#fff;">
+          <div style="display:flex; align-items:center; justify-content:center; gap:1rem; text-align:left;">
+            <%= image_tag(attachments['logo.png'].url, style: "height:48px; width:auto; margin-bottom:0;") %>
+            <h1 style="padding-left:1rem; font-size:2rem; font-weight:700; margin:0; color:#fff;">
+              <%= defined?(@application_name) ? @application_name : "Decidodeck" %>
+            </h1>
+          </div>
+        </div>
+        <div style="padding:2rem;">
+          <%= yield %>
+        </div>
+
+        <div style="background-color:#1a202c;padding:1.5rem; text-align:center; color:#f3f4f6; font-size:0.875rem;">
+          <p><span style="margin-left:1.5rem;">&copy; <%=  Date.today.year %> Eventide Systems Pty Ltd. All rights reserved</span></p>
+          <p>
+            <%= link_to 'Privacy policy', privacy_url,  style: 'margin-left:1.5rem; color:#f3f4f6; text-decoration:underline;' %>
+            <%= link_to 'Terms & conditions', terms_url, style: 'margin-left:1.5rem; color:#f3f4f6; text-decoration:underline;' %>
+            <%= link_to 'Takedown policy', takedown_url, style: 'margin-left:1.5rem; color:#f3f4f6; text-decoration:underline;' %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+
+<h1 style="font-size:2rem; font-weight:700; color:#78350f; margin-bottom:1rem;">Free SDG Confirmation Instructions</h1>
+<p style="font-size:1rem; color:#374151; margin-bottom:1rem;">Welcome <%= @email %>!</p>
+
+<p style="font-size:1rem; color:#374151; margin-bottom:1rem;">You can confirm your account through the link below:</p>
+
+<p style="margin-bottom:2rem;">
+	<%= link_to 'Confirm my email address', confirmation_url(@resource, confirmation_token: @token), style: "display:inline-block; background-color:#78350f; color:#fff; font-weight:600; padding:0.75rem 1.5rem; border-radius:0.375rem; text-decoration:none; font-size:1rem;" %>
+</p>
+
+<p style="font-size:1rem; color:#374151; margin-bottom:1rem;">
+  Free SDG is part of the <a href="https://decidodeck.com" style="color:#78350f; text-decoration:underline;">Decidodeck</a> platform 
+  - an open-source tool designed to help organizations plan, manage, and report on initiatives that address complex challenges.
+</p>
+
+<p style="font-size:1rem; color:#374151; margin-bottom:1rem;">
+  You can learn more via our <a href="https://github.com/EventideSystems/decidodeck#decidodeck" style="color:#78350f; text-decoration:underline;">Github project page</a> 
+  or reach out to us directly at <a href="mailto:contact@decidodeck.com" style="color:#78350f; text-decoration:underline;">contact@decidodeck.com</a>.
+</p>
+
+<p style="font-size:1rem; color:#374151; margin-bottom:1rem;">We’re excited to have you on board and look forward to collaborating!</p>

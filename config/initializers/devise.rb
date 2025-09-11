@@ -15,7 +15,7 @@ Devise.setup do |config|
   config.mailer_sender = 'contact@decidodeck.com'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'CustomDeviseMailer'
   # config.mailer = 'MandrillDeviseMailer'
 
   # Configure the parent class responsible to send e-mails.

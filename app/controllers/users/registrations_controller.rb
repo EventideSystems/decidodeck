@@ -3,7 +3,7 @@
 module Users
   # Controller for managing User Registrations
   class RegistrationsController < Devise::RegistrationsController
-    # before_action :configure_sign_up_params, only: [:create]
+    before_action :configure_sign_up_params, only: [:create]
     # before_action :configure_account_update_params, only: [:update]
 
     # GET /resource/sign_up
@@ -21,7 +21,7 @@ module Users
           # TODO: Create strategy pattern for different setup processes
           # based on subscription type.
           subscription_type = params[:subscription_type] || 'free_sdg'
-          account = Account.create(owner: resource, subscription_type:, max_impact_cards: 2, max_users: 3)
+          account = Account.create(owner: resource, subscription_type:, max_impact_cards: 2, max_users: 2)
           account.account_members.create(user: resource, role: 'admin')
           account.reload.default_workspace.tap do |workspace|
             workspace.workspace_members.create(user: resource, role: 'admin')
@@ -58,9 +58,9 @@ module Users
     # protected
 
     # If you have extra params to permit, append them to the sanitizer.
-    # def configure_sign_up_params
-    #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-    # end
+    def configure_sign_up_params
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:subscription_type])
+    end
 
     # If you have extra params to permit, append them to the sanitizer.
     # def configure_account_update_params
