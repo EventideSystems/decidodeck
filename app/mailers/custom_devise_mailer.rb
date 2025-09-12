@@ -22,7 +22,7 @@ class CustomDeviseMailer < Devise::Mailer
     @current_theme = opts[:subscription_type]&.to_sym || :decidodeck
 
     attachments.inline['logo.png'] = File.read(logo_attachment_file_path_for_resource)
-    @application_name = application_name_for_resource
+    @application_name = application_name_for_current_theme
 
     super(action, opts).tap do |headers|
       # Only customize for certain actions. Other actions (e.g. reset_password_instructions)
@@ -38,8 +38,8 @@ class CustomDeviseMailer < Devise::Mailer
 
   private
 
-  def application_name_for_resource
-    case resource.subscription_type&.to_sym
+  def application_name_for_current_theme
+    case current_theme
     when :free_sdg
       'Free SDG'
     else
