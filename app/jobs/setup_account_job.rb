@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Set up a new account for a user after sign-up
 class SetupAccountJob < ApplicationJob
   queue_as :default

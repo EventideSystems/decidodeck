@@ -121,4 +121,11 @@ class User < ApplicationRecord
     user_context = UserContext.new(self, nil)
     WorkspacePolicy::Scope.new(user_context, Workspace).resolve.first
   end
+
+  protected
+
+  def send_devise_notification(notification, *args)
+    args.second[:subscription_type] = subscription_type
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
 end

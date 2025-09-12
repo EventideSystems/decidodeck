@@ -9,9 +9,7 @@ class CustomDeviseMailer < Devise::Mailer
 
   helper :application # Access to all helpers defined within `application_helper`.
 
-  def current_theme
-    resource&.subscription_type&.to_sym || :decidodeck
-  end
+  attr_reader :current_theme
 
   helper_method :current_theme
 
@@ -21,10 +19,16 @@ class CustomDeviseMailer < Devise::Mailer
   # This method is called internally by Devise to set up email headers, but is our only chance to
   # customize the contents and layout based on the subscription type.
   def headers_for(action, opts)
+    @current_theme = opts[:subscription_type]&.to_sym || :decidodeck
+
     attachments.inline['logo.png'] = File.read(logo_attachment_file_path_for_resource)
     @application_name = application_name_for_resource
 
     super(action, opts).tap do |headers|
+      # Only customize for certain actions. Other actions (e.g. reset_password_instructions)
+      # will use the default Devise behavior. Maybe we should either customize those too,
+      # or defer to a convention (if a theme-specific template exists, use that - otherwise
+      # use the default).
       if %i[confirmation_instructions invitation_instructions].include?(action)
         headers[:subject] = subject_for_current_theme(headers[:subject])
         headers[:template_name] = template_name_for_current_theme(action)
