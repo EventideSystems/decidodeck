@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
+  authenticate :user, ->(user) { user.admin? } do
+    mount GoodJob::Engine => 'good_job'
+  end
+
   resources :accounts
   resources :checklist_items, only: %i[show edit update]
   resources :data_models, only: %i[index show edit update] do
@@ -151,5 +155,5 @@ Rails.application.routes.draw do
   get 'data_retention', to: 'home#data_retention'
   get 'takedown', to: 'home#takedown'
 
-  root to: 'home#index'
+  root to: 'home#index'  
 end

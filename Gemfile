@@ -84,6 +84,8 @@ gem 'paranoia'
 gem 'ransack'
 gem 'recaptcha'
 
+gem 'good_job'
+
 # Change tracking
 gem 'fx'
 gem 'logidze'

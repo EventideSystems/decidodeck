@@ -51,7 +51,6 @@ Dir.glob(Rails.root.join('db/data_models/*.yml')).each do |yml|
   DataModels::Import.call(filename: yml)
 end
 
-
 # --- Example Data Model Reference (Workspace-specific) ---
 public_sdg_model = DataModel.where(public_model: true).find_by(name: 'Sustainable Development Goals and Targets')
 ws1_sdg_model = DataModel.find_or_create_by!(name: 'Sustainable Development Goals and Targets', workspace: ws1) do |dm|
