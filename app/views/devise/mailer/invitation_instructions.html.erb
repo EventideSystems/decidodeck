@@ -1,6 +1,6 @@
 
 
-<p><%= t("devise.mailer.invitation_instructions.hello", invitee: @resource.name) %></p>
+<p><%= t("devise.mailer.invitation_instructions.hello", invitee: @resource.display_name) %></p>
 <p>
   <%=
     t(
@@ -18,3 +18,5 @@
 <% end %>
 
 <p><%= sanitize(t("devise.mailer.invitation_instructions.ignore")) %></p>
+
+

@@ -25,9 +25,9 @@ class CustomDeviseMailer < Devise::Mailer
     @application_name = application_name_for_resource
 
     super(action, opts).tap do |headers|
-      if action == :confirmation_instructions
-        headers[:subject] = subject_for_current_theme
-        headers[:template_name] = template_name_for_current_theme
+      if %i[confirmation_instructions invitation_instructions].include?(action)
+        headers[:subject] = subject_for_current_theme(headers[:subject])
+        headers[:template_name] = template_name_for_current_theme(action)
       end
     end
   end
@@ -52,21 +52,21 @@ class CustomDeviseMailer < Devise::Mailer
     end
   end
 
-  def subject_for_current_theme
+  def subject_for_current_theme(default_subject)
     case current_theme
     when :free_sdg
-      'Free SDG - Confirm your email address'
+      "Free SDG - #{default_subject}"
     else
-      'Confirm your email address'
+      default_subject
     end
   end
 
-  def template_name_for_current_theme
+  def template_name_for_current_theme(action)
     case current_theme
     when :free_sdg
-      'confirmation_instructions_free_sdg'
+      "#{action}_free_sdg"
     else
-      'confirmation_instructions'
+      action.to_s
     end
   end
 end

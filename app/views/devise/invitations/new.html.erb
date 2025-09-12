@@ -1,5 +1,6 @@
 <%= render layout: "layouts/devise_page", locals: { title: "Invite Users" } do %>
   <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { class: 'space-y-6' }, data: { turbo: false }) do |f| %>
+    <%= f.hidden_field :subscription_type, value: subscription_type_for_current_theme %>
 
     <div>
       <%= f.label :email, class: 'block text-sm font-medium text-gray-700 dark:text-gray-700' %>
