@@ -7,7 +7,7 @@ module Users
 
     layout 'application', only: [:new] # NOTE: Defaults to 'devise' layout for other actions
 
-    def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
       workspace_role = params[:workspace_role].downcase
       account_role = params[:account_role].downcase
 
@@ -17,7 +17,7 @@ module Users
         user.subscription_type = params[:user][:subscription_type]
         if current_workspace.members.include?(user)
           redirect_to users_path, alert: "A user with the email '#{user.email}' is already a member of this workspace."
-        elsif current_workspace.max_users_reached?
+        elsif current_workspace.max_users_reached? && !current_user.admin?
           redirect_to users_path, alert: 'You have reached the maximum number of users for this workspace.'
         else
           AccountMember.create!(user: user, account: current_account, role: account_role)
@@ -26,7 +26,7 @@ module Users
           redirect_to users_path, notice: 'User was successfully invited.'
           # TODO: Send email to existing user notifying them they have been added to the workspace
         end
-      elsif current_workspace.max_users_reached?
+      elsif current_workspace.max_users_reached? && !current_user.admin?
         redirect_to users_path, alert: 'You have reached the maximum number of users for this workspace.'
       else
         super do |resource|
