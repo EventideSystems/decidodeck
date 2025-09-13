@@ -43,7 +43,7 @@ class CustomDeviseMailer < Devise::Mailer
     when :free_sdg
       'Free SDG'
     else
-      'Decidodeck'
+      'Obsekio'
     end
   end
 

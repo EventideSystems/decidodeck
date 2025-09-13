@@ -1,7 +1,5 @@
-
-
-<p><%= t("devise.mailer.invitation_instructions.hello", invitee: @resource.display_name) %></p>
-<p>
+<p style="font-size:1rem; color:#374151; margin-bottom:1rem;"><%= t("devise.mailer.invitation_instructions.hello", invitee: @resource.display_name) %></p>
+<p style="font-size:1rem; color:#374151; margin-bottom:1rem;">
   <%=
     t(
       "devise.mailer.invitation_instructions.someone_invited_you",
@@ -9,14 +7,28 @@
     ).html_safe
   %>
 </p>
-<p>
-  **<%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token) %>**
+<p style="font-size:1rem; color:#374151; margin-bottom:1rem;">
+  <%= 
+    link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token), style: "display:inline-block; background-color:#78350f; color:#fff; font-weight:600; padding:0.75rem 1.5rem; border-radius:0.375rem; text-decoration:none; font-size:1rem;" 
+  %>
 </p>
 
 <% if @resource.invitation_due_at %>
-  <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
+  <p style="font-size:1rem; color:#374151; margin-bottom:1rem;"><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
 <% end %>
 
-<p><%= sanitize(t("devise.mailer.invitation_instructions.ignore")) %></p>
+<p style="font-size:1rem; color:#374151; margin-bottom:1rem;"><%= sanitize(t("devise.mailer.invitation_instructions.ignore")) %></p>
+
+<p style="font-size:1rem; color:#374151; margin-bottom:1rem;">
+  Obsekio is part of the <a href="https://decidodeck.com" style="color:#78350f; text-decoration:underline;">Decidodeck</a> platform 
+  - an open-source tool designed to help organizations plan, manage, and report on initiatives that address complex challenges.
+</p>
+
+<p style="font-size:1rem; color:#374151; margin-bottom:1rem;">
+  You can learn more via our <a href="https://github.com/EventideSystems/decidodeck#decidodeck" style="color:#78350f; text-decoration:underline;">Github project page</a> 
+  or reach out to us directly at <a href="mailto:contact@decidodeck.com" style="color:#78350f; text-decoration:underline;">contact@decidodeck.com</a>.
+</p>
+
+<p style="font-size:1rem; color:#374151; margin-bottom:1rem;">We're excited to have you on board and look forward to collaborating!</p>
 
 
