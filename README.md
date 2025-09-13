@@ -99,6 +99,9 @@ For more details, refer to our [design documentation →](/doc/DESIGN.md)
 
 We're grateful to Wicked Lab for developing the original Tool for Systemic Change and for agreeing to release the code as open source.
 
+Credit also needs to be given to David Le Blanc for his work developing [sustainable development goals 
+as a network of targets](https://www.un.org/esa/desa/papers/2015/wp141_2015.pdf), the basis of Decidodeck's thematic map for SDG goals and targets.
+
 We'd also like to thank [AppSignal](https://www.appsignal.com/) for providing monitoring and error tracking services.
 
 And naturally we appreciate our users, without whose support and feedback this project would not exist.    
