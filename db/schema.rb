@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_12_091754) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_13_100026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "hstore"
@@ -439,14 +439,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_091754) do
     t.index ["workspace_id"], name: "index_subsystem_tags_on_workspace_id"
   end
 
-  create_table "targets_network_mappings", force: :cascade do |t|
+  create_table "thematic_mappings", force: :cascade do |t|
     t.bigint "focus_area_id"
     t.bigint "characteristic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "data_model_id"
-    t.index ["characteristic_id"], name: "index_targets_network_mappings_on_characteristic_id"
-    t.index ["focus_area_id"], name: "index_targets_network_mappings_on_focus_area_id"
+    t.index ["characteristic_id"], name: "index_thematic_mappings_on_characteristic_id"
+    t.index ["focus_area_id"], name: "index_thematic_mappings_on_focus_area_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

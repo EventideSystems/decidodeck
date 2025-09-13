@@ -107,9 +107,8 @@ class Scorecard < ApplicationRecord
     @grid_mode ||= workspace.classic_grid_mode? ? :classic : :modern
   end
 
-  # SMELL: Hack to test if the scorecard has a thematic map (originally only SDGs)
   def thematic_map?
-    data_model.name.include?('Sustainable Development Goals')
+    data_model.thematic_mappings.present?
   end
 
   def linked?

@@ -14,10 +14,19 @@ module DataModels
       new(filename:, workspace:).call
     end
 
-    def call # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    def call
       file = File.read(filename)
       source = YAML.load(file).with_indifferent_access
 
+      create_data_model(source).tap do |data_model|
+        create_thematic_mappings(source, data_model)
+      end
+    end
+
+    private
+
+    def create_data_model(source) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+      data_model = nil
       ActiveRecord::Base.transaction do
         data_model = find_or_create_data_model(source)
         data_model.focus_area_groups.update_all(position: nil) # rubocop:disable Rails/SkipsModelValidations
@@ -38,9 +47,31 @@ module DataModels
           end
         end
       end
+
+      data_model
     end
 
-    private
+    def create_thematic_mappings(source, data_model) # rubocop:disable Metrics/MethodLength
+      source[:goals].each do |goal_source|
+        # TODO: After we move to a polymorphic association for ThematicMapping, we will need to adjust this
+        # to also handle mappings to FocusAreas (Goals) and FocusAreaGroups (Goal Categories)
+        goal_source[:targets].each do |target_source|
+          target = FocusArea.find_by(code: target_source[:code])
+          next unless target.present? && target_source[:thematic_mappings].present?
+
+          target_source[:thematic_mappings].each do |thematic_mapping|
+            indicator = Characteristic.find_by(code: thematic_mapping[:code])
+            next if indicator.blank?
+
+            ThematicMapping.find_or_create_by!(
+              data_model: data_model,
+              focus_area: target,
+              characteristic: indicator
+            )
+          end
+        end
+      end
+    end
 
     def data_model_params
       params = workspace.nil? ? {} : { workspace: workspace }
