@@ -3,19 +3,26 @@
 <% end %>
 
 <!-- Hero section -->
-<div class="bg-amber-800 relative isolate overflow-hidden">
-  <div id="sticky-header" class="transition-colors duration-300 w-full">
+<div class="bg-yellow-50 relative isolate overflow-hidden">
+  <div id="sticky-header" class="transition-colors duration-300 w-full hidden opacity-95">
     <div class="flex items-center pr-10 py-6 w-full">
-      <div id="sticky-branding" class="pl-10 hidden">
+      <div id="sticky-branding" class="pl-10">
         <%= image_tag 'themes/free_sdg/brand.png', class: 'h-8 w-auto mr-2', alt: "Free SDG logo" %>
         <span class="text-xl font-bold text-white">Free SDG</span>
       </div>
       <div class="flex-grow"></div>
       <div class="flex items-center justify-end">
-        <%= link_to_registration link_class: 'bg-amber-900 hover:bg-amber-700' %>
         <%= 
           link_to(
-            "Sign In", 
+            'Get Started →',
+            new_user_registration_path,
+            class: 'text-lg font-semibold leading-6 text-white bg-amber-900 hover:bg-amber-700 px-4 py-2 rounded-sm',
+            data: { turbo: false }
+          )
+        %>
+        <%= 
+          link_to(
+            "Sign In →", 
             new_user_session_path, 
             class: 'ml-4 text-lg font-semibold leading-6 text-white bg-amber-900 hover:bg-amber-700 px-4 py-2 rounded-sm', 
             data: { turbo: false }
@@ -25,129 +32,116 @@
     </div>
   </div>
   <div class="absolute left-[calc(50%-4rem)] top-10 -z-10 transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)]" aria-hidden="true">
-    <div class="aspect-1108/632 w-[69.25rem] bg-linear-to-r from-[#80caff] to-[#4f46e5] opacity-20" style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)"></div>
+    <div class="aspect-1108/632 w-[69.25rem] bg-linear-to-r from-[#fef9c3] to-[#fbbf24] opacity-20" style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)"></div>
   </div>
-  <div class="mx-auto max-w-7xl px-6 pb-16 pt-8 sm:pb-16 lg:flex lg:px-8 lg:pt-40">
-    <div class="mx-auto max-w-2xl shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
-      <%= landing_pages_h1 %>
-      <h2 class="mt-10 text-3xl font-bold tracking-tight text-white sm:text-4xl">A free tool to track your work against the UN's Sustainable Development Goals</h2>
-      <p class="mt-6 text-lg leading-8 text-gray-300">
-        Log what matters. Find the patterns. Map who's involved. Keep your strategy in view.
+  <div class="mx-auto max-w-7xl px-6 pb-16 pt-4 sm:pb-16 lg:flex lg:px-8 lg:pt-32">
+    <div class="mx-auto max-w-2xl shrink-0 lg:mx-0 lg:max-w-xl">
+      <%= landing_pages_h1 title_class: "text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl" %>
+      <h2 class="text-4xl font-bold tracking-tight text-slate-800 sm:text-6xl pt-4">Track what matters.<br>Build what lasts.</h2>
+      <p class="mt-6 text-lg leading-8 text-slate-800">
+        Free SDG is an open-source platform for communities, governments, and changemakers to log initiatives, surface patterns, 
+        and align action with the Sustainable Development Goals.
       </p>
-      <div class="mt-10 flex items-center gap-x-6">
-        <%= link_to new_user_session_path, class: 'text-sm font-semibold leading-6 text-white', data: { turbo: false } do %>
-          Already have an account? <span class="text-yellow-400">Sign in <span aria-hidden="true">→</span></span>
-        <% end %>
-      </div>
-      <div class="mt-10 flex items-center gap-x-6">
-        <%= link_to new_contact_path, class: 'text-sm font-semibold leading-6 text-white', data: { turbo: false } do %>
-          Ready to start tracking your goals? <span class="text-yellow-400">Get started <span aria-hidden="true">→</span></span>
-        <% end %>
+      <div class="flex items-center justify-start mt-10 gap-x-6">
+        <%= 
+          link_to(
+            'Get Started →',
+            new_user_registration_path,
+            class: 'text-lg font-semibold leading-6 text-white bg-amber-700 hover:bg-amber-600 px-4 py-2 rounded-sm',
+            data: { turbo: false }
+          )
+        %>
+        <%= 
+          link_to(
+            "Sign In →", 
+            new_user_session_path, 
+            class: 'text-lg font-semibold leading-6 text-slate-800 border border-slate-800 hover:bg-slate-800 hover:text-white px-4 py-2 rounded-sm', 
+            data: { turbo: false }
+          )
+        %>
       </div>
     </div>
     <div class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
       <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
-        <%= image_tag 'themes/free_sdg/hero.png', class: "w-[56rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10", title: 'Application screenshot' %>
+        <%= image_tag 'themes/free_sdg/hero.png', class: "w-[56rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10", alt: 'Free SDG hero image, referencing themes relating to measuring sustainable development' %>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Feature section -->
-<div class="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
-  <div class="mx-auto max-w-2xl text-center">
-    <h2 class="text-base font-semibold leading-7 text-yellow-400">Create impact</h2>
-    <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-      Navigate complexity with Free SDG
-    </p>
-    <p class="mt-6 text-lg leading-8 text-gray-300">
-      Clarify your goals through the lens of the UN's Sustainable Development Goals. 
-      Identify stakeholders, align initiatives, and trace strategic pathways. 
-    </p>    
-    <p class="mt-6 text-lg leading-8 text-gray-300">
-      Use Free SDG to gather evidence, make informed decisions, and track progress - 
-      ensuring your efforts remain resonant, accountable, and transformative.
-    </p>
-  </div>
-  <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-    <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-      <div class="flex flex-col">
-        <dt class="text-base font-semibold leading-7 text-white">
-          <div class="mb-6 flex items-center">
-            <div class="h-12 w-12 flex items-center justify-center rounded-lg bg-yellow-500">
-              <%= render_icon :monitor %>
-            </div>
-            <span class="ml-4 text-2xl font-bold text-white">Goal focused</span>
-          </div>
-        </dt>
-        <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
-          <div class="mx-auto max-w-2xl py-3">
-            <%= image_tag 'themes/free_sdg/data_entry.png', class: "rounded-xl shadow-2xl ring-1 ring-white/10", title: 'App screenshot' %>
-          </div>
-          <p class="flex-auto">
-            Keep tabs on your initiatives and monitor progress to ensure you're on track to meet your goals. Use the tool to gather data to make informed decisions and adjust your strategy as needed.
-          </p>
-        </dd>
-      </div>
-      <div class="flex flex-col">
-        <dt class="text-base font-semibold leading-7 text-white">
-          <div class="mb-6 flex items-center">
-            <div class="h-12 w-12 flex items-center justify-center rounded-lg bg-yellow-500">
-              <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-              </svg>
-            </div>
-            <span class="ml-4 text-2xl font-bold text-white">Network oriented</span>
-          </div>
-        </dt>
-        <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
-          <div class="mx-auto max-w-2xl py-3">
-            <%= image_tag 'themes/free_sdg/ecosystem_map.png', class: "rounded-xl shadow-2xl ring-1 ring-white/10", title: 'App screenshot' %>
-          </div>
-          <p class="flex-auto">
-            Connect with stakeholders and build relationships to drive change. Use Free SDG to identify key players in your network and understand the relationships between them.                
-          </p>
-        </dd>
-      </div>
-      <div class="flex flex-col">
-        <dt class="text-base font-semibold leading-7 text-white">
-          <div class="mb-6 flex items-center">
-            <div class="h-12 w-12 flex items-center justify-center rounded-lg bg-yellow-500">
-              <%= render_icon :open_source %>
-            </div>
-            <span class="ml-4 text-2xl font-bold text-white">Community driven</span>
-          </div>
-        </dt>
-        <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
-          <div class="mx-auto max-w-2xl py-3">
-            <%= image_tag 'themes/free_sdg/open_source.png', class: "rounded-xl shadow-2xl ring-1 ring-white/10", title: 'App screenshot' %>
-          </div>
-          <p class="flex-auto">
-            Free SDG is part of <%= link_to 'Decidodeck', 'https://github.com/EventideSystems/decidodeck', class: 'text-yellow-400' %>, 
-            an open-source project designed with community needs at its core. It thrives on collaborative input, ensuring the software 
-            evolves to serve and benefits the community.
-          </p>
-        </dd>
-      </div>
-    </dl>
-  </div> 
-</div>
 
-<%= render 'sponsors' %>
+<section class="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
+  <h2 class="text-4xl font-bold text-white text-center mb-12">Built for Collective Impact</h2>
+  <div class="grid gap-8 lg:grid-cols-3">
+    <div>
+      <div class="flex items-center justify-left mb-4 text-white">
+        <%= render_icon :task_alt, classes: "h-8 w-8" %>
+        <h3 class="text-xl font-bold text-white pt-2 mb-2 ml-4">Goal focused</h3>
+      </div>
+      <p class="text-white">Link every initiative to SDG targets to contribute to a global story of change.</p>
+    </div>
+    <div>
+      <div class="flex items-center justify-left mb-4 text-white">
+        <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+        </svg>
+        <h3 class="text-xl font-bold text-white pt-2 mb-2 ml-4">Community-centered</h3>
+      </div>
+      <p class="text-white">Shared ownership, transparent data, and inclusive collaboration.</p>
+    </div>
+    <div>
+      <div class="flex items-center justify-left mb-4 text-white">
+        <%= render_icon :graph_3, classes: "h-8 w-8"  %>
+        <h3 class="text-xl font-bold pt-2 text-white mb-2 ml-4">Network-aware</h3>
+      </div>
+
+      <p class="text-white">Visualize relationships between agencies, activities, and outcomes to see where momentum is building.</p>
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
+  <h2 class="text-4xl font-bold text-white text-center mb-12">Free SDG Features</h2>
+  <div class="grid gap-8 lg:grid-cols-3">
+    <div>
+      <ul class="text-white text-left list-disc pl-6 mt-12 mb-4 space-y-3">
+        <li>Log initiatives and link them to SDG targets</li>
+        <li>Monitor action progress by status</li>
+        <li>Apply custom tags for flexible grouping of data</li>
+        <li>Map stakeholders and their roles</li>
+        <li>Visualize thematic connections and gaps</li>
+        <li>Export insights to share with funders, partners, or communities</li>
+      </ul>
+    </div>
+    <div>
+      <div class="mx-auto max-w-2xl py-3">
+        <%= 
+          image_tag(
+            'themes/free_sdg/data_entry.png', 
+            class: "rounded-xl shadow-2xl ring-1 ring-white/10", 
+            alt: 'Screenshot depicting data entry for initiatives in Free SDG'
+          ) 
+        %>
+      </div>
+    </div>
+    <div>
+      <div class="mx-auto max-w-2xl py-3">
+        <%= 
+          image_tag(
+            'themes/free_sdg/ecosystem_map.png', 
+            class: "rounded-xl shadow-2xl ring-1 ring-white/10", 
+            alt: 'Screenshot depicting an thematic map in Free SDG'
+          ) 
+        %>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- CTA section -->
-<div class="relative isolate mt-32 px-6 py-32 sm:mt-40 sm:py-40 lg:px-8">
-  <svg class="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
-    <defs>
-      <pattern id="1d4240dd-898f-445f-932d-e2872fd12de3" width="200" height="200" x="50%" y="0" patternUnits="userSpaceOnUse">
-        <path d="M.5 200V.5H200" fill="none" />
-      </pattern>
-    </defs>
-    <svg x="50%" y="0" class="overflow-visible fill-gray-800/20">
-      <path d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z" stroke-width="0" />
-    </svg>
-    <rect width="100%" height="100%" stroke-width="0" fill="url(#1d4240dd-898f-445f-932d-e2872fd12de3)" />
-  </svg>
+<div class="relative isolate mt-4 px-6 py-32 sm:mt-4 sm:py-40 lg:px-8">
+
   <div class="absolute inset-x-0 top-10 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl" aria-hidden="true">
     <div xclass="aspect-1108/632 w-[69.25rem] flex-none bg-linear-to-r from-[#80caff] to-[#4f46e5] opacity-20" style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)"></div>
   </div>
@@ -157,7 +151,7 @@
       Contact us to discuss your goals and challenges, and together we'll figure out how Free SDG can help. Let's start the conversation today.
     </p>
     <div class="mt-5 flex items-center justify-center gap-x-6">
-      <%= link_to new_contact_path, class: 'text-sm font-semibold leading-6 text-white', data: { turbo: false } do %>
+      <%= link_to new_contact_path, class: 'ml-4 text-lg font-semibold leading-6 text-white bg-amber-900 hover:bg-amber-700 px-6 py-4 rounded-sm', data: { turbo: false } do %>
         Get in touch and talk to us about your project <span aria-hidden="true">→</span>
       <% end %>
     </div>
@@ -165,19 +159,14 @@
       Or, if you're ready to dive right in...
     </p>
     <div class="mt-5 flex items-center justify-center gap-x-6">
-      <%= link_to new_user_registration_path, class: 'text-sm font-semibold leading-6 text-white', data: { turbo: false } do %>
+      <%= link_to new_user_registration_path, class: 'ml-4 text-lg font-semibold leading-6 text-white bg-amber-900 hover:bg-amber-700 px-6 py-4 rounded-sm', data: { turbo: false } do %>
         Register a free account and start mapping your impact <span aria-hidden="true">→</span>
       <% end %>
     </div>
-
-    <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
-      If our work speaks to you and you'd like to support it...
-    </p>
-    <div class="mt-5 flex items-center justify-center gap-x-6">
-      <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="decidodeck" data-color="#eab308" data-emoji="☕"  data-font="Cookie" data-text="Buy us a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#FFDD00" ></script>
-    </div>
   </div>
 </div>
+
+<%= render 'sponsors' %>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -189,18 +178,16 @@
       if (window.scrollY > initialOffset) {
         if (!isSticky) {
           header.classList.add('fixed', 'top-0', 'left-0', 'w-full', 'z-[100]', 'bg-amber-950', 'shadow-lg');
-          header.classList.remove('mt-10');
+          header.classList.remove('mt-10', 'hidden');
           header.style.boxShadow = '0 2px 8px rgba(0,0,0,0.12)';
-          branding.classList.remove('hidden');
           branding.classList.add('flex', 'items-center');
           isSticky = true;
         }
       } else {
         if (isSticky) {
           header.classList.remove('fixed', 'top-0', 'left-0', 'w-full', 'z-[100]', 'bg-amber-950', 'shadow-lg');
-          header.classList.add('mt-10');
+          header.classList.add('mt-10', 'hidden');
           header.style.boxShadow = '';
-          branding.classList.add('hidden');
           branding.classList.remove('flex', 'items-center');
           isSticky = false;
         }

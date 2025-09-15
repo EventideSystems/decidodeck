@@ -1,7 +1,19 @@
-<div class="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
+<div class="relative isolate mt-4 px-6 py-16 sm:mt-4 sm:py-16 lg:px-8">
+  <svg class="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
+    <defs>
+      <pattern id="1d4240dd-898f-445f-932d-e2872fd12de3" width="200" height="200" x="50%" y="0" patternUnits="userSpaceOnUse">
+        <path d="M.5 200V.5H200" fill="none" />
+      </pattern>
+    </defs>
+    <svg x="50%" y="0" class="overflow-visible fill-gray-800/20">
+      <path d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z" stroke-width="0" />
+    </svg>
+    <rect width="100%" height="100%" stroke-width="0" fill="url(#1d4240dd-898f-445f-932d-e2872fd12de3)" />
+  </svg>
+
+
   <div class="mx-auto max-w-2xl text-center">
-    <h2 class="text-base font-semibold leading-7 text-yellow-400">Our sponsors</h2>
-    <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">We're proud to be supported by this amazing company</p>
+    <h2 class="mt-2 text-4xl font-bold tracking-tight text-white sm:text-4xl">We're proud to be supported by this amazing company</h2>
     <%= link_to 'https://www.appsignal.com/', target: :blank do %>
       <div class="flex justify-center items-center mt-8">
         <div class="bg-white/10 p-4 rounded-lg">
@@ -9,5 +21,18 @@
         </div>
       </div>
     <% end %>
+
+    <% unless current_theme_display_name == 'Decidodeck' %>
+      <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
+        <%= current_theme_display_name %> is part of <%= link_to 'Decidodeck', 'https://github.com/EventideSystems/decidodeck#decidodeck', class: 'text-yellow-400 hover:underline' %>,
+        an open-source platform designed to help organizations map their impact and effect meaningful change.
+      </p>
+    <% end %>
+    <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
+      If our work speaks to you and you'd like to support it...
+    </p>
+    <div class="mt-5 flex items-center justify-center gap-x-6">
+      <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="decidodeck" data-color="#eab308" data-emoji="☕"  data-font="Cookie" data-text="Buy us a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#FFDD00" ></script>
+    </div>
   </div>
 </div>
