@@ -3,7 +3,7 @@
   <%=
     t(
       "devise.mailer.invitation_instructions.someone_invited_you",
-      link: link_to("Obsekio: the Tool for Systemic Change", root_url)
+      link: link_to("Obsekio: the Tool for Systemic Change", root_url(host: @host))
     ).html_safe
   %>
 </p>
