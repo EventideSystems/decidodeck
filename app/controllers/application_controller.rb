@@ -27,16 +27,14 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
 
   helper_method :current_account
 
-  def current_theme # rubocop:disable Metrics/MethodLength
-    target_source = params[:theme] || request.host
-
-    case target_source
+  def current_theme
+    case request.host
     when /free[-|_]?sdg/
       :free_sdg
     when /obsekio/
       :obsekio
     when /tool[-|_]?for[-|_]?systemic[-|_]?change/
-      :toolfor_systemic_change
+      :tool_for_systemic_change
     else
       :decidodeck
     end
@@ -50,7 +48,7 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
       'Free SDG'
     when :obsekio
       'Obsekio'
-    when :toolfor_systemic_change
+    when :tool_for_systemic_change
       'Obsekio'
     else
       'Decidodeck'

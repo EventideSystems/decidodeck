@@ -1,4 +1,4 @@
-<div class="relative isolate mt-4 px-6 py-32 sm:mt-4 sm:py-40 lg:px-8">
+<div class="relative isolate mt-4 px-6 py-16 sm:mt-4 sm:py-16 lg:px-8">
   <svg class="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
     <defs>
       <pattern id="1d4240dd-898f-445f-932d-e2872fd12de3" width="200" height="200" x="50%" y="0" patternUnits="userSpaceOnUse">
@@ -22,10 +22,12 @@
       </div>
     <% end %>
 
-    <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
-      Free SDG is part of the <%= link_to 'Decidodeck', 'https://github.com/EventideSystems/decidodeck#decidodeck', class: 'text-yellow-400 hover:underline' %> 
-      platform, an open-source project designed to help organizations map their impact and effect meaningful change.
-    </p>
+    <% unless current_theme_display_name == 'Decidodeck' %>
+      <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
+        <%= current_theme_display_name %> is part of <%= link_to 'Decidodeck', 'https://github.com/EventideSystems/decidodeck#decidodeck', class: 'text-yellow-400 hover:underline' %>,
+        an open-source platform designed to help organizations map their impact and effect meaningful change.
+      </p>
+    <% end %>
     <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
       If our work speaks to you and you'd like to support it...
     </p>

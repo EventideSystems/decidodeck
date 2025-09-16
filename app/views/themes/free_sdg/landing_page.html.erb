@@ -47,7 +47,7 @@
           link_to(
             'Get Started →',
             new_user_registration_path,
-            class: 'text-lg font-semibold leading-6 text-white bg-orange-500 hover:bg-amber-600 px-4 py-2 rounded-sm',
+            class: 'text-lg font-semibold leading-6 text-white bg-amber-700 hover:bg-amber-600 px-4 py-2 rounded-sm',
             data: { turbo: false }
           )
         %>
@@ -63,7 +63,7 @@
     </div>
     <div class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
       <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
-        <%= image_tag 'themes/free_sdg/hero.png', class: "w-[56rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10", title: 'Application screenshot' %>
+        <%= image_tag 'themes/free_sdg/hero.png', class: "w-[56rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10", alt: 'Free SDG hero image, referencing themes relating to measuring sustainable development' %>
       </div>
     </div>
   </div>
@@ -75,25 +75,25 @@
   <h2 class="text-4xl font-bold text-white text-center mb-12">Built for Collective Impact</h2>
   <div class="grid gap-8 lg:grid-cols-3">
     <div>
-      <div class="flex items-center justify-left mb-4">
-        <%= render_icon :monitor, classes: "h-6 w-6 fill-white" %>
-        <h3 class="text-xl font-bold text-white mb-2 ml-4">Goal focused</h3>
+      <div class="flex items-center justify-left mb-4 text-white">
+        <%= render_icon :task_alt, classes: "h-8 w-8" %>
+        <h3 class="text-xl font-bold text-white pt-2 mb-2 ml-4">Goal focused</h3>
       </div>
       <p class="text-white">Link every initiative to SDG targets to contribute to a global story of change.</p>
     </div>
     <div>
-      <div class="flex items-center justify-left mb-4">
-        <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+      <div class="flex items-center justify-left mb-4 text-white">
+        <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
         </svg>
-        <h3 class="text-xl font-bold text-white mb-2 ml-4">Community-centered</h3>
+        <h3 class="text-xl font-bold text-white pt-2 mb-2 ml-4">Community-centered</h3>
       </div>
       <p class="text-white">Shared ownership, transparent data, and inclusive collaboration.</p>
     </div>
     <div>
-      <div class="flex items-center justify-left mb-4">
-        <%= render_icon :open_source %>
-        <h3 class="text-xl font-bold text-white mb-2 ml-4">Network-aware</h3>
+      <div class="flex items-center justify-left mb-4 text-white">
+        <%= render_icon :graph_3, classes: "h-8 w-8"  %>
+        <h3 class="text-xl font-bold pt-2 text-white mb-2 ml-4">Network-aware</h3>
       </div>
 
       <p class="text-white">Visualize relationships between agencies, activities, and outcomes to see where momentum is building.</p>
@@ -102,26 +102,38 @@
 </section>
 
 <section class="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
-  <h2 class="text-4xl font-bold text-white text-center mb-12">Features</h2>
+  <h2 class="text-4xl font-bold text-white text-center mb-12">Free SDG Features</h2>
   <div class="grid gap-8 lg:grid-cols-3">
     <div>
-      <ul class="text-white text-left list-disc pl-6 mt-10 mb-4 space-y-3">
+      <ul class="text-white text-left list-disc pl-6 mt-12 mb-4 space-y-3">
         <li>Log initiatives and link them to SDG targets</li>
+        <li>Monitor action progress by status</li>
         <li>Apply custom tags for flexible grouping of data</li>
         <li>Map stakeholders and their roles</li>
         <li>Visualize thematic connections and gaps</li>
-        <li>Filter by stage, sequence, or geography</li>
         <li>Export insights to share with funders, partners, or communities</li>
       </ul>
     </div>
     <div>
       <div class="mx-auto max-w-2xl py-3">
-        <%= image_tag 'themes/free_sdg/data_entry.png', class: "rounded-xl shadow-2xl ring-1 ring-white/10", title: 'App screenshot' %>
+        <%= 
+          image_tag(
+            'themes/free_sdg/data_entry.png', 
+            class: "rounded-xl shadow-2xl ring-1 ring-white/10", 
+            alt: 'Screenshot depicting data entry for initiatives in Free SDG'
+          ) 
+        %>
       </div>
     </div>
     <div>
       <div class="mx-auto max-w-2xl py-3">
-        <%= image_tag 'themes/free_sdg/ecosystem_map.png', class: "rounded-xl shadow-2xl ring-1 ring-white/10", title: 'App screenshot' %>
+        <%= 
+          image_tag(
+            'themes/free_sdg/ecosystem_map.png', 
+            class: "rounded-xl shadow-2xl ring-1 ring-white/10", 
+            alt: 'Screenshot depicting an thematic map in Free SDG'
+          ) 
+        %>
       </div>
     </div>
   </div>
