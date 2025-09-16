@@ -18,8 +18,9 @@ class CustomDeviseMailer < Devise::Mailer
   # Override headers_for to customize email subjects and templates based on user subscription type
   # This method is called internally by Devise to set up email headers, but is our only chance to
   # customize the contents and layout based on the subscription type.
-  def headers_for(action, opts)
+  def headers_for(action, opts) # rubocop:disable Metrics/AbcSize
     @current_theme = opts[:subscription_type]&.to_sym || :decidodeck
+    @host = opts[:host] || Rails.application.config.action_mailer.default_url_options[:host]
 
     attachments.inline['logo.png'] = File.read(logo_attachment_file_path_for_resource)
     @application_name = application_name_for_current_theme

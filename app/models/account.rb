@@ -82,7 +82,7 @@ class Account < ApplicationRecord
 
     self.default_workspace = workspaces.create!(
       name: 'Default',
-      description: "Default workspace"
+      description: 'Default workspace'
     )
     save!
   end

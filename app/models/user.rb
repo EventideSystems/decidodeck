@@ -88,8 +88,9 @@ class User < ApplicationRecord
 
   # Virtual attributes used when inviting or updating users
   attr_accessor :initial_workspace_role, :initial_system_role, :workspace_role
-  # Virtual attribute to hold the subscription type during user sign-up
-  attr_accessor :subscription_type
+  # Virtual attributes to hold the subscription type and host during user sign-up,
+  # used to pass to the mailer for customizing email content and links
+  attr_accessor :subscription_type, :host
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[name email] + _ransackers.keys
