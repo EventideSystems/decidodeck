@@ -11,7 +11,7 @@
 </p>
 <p style="margin-bottom:2rem;">
   <%= 
-    link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token), style: "display:inline-block; background-color:#78350f; color:#fff; font-weight:600; padding:0.75rem 1.5rem; border-radius:0.375rem; text-decoration:none; font-size:1rem;" 
+    link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, invitation_token: @token, host: @host), style: "display:inline-block; background-color:#78350f; color:#fff; font-weight:600; padding:0.75rem 1.5rem; border-radius:0.375rem; text-decoration:none; font-size:1rem;" 
   %>
 </p>
 
