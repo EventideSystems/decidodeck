@@ -51,7 +51,7 @@ module Users
     private
 
     def configure_invite_params
-      devise_parameter_sanitizer.permit(:invite, keys: %i[subscription_type name])
+      devise_parameter_sanitizer.permit(:invite, keys: %i[subscription_type name host])
     end
 
     # SMELL: This method is duplicated in Users::RegistrationsController
