@@ -67,8 +67,6 @@ module LandingPagesHelper
     end
   end
 
-  private
-
   def brand_image_path_for_current_theme
     case current_theme
     when :free_sdg
@@ -81,6 +79,8 @@ module LandingPagesHelper
       'logo-small.png'
     end
   end
+
+  private
 
   def button_bg_class_for_current_theme
     case current_theme
