@@ -15,6 +15,8 @@ module Users
 
       if user
         user.subscription_type = params[:user][:subscription_type]
+        user.host = request.host
+
         if current_workspace.members.include?(user)
           redirect_to users_path, alert: "A user with the email '#{user.email}' is already a member of this workspace."
         elsif current_workspace.max_users_reached? && !current_user.admin?

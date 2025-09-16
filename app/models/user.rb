@@ -127,6 +127,7 @@ class User < ApplicationRecord
 
   def send_devise_notification(notification, *args)
     args.second[:subscription_type] = subscription_type
+    args.second[:host] = host
     devise_mailer.send(notification, self, *args).deliver_later
   end
 end

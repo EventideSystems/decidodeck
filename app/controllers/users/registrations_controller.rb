@@ -7,6 +7,8 @@ module Users
 
     # POST /resource
     def create
+      params[:user][:host] ||= request.host
+
       super do |resource|
         if resource.persisted?
           user_id = resource.id
