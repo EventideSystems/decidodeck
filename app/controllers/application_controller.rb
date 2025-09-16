@@ -27,8 +27,10 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
 
   helper_method :current_account
 
-  def current_theme
-    case request.host
+  def current_theme # rubocop:disable Metrics/MethodLength
+    target_source = params[:theme] || request.host
+
+    case target_source
     when /free[-|_]?sdg/
       :free_sdg
     when /obsekio/

@@ -20,7 +20,7 @@ module Users
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:subscription_type])
+      devise_parameter_sanitizer.permit(:sign_up, keys: %i[subscription_type host])
     end
 
     # NOTE: See https://github.com/EventideSystems/decidodeck/issues/1276

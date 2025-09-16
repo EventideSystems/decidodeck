@@ -69,7 +69,7 @@ class SetupWorkspace
     )
   end
 
-  def create_impact_cards # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
+  def create_impact_cards # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     return unless subscription_type == :free_sdg
 
     workspace.scorecards.create!(
