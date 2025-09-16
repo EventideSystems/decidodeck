@@ -36,7 +36,7 @@ class SetupWorkspace
     ['State government', '#00CCAA']
   ].freeze
 
-  def create_data_models # rubocop:disable Metrics/MethodLength
+  def create_data_models 
     return if workspace.data_models.exists?
 
     case subscription_type
@@ -69,7 +69,7 @@ class SetupWorkspace
     )
   end
 
-  def create_impact_cards # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
+  def create_impact_cards
     return unless subscription_type == :free_sdg
 
     workspace.scorecards.create!(

@@ -81,8 +81,8 @@ class Account < ApplicationRecord
     return if default_workspace.present?
 
     self.default_workspace = workspaces.create!(
-      name: 'Default Workspace',
-      description: "Default workspace for #{name}"
+      name: 'Default',
+      description: "Default workspace"
     )
     save!
   end

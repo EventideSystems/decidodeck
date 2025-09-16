@@ -40,7 +40,7 @@ RSpec.describe Account, type: :model do
       account = described_class.create(name: 'Test Account')
       expect(account).to be_persisted
       expect(account.workspaces.count).to eq(1)
-      expect(account.workspaces.first.name).to eq('Default Workspace')
+      expect(account.workspaces.first.name).to eq('Default')
     end
   end
 end
