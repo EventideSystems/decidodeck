@@ -11,8 +11,7 @@ class WorkspacePolicy < ApplicationPolicy
         scope
           .joins(:account)
           .where(
-            workspaces: { id: current_user_available_workspace_ids },
-            accounts: { expires_on: [nil, Time.zone.now..] }
+            workspaces: { id: current_user_available_workspace_ids }
           )
       end
     end
