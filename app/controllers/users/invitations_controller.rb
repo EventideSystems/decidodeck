@@ -11,6 +11,8 @@ module Users
       workspace_role = params[:workspace_role].downcase
       account_role = params[:account_role].downcase
 
+      params[:user][:host] ||= request.host
+
       user = User.find_by(email: params[:user][:email])
 
       if user
@@ -49,7 +51,7 @@ module Users
     private
 
     def configure_invite_params
-      devise_parameter_sanitizer.permit(:invite, keys: %i[subscription_type name])
+      devise_parameter_sanitizer.permit(:invite, keys: %i[subscription_type name host])
     end
 
     # SMELL: This method is duplicated in Users::RegistrationsController
