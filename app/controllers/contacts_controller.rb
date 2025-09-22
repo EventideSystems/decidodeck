@@ -28,7 +28,7 @@ class ContactsController < ApplicationController
     recaptcha_valid = verify_recaptcha(model: @contact, action: 'contact')
     if recaptcha_valid
       if @contact.save
-        ContactMailer.contact(@contact.name, @contact.email, @contact.message).deliver_now
+        ContactMailer.contact(@contact.name, @contact.email, @contact.message).deliver_later
         redirect_to root_path, notice: 'Your message has been sent.'
       else
         render 'new'

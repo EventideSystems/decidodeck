@@ -4,6 +4,7 @@ module Users
   # Controller for managing User Registrations
   class RegistrationsController < Devise::RegistrationsController
     before_action :configure_sign_up_params, only: [:create]
+    skip_before_action :check_accepted_terms
 
     # POST /resource
     def create
@@ -11,7 +12,7 @@ module Users
 
       super do |resource|
         if resource.persisted?
-          resource.update(accepted_terms_of_service_at: Time.current)
+          resource.update(accepted_terms_at: Time.current)
           user_id = resource.id
           subscription_type = params[:user][:subscription_type] || 'free_sdg'
           SetupAccountJob.perform_later(user_id:, subscription_type:)
