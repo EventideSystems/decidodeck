@@ -5,6 +5,7 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  accepted_terms_at      :datetime
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime
@@ -113,8 +114,20 @@ class User < ApplicationRecord
   # TODO: Consider stripping out the email domain and only showing the username.
   # Might also consider moving this to a helper
   def display_name
-    name.presence || email
+    name.presence || email.split('@').first.titleize
   end
+
+  def accepted_terms? = accepted_terms_at.present?
+
+  def accept_terms!
+    update!(accepted_terms_at: Time.current)
+  end
+
+  def admin? = system_role == 'admin'
+
+  def member? = system_role == 'member'
+
+  # Returns the user's default workspace, which is the first workspace they belong to.
 
   # This really belongs in a controller - or possibly as a 'current_workspace' attribute on
   # the user record that is checked on the controller level.

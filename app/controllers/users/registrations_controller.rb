@@ -11,6 +11,7 @@ module Users
 
       super do |resource|
         if resource.persisted?
+          resource.update(accepted_terms_of_service_at: Time.current)
           user_id = resource.id
           subscription_type = params[:user][:subscription_type] || 'free_sdg'
           SetupAccountJob.perform_later(user_id:, subscription_type:)

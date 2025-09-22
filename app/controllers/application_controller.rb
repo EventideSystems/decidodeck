@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
   before_action :authenticate_user!
   before_action :set_paper_trail_whodunnit
   before_action :set_actionmailer_host
+  before_action :check_accepted_terms, if: :user_signed_in?
 
   # protect_from_forgery with: :exception
   protect_from_forgery prepend: true
@@ -113,6 +114,14 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
   end
 
   private
+
+  def check_accepted_terms
+    return if current_user.accepted_terms?
+    return if current_user.admin?
+    return if current_user != true_user # Prevents issues when admin is impersonating another user
+
+    redirect_to new_users_accept_terms_path
+  end
 
   def fetch_workspace_from_session
     return nil if session[:workspace_id].blank?

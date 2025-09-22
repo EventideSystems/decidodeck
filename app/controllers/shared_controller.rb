@@ -7,6 +7,7 @@ class SharedController < ApplicationController
   skip_before_action :set_session_workspace_id
   skip_before_action :authenticate_user!
   skip_before_action :set_paper_trail_whodunnit
+  skip_before_action :check_accepted_terms
 
   before_action :set_scorecard
 

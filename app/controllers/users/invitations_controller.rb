@@ -48,6 +48,12 @@ module Users
       render :new
     end
 
+    def update
+      super do |resource|
+        resource.accept_terms! if resource.errors.empty?
+      end
+    end
+
     private
 
     def configure_invite_params

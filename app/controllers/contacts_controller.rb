@@ -3,6 +3,7 @@
 # Controller for the contacts page
 class ContactsController < ApplicationController
   skip_before_action :authenticate_user!
+  skip_before_action :check_accepted_terms
 
   layout 'home'
 

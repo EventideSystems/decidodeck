@@ -57,6 +57,11 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  # Accept Terms of Service routes
+  namespace :users do
+    resource :accept_terms, only: [:new, :create]
+  end
+
   resources :workspaces do
     member do
       get 'switch'
