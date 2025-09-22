@@ -3,6 +3,7 @@
 # Controller for the home page
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!
+  skip_before_action :check_accepted_terms, except: [:index]
 
   layout 'home'
 

@@ -1,0 +1,33 @@
+<h1 class="text-2xl/8 font-semiboldsm:text-xl/8 text-black dark:text-white">
+  Hi <%= current_user.display_name %>,
+</h1>
+
+<div class="mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded-sm relative" role="alert">
+  <strong class="font-bold">Important announcement:</strong>
+  <span class="block sm:inline">Updates to our Terms and Conditions.</span>
+</div>
+
+<h2 class="text-lg font-semibold sm:text-lg text-black dark:text-white mt-3">
+  We've made changes to our Terms and Conditions.
+</h2>
+
+<%= form_with url: users_accept_terms_path, method: :post, local: true do |form| %>
+  <div class="mt-4 text-black dark:text-white w-full md:w-1/2">
+    <p class="my-4">
+      By continuing, you acknowledge that you’ve read and agreed to the updated terms, 
+      which outline how this platform handles data and how content may be shared or remixed.
+    </p>
+    <p class="my-4">
+      Please note that continued access to your account requires acceptance of these changes.
+    </p>
+  </div>
+  <div class="mb-4 flex items-center">
+    <%= check_box_tag :accept_terms, required: true, class: "mr-2" %>
+    <label for="terms_checkbox">
+      I have read and accept the <%= link_to "Terms and Conditions", terms_path, target: "_blank", class: "underline text-blue-600" %>.
+    </label>
+  </div>
+  <div>
+    <%= submit_tag "Accept Terms", class: TailwindClasses::SUBMIT_BUTTON_CLASS %>
+  </div>
+<% end %>

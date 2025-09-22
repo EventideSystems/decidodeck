@@ -15,6 +15,15 @@
       </div>
     </div>
 
+  <div class="mb-4 flex items-center">
+    <%= check_box_tag :accept_terms, required: true, class: "mr-2" %>
+    <label for="terms_checkbox" class="text-sm">
+      I have read and accept the Terms and Conditions
+      <%= link_to "Terms and Conditions", terms_path, target: "_blank", class: "underline" %> and
+      <%= link_to "Privacy Policy", privacy_path, target: "_blank", class: "underline" %>.
+    </label>
+  </div>
+
     <div>
       <%= f.submit  t("devise.invitations.edit.submit_button"), class: "flex w-full justify-center rounded-md border border-transparent bg-teal-600 py-2 px-4 text-sm font-medium text-white shadow-xs hover:bg-teal-700 focus:outline-hidden focus:ring-2 focus:ring-teal-500 focus:ring-offset-2" %>
     </div>
