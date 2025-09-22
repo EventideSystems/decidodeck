@@ -55,4 +55,8 @@ FactoryBot.define do
     password_confirmation { 'example' }
     confirmed_at { Time.zone.now }
   end
+
+  factory :system_admin, parent: :user do
+    system_role { :admin }
+  end
 end

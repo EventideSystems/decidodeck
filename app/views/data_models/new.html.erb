@@ -1,0 +1,45 @@
+<div class="mx-auto max-w-6xl">
+  <%= form_with model: @data_model, class: 'mx-auto max-w-6xl' do |form| %>
+    <%= render 'form_header', record: @data_model %>
+    <%= render 'form_body' do %>
+      <%= render 'section', first_section: true do %>
+        <%= render 'section_header', title: 'General Settings', subtitle: 'Name and description.' %>
+        <%= render 'section_body' do %>
+          <div class="sm:col-span-4">
+            <%= form.label :name %>
+            <%= form.text_field(:name, placeholder: 'Data model name', required: true) %>
+          </div>
+
+          <div class="sm:col-span-4">
+            <%= form.label :short_name %>
+            <%= form.text_field(:short_name, placeholder: 'Short name', required: false) %>
+          </div>
+
+          <div class="col-span-full">
+            <%= form.label :description %>
+            <%= form.rich_textarea :description, rows: 3, placeholder: 'Data model description' %>
+            <p class="text-sm/6 text-gray-600 dark:text-gray-400">A brief description of the data model (optional).</p>
+          </div>
+        <% end %>
+      <% end %>
+
+      <%= render 'section', first_section: true do %>
+        <%= render 'section_header', title: 'Attribution', subtitle: 'Licensing and ownership.' %>
+        <%= render 'section_body' do %>
+        
+          <div class="sm:col-span-4">
+            <%= form.label :author %>
+            <%= form.text_field(:author, placeholder: 'Author', required: false) %>
+          </div>
+
+          <div class="sm:col-span-4">
+            <%= form.label :license %>
+            <%= form.text_field(:license, placeholder: 'License', required: false) %>
+          </div>
+
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= render 'form_buttons', form:, cancel_path: data_models_path %>
+  <% end %>
+</div>

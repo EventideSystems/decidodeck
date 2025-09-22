@@ -1,9 +1,29 @@
-<%= turbo_stream.append dom_id(@goal, :targets_list) do %>
-  <%= turbo_frame_tag dom_id(@target) do %>
-    <%= render 'targets/target', target: @target %>
+<%- if @target.siblings.present? && @target.position < @target.siblings.last.position %>
+  <%- if @target.next_sibling.present? %>
+    <%= turbo_stream.before dom_id(@target.next_sibling) do %>
+      <%= turbo_frame_tag dom_id(@target) do %>
+        <%= render 'targets/target', target: @target, link_class: 'animate-flash-yellow' %>
+      <% end %>
+    <% end %>
+  <% elsif @target.previous_sibling.present? %>
+    <%= turbo_stream.after dom_id(@target.previous_sibling) do %>
+      <%= turbo_frame_tag dom_id(@target) do %>
+        <%= render 'targets/target', target: @target, link_class: 'animate-flash-yellow' %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <h1 class="text-2xl font-bold">No siblings found</h1>
+  <% end %>
+
+<% else %>
+  <%= turbo_stream.append dom_id(@goal, :targets_list) do %>
+    <%= turbo_frame_tag dom_id(@target) do %>
+      <%= render 'targets/target', target: @target, link_class: 'animate-flash-yellow' %>
+    <% end %>
   <% end %>
 <% end %>
 
 <%= turbo_stream.update dom_id(@goal, :new_target) do %>
   <%= render 'targets/link_to_new_element', parent: @goal %>
 <% end %>
+

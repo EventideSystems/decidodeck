@@ -3,7 +3,7 @@
 require 'csv'
 
 # Controller for managing impact card data models
-class DataModelsController < ApplicationController
+class DataModelsController < ApplicationController # rubocop:disable Metrics/ClassLength
   after_action :verify_authorized, except: :index
 
   sidebar_item :library
@@ -31,12 +31,47 @@ class DataModelsController < ApplicationController
         render 'data_models/index', formats: [:css],
                                     locals: { data_models: @data_models }
       end
+
+      # format.csv do
+      #   csv_data = CSV.generate(headers: true) do |csv|
+      #     csv << ['Name', 'Short Name', 'Description', 'Author', 'License', 'Status', 'Public Model', 'Created At',
+      #             'Updated At', 'Workspace']
+      #     @all_data_models.each do |data_model|
+      #       csv << [data_model.name, data_model.short_name, data_model.description, data_model.author,
+      #               data_model.license, data_model.status, data_model.public_model ? 'Yes' : 'No',
+      #               data_model.created_at, data_model.updated_at,
+      #               data_model.workspace.name]
+      #     end
+      #   end
+      #   send_data csv_data, filename: "data_models-#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.csv"
+      # end
     end
   end
 
   def show
     @data_model = policy_scope(DataModel).find(params[:id])
     authorize @data_model
+  end
+
+  def new
+    @data_model = current_workspace.data_models.build(author: current_user.display_name)
+    authorize @data_model
+  end
+
+  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    @data_model = current_workspace.data_models.build(data_model_params)
+    @data_model.focus_area_groups.build(name: 'First Goal', position: 1).tap do |group|
+      group.focus_areas.build(name: 'First Target', position: 1).tap do |area|
+        area.characteristics.build(name: 'First Indicator', position: 1)
+        area.characteristics.build(name: 'Second Indicator', position: 2)
+      end
+    end
+    authorize @data_model
+    if @data_model.save
+      redirect_to edit_data_model_path(@data_model), notice: 'Data Model was successfully created.'
+    else
+      render :new
+    end
   end
 
   def copy_to_current_workspace
@@ -126,6 +161,7 @@ class DataModelsController < ApplicationController
   end
 
   def data_model_params
-    params.require(:data_model).permit(:name, :description)
+    params.require(:data_model).permit(:name, :short_name, :description, :author, :license, :color, :status,
+                                       :public_model)
   end
 end

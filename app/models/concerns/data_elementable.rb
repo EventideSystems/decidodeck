@@ -19,7 +19,15 @@ module DataElementable
   end
 
   def siblings
-    parent.children - [self]
+    (parent.children - [self]).sort_by(&:position)
+  end
+
+  def next_sibling
+    siblings.find { |s| s.position > position }
+  end
+
+  def previous_sibling
+    siblings.reverse.find { |s| s.position < position }
   end
 
   def full_name

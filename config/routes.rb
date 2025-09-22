@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :accounts
   resources :checklist_items, only: %i[show edit update]
-  resources :data_models, only: %i[index show edit update] do
+  resources :data_models do
     member do
       get 'edit_name'
       patch 'update_name'

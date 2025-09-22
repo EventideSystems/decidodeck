@@ -40,25 +40,7 @@
   <div class="mt-4 flex flex-wrap items-end justify-start gap-4">
     <%= turbo_frame_tag dom_id(@data_model, :goals_list), class: 'w-full' do %>
       <% @data_model.children.order(:position).each do |goal| %>
-        <%= turbo_frame_tag dom_id(goal) do %>
-          <div class="mb-6 w-full rounded-lg border border-zinc-200 bg-white p-4 shadow-xs dark:border-zinc-700 dark:bg-zinc-800">
-            <%= turbo_frame_tag dom_id(goal, :link) do %>
-              <%= render '/goals/link', goal: goal %>
-            <% end %>
-            <%= turbo_frame_tag dom_id(goal, :targets_list) do %>
-              <% goal.children.order(:position).each do |target| %>
-                <%= turbo_frame_tag dom_id(target) do %>
-                  <%= render 'targets/target', target: %>
-                <% end %>
-              <% end %>
-            <% end %>
-
-            <%= turbo_frame_tag dom_id(goal, :new_target) do %>
-              <%= render 'targets/link_to_new_element', parent: goal %>
-            <% end %>
-            
-          </div>
-        <% end %>
+        <%= render 'goals/goal', goal: goal %>
       <% end %>
     <% end %>
     

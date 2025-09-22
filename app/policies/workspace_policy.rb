@@ -8,11 +8,7 @@ class WorkspacePolicy < ApplicationPolicy
       if system_admin?
         scope.all
       else
-        scope
-          .joins(:account)
-          .where(
-            workspaces: { id: current_user_available_workspace_ids }
-          )
+        scope.where(workspaces: { id: current_user_available_workspace_ids })
       end
     end
 

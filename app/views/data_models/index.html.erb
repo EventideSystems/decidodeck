@@ -7,7 +7,7 @@
         <%= render partial: 'search_form', locals: { record: @q, placeholder: 'Search data model library...', options: { url: data_models_path } } %>
         <%- if policy(DataModel).create? %>
           <div>
-            <%#= link_to_primary 'Create Impact Card Data Model', new_data_model_path %>
+            <%= link_to_primary 'Create Data Model', new_data_model_path %>
           </div>
         <%- end %>
       </div>

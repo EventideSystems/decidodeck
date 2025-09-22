@@ -1,3 +1,18 @@
-<%= turbo_stream.update dom_id(@target, :link) do %>
-  <%= render 'link', target: @target, link_class: 'animate-flash-yellow' %>
+<%- if @target.saved_change_to_position? && @target.siblings.present? %>
+  <%= turbo_stream.remove dom_id(@target) %>
+ 
+  <%- if @target.next_sibling.present? %>
+    <%= turbo_stream.before dom_id(@target.next_sibling) do %>
+      <%= render partial: 'targets/target', locals: { target: @target } %>
+    <% end %>
+  <% elsif @target.previous_sibling.present? %>
+    <%= turbo_stream.after dom_id(@target.previous_sibling) do %>
+      <%= render partial: 'targets/target', locals: { target: @target } %>
+    <% end %>
+  <% end %>
+  
+<% else %>
+  <%= turbo_stream.update dom_id(@target, :link) do %>
+    <%= render 'link', target: @target, link_class: 'animate-flash-yellow' %>
+  <% end %>
 <% end %>
