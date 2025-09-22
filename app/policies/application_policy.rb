@@ -98,6 +98,10 @@ class ApplicationPolicy
     current_user.admin? || current_account_admin? || workspace_admin?(user_context.workspace)
   end
 
+  def current_account
+    user_context.account
+  end
+
   def current_account_admin?
     current_user.admin? || account_admin?(user_context.account) || account_owner(user_context.account)
   end

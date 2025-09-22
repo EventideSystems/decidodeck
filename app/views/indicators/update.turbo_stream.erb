@@ -1,3 +1,20 @@
-<%= turbo_stream.update dom_id(@indicator) do %>
-  <%= render 'indicators/indicator', indicator: @indicator, link_class: 'animate-flash-yellow' %>
+<%- if @indicator.saved_change_to_position? && @indicator.siblings.present? %>
+  <%= turbo_stream.remove dom_id(@indicator) %>
+ 
+  <%- if @indicator.next_sibling.present? %>
+    <%= turbo_stream.before dom_id(@indicator.next_sibling) do %>
+      <%= render partial: 'indicators/indicator', locals: { indicator: @indicator } %>
+    <% end %>
+  <% elsif @indicator.previous_sibling.present? %>
+    <%= turbo_stream.after dom_id(@indicator.previous_sibling) do %>
+      <%= render partial: 'indicators/indicator', locals: { indicator: @indicator } %>
+    <% end %>
+  <% else %>
+    <h1 class="text-2xl font-bold">No siblings found</h1>
+  <% end %>
+
+<% else %>
+  <%= turbo_stream.update dom_id(@indicator, :link) do %>
+    <%= render 'link', indicator: @indicator, link_class: 'animate-flash-yellow' %>
+  <% end %>
 <% end %>

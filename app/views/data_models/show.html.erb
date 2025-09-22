@@ -25,13 +25,13 @@
               <div class="flex justify-end items-center mb-4">
                 <%= 
                   button_to_primary(
-                    'Copy to Workspace', 
+                    @data_model.workspace == current_workspace ? 'Copy' : 'Import into Workspace', 
                     copy_to_current_workspace_data_model_path(@data_model), 
                     method: :post,
                     data: {
                       turbo: false
                     },
-                    title: 'Copy this data model to your current workspace'
+                    title: 'Make a copy of this data model in your current workspace'
                   )
                 %>
               </div>

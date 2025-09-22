@@ -15,21 +15,6 @@ class DataModelPolicy < ApplicationPolicy
     def workspace_ids
       WorkspacePolicy::Scope.new(user_context, Workspace).resolve.ids
     end
-
-    private
-
-    # Duplicated in WorkspacePolicy
-    def current_user_available_workspace_ids
-      (
-        current_user.workspaces_from_admin_accounts.ids +
-        current_user.workspaces_from_owned_accounts.ids +
-        current_user.workspaces.ids
-      ).uniq
-    end
-  end
-
-  def index?
-    system_admin? # Temporarily restrict to system admins
   end
 
   def show?
@@ -37,22 +22,29 @@ class DataModelPolicy < ApplicationPolicy
   end
 
   def create?
-    system_admin? || (workspace_admin?(current_workspace) && current_workspace_not_expired?)
+    current_workspace_allows_modifications?
   end
 
   def update?
-    system_admin? || (workspace_admin?(current_workspace) && record_in_scope? && current_workspace_not_expired?)
+    record_allows_modifications? && current_workspace_allows_modifications?
   end
 
   def destroy?
-    system_admin? || (workspace_admin?(current_workspace) && record_in_scope? && current_workspace_not_expired?)
+    record_allows_modifications? && current_workspace_allows_modifications?
   end
 
   def copy_to_current_workspace?
-    system_admin? || (
-      workspace_admin?(current_workspace) &&
-      (workspace_admin?(record.workspace) || record.public_model) &&
-      current_workspace_not_expired?
-    )
+    current_workspace_allows_modifications? && (record_allows_modifications? || record.public_model?)
+  end
+
+  private
+
+  # Restrict access to unexpired workspaces and non-free SDG accounts only
+  def current_workspace_allows_modifications?
+    system_admin? || (current_workspace_not_expired? && !current_account.free_sdg?)
+  end
+
+  def record_allows_modifications?
+    system_admin? || (workspace_admin?(record.workspace) && record_in_scope? && !record.public_model?)
   end
 end
