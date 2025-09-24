@@ -11,16 +11,6 @@ class WorkspacePolicy < ApplicationPolicy
         scope.where(workspaces: { id: current_user_available_workspace_ids })
       end
     end
-
-    private
-
-    def current_user_available_workspace_ids
-      (
-        current_user.workspaces_from_admin_accounts.ids +
-        current_user.workspaces_from_owned_accounts.ids +
-        current_user.workspaces.ids
-      ).uniq
-    end
   end
 
   def index

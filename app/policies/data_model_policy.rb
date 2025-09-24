@@ -41,7 +41,8 @@ class DataModelPolicy < ApplicationPolicy
 
   # Restrict access to unexpired workspaces and non-free SDG accounts only
   def current_workspace_allows_modifications?
-    system_admin? || (current_workspace_not_expired? && !current_account.free_sdg?)
+    system_admin? ||
+      (workspace_admin?(current_workspace) && current_workspace_not_expired? && !current_account.free_sdg?)
   end
 
   def record_allows_modifications?

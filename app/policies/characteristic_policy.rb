@@ -1,34 +1,16 @@
 # frozen_string_literal: true
 
-# TODO: Delegate checks to DataModelPolicy
-class CharacteristicPolicy < ApplicationPolicy # rubocop:disable Style/Documentation
+# Delegates checks to DataModelElementPolicy
+class CharacteristicPolicy < DataModelElementPolicy
   class Scope < Scope # rubocop:disable Style/Documentation
     def resolve
-      scope
+      if system_admin?
+        scope.all
+      else
+        scope
+          .joins(focus_area: { focus_area_group: :data_model })
+          .where(data_model: { workspace_id: current_user_available_workspace_ids })
+      end
     end
-  end
-
-  def index?
-    system_admin?
-  end
-
-  def show?
-    system_admin?
-  end
-
-  def create?
-    system_admin?
-  end
-
-  def update?
-    system_admin?
-  end
-
-  def destroy?
-    system_admin?
-  end
-
-  def description?
-    true
   end
 end

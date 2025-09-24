@@ -43,6 +43,14 @@ class ApplicationPolicy
 
       WorkspaceMember.where(user: current_user, workspace: workspace).first.try(:member?)
     end
+
+    def current_user_available_workspace_ids
+      (
+        current_user.workspaces_from_admin_accounts.ids +
+        current_user.workspaces_from_owned_accounts.ids +
+        current_user.workspaces.ids
+      ).uniq
+    end
   end
 
   attr_reader :user_context, :record
