@@ -79,3 +79,8 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
 end
+
+Pundit::Matchers.configure do |config|
+  # Change the default user alias
+  config.default_user_alias = :current_user
+end

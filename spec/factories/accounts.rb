@@ -34,5 +34,16 @@
 #
 FactoryBot.define do
   factory :account do
+    name { FFaker::Company.name }
+    description { FFaker::Lorem.sentence }
+    max_users { 5 }
+    max_impact_cards { 5 }
+    subscription_type { 'invoiced' }
+  end
+
+  trait :free_sdg do
+    max_users { 2 }
+    max_impact_cards { 2 }
+    subscription_type { 'free_sdg' }
   end
 end

@@ -129,6 +129,7 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'cuprite'
   gem 'database_cleaner'
+  gem 'pundit-matchers'
 
   # gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
