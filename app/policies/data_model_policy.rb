@@ -41,6 +41,10 @@ class DataModelPolicy < ApplicationPolicy
     system_admin?
   end
 
+  def update_status?
+    update?
+  end
+
   private
 
   # Restrict access to unexpired workspaces and non-free SDG accounts only

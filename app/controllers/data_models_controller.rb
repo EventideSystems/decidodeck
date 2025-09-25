@@ -130,6 +130,19 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
     @data_model.assign_attributes(data_model_params)
   end
 
+  def update_status
+    @data_model = policy_scope(DataModel).find(params[:id])
+    authorize @data_model, :update_status?
+    @data_model.assign_attributes(params[:data_model].permit(:status))
+    if @data_model.save
+      respond_to do |format|
+        format.turbo_stream
+      end
+    else
+      render 'edit'
+    end
+  end
+
   private
 
   def build_base_scope # rubocop:disable Metrics/AbcSize,Metrics/MethodLength

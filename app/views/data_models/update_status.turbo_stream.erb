@@ -1,0 +1,7 @@
+<%= turbo_stream.update dom_id(@data_model, :update_status) do %>
+  <%= render 'data_models/edit_status', data_model: @data_model %>
+<%- end %>
+
+<%= turbo_stream.update dom_id(@data_model, :status) do %>
+  <%= render 'data_model_status_badge', data_model: @data_model %>
+<% end %>
