@@ -11,7 +11,7 @@
             <%=
               form.collection_select(
                 :data_model_id,
-                current_workspace.data_models, :id, :name,
+                current_workspace.data_models.active.order("lower(name)"), :id, :name,
                 include_blank: 'Select a data model',
                 required: true
               )
