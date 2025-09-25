@@ -3,6 +3,7 @@
 module DataModels
   # Reorder elements by position in a data model
   class RepositionElement
+    # TODO: Remove the siblings parameter and fetch them inside the service
     def initialize(element:, new_position:, siblings:)
       @siblings = siblings
       @element = element
@@ -26,15 +27,29 @@ module DataModels
     end
 
     def call
-      ordered_siblings = (siblings - [element]).sort_by(&:position)
+      ordered_siblings.insert(checked_new_position - 1, element)
 
-      ordered_siblings.insert(new_position - 1, element)
-
-      element.position = new_position
+      element.position = checked_new_position
 
       ordered_siblings.each_with_index do |sibling, index|
         sibling.position = index + 1
       end
+    end
+
+    private
+
+    def checked_new_position
+      @checked_new_position ||= if new_position < 1
+                                  1
+                                elsif new_position > ordered_siblings.size + 1
+                                  ordered_siblings.size + 1
+                                else
+                                  new_position
+                                end
+    end
+
+    def ordered_siblings
+      @ordered_siblings ||= (siblings - [element]).sort_by(&:position)
     end
   end
 end

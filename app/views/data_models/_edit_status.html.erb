@@ -1,0 +1,41 @@
+<%- if policy(data_model).update_status? %>
+  
+<%= turbo_frame_tag dom_id(data_model, :update_status) do %>
+  <div class="flex flex-1 justify-end py-6 gap-4">
+    <%- if data_model.status != 'active' %>
+      <%= 
+        button_to(
+          'Activate',
+          update_status_data_model_path(data_model, data_model: { status: 'active' }),
+          method: :patch,
+          class: 'inline-flex items-center px-4 py-2 border border-transparent text-xs font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500', 
+          data: { turbo_stream: true }
+        ) 
+      %>
+    <% end %>
+    <%- if data_model.status != 'draft' %>
+      <%= 
+        button_to(
+          'Revert to Draft',
+          update_status_data_model_path(data_model, data_model: { status: 'draft' }),
+          method: :patch,
+          class: 'inline-flex items-center px-4 py-2 border border-transparent text-xs font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500', 
+          data: { turbo_stream: true }
+        ) 
+      %>
+    <% end %>
+    <%- if data_model.status != 'archived' %>
+      <%= 
+        button_to(
+          'Archive',
+          update_status_data_model_path(data_model, data_model: { status: 'archived' }),
+          method: :patch,
+          class: 'inline-flex items-center px-4 py-2 border border-transparent text-xs font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500', 
+          data: { turbo_stream: true }
+        ) 
+      %>
+    <% end %>
+  </div>
+<% end %>
+  
+<%- end %>

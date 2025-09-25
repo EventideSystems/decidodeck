@@ -22,6 +22,15 @@ module DataModelHelper
     end
   end
 
+  def data_model_status_color(data_model)
+    case data_model.status.to_sym
+    when :active then 'bg-green-400 green-900'
+    when :draft then 'bg-yellow-400 yellow-900'
+    when :archived then 'bg-gray-400 gray-900'
+    else 'bg-gray-400 gray-900'
+    end
+  end
+
   def display_name(element)
     [element.code, element.short_name.presence || element.name].compact.join(' ')
   end

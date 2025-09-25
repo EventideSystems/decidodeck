@@ -30,12 +30,29 @@
               </div>
               <%= render 'data_model_type_badge', data_model: @data_model %>
               <%= render 'other_workspace_badge', data_model: @data_model %>
+              <%= turbo_frame_tag dom_id(@data_model, :status) do %>
+                <%= render 'data_model_status_badge', data_model: @data_model %>
+              <% end %>
             </div>
           <% end %>
         </div>
+        <%= render 'data_models/edit_status', data_model: @data_model %>
       </div>
     </div>
   </div>
+
+  <%- if @data_model.scorecards.any? %>
+    <div class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-sm relative" role="alert">
+      <strong class="font-bold">This data model is in use.</strong>
+      <span class="block sm:inline">
+        The data model is currently being used by <%= pluralize(@data_model.scorecards.count, 'impact card') %>. 
+      </span>
+      <span class="block">
+        You can still edit the data model, but please be aware that changes may affect existing impact cards.
+      </span>
+    </div>
+  <% end %>
+
 
   <div class="mt-4 flex flex-wrap items-end justify-start gap-4">
     <%= turbo_frame_tag dom_id(@data_model, :goals_list), class: 'w-full' do %>

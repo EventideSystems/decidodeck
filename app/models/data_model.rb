@@ -35,7 +35,7 @@ class DataModel < ApplicationRecord
 
   acts_as_paranoid
 
-  string_enum status: %i[active archived]
+  string_enum status: %i[active draft archived]
 
   belongs_to :workspace, optional: true
   has_many :focus_area_groups, dependent: :destroy
