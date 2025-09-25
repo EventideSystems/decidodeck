@@ -62,10 +62,17 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
     authorize @data_model
   end
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @data_model = build_data_model
     authorize @data_model
     if @data_model.save
+      @data_model.focus_area_groups.create(name: 'First Goal', position: 1).tap do |group|
+        group.focus_areas.create(name: 'First Target', position: 1).tap do |area|
+          area.characteristics.create(name: 'First Indicator', position: 1)
+          area.characteristics.create(name: 'Second Indicator', position: 2)
+        end
+      end
+
       redirect_to edit_data_model_path(@data_model), notice: 'Data Model was successfully created.'
     else
       render :new, notice: "Data Model failed to create.#{@data_model.errors.full_messages.to_sentence}"
@@ -171,18 +178,11 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
     end
   end
 
-  def build_data_model # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+  def build_data_model
     if params[:data_model][:public_model] == '1' && policy(DataModel).make_public_model?
       DataModel.new(data_model_params)
     else
       current_workspace.data_models.build(data_model_params)
-    end.tap do |data_model|
-      data_model.focus_area_groups.build(name: 'First Goal', position: 1).tap do |group|
-        group.focus_areas.build(name: 'First Target', position: 1).tap do |area|
-          area.characteristics.build(name: 'First Indicator', position: 1)
-          area.characteristics.build(name: 'Second Indicator', position: 2)
-        end
-      end
     end
   end
 
