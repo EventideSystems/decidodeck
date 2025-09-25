@@ -36,6 +36,14 @@
                   )
                 %>
               </div>
+            <%- else %>
+              <%- if current_account.free_sdg? %>
+                <div 
+                  class="absolute top-0 right-0 inline-flex rounded-lg items-center justify-end bg-amber-400 mr-3" 
+                  title="Copying data models isn't available in FreeSDG accounts.">
+                  <p class="py-1 px-2 text-sm whitespace-nowrap text-gray-800">Unavailable in FreeSDG accounts</p>
+                </div>
+              <% end %>
             <%- end %>
             <%- if policy(@data_model).edit? %>
               <div class="flex justify-end items-center mb-4">

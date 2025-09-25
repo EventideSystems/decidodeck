@@ -58,6 +58,10 @@ class DataModel < ApplicationRecord
       .uniq
   end
 
+  def display_name
+    short_name.presence || name
+  end
+
   def element_by_code(code)
     focus_area_groups.find_by(code: code) ||
       focus_areas.find_by(code: code) ||
