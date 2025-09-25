@@ -65,7 +65,7 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
   def create
     @data_model = build_data_model
     authorize @data_model
-    if @data_model.save!
+    if @data_model.save
       redirect_to edit_data_model_path(@data_model), notice: 'Data Model was successfully created.'
     else
       render :new, notice: "Data Model failed to create.#{@data_model.errors.full_messages.to_sentence}"

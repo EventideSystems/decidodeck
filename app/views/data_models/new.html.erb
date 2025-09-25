@@ -5,6 +5,11 @@
       <%= render 'section', first_section: true do %>
         <%= render 'section_header', title: 'General Settings', subtitle: 'Name and description.' %>
         <%= render 'section_body' do %>
+
+          <p class="text-red-600 dark:text-red-400">
+          <%= @data_model.errors.full_messages.to_sentence %>
+          </p>
+
           <div class="sm:col-span-4">
             <%= form.label :name %>
             <%= form.text_field(:name, placeholder: 'Data model name', required: true, autofocus: true) %>
