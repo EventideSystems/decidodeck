@@ -8,12 +8,22 @@ class DataModelPolicy < ApplicationPolicy
       if system_admin?
         scope.all
       else
-        scope.where(workspace_id: workspace_ids).or(DataModel.where(public_model: true))
+        scope
+          .where(workspace_id: workspace_ids, status: statuses)
+          .or(DataModel.where(public_model: true, status: 'active'))
       end
     end
 
     def workspace_ids
       WorkspacePolicy::Scope.new(user_context, Workspace).resolve.ids
+    end
+
+    def statuses
+      if workspace_admin?(current_workspace)
+        DataModel.statuses.keys
+      else
+        %w[active]
+      end
     end
   end
 
