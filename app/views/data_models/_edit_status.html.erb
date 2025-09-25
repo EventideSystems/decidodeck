@@ -8,7 +8,7 @@
           'Activate',
           update_status_data_model_path(data_model, data_model: { status: 'active' }),
           method: :patch,
-          class: 'inline-flex items-center px-4 py-2 border border-transparent text-xs font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500', 
+          class: 'inline-flex items-center px-4 py-2 border border-transparent text-xs font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-green-500', 
           data: { turbo_stream: true }
         ) 
       %>
@@ -16,10 +16,10 @@
     <%- if data_model.status != 'draft' %>
       <%= 
         button_to(
-          'Revert to Draft',
+          'Mark as Draft',
           update_status_data_model_path(data_model, data_model: { status: 'draft' }),
           method: :patch,
-          class: 'inline-flex items-center px-4 py-2 border border-transparent text-xs font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500', 
+          class: 'inline-flex items-center px-4 py-2 border border-transparent text-xs font-medium rounded-md text-zinc-500 bg-yellow-400 hover:bg-yellow-500 hover:text-zinc-900 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500', 
           data: { turbo_stream: true }
         ) 
       %>
@@ -30,7 +30,7 @@
           'Archive',
           update_status_data_model_path(data_model, data_model: { status: 'archived' }),
           method: :patch,
-          class: 'inline-flex items-center px-4 py-2 border border-transparent text-xs font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500', 
+          class: TailwindClasses::DANGER_ZONE_BUTTON_CLASS + ' text-xs', 
           data: { turbo_stream: true }
         ) 
       %>
