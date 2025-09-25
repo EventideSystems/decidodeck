@@ -54,18 +54,13 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
   end
 
   def new
-    @data_model = current_workspace.data_models.build(author: current_user.display_name)
+    @data_model = current_workspace.data_models.build(author: current_user.display_name, status: :draft)
     authorize @data_model
   end
 
-  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-    @data_model = current_workspace.data_models.build(data_model_params)
-    @data_model.focus_area_groups.build(name: 'First Goal', position: 1).tap do |group|
-      group.focus_areas.build(name: 'First Target', position: 1).tap do |area|
-        area.characteristics.build(name: 'First Indicator', position: 1)
-        area.characteristics.build(name: 'Second Indicator', position: 2)
-      end
-    end
+  def create
+    @data_model = build_data_model
+
     authorize @data_model
     if @data_model.save
       redirect_to edit_data_model_path(@data_model), notice: 'Data Model was successfully created.'
@@ -160,7 +155,23 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
     end
   end
 
+  def build_data_model # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    if params[:data_model][:public_model] && policy(DataModel).make_public_model?
+      DataModel.new(data_model_params)
+    else
+      current_workspace.data_models.build(data_model_params)
+    end.tap do |data_model|
+      data_model.focus_area_groups.build(name: 'First Goal', position: 1).tap do |group|
+        group.focus_areas.build(name: 'First Target', position: 1).tap do |area|
+          area.characteristics.build(name: 'First Indicator', position: 1)
+          area.characteristics.build(name: 'Second Indicator', position: 2)
+        end
+      end
+    end
+  end
+
   def data_model_params
+    params[:data_model].delete(:public_model) unless policy(DataModel).make_public_model?
     params.require(:data_model).permit(:name, :short_name, :description, :author, :license, :color, :status,
                                        :public_model)
   end

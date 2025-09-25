@@ -37,6 +37,10 @@ class DataModelPolicy < ApplicationPolicy
     current_workspace_allows_modifications? && (record_allows_modifications? || record.public_model?)
   end
 
+  def make_public_model?
+    system_admin?
+  end
+
   private
 
   # Restrict access to unexpired workspaces and non-free SDG accounts only

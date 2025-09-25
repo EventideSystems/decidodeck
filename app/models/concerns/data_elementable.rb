@@ -14,11 +14,15 @@
 module DataElementable
   extend ActiveSupport::Concern
 
+  class ParentMissingError < StandardError; end
+
   included do
     # Any shared logic or callbacks can go here if needed
   end
 
   def siblings
+    raise ParentMissingError if parent.nil?
+
     (parent.children - [self]).sort_by(&:position)
   end
 

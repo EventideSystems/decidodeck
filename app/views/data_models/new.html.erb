@@ -7,7 +7,7 @@
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
             <%= form.label :name %>
-            <%= form.text_field(:name, placeholder: 'Data model name', required: true) %>
+            <%= form.text_field(:name, placeholder: 'Data model name', required: true, autofocus: true) %>
           </div>
 
           <div class="sm:col-span-4">
@@ -20,10 +20,22 @@
             <%= form.rich_textarea :description, rows: 3, placeholder: 'Data model description' %>
             <p class="text-sm/6 text-gray-600 dark:text-gray-400">A brief description of the data model (optional).</p>
           </div>
+
+          <div class="sm:col-span-4">
+            <%= form.label :status %>
+            <%= form.select :status, options_for_select(DataModel.statuses.keys.map { |status| [status.humanize, status] }, @data_model.status)  %>
+          </div>
+
+          <%- if policy(@data_model).make_public_model? %>
+            <div class="sm:col-span-4 flex items-center gap-2">
+              <%= form.check_box(:public_model) %>
+              <%= form.label :public_model? %>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
 
-      <%= render 'section', first_section: true do %>
+      <%= render 'section' do %>
         <%= render 'section_header', title: 'Attribution', subtitle: 'Licensing and ownership.' %>
         <%= render 'section_body' do %>
         
