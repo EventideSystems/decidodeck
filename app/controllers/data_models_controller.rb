@@ -68,7 +68,7 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
     if @data_model.save
       redirect_to edit_data_model_path(@data_model), notice: 'Data Model was successfully created.'
     else
-      render :new
+      render :new, notice: "Data Model failed to create.#{@data_model.errors.full_messages.to_sentence}"
     end
   end
 
@@ -172,7 +172,7 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
   end
 
   def build_data_model # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-    if params[:data_model][:public_model] && policy(DataModel).make_public_model?
+    if params[:data_model][:public_model] == '1' && policy(DataModel).make_public_model?
       DataModel.new(data_model_params)
     else
       current_workspace.data_models.build(data_model_params)
