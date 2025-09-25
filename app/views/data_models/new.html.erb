@@ -7,7 +7,16 @@
         <%= render 'section_body' do %>
 
           <p class="text-red-600 dark:text-red-400">
-          <%= @data_model.errors.full_messages.to_sentence %>
+            <%= @data_model.errors.full_messages.to_sentence %>
+            <%- @data_model.focus_area_groups.each do |group| %>
+              <%= group.errors.full_messages.to_sentence %>
+              <%- group.focus_areas.each do |area| %>
+                <%= area.errors.full_messages.to_sentence %>
+                <%- area.characteristics.each do |characteristic| %>
+                  <%= characteristic.errors.full_messages.to_sentence %>
+                <%- end %>
+              <%- end %>
+            <%- end %>
           </p>
 
           <div class="sm:col-span-4">
