@@ -155,6 +155,7 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
 
   private
 
+  # TODO: Move to policy?
   def build_base_scope # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     filter_params = params.permit(q: %i[current_workspace other_workspaces public_models])
 
@@ -170,9 +171,11 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
 
     base_scope = policy_scope(DataModel)
 
+    public_statuses = current_user.admin? ? DataModel.statuses.keys : %w[active]
+
     base_scope = base_scope.where(workspace: permitted_workspaces)
     if filter_params.dig(:q, :public_models) == '1'
-      base_scope.or(DataModel.where(public_model: true))
+      base_scope.or(DataModel.where(public_model: true, status: public_statuses))
     else
       base_scope.where(public_model: [false, nil])
     end
