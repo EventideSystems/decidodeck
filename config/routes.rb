@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get 'edit_description'
       patch 'update_description'
       patch 'update_status'
+      get 'show_name'
     end
     resources :goals, only: %i[index new create], controller: 'goals'
     member do

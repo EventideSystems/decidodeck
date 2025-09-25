@@ -26,7 +26,6 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
       format.turbo_stream do
         render 'data_models/index', locals: { data_models: @data_models }
       end
-
       format.css do
         render 'data_models/index', formats: [:css],
                                     locals: { data_models: @data_models }
@@ -46,6 +45,11 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
       #   send_data csv_data, filename: "data_models-#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.csv"
       # end
     end
+  end
+
+  def show_name
+    @data_model = policy_scope(DataModel).find(params[:id])
+    authorize @data_model, :edit?
   end
 
   def show

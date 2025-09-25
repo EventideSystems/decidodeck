@@ -1,5 +1,5 @@
 <div class="mx-auto max-w-6xl">
-  <%= form_with model: @data_model, class: 'mx-auto max-w-6xl' do |form| %>
+  <%= form_with model: @data_model, class: 'mx-auto max-w-6xl', data: { turbo: false } do |form| %>
     <%= render 'form_header', record: @data_model %>
     <%= render 'form_body' do %>
       <%= render 'section', first_section: true do %>

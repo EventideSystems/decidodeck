@@ -3,6 +3,7 @@
     <div class="flex items-center gap-4">
       <%= form.text_field :name, class: 'text-lg font-bold text-zinc-950 dark:text-white w-[36rem]' %>
       <%= form.submit 'Save', class: 'mt-2' %>
+      <%= link_to 'Cancel', show_name_data_model_path(@data_model), data: { turbo_frame: dom_id(@data_model, :edit_name) }, class: 'text-sm font-semibold text-gray-900 dark:text-white mt-2 mr-3' %>
     </div>
   <% end %>
 <% end %>
