@@ -66,7 +66,7 @@
           <%= display_name(focus_area_group) %>
         </h2>
         <%- if focus_area_group.description.present? %>        
-          <div class="flex text-zinc-500 mb-4">
+          <div class="text-zinc-500 mb-4">
             <%= rich_text(focus_area_group.description) %>
           </div>
         <% end %>
@@ -79,7 +79,7 @@
               <%= display_name(focus_area) %>
             </h3>
             <%- if focus_area.description.present? %>        
-              <div class="flex text-zinc-500 mb-4">
+              <div class="text-zinc-500 mb-4">
                 <%= rich_text(focus_area.description) %>
               </div>
             <% end %>
@@ -88,7 +88,7 @@
                 <li class="mt-1 text-zinc-950 dark:text-white" title="<%= characteristic.name %>">
                   <%= display_name(characteristic) %>
                   <%- if characteristic.description.present? %>        
-                    <div class="flex text-zinc-500 mb-4">
+                    <div class="text-zinc-500 mb-4">
                       <%= rich_text(characteristic.description) %>
                     </div>
                   <% end %>
