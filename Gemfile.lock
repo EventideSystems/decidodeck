@@ -82,7 +82,7 @@ GEM
       rack (>= 2.0.0)
     ast (2.4.3)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1164.0)
+    aws-partitions (1.1172.0)
     aws-sdk-core (3.233.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -91,7 +91,7 @@ GEM
       bigdecimal
       jmespath (~> 1, >= 1.6.1)
       logger
-    aws-sdk-lambda (1.160.0)
+    aws-sdk-lambda (1.161.0)
       aws-sdk-core (~> 3, >= 3.231.0)
       aws-sigv4 (~> 1.5)
     aws-sdk-rails (5.1.0)
@@ -102,7 +102,7 @@ GEM
     base64 (0.3.0)
     bcrypt (3.1.20)
     benchmark (0.4.1)
-    bigdecimal (3.2.3)
+    bigdecimal (3.3.1)
     bindex (0.8.1)
     bootsnap (1.18.6)
       msgpack (~> 1.2)
@@ -623,15 +623,15 @@ CHECKSUMS
   appsignal (4.7.2) sha256=91656547010cfbe7673f4ee683e982e1603674ee7c90ea601f8b00e83b22869d
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   aws-eventstream (1.4.0) sha256=116bf85c436200d1060811e6f5d2d40c88f65448f2125bc77ffce5121e6e183b
-  aws-partitions (1.1164.0) sha256=0c84863e8d8ecae9826d24f354a321e0cde6c0d3078069dba3b96525d74950f4
+  aws-partitions (1.1172.0) sha256=62809c443c36260f8d6c2e978ea49adcac497ca63f67568aae3e0e51e8341246
   aws-sdk-core (3.233.0) sha256=798db4e867d15dceb6504317867fc8013042984988199600c78e310d0058018a
-  aws-sdk-lambda (1.160.0) sha256=abb99459230e20958f0d949622406524f97f3ac33d8566eda4af6a2be43dd847
+  aws-sdk-lambda (1.161.0) sha256=09a9a5a0dfabd567989b015a54aed140d479f58b447f3fc94585f84b28e1e380
   aws-sdk-rails (5.1.0) sha256=8cffd3b60142e12a6747c91a7a609f668276b1082fc0c10810d5da3d14b13189
   aws-sigv4 (1.12.1) sha256=6973ff95cb0fd0dc58ba26e90e9510a2219525d07620c8babeb70ef831826c00
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   bcrypt (3.1.20) sha256=8410f8c7b3ed54a3c00cd2456bf13917d695117f033218e2483b2e40b0784099
   benchmark (0.4.1) sha256=d4ef40037bba27f03b28013e219b950b82bace296549ec15a78016552f8d2cce
-  bigdecimal (3.2.3) sha256=ffd11d1ac67a0d3b2f44aec0a6487210b3f813f363dd11f1fcccf5ba00da4e1b
+  bigdecimal (3.3.1) sha256=eaa01e228be54c4f9f53bf3cc34fe3d5e845c31963e7fcc5bedb05a4e7d52218
   bindex (0.8.1) sha256=7b1ecc9dc539ed8bccfc8cb4d2732046227b09d6f37582ff12e50a5047ceb17e
   bootsnap (1.18.6) sha256=0ae2393c1e911e38be0f24e9173e7be570c3650128251bf06240046f84a07d00
   brakeman (7.1.0) sha256=bbc708a75a53008490c8b9600b97fa85cb3d5a8818dd1560f18e0b89475d48af
