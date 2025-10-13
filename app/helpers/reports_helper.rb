@@ -15,7 +15,11 @@ module ReportsHelper
   end
 
   def stakeholder_report_name
-    multiple_scorecards_types? ? 'Stakeholder Report' : "#{default_data_model_name} Stakeholder Report"
+    if multiple_scorecards_types?
+      "#{Organisation.model_name.human.titleize} Report"
+    else
+      "#{default_data_model_name} #{Organisation.model_name.human.titleize} Report"
+    end
   end
 
   def report_scorecard_label

@@ -9,7 +9,7 @@
             'form',
             name: stakeholder_report_name,
             path: impact_card_stakeholders_reports_path(format: :xlsx),
-            description: 'This report provides details on the number of partnering organisations, the initiatives they are working on and their stakeholder type.'
+            description: "This report provides details on the number of partnering #{Organisation.model_name.human.pluralize.downcase}, the #{Initiative.model_name.human.pluralize.downcase} they are working on and their #{StakeholderType.model_name.human.pluralize.downcase}."
           ) do |f|
         %>
           <%= render partial: 'impact_card_selector', locals: { f: f } %>
@@ -21,7 +21,7 @@
               'form',
               name: 'Subsystem Report',
               path: subsystem_summary_reports_path(format: :xlsx),
-              description: 'This report shows a summary of the interactions between subsystems, organisations and initiatives.'
+              description: "This report shows a summary of the interactions between subsystems, #{Organisation.model_name.human.pluralize.downcase} and #{Initiative.model_name.human.pluralize.downcase}."
             ) do |f|
           %>
             <%= render partial: 'impact_card_selector', locals: { f: f } %>
@@ -33,7 +33,7 @@
             'form',
             name: comments_report_name,
             path: scorecard_comments_reports_path(format: :xlsx),
-            description: 'This report shows the first time comments have been recorded across initiatives.'
+            description: "This report shows the first time comments have been recorded across #{Initiative.model_name.human.pluralize.downcase}."
           ) do |f|
         %>
           <%= render partial: 'impact_card_selector', locals: { f: f } %>
@@ -49,7 +49,7 @@
               'form',
               name: activity_report_name,
               path: impact_card_activity_reports_path(format: :xlsx),
-              description: 'This report shows the addition and removal of characteristics across initiatives over a period of time.'
+              description: "This report shows the addition and removal of characteristics across #{Initiative.model_name.human.pluralize.downcase} over a period of time."
             ) do |f|
           %>
             <%= render partial: 'impact_card_selector', locals: { f: f } %>
@@ -66,7 +66,7 @@
               'form',
               name: 'Cross-Workspace Percent Actual',
               path: cross_workspace_percent_actual_reports_path(format: :xlsx),
-              description: 'Actual Percentage per Impact Card for all workspaces (must have admin role in each workspace).'
+              description: "Actual Percentage per #{Scorecard.model_name.human.titleize} for all workspaces (must have admin role in each workspace)."
             )
           %>
         <% end %>
@@ -77,7 +77,7 @@
               'form',
               name: 'Cross-Workspace Percent Actual Per Focus Area',
               path: cross_workspace_percent_actual_reports_path(format: :xlsx),
-              description: 'Actual Percentage per Impact Card per Focus Area for all workspaces (must have admin role in each workspace).'
+              description: "Actual Percentage per #{Scorecard.model_name.human.titleize} per Focus Area for all workspaces (must have admin role in each workspace)."
             )
           %>
         <% end %>
@@ -88,7 +88,7 @@
               'form',
               name: 'Cross-Workspace Percent Actual Per Focus Area (Tabbed)',
               path: cross_workspace_percent_actual_by_focus_area_tabbed_reports_path(format: :xlsx),
-              description: 'Actual Percentage per Impact Card all workspaces, grouped by Focus Area in separate tabs (must have admin role in each workspace).'
+              description: "Actual Percentage per #{Scorecard.model_name.human.titleize} for all workspaces, grouped by Focus Area in separate tabs (must have admin role in each workspace)."
             )
           %>
         <% end %>

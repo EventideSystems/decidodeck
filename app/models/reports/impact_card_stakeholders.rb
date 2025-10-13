@@ -24,23 +24,25 @@ module Reports
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/AbcSize
     def to_xlsx
-      Axlsx::Package.new do |p|
-        p.workbook.styles.fonts.first.name = 'Calibri'
-        styles = default_styles(p)
+      with_i18n_scope(scope: scorecard.account.i18n_scope) do
+        Axlsx::Package.new do |p|
+          p.workbook.styles.fonts.first.name = 'Calibri'
+          styles = default_styles(p)
 
-        p.workbook.add_worksheet(name: 'Report') do |sheet|
-          sheet.add_row([DateTime.now], style: styles[:date])
-          add_title(sheet, styles)
-          sheet.add_row
-          add_summary(sheet, styles)
-          sheet.add_row
-          add_unique_organisations(sheet, styles)
-          sheet.add_row
-          add_initiatives(sheet, styles)
-          sheet.add_row
-          add_stakeholder_types(sheet, styles)
-        end
-      end.to_stream
+          p.workbook.add_worksheet(name: 'Report') do |sheet|
+            sheet.add_row([DateTime.now], style: styles[:date])
+            add_title(sheet, styles)
+            sheet.add_row
+            add_summary(sheet, styles)
+            sheet.add_row
+            add_unique_organisations(sheet, styles)
+            sheet.add_row
+            add_initiatives(sheet, styles)
+            sheet.add_row
+            add_stakeholder_types(sheet, styles)
+          end
+        end.to_stream
+      end
     end
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
@@ -59,15 +61,25 @@ module Reports
     end
 
     def add_summary(sheet, styles)
-      sheet.add_row(['Total Partnering Stakeholders', total_partnering_organisations], style: styles[:h1])
       sheet.add_row(
-        ["Total #{scorecard_model_name} Initiatives", total_transition_card_initiatives],
+        ["Total Partnering #{Organisation.model_name.human.pluralize.titleize}",
+         total_partnering_organisations], style: styles[:h1]
+      )
+      sheet.add_row(
+        ["Total #{scorecard_model_name} #{Initiative.model_name.human.pluralize.titleize}",
+         total_transition_card_initiatives],
         style: styles[:h1]
       )
     end
 
-    def add_initiatives(sheet, styles)
-      sheet.add_row(['Initiatives', 'Total Stakeholders', 'Stakeholders'], style: styles[:h3])
+    def add_initiatives(sheet, styles) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+      sheet.add_row(
+        [
+          Initiative.model_name.human.pluralize.titleize,
+          "Total #{Organisation.model_name.human.pluralize.titleize}",
+          Organisation.model_name.human.pluralize.titleize
+        ], style: styles[:h3]
+      )
       initiatives.each do |initiative|
         name = initiative.name
         organisations = organisations_for_initiative(initiative)
@@ -78,8 +90,14 @@ module Reports
       end
     end
 
-    def add_stakeholder_types(sheet, styles)
-      sheet.add_row(['Stakeholder Type', 'Total Stakeholders', 'Stakeholders'], style: styles[:h3])
+    def add_stakeholder_types(sheet, styles) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+      sheet.add_row(
+        [
+          StakeholderType.model_name.human.titleize,
+          "Total #{Organisation.model_name.human.pluralize.titleize}",
+          Organisation.model_name.human.pluralize.titleize
+        ], style: styles[:h3]
+      )
       stakeholder_types.each do |stakeholder_type|
         name = stakeholder_type.name
         organisations = organisations_for_stakeholder_type(stakeholder_type)
@@ -96,17 +114,19 @@ module Reports
       sheet.add_row(['Community', scorecard.community&.name || 'NOT DEFINED'])
     end
 
-    ORGANISTION_SECTION_HEADERS = [
-      'Organisations',
-      'Betweenness Centrality',
-      'Total Connections',
-      'Total Initiatives',
-      'Stakeholder Type',
-      'Initiatives'
-    ].freeze
+    def organisation_section_headers
+      [
+        Organisation.model_name.human.pluralize.titleize,
+        'Betweenness Centrality',
+        'Total Connections',
+        "Total #{Initiative.model_name.human.pluralize.titleize}",
+        StakeholderType.model_name.human.titleize,
+        Initiative.model_name.human.pluralize.titleize
+      ]
+    end
 
     def add_unique_organisations(sheet, styles) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength
-      sheet.add_row(ORGANISTION_SECTION_HEADERS, style: styles[:h3])
+      sheet.add_row(organisation_section_headers, style: styles[:h3])
 
       unique_organisations.each do |organisation|
         name = organisation.name

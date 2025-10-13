@@ -28,8 +28,10 @@ en:
         suggestion: Suggestion / idea
         more_information: More information
     models:
+      account: Account
       scorecard: Impact Card
       transition_card: Transition Card
       sustainable_development_goal_alignment_card: SDGs Alignment Card
       wicked_problem: Problem / Opportunity
       organisation: Stakeholder
+      translation: TranslationX

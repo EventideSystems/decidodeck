@@ -1,15 +1,15 @@
-<%= page_header_tag 'Import Initiatives' %>
+<%= page_header_tag "Import #{Initiative.model_name.human.pluralize}" %>
 
 <div class="max-w-2xl">
   <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
     <h3 class="text-sm font-medium text-yellow-800 mb-2">Import Instructions</h3>
-    <ul class="text-sm text-yellow-700 space-y-1">
-      <li>• Upload a CSV file with columns: Name, Description, Impact Card Name, Started At, Finished At, Contact Name, Contact Email, Contact Phone, Contact Website, Contact Position, Notes</li>
-      <li>• Impact Card Name must match existing impact cards in your workspace</li>
-      <li>• Dates should be in YYYY-MM-DD format (optional)</li>
-      <li>• The file should match the format exported from the initiatives list</li>
-      <li>• Empty rows will be ignored</li>
-      <li>• Stakeholder and subsystem tag associations from CSV are not imported (can be added manually after import)</li>
+    <ul class="text-sm text-yellow-700 ml-5 list-disc space-y-1">
+      <li>Upload a CSV file with columns: Name, Description, <%= Scorecard.model_name.human %> Name, Started At, Finished At, Contact Name, Contact Email, Contact Phone, Contact Website, Contact Position, Notes</li>
+      <li><%= Scorecard.model_name.human %> Name must match existing <%= Scorecard.model_name.human.pluralize.downcase %> in your workspace</li>
+      <li>Dates (optional) should be in YYYY-MM-DD format</li>
+      <li>The file should match the format exported from the <%= Initiative.model_name.human.pluralize.downcase %> list</li>
+      <li>Empty rows will be ignored</li>
+      <li><%= Organisation.model_name.human.downcase.upcase_first %> and <%= Organisation.model_name.human.downcase %> associations from CSV are not imported (can be added manually after import)</li>
     </ul>
   </div>
 
@@ -23,15 +23,15 @@
     </div>
 
     <div class="flex gap-4">
-      <%= form.submit "Import Initiatives", class: "bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700" %>
+      <%= form.submit "Import #{Initiative.model_name.human.pluralize}", class: "bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700" %>
       <%= link_to "Cancel", initiatives_path, class: "bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400" %>
     </div>
   <% end %>
 
   <div class="mt-8">
-    <h3 class="text-sm font-medium text-gray-800 mb-2">Need a template?</h3>
+    <h3 class="text-sm font-medium text-gray-600 mb-2">Need a template?</h3>
     <p class="text-sm text-gray-600 mb-2">
-      You can <%= link_to "export existing initiatives", initiatives_path(format: :csv), class: "text-blue-600 hover:text-blue-800" %> 
+      You can <%= link_to "export existing #{Initiative.model_name.human.pluralize.downcase}", initiatives_path(format: :csv), class: "text-blue-600 hover:text-blue-800" %> 
       to get a properly formatted CSV file as a template.
     </p>
   </div>

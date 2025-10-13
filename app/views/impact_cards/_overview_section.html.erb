@@ -1,5 +1,5 @@
 <%= render 'section', first_section: true do %>
-  <%= render 'section_header', title: 'Overview', subtitle: 'General settings for this impact card.' %>
+  <%= render 'section_header', title: 'Overview', subtitle: "General settings for this #{Scorecard.model_name.human.downcase}." %>
   <%= render 'section_body' do %>
     <div class="sm:col-span-4">
       <%= form.label :name %>
@@ -9,7 +9,7 @@
     <div class="col-span-full">
       <%= form.label :description %>
       <%= form.rich_textarea :description, rows: 3, placeholder: '' %>
-      <p class="text-sm/6 text-gray-600 dark:text-gray-400">A brief description of the impact card (optional).</p>
+      <p class="text-sm/6 text-gray-600 dark:text-gray-400">A brief description of the <%= Scorecard.model_name.human.downcase %> (optional).</p>
     </div>
   <% end %>
 <% end %>

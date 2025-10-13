@@ -66,7 +66,7 @@ class Scorecard < ApplicationRecord
   delegate :name, :description, to: :wicked_problem, prefix: true, allow_nil: true
   delegate :name, :description, to: :community, prefix: true, allow_nil: true
 
-  delegate :stakeholder_types, to: :workspace
+  delegate :stakeholder_types, :account, to: :workspace
 
   accepts_nested_attributes_for :initiatives,
                                 allow_destroy: true,

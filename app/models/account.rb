@@ -5,6 +5,7 @@
 # Table name: accounts
 #
 #  id                              :bigint           not null, primary key
+#  default_locale                  :string           default("en"), not null
 #  default_workspace_grid_mode     :string           default("classic"), not null
 #  deleted_at                      :datetime
 #  description                     :string
@@ -52,6 +53,9 @@ class Account < ApplicationRecord
 
   after_create :create_default_workspace
 
+  # validate :default_i18n_scope, inclusion: { in: [nil] + I18n::Backend::ActiveRecord.config.available_scopes },
+  #                               allow_nil: true
+
   # TODO: Fix this to use the reminder days for each account (subtract expiry_final_reminder_days)
   scope :expiring_soon,
         lambda {
@@ -66,6 +70,11 @@ class Account < ApplicationRecord
 
   def expiry_reminder_sent_on
     [expiry_initial_reminder_sent_on, expiry_final_reminder_sent_on].compact_blank.max
+  end
+
+  # Returns a string that can be used as the i18n scope for this account
+  def i18n_scope
+    id.to_s
   end
 
   def max_users_reached?

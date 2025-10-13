@@ -3,9 +3,9 @@
 <div class="mx-auto max-w-6xl">
   <div class="flex flex-wrap items-end justify-between gap-4">
     <div class="w-full">
-      <%= page_header_tag 'Stakeholders' %>
+      <%= page_header_tag Organisation.model_name.human.pluralize %>
       <div class="flex justify-between items-center mt-4 ">
-        <%= render partial: 'search_form', locals: { record: @q, placeholder: 'Search stakeholders...' } %>
+        <%= render partial: 'search_form', locals: { record: @q, placeholder: "Search #{Organisation.model_name.human.pluralize.downcase}..." } %>
         <div class="flex justify-end items-center mb-4 space-x-2">
           <%=
             link_to_primary("Export", organisations_path(format: :csv), data: { turbo_stream: false })
@@ -17,7 +17,7 @@
           <%- end %>
           <%- if policy(Organisation).create? %>
             <div>
-              <%= link_to_primary 'Create Stakeholder', new_organisation_path %>
+              <%= link_to_primary "Create #{Organisation.model_name.human}", new_organisation_path %>
             </div>
           <%- end %>
         </div>

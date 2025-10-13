@@ -16,54 +16,56 @@ module Reports
     end
 
     def to_xlsx # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-      Axlsx::Package.new do |p| # rubocop:disable Metrics/BlockLength
-        p.workbook.styles.fonts.first.name = 'Calibri'
+      with_i18n_scope(scope: scorecard.account.i18n_scope) do # rubocop:disable Metrics/BlockLength
+        Axlsx::Package.new do |p| # rubocop:disable Metrics/BlockLength
+          p.workbook.styles.fonts.first.name = 'Calibri'
 
-        header_1 = header_1_style(p) # rubocop:disable Naming/VariableNumber
-        header_2 = header_2_style(p) # rubocop:disable Naming/VariableNumber
-        header_3 = header_3_style(p) # rubocop:disable Naming/VariableNumber
-        blue_normal = blue_normal_style(p)
-        wrap_text = wrap_text_style(p)
-        date = date_style(p)
+          header_1 = header_1_style(p) # rubocop:disable Naming/VariableNumber
+          header_2 = header_2_style(p) # rubocop:disable Naming/VariableNumber
+          header_3 = header_3_style(p) # rubocop:disable Naming/VariableNumber
+          blue_normal = blue_normal_style(p)
+          wrap_text = wrap_text_style(p)
+          date = date_style(p)
 
-        p.workbook.add_worksheet(name: 'Report') do |sheet| # rubocop:disable Metrics/BlockLength
-          add_report_header(sheet, header_1, blue_normal, date)
-          sheet.add_row
-          add_initiative_columns_header(sheet, wrap_text)
-          add_initiative_totals(sheet, header_1)
-          add_characteristic_columns_header(sheet, header_1, wrap_text)
+          p.workbook.add_worksheet(name: 'Report') do |sheet| # rubocop:disable Metrics/BlockLength
+            add_report_header(sheet, header_1, blue_normal, date)
+            sheet.add_row
+            add_initiative_columns_header(sheet, wrap_text)
+            add_initiative_totals(sheet, header_1)
+            add_characteristic_columns_header(sheet, header_1, wrap_text)
 
-          data = ImpactCardChecklistItems.execute(scorecard.id, date_from, date_to)
+            data = ImpactCardChecklistItems.execute(scorecard.id, date_from, date_to)
 
-          current_focus_area_group_name = ''
-          current_focus_area_name = ''
+            current_focus_area_group_name = ''
+            current_focus_area_name = ''
 
-          data.each do |row|
-            if row[:focus_area_group_name] != current_focus_area_group_name
-              current_focus_area_group_name = row[:focus_area_group_name]
-              current_focus_area_name = ''
-              sheet.add_row([row[:focus_area_group_name], '', '', '', '', ''], style: header_2)
+            data.each do |row|
+              if row[:focus_area_group_name] != current_focus_area_group_name
+                current_focus_area_group_name = row[:focus_area_group_name]
+                current_focus_area_name = ''
+                sheet.add_row([row[:focus_area_group_name], '', '', '', '', ''], style: header_2)
+              end
+
+              if row[:focus_area_name] != current_focus_area_name
+                current_focus_area_name = row[:focus_area_name]
+                sheet.add_row(["  #{row[:focus_area_name]}", '', '', '', '', ''], style: header_3)
+              end
+
+              sheet.add_row(
+                [
+                  "    #{row[:characteristic_name]}",
+                  row[:actual_count_before_period],
+                  row[:additions_count_during_period],
+                  row[:actual_count_after_period],
+                  row[:assigned_actuals_count_during_period]
+                ]
+              )
             end
 
-            if row[:focus_area_name] != current_focus_area_name
-              current_focus_area_name = row[:focus_area_name]
-              sheet.add_row(["  #{row[:focus_area_name]}", '', '', '', '', ''], style: header_3)
-            end
-
-            sheet.add_row(
-              [
-                "    #{row[:characteristic_name]}",
-                row[:actual_count_before_period],
-                row[:additions_count_during_period],
-                row[:actual_count_after_period],
-                row[:assigned_actuals_count_during_period]
-              ]
-            )
+            set_column_widths(sheet)
           end
-
-          set_column_widths(sheet)
-        end
-      end.to_stream
+        end.to_stream
+      end
     end
 
     private
@@ -86,10 +88,10 @@ module Reports
       sheet.add_row(
         [
           '',
-          'Initiatives beginning of period',
+          "#{Initiative.model_name.human.pluralize} beginning of period",
           'Additions',
           'Removals',
-          'Initiatives end of period'
+          "#{Initiative.model_name.human.pluralize} end of period"
         ],
         height: 48,
         style: wrap_text
@@ -99,7 +101,7 @@ module Reports
     def add_initiative_totals(sheet, header_1) # rubocop:disable Naming/VariableNumber
       sheet.add_row(
         [
-          "Total #{scorecard_model_name} Initiatives",
+          "Total #{scorecard_model_name} #{Initiative.model_name.human.pluralize}",
           initiative_totals[:initial],
           initiative_totals[:additions],
           initiative_totals[:removals],

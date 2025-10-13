@@ -22,6 +22,10 @@ module ApplicationHelper
     render 'branding', brand_image_path:, brand_text:, brand_text_class:, logo_class:
   end
 
+  def indefinite_article(string)
+    %w[a e i o u].include?(string.to_s[0].downcase) ? 'an' : 'a'
+  end
+
   def link_to_registration(link_class: '')
     link_class = merge_tailwind_class(
       'text-lg font-semibold leading-6 text-white bg-teal-900 hover:bg-teal-700 px-4 py-2 rounded-sm', link_class

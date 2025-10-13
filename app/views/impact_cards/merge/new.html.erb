@@ -1,6 +1,6 @@
 <div class="mx-auto max-w-6xl">
   <%= form_with model: @target, url: impact_card_merge_path(@target), method: :post, scope: :impact_card, data: { turbo: false }, class: 'mx-auto max-w-4xl' do |form| %>
-    <%= render 'form_header', title: "Merge another impact card into #{@target.name}" %>
+    <%= render 'form_header', title: "Merge another #{Scorecard.model_name.human.downcase} into #{@target.name}" %>
     <%= hidden_field_tag :target_id, @target.id %>
     <%= render 'form_body' do %>
       <%= render 'section', first_section: true do %>

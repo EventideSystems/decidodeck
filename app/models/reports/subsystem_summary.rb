@@ -15,20 +15,22 @@ module Reports
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/AbcSize
     def to_xlsx
-      Axlsx::Package.new do |p|
-        p.workbook.styles.fonts.first.name = 'Calibri'
-        styles = default_styles(p)
-        p.workbook.add_worksheet(name: 'Report') do |sheet|
-          sheet.add_row([Time.zone.now], style: styles[:date])
-          add_title(sheet, styles)
-          sheet.add_row
-          add_summary(sheet, styles)
-          sheet.add_row
-          add_initiatives_per_subsystem(sheet, styles)
-          sheet.add_row
-          add_organisations_per_subsystem(sheet, styles)
-        end
-      end.to_stream
+      with_i18n_scope(scope: scorecard.account.i18n_scope) do
+        Axlsx::Package.new do |p|
+          p.workbook.styles.fonts.first.name = 'Calibri'
+          styles = default_styles(p)
+          p.workbook.add_worksheet(name: 'Report') do |sheet|
+            sheet.add_row([Time.zone.now], style: styles[:date])
+            add_title(sheet, styles)
+            sheet.add_row
+            add_summary(sheet, styles)
+            sheet.add_row
+            add_initiatives_per_subsystem(sheet, styles)
+            sheet.add_row
+            add_organisations_per_subsystem(sheet, styles)
+          end
+        end.to_stream
+      end
     end
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
@@ -46,31 +48,43 @@ module Reports
       sheet.add_row(['Community', scorecard.community&.name || 'NOT DEFINED'])
     end
 
-    def add_summary(sheet, styles)
+    def add_summary(sheet, styles) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
       sheet.add_row(['Total Subsystems', total_subsystems], style: styles[:h1])
-      sheet.add_row(['Total Partnering Stakeholders', total_partnering_organisations], style: styles[:h1])
       sheet.add_row(
-        ["Total #{scorecard_model_name} Initiatives", total_transition_card_initiatives],
+        [
+          "Total Partnering #{Organisation.model_name.human.pluralize.titleize}",
+          total_partnering_organisations
+        ], style: styles[:h1]
+      )
+      sheet.add_row(
+        ["Total #{scorecard_model_name} #{Initiative.model_name.human.pluralize.titleize}",
+         total_transition_card_initiatives],
         style: styles[:h1]
       )
     end
 
-    def add_initiatives_per_subsystem(sheet, styles)
+    def add_initiatives_per_subsystem(sheet, styles) # rubocop:disable Metrics/AbcSize
       initiatives_per_subsystem = fetch_initiatives_per_subsystem
       max_initiatives = initiatives_per_subsystem.values.map(&:count).max || 0
 
-      sheet.add_row(['Subsystem ', 'Total Initiatives'] + Array.new(max_initiatives, 'Initiatives'), style: styles[:h3])
+      sheet.add_row(
+        ['Subsystem ',
+         "Total #{Initiative.model_name.human.pluralize.titleize}"] +
+         Array.new(max_initiatives, Initiative.model_name.human.pluralize.titleize), style: styles[:h3]
+      )
       initiatives_per_subsystem.each do |subsystem, initiatives|
         sheet.add_row([subsystem, initiatives.count] + initiatives)
       end
     end
 
-    def add_organisations_per_subsystem(sheet, styles)
+    def add_organisations_per_subsystem(sheet, styles) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
       organisations_per_subsystem = fetch_organisations_per_subsystem
       max_organisations = organisations_per_subsystem.values.map(&:count).max || 0
 
       sheet.add_row(
-        ['Subsystem ', 'Total Stakeholders'] + Array.new(max_organisations, 'Stakeholders'),
+        ['Subsystem ',
+         "Total #{Organisation.model_name.human.pluralize.titleize}"] +
+         Array.new(max_organisations, Organisation.model_name.human.pluralize.titleize),
         style: styles[:h3]
       )
       organisations_per_subsystem.each do |subsystem, organisations|

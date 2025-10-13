@@ -1,6 +1,6 @@
 <div class="mx-auto max-w-6xl">
   <%= form_with model: @impact_card, url: impact_cards_path, scope: :impact_card, class: 'mx-auto max-w-4xl' do |form| %>
-    <%= render 'form_header', title: 'New Impact Card - Initial Setup' %>
+    <%= render 'form_header', title: "New #{Scorecard.model_name.human} - Initial Setup" %>
     <%= render 'form_body' do %>
       <%= render 'overview_section', form: %>
       <%= render 'section' do %>
@@ -22,22 +22,22 @@
 
       <% if current_workspace.scorecards.count.positive? %>
         <%= render 'section' do %>
-          <%= render 'section_header', title: 'Import Initiatives', subtitle: 'Copy initiatives from another impact card.' do %>
+          <%= render 'section_header', title: "Import #{Initiative.model_name.human.pluralize}", subtitle: "Copy #{Initiative.model_name.human.pluralize.downcase} from another #{Scorecard.model_name.human.downcase}." do %>
             <p class="mt-1 text-sm/6 text-gray-600">
-              Note: this is a completely optional step, allowing you to quickly set up an impact card by copying the structure of an existing one.
+              Note: this is a completely optional step, allowing you to quickly set up <%= indefinite_article(Scorecard.model_name.human) %> <%= Scorecard.model_name.human.downcase %> by copying the structure of an existing one.
             </p>
           <% end %>
           <%= render 'section_body' do %>
             <div class="sm:col-span-4">
-              <%= form.label :impact_card_source, 'Impact Card Source' %>
+              <%= form.label :impact_card_source, "#{Scorecard.model_name.human} Source" %>
               <%=
                 custom_select_tag(
                   :impact_card_source_id,
                   options_from_collection_for_select(policy_scope(Scorecard), :id, :name),
-                  include_blank: 'Select an impact card'
+                  include_blank: "Select #{indefinite_article(Scorecard.model_name.human)} #{Scorecard.model_name.human.downcase}"
                 )
                %>
-              <p class="text-sm/6 text-gray-600 mt-1">Impact card to use as a template for initiatives (optional).</p>
+              <p class="text-sm/6 text-gray-600 mt-1"><%= Scorecard.model_name.human.upcase_first %> to use as a template for <%= Initiative.model_name.human.pluralize.downcase %> (optional).</p>
             </div>
           <% end %>
         <% end %>
@@ -47,20 +47,20 @@
 
       <%= form.fields_for :initiatives do |initiatives_form| %>
         <%= render 'section' do %>
-          <%= render 'section_header', title: 'First Initiative', subtitle: 'Create your first initiative.' do %>
+          <%= render 'section_header', title: "First #{Initiative.model_name.human}", subtitle: "Create your first #{Initiative.model_name.human.downcase}." do %>
             <p class="mt-1 text-sm/6 text-gray-600">
-              Note: you can add more initiatives later, after creating this impact card.
+              Note: you can add more <%= Initiative.model_name.human.pluralize.downcase %> later, after creating this <%= Scorecard.model_name.human.downcase %>.
             </p>
           <% end %>
           <%= render 'section_body' do %>
             <div class="sm:col-span-4">
               <%= initiatives_form.label :name %>
-              <%= initiatives_form.text_field :name, placeholder: 'Initiative name' %>
+              <%= initiatives_form.text_field :name, placeholder: "#{Initiative.model_name.human} name" %>
             </div>
 
             <div class="col-span-full">
               <%= initiatives_form.label :description %>
-              <%= initiatives_form.rich_textarea :description, rows: 3, placeholder: 'Initiative description' %>
+              <%= initiatives_form.rich_textarea :description, rows: 3, placeholder: "#{Initiative.model_name.human} description" %>
             </div>
           <% end %>
         <% end %>
@@ -68,7 +68,7 @@
         <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 dark:border-white/10 pb-12 md:grid-cols-3">
           <div>
             <h3 class="text-sm font-semibold text-zinc-950 dark:text-white text-right">Contact Details</h3>
-            <p class="mt-1 text-sm/6 text-gray-600 text-right">Enter the main contact for this initiative (optional).</p>
+            <p class="mt-1 text-sm/6 text-gray-600 text-right">Enter the main contact for this <%= Initiative.model_name.human.downcase %> (optional).</p>
           </div>
 
           <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
@@ -116,7 +116,7 @@
         <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 dark:border-white/10 pb-12 md:grid-cols-3">
           <div>
             <h3 class="pl-10 text-sm font-semibold text-zinc-950 dark:text-white text-right">Stakeholders</h3>
-            <p class="mt-1 text-sm/6 text-gray-600 text-right">Identify who might be interested in this initiative.</p>
+            <p class="mt-1 text-sm/6 text-gray-600 text-right">Identify who might be interested in this <%= Initiative.model_name.human.downcase %>.</p>
           </div>
           <%= render 'initiatives_organisations/controls', initiative: @impact_card.initiatives.first %>
         </div>
@@ -125,7 +125,7 @@
         <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 dark:border-white/10 pb-12 md:grid-cols-3">
           <div>
             <h3 class="pl-10 text-sm font-semibold text-zinc-950 dark:text-white text-right">Subsystem Tags</h3>
-            <p class="mt-1 text-sm/6 text-gray-600 text-right">Identify relevant subsystem tags for this initiative.</p>
+            <p class="mt-1 text-sm/6 text-gray-600 text-right">Identify relevant subsystem tags for this <%= Initiative.model_name.human.downcase %>.</p>
           </div>
           <%= render 'initiatives_subsystem_tags/controls', initiative: @impact_card.initiatives.first %>
         </div>

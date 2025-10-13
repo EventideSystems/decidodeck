@@ -7,24 +7,24 @@
         <%= render 'section_header', title: 'General Settings', subtitle: 'Name and description.' %>
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
-            <%= form.label :impact_card_id %>
+            <%= form.label :impact_card_id, "#{Scorecard.model_name.human.downcase.upcase_first}" %>
             <% if @impact_card.present? %>
               <%= hidden_field_tag(:impact_card_id, @impact_card.id) %>
               <%= custom_text_field_tag(:name, @impact_card.name, readonly: true, class: 'bg-slate-200 dark:bg-slate-600') %>
             <% else %>
-              <%= select_impact_card_tag(:impact_card_id, workspace: current_workspace, autofocus: true, required: true, prompt: 'Select an impact card') %>
+              <%= select_impact_card_tag(:impact_card_id, workspace: current_workspace, autofocus: true, required: true, prompt: "Select #{indefinite_article(Scorecard.model_name.human)} #{Scorecard.model_name.human.downcase}") %>
             <% end %>
           </div>
 
           <div class="sm:col-span-4">
             <%= form.label :name %>
-            <%= form.text_field(:name, placeholder: 'Initiative name', autofocus: @impact_card.blank?, required: true) %>
+            <%= form.text_field(:name, placeholder: "#{Initiative.model_name.human} name", autofocus: @impact_card.blank?, required: true) %>
           </div>
 
           <div class="col-span-full">
             <%= form.label :description %>
-            <%= form.rich_textarea :description, rows: 3, placeholder: 'Initiative description' %>
-            <p class="text-sm/6 text-gray-600 dark:text-gray-400">A brief description of the initiative (optional).</p>
+            <%= form.rich_textarea :description, rows: 3, placeholder: "#{Initiative.model_name.human} description" %>
+            <p class="text-sm/6 text-gray-600 dark:text-gray-400">A brief description of the <%= Initiative.model_name.human.downcase %> (optional).</p>
           </div>
         <% end %>
       <% end %>
@@ -33,7 +33,7 @@
       <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-t border-gray-900/10 dark:border-white/10 pb-12 md:grid-cols-3 pt-10">
         <div>
           <h2 class="text-base/7 font-semibold text-zinc-950 dark:text-white">Subsystem Tags</h2>
-          <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400">Identify relevant subsystem tags for this initiative.</p>
+          <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400">Identify relevant subsystem tags for this <%= Initiative.model_name.human.downcase %>.</p>
         </div>
         <%= render 'initiatives_subsystem_tags/controls', initiative: %>
       </div>
@@ -41,7 +41,7 @@
       <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 dark:border-white/10 pb-12 md:grid-cols-3">
         <div>
           <h2 class="text-base/7 font-semibold text-zinc-950 dark:text-white">Contact Details</h2>
-          <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400">Enter the main contact for this initiative (optional).</p>
+          <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400">Enter the main contact for this <%= Initiative.model_name.human.downcase %> (optional).</p>
         </div>
 
         <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
@@ -70,7 +70,7 @@
       <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 dark:border-white/10 pb-12 md:grid-cols-3">
         <div>
           <h2 class="text-base/7 font-semibold text-zinc-950 dark:text-white">Applicable Date Range</h2>
-          <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400">Optionally set the start and end dates for this initiative.</p>
+          <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400">Optionally set the start and end dates for this <%= Initiative.model_name.human.downcase %>.</p>
         </div>
 
         <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
@@ -89,7 +89,7 @@
       <div class="grid grid-cols-1 gap-x-8 gap-y-10 pb-12 md:grid-cols-3">
         <div>
           <h2 class="text-base/7 font-semibold text-zinc-950 dark:text-white">Stakeholders</h2>
-          <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400">Identify who might be interested in this initiative.</p>
+          <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400">Identify who might be interested in this <%= Initiative.model_name.human.downcase %>.</p>
         </div>
         <%= render 'initiatives_organisations/controls', initiative: %>
       </div>

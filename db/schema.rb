@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_21_225002) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "hstore"
@@ -47,6 +47,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_21_225002) do
     t.datetime "updated_at", null: false
     t.jsonb "log_data"
     t.integer "owner_id"
+    t.string "default_locale", default: "en", null: false
     t.index ["default_workspace_id"], name: "index_accounts_on_default_workspace_id"
     t.index ["owner_id"], name: "index_accounts_on_owner_id"
   end
@@ -447,6 +448,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_21_225002) do
     t.bigint "data_model_id"
     t.index ["characteristic_id"], name: "index_thematic_mappings_on_characteristic_id"
     t.index ["focus_area_id"], name: "index_thematic_mappings_on_focus_area_id"
+  end
+
+  create_table "translations", force: :cascade do |t|
+    t.string "scope"
+    t.string "locale"
+    t.string "key"
+    t.text "value"
+    t.text "interpolations"
+    t.boolean "is_proc", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["scope", "locale", "key"], name: "index_translations_on_scope_and_locale_and_key", unique: true
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

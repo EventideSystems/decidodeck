@@ -5,6 +5,7 @@
 # Table name: accounts
 #
 #  id                              :bigint           not null, primary key
+#  default_locale                  :string           default("en"), not null
 #  default_workspace_grid_mode     :string           default("classic"), not null
 #  deleted_at                      :datetime
 #  description                     :string

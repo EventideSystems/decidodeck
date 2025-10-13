@@ -49,14 +49,19 @@ module LabelsHelper
     0.2126 * r + 0.7152 * g + 0.0722 * b
   end
 
+  # SMELL: This method has general utility beyond labels and should be moved to ApplicationHelper or a
+  # new SidebarHelper.
+  # SMELL: The name 'label_class_human_title' is misleading; consider renaming it to 'class_human_title'.
   def label_class_human_title(klass)
     klass.model_name.human.pluralize.titleize
   end
 
+  # SMELL: This method has general utility beyond labels and should be moved to ApplicationHelper or a new helper.
   def label_class_search_placeholder(klass)
     "Search #{klass.model_name.human.pluralize.downcase}..."
   end
 
+  # SMELL: This method has general utility beyond labels and should be moved to ApplicationHelper or a new helper.
   def label_class_button_name(klass)
     "Create #{klass.model_name.human.titleize}"
   end

@@ -141,7 +141,7 @@ class InitiativesController < ApplicationController # rubocop:disable Style/Docu
   private
 
   def export_filename
-    "initiatives-#{Time.zone.today.strftime('%Y-%m-%d')}"
+    "#{Initiative.model_name.human.pluralize.downcase}-#{Time.zone.today.strftime('%Y-%m-%d')}"
   end
 
   def initiatives_to_csv(initiatives) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
@@ -152,8 +152,8 @@ class InitiativesController < ApplicationController # rubocop:disable Style/Docu
       csv << (([
         'Name',
         'Description',
-        'Impact Card Name',
-        'Impact Card Type',
+        "#{ScorecardType.model_name.human} Name",
+        "#{ScorecardType.model_name.human} Type",
         'Started At',
         'Finished At',
         'Contact Name',
@@ -162,9 +162,9 @@ class InitiativesController < ApplicationController # rubocop:disable Style/Docu
         'Contact Website',
         'Contact Position'
       ] + 1.upto(max_organisation_index).map do |index|
-        "Stakeholder #{index} Name"
+        "#{Organisation.model_name.human.titleize} #{index} Name"
       end + 1.upto(max_subsystem_tag_index).map do |index|
-        "Subsystem Tag #{index} Name"
+        "#{SubsystemTag.model_name.human.titleize} #{index} Name"
       end) + ['Notes'])
 
       initiatives.each do |initiative|
@@ -254,21 +254,30 @@ class InitiativesController < ApplicationController # rubocop:disable Style/Docu
     scorecard_errors = 0
     scorecards_cache = {}
 
+    scorecard_name_column_names = ["#{Scorecard.model_name.human.titleize} Name", 'Impact Card Name'].uniq
+    scorecard_name_column_name = nil
+
     # Build cache of scorecards for faster lookup
     policy_scope(Scorecard).each do |sc|
       scorecards_cache[sc.name.downcase] = sc
     end
 
     CSV.foreach(file.path, headers: true, force_quotes: true) do |row| # rubocop:disable Metrics/BlockLength
+      if scorecard_name_column_name.nil?
+        scorecard_name_column_name = scorecard_name_column_names.find { |col| row.headers.include?(col) }
+      end
+      # If we still don't have a scorecard name column, it means the CSV is invalid
+      # because it doesn't have the required columns
+      next if scorecard_name_column_name.nil?
       # Skip empty rows
       next if row['Name'].blank? || row['Name'].strip.empty?
 
       scorecard = nil
-      if row['Impact Card Name'].present?
-        scorecard = scorecards_cache[row['Impact Card Name'].downcase]
+      if row[scorecard_name_column_name].present?
+        scorecard = scorecards_cache[row[scorecard_name_column_name].downcase]
         unless scorecard
           scorecard_errors += 1
-          errors << "Row #{$INPUT_LINE_NUMBER}: Impact card '#{row['Impact Card Name']}' not found"
+          errors << "Row #{$INPUT_LINE_NUMBER}: #{scorecard_name_column_name.downcase.upcase_first} '#{row[scorecard_name_column_name]}' not found" # rubocop:disable Layout/LineLength
           next
         end
       end

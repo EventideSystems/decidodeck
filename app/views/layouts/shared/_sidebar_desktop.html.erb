@@ -8,9 +8,9 @@
         <li>
           <ul role="list" class="-mx-2 space-y-1">
             <%= render_sidebar_item title: 'Home', path: root_path, icon: :home, active_group: :home %>
-            <%= render_sidebar_item title: 'Impact Cards', path: impact_cards_path, icon: :impact_cards, active_group: :impact_cards %>
-            <%= render_sidebar_item title: 'Initiatives', path: initiatives_path, icon: :initiatives, active_group: :initiatives %>
-            <%= render_sidebar_item title: 'Stakeholders', path: organisations_path, icon: :stakeholders, active_group: :stakeholders %>
+            <%= render_sidebar_item title: label_class_human_title(Scorecard), path: impact_cards_path, icon: :impact_cards, active_group: :impact_cards %>
+            <%= render_sidebar_item title: label_class_human_title(Initiative), path: initiatives_path, icon: :initiatives, active_group: :initiatives %>
+            <%= render_sidebar_item title: label_class_human_title(Organisation), path: organisations_path, icon: :stakeholders, active_group: :stakeholders %>
             <%= render_sidebar_item title: 'Reports', path: reports_path, icon: :reports, active_group: :reports %>
             <%= render_sidebar_item title: 'Team', path: users_path, icon: :teams, active_group: :teams %>
             <%= render_sidebar_item title: 'Library', path: data_models_path, icon: :newsstand, active_group: :library %>

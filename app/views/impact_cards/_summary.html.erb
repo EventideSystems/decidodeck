@@ -21,7 +21,7 @@
           <%= link_to_primary 'Import Comments', import_comments_impact_card_path(impact_card) %>
         <% end %>
         <% if policy(impact_card).add_initiative? %>
-          <%= link_to_primary 'Add Initiative', new_impact_card_initiative_path(impact_card) %>
+          <%= link_to_primary "Add #{Initiative.model_name.human}", new_impact_card_initiative_path(impact_card) %>
         <% end %>
         <% if policy(impact_card).edit? %>
           <%= link_to_primary 'Edit Card', edit_impact_card_path(impact_card) %>

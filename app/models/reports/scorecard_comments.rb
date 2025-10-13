@@ -19,73 +19,75 @@ module Reports
     end
 
     def to_xlsx # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
-      padding_plus_2 = Array.new(initiatives.count + 2, '') # rubocop:disable Naming/VariableNumber
+      with_i18n_scope(scope: scorecard.account.i18n_scope) do # rubocop:disable Metrics/BlockLength
+        padding_plus_2 = Array.new(initiatives.count + 2, '') # rubocop:disable Naming/VariableNumber
 
-      Axlsx::Package.new do |p| # rubocop:disable Metrics/BlockLength
-        p.workbook.styles.fonts.first.name = 'Calibri'
+        Axlsx::Package.new do |p| # rubocop:disable Metrics/BlockLength
+          p.workbook.styles.fonts.first.name = 'Calibri'
 
-        # rubocop:disable Naming/VariableNumber
-        styles = {
-          header_1: p.workbook.styles.add_style(fg_color: '386190', sz: 16, b: true),
-          header_2: p.workbook.styles.add_style(bg_color: 'dce6f1', fg_color: '386190', sz: 12, b: true),
-          header_3: p.workbook.styles.add_style(bg_color: 'dce6f1', fg_color: '386190', sz: 12, b: false),
-          blue_normal: p.workbook.styles.add_style(fg_color: '386190', sz: 12, b: false),
-          wrap_text: p.workbook.styles.add_style(
-            alignment: {
-              horizontal: :general,
-              vertical: :bottom,
-              wrap_text: true
-            }
-          ),
-          date: date_style(p)
-        }
-        # rubocop:enable Naming/VariableNumber
+          # rubocop:disable Naming/VariableNumber
+          styles = {
+            header_1: p.workbook.styles.add_style(fg_color: '386190', sz: 16, b: true),
+            header_2: p.workbook.styles.add_style(bg_color: 'dce6f1', fg_color: '386190', sz: 12, b: true),
+            header_3: p.workbook.styles.add_style(bg_color: 'dce6f1', fg_color: '386190', sz: 12, b: false),
+            blue_normal: p.workbook.styles.add_style(fg_color: '386190', sz: 12, b: false),
+            wrap_text: p.workbook.styles.add_style(
+              alignment: {
+                horizontal: :general,
+                vertical: :bottom,
+                wrap_text: true
+              }
+            ),
+            date: date_style(p)
+          }
+          # rubocop:enable Naming/VariableNumber
 
-        p.workbook.add_worksheet(name: 'Report') do |sheet| # rubocop:disable Metrics/BlockLength
-          add_header(sheet, styles)
+          p.workbook.add_worksheet(name: 'Report') do |sheet| # rubocop:disable Metrics/BlockLength
+            add_header(sheet, styles)
 
-          data = generate_data
+            data = generate_data
 
-          scorecard.data_model.focus_area_groups.order(:position).each do |focus_area_group| # rubocop:disable Metrics/BlockLength
-            sheet.add_row([focus_area_group.name] + padding_plus_2, style: styles[:header_2]) # rubocop:disable Naming/VariableNumber
+            scorecard.data_model.focus_area_groups.order(:position).each do |focus_area_group| # rubocop:disable Metrics/BlockLength
+              sheet.add_row([focus_area_group.name] + padding_plus_2, style: styles[:header_2]) # rubocop:disable Naming/VariableNumber
 
-            focus_area_group.focus_areas.order(:position).each do |focus_area|
-              sheet.add_row(["  #{focus_area.name}"] + padding_plus_2, style: styles[:header_3]) # rubocop:disable Naming/VariableNumber
+              focus_area_group.focus_areas.order(:position).each do |focus_area|
+                sheet.add_row(["  #{focus_area.name}"] + padding_plus_2, style: styles[:header_3]) # rubocop:disable Naming/VariableNumber
 
-              focus_area.characteristics.order(:position).each do |characteristic|
-                data_row = data[characteristic.id]
+                focus_area.characteristics.order(:position).each do |characteristic|
+                  data_row = data[characteristic.id]
 
-                initiative_comments =
-                  if data_row.present?
-                    initiatives.map do |initiative|
-                      comment_data = data_row[:comments].find { |d| d[:initiative_id] == initiative.id }
+                  initiative_comments =
+                    if data_row.present?
+                      initiatives.map do |initiative|
+                        comment_data = data_row[:comments].find { |d| d[:initiative_id] == initiative.id }
 
-                      next '' if comment_data.blank?
+                        next '' if comment_data.blank?
 
-                      comment_data[:comments]
-                        .sort_by { |c| c[:date] }
-                        .reverse
-                        .map { |c| "[#{utc_date_time_string_to_date_time(c[:date])}] #{c[:comment]}" }
-                        .join('; ')
+                        comment_data[:comments]
+                          .sort_by { |c| c[:date] }
+                          .reverse
+                          .map { |c| "[#{utc_date_time_string_to_date_time(c[:date])}] #{c[:comment]}" }
+                          .join('; ')
+                      end
+                    else
+                      initiatives.map { '' }
                     end
-                  else
-                    initiatives.map { '' }
-                  end
 
-                sheet.add_row(
-                  [
-                    "    #{characteristic.name}",
-                    data_row&.dig(:initiative_count) || 0,
-                    data_row&.dig(:initiative_comment_count) || 0
-                  ] + initiative_comments
-                )
+                  sheet.add_row(
+                    [
+                      "    #{characteristic.name}",
+                      data_row&.dig(:initiative_count) || 0,
+                      data_row&.dig(:initiative_comment_count) || 0
+                    ] + initiative_comments
+                  )
+                end
               end
             end
-          end
 
-          sheet.column_widths(75.5, 10, 10)
-        end
-      end.to_stream
+            sheet.column_widths(75.5, 10, 10)
+          end
+        end.to_stream
+      end
     end
 
     private

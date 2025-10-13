@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
   before_action :set_paper_trail_whodunnit
   before_action :set_actionmailer_host
   before_action :check_accepted_terms, if: :user_signed_in?
+  before_action :set_i18n
 
   # protect_from_forgery with: :exception
   protect_from_forgery prepend: true
@@ -160,5 +161,14 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
   def flash_resource_not_found(_exception)
     flash[:error] = "Resource not found in workspace '#{current_workspace.name}'"
     redirect_to(root_path)
+  end
+
+  def set_i18n # rubocop:disable Metrics/AbcSize
+    I18n.locale = current_account&.default_locale.presence || I18n.default_locale
+
+    return if I18n::Backend::ActiveRecord.config.scope == current_account&.i18n_scope.presence
+
+    I18n::Backend::ActiveRecord.config.scope = current_account&.i18n_scope.presence
+    I18n.backend.reload!
   end
 end

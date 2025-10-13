@@ -3,26 +3,26 @@
     <%= render 'form_header', record: organisation %>
     <%= render 'form_body' do %>
       <%= render 'section', first_section: true do %>
-        <%= render 'section_header', title: 'Overview', subtitle: 'General settings for this stakeholder.' %>
+        <%= render 'section_header', title: 'Overview', subtitle: "General settings for this #{Organisation.model_name.human.downcase}." %>
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
             <%= form.label :name %>
-            <%= form.text_field(:name, placeholder: 'Stakeholder name', autofocus: true, required: true) %>
+            <%= form.text_field(:name, placeholder: "#{Organisation.model_name.human.downcase.upcase_first} name", autofocus: true, required: true) %>
           </div>
 
           <div class="col-span-full">
             <%= form.label :description %>
             <%= form.rich_textarea :description, rows: 3, placeholder: '' %>
-            <p class="text-sm/6 text-gray-600 dark:text-gray-400">A brief description of the stakeholder (optional).</p>
+            <p class="text-sm/6 text-gray-600 dark:text-gray-400">A brief description of the <%= Organisation.model_name.human.downcase %> (optional).</p>
           </div>
         <% end %>
       <% end %>
 
       <%= render 'section' do %>
-        <%= render 'section_header', title: 'Stakeholder Type', subtitle: 'Select a category for the stakeholder.' %>
+        <%= render 'section_header', title: StakeholderType.model_name.human.titleize, subtitle: "Select a category for the #{Organisation.model_name.human.downcase}." %>
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
-            <%= form.label :stakeholder_type_id %>
+            <%= form.label :stakeholder_type_id, StakeholderType.model_name.human.downcase.upcase_first %>
             <%= form.collection_select :stakeholder_type_id, current_workspace.stakeholder_types.order(:name), :id, :name, {} %>
           </div>
         <% end %>

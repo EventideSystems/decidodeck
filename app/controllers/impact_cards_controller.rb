@@ -241,7 +241,8 @@ class ImpactCardsController < ApplicationController
 
   def checklist_items_to_csv(checklist_items) # rubocop:disable Metrics/MethodLength
     CSV.generate(headers: true) do |csv|
-      csv << %w[initiative_name characteristic_name status comment]
+      initiative_name_field = "#{Initiative.model_name.human.downcase}_name"
+      csv << [initiative_name_field, 'characteristic_name', 'status', 'comment']
 
       checklist_items.each do |item|
         csv << [
@@ -259,13 +260,20 @@ class ImpactCardsController < ApplicationController
     errors = []
     skipped_count = 0
     invalid_status_errors = 0
+    initiative_name_column_names = ["#{Initiative.model_name.human.downcase}_name", 'initiative_name'].uniq
+    initiative_name_column_name = nil
 
     # Valid status values
     valid_statuses = ChecklistItem.statuses.keys - ['no_comment']
 
     CSV.foreach(file.path, headers: true, force_quotes: true) do |row| # rubocop:disable Metrics/BlockLength
-      # Skip empty rows
-      next if row['initiative_name'].blank? || row['characteristic_name'].blank?
+      if initiative_name_column_name.nil?
+        initiative_name_column_name = row.headers.find { |header| initiative_name_column_names.include?(header) }
+      end
+
+      next if initiative_name_column_name.nil?
+      next if row[initiative_name_column_name].blank?
+      next if row['characteristic_name'].blank?
 
       # Skip rows with 'no_comment' status (nothing meaningful to import)
       if row['status']&.strip&.downcase == 'no_comment'
@@ -275,7 +283,7 @@ class ImpactCardsController < ApplicationController
 
       # Find the checklist item by initiative name and characteristic name within this specific scorecard
       checklist_item = find_checklist_item_by_names_in_scorecard(
-        row['initiative_name']&.strip,
+        row[initiative_name_column_name]&.strip,
         row['characteristic_name']&.strip,
         scorecard
       )

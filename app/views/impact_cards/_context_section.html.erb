@@ -1,6 +1,6 @@
 <%- if policy(Community).index? || policy(WickedProblem).index? %>
   <%= render 'section' do %>
-    <%= render 'section_header', title: 'Context', subtitle: 'Optionally set labels for this impact card.' %>
+    <%= render 'section_header', title: 'Context', subtitle: "Optionally set labels for this #{Scorecard.model_name.human.downcase}." %>
     <%= render 'section_body' do %>
       <%- if policy(Community).index? %>
         <div class="sm:col-span-6">

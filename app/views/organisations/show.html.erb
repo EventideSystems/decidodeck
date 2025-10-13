@@ -3,7 +3,7 @@
 <div class="mx-auto max-w-6xl">
   <div class="flex flex-wrap items-end justify-between gap-4">
     <div class="w-full">
-      <%= page_header_tag 'Stakeholder Details' %>
+      <%= page_header_tag "#{Organisation.model_name.human.titleize} Details" %>
       <div class="flex justify-between items-center mt-4">
         <div class="flex gap-6 py-6">
           <%= render partial: 'resource_summary', locals: { name: @organisation.name, background_color: 'bg-teal-500' } %>
@@ -24,7 +24,7 @@
         <div class="relative">
           <%- if policy(@organisation).edit? %>
             <div class="flex justify-end items-center mb-4">
-              <%= link_to_primary 'Edit Stakeholder', edit_organisation_path(@organisation) %>
+              <%= link_to_primary "Edit #{Organisation.model_name.human.titleize}", edit_organisation_path(@organisation) %>
             </div>
           <%- end %>
         </div>
