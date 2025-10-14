@@ -34,7 +34,17 @@
                   data: { turbo: false } 
                 )
               %>
-            <%- end %>
+            <%- end %>  
+
+            <%- if current_user == @user && current_user != true_user %>
+              <%= 
+                button_to_primary(
+                  'Stop impersonating', 
+                  stop_impersonating_users_path(@user), 
+                  data: { turbo: false, method: "post" } 
+                )
+              %>
+            <% end %>
 
             <%- if @user.status == 'deleted' && policy(@user).undelete? %>
               <%= 

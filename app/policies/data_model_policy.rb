@@ -11,7 +11,7 @@ class DataModelPolicy < ApplicationPolicy
         scope
           .where(workspace_id: workspace_ids, status: statuses)
           .or(DataModel.where(public_model: true, status: 'active'))
-      end
+      end.kept
     end
 
     def workspace_ids

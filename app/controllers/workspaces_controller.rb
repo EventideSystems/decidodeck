@@ -6,6 +6,8 @@ class WorkspacesController < ApplicationController
 
   before_action :set_workspace, only: %i[show edit update destroy switch]
 
+  menu_item :workspace
+
   def index
     search_params = params.permit(:format, :page, q: [:name_or_description_cont])
 
@@ -59,7 +61,7 @@ class WorkspacesController < ApplicationController
 
   def switch
     self.current_workspace = @workspace
-    redirect_to(dashboard_path, notice: 'Workspace successfully switched.')
+    redirect_to(root_path, notice: 'Workspace successfully switched.')
   end
 
   def content_subtitle

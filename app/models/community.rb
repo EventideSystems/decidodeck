@@ -5,7 +5,7 @@
 # Table name: communities
 #
 #  id           :integer          not null, primary key
-#  color        :string           default("#d444db"), not null
+#  color        :string           default("#bc4309"), not null
 #  deleted_at   :datetime
 #  description  :string
 #  name         :string
@@ -24,7 +24,7 @@ class Community < ApplicationRecord
   include ExportToCsv
 
   has_paper_trail
-  acts_as_paranoid
+  include Discardable
 
   belongs_to :workspace
   has_many :scorecards, dependent: :nullify

@@ -9,7 +9,7 @@ class AccountPolicy < ApplicationPolicy
       if system_admin?
         scope.all
       else
-        scope.where(id: current_user_account_ids)
+        scope.where(id: current_user_account_ids).kept
       end
     end
 

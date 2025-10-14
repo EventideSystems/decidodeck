@@ -9,7 +9,7 @@ class WorkspacePolicy < ApplicationPolicy
         scope.all
       else
         scope.where(workspaces: { id: current_user_available_workspace_ids })
-      end
+      end.kept
     end
   end
 

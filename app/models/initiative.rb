@@ -37,7 +37,7 @@ class Initiative < ApplicationRecord
   include Searchable
 
   has_paper_trail
-  acts_as_paranoid
+  include Discardable
 
   belongs_to :scorecard, optional: true
   has_many :initiatives_organisations, dependent: :destroy

@@ -34,7 +34,7 @@
 #  fk_rails_...  (default_workspace_id => workspaces.id)
 #
 class Account < ApplicationRecord
-  acts_as_paranoid
+  include Discardable
   has_logidze
 
   include Searchable

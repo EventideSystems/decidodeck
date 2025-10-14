@@ -1,9 +1,18 @@
 <%= render 'classic_stylesheet', impact_card: @scorecard, focus_areas: @focus_areas %>
 <%= render 'expiry_warning' %>  
-<div class="mx-auto max-w-6xl">
-  <%= render 'impact_cards/summary', impact_card: @scorecard, print_description: true %>
-  <%= render 'impact_cards/tabs', impact_card: @scorecard %>
-  <div>
-    <%= render 'impact_cards/grid', impact_card: @scorecard, impact_card_grid: @scorecard_grid, search_url: impact_card_path(@scorecard) %>
+<div class="h-screen w-full bg-gray-50 dark:bg-gray-900 relative" data-controller="drawer">
+  <!-- Main Content Area (Artifact Cards) -->
+  <div data-drawer-target="content" class="h-full p-6 overflow-y-hidden transition-all duration-300">
+    <%= render 'impact_cards/summary', impact_card: @scorecard, print_description: true %>
+    <%= render 'impact_cards/tabs', impact_card: @scorecard %>
+    <div>
+      <%= render 'impact_cards/grid', impact_card: @scorecard, impact_card_grid: @scorecard_grid, search_url: impact_card_path(@scorecard) %>
+    </div>
   </div>
+
+  <%= render 'drawer' do %>
+    <%= render 'impact_cards/drawer_actions', impact_card: @scorecard %>
+  <% end %>
 </div>
+
+

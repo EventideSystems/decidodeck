@@ -64,9 +64,7 @@ RSpec.describe Scorecard, type: :model do
     it { expect(merged.initiatives).not_to eq(scorecard.initiatives + other_scorecard.initiatives) }
 
     it 'removes all initiatives from merged scorecard' do
-      merged
-      other_scorecard.reload
-      expect(other_scorecard.initiatives.count).to eq(0)
+      expect { merged }.to change { other_scorecard.initiatives.count }.from(10).to(0)
     end
   end
 end

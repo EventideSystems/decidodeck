@@ -3,12 +3,29 @@
 # General helper methods for the application
 module ApplicationHelper
   include Pagy::Frontend
-  include TailwindClasses
+  include TailwindSupport
 
   def application_name
     return current_theme_display_name if Rails.env.production?
 
     "#{current_theme_display_name} - #{Rails.env.titleize}"
+  end
+
+  def html_lang
+    I18n.locale == I18n.default_locale ? 'en' : I18n.locale.to_s
+  end
+
+  def current_theme_logo
+    case current_theme
+    when :free_sdg
+      'free-sdg-logo.svg'
+    when :obsekio
+      'tool-for-systemic-change-logo.svg'
+    when :tool_for_systemic_change
+      'tool-for-systemic-change-logo.svg'
+    else
+      'logo.svg'
+    end
   end
 
   # NOTE: Similar code in LandingPagesHelper#landing_pages_h1
@@ -17,7 +34,7 @@ module ApplicationHelper
     brand_text_class = merge_tailwind_class(
       'text-4xl font-bold tracking-tight text-zinc-950 sm:text-6xl dark:text-white', title_class
     )
-    brand_image_path = brand_image_path_for_current_theme
+    brand_image_path = current_theme_logo
 
     render 'branding', brand_image_path:, brand_text:, brand_text_class:, logo_class:
   end
@@ -62,6 +79,12 @@ module ApplicationHelper
     render 'layouts/shared/sidebar_item', title:, path:, icon:, active:, classes:, count:
   end
 
+  def render_menu_item(title:, path:, active_menu:)
+    active = active_menu == controller.active_menu_item
+
+    render 'layouts/shared/menu_item', title:, path:, active:
+  end
+
   def render_tab_item(title:, path:, active_tab:, classes: '')
     active = active_tab == current_active_tab
 
@@ -72,27 +95,22 @@ module ApplicationHelper
     render 'application/definition_list_element', term: term, definition: definition
   end
 
-  # NOTE: Not currently in use
-  def html_lang
-    I18n.locale == I18n.default_locale ? 'en' : I18n.locale.to_s
-  end
-
   private
 
-  # NOTE: Similar code in LandingPagesHelper#brand_image_path_for_current_theme
-  # TODO: DRY this up, use a convention to locate images based on theme name
-  def brand_image_path_for_current_theme
-    case current_theme
-    when :free_sdg
-      'themes/free_sdg/brand.png'
-    when :obsekio
-      'logo-small.png'
-    when :toolfor_systemic_change
-      'logo-small.png'
-    else
-      'logo-small.png'
-    end
-  end
+  # # NOTE: Similar code in LandingPagesHelper#brand_image_path_for_current_theme
+  # # TODO: DRY this up, use a convention to locate images based on theme name
+  # def brand_image_path_for_current_theme
+  #   case current_theme
+  #   when :free_sdg
+  #     'themes/free_sdg/brand.png'
+  #   when :obsekio
+  #     'logo-small.png'
+  #   when :toolfor_systemic_change
+  #     'logo-small.png'
+  #   else
+  #     'logo-small.png'
+  #   end
+  # end
 
   def current_active_tab
     return nil unless controller.respond_to?(:active_tab_item)

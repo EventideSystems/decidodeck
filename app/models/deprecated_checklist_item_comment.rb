@@ -18,7 +18,7 @@
 #
 class DeprecatedChecklistItemComment < ApplicationRecord
   has_paper_trail
-  acts_as_paranoid
+  include Discardable
 
   string_enum status: %i[actual planned suggestion more_information]
 

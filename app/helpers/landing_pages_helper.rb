@@ -7,7 +7,7 @@ module LandingPagesHelper
     brand_text_class = merge_tailwind_class(
       'text-4xl font-bold tracking-tight text-zinc-50 sm:text-6xl', title_class
     )
-    brand_image_path = brand_image_path_for_current_theme
+    brand_image_path = current_theme_logo
 
     render 'branding', brand_image_path:, brand_text:, brand_text_class:, logo_class: 'h-16 w-auto'
   end

@@ -22,7 +22,7 @@ class StakeholderType < ApplicationRecord
   include RandomColorAttribute
   include ExportToCsv
 
-  acts_as_paranoid
+  include Discardable
 
   validates :name, presence: true
 

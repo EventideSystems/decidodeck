@@ -46,7 +46,7 @@ class Workspace < ApplicationRecord
   include Searchable
 
   has_logidze
-  acts_as_paranoid
+  include Discardable
 
   EXPIRY_WARNING_PERIOD = 30.days
 
@@ -68,6 +68,7 @@ class Workspace < ApplicationRecord
   has_many :initiatives, through: :scorecards
 
   delegate :owner, to: :account
+  alias artifacts scorecards
 
   validates :name, presence: true
 

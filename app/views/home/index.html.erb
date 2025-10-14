@@ -1,151 +1,122 @@
 
-<!-- Hero section -->
-<div class="bg-teal-800 relative isolate overflow-hidden">
-  <div class="text-right mt-10 mr-10">
-    <%= 
-      link_to(
-        "Sign in", 
-        new_user_session_path, 
-        class: 'text-lg font-semibold leading-6 text-white bg-teal-900 hover:bg-teal-700 px-4 py-2 rounded-sm', 
-        data: { turbo: false }
-      )
-    %>
-  </div>
-  <div class="absolute left-[calc(50%-4rem)] top-10 -z-10 transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)]" aria-hidden="true">
-    <div class="aspect-1108/632 w-[69.25rem] bg-linear-to-r from-[#80caff] to-[#4f46e5] opacity-20" style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)"></div>
-  </div>
-  <div class="mx-auto max-w-7xl px-6 pb-16 pt-8 sm:pb-16 lg:flex lg:px-8 lg:pt-40">
-    <div class="mx-auto max-w-2xl shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
-      <%= landing_pages_h1 %>
-      <p class="mt-6 text-lg leading-8 text-gray-300">Tackle the toughest challenges with <%= current_theme_display_name %>, the Tool for Systemic Change. Create lasting solutions through evidence-based planning and collaboration.</p>
-      <div class="mt-10 flex items-center gap-x-6">
-        <%= link_to new_user_session_path, class: 'text-sm font-semibold leading-6 text-white', data: { turbo: false } do %>
-          Already have an account? <span class="text-yellow-400">Sign in <span aria-hidden="true">→</span></span>
+<div class="h-screen bg-gray-50 dark:bg-gray-900 relative" data-controller="drawer">
+  <!-- Main Content Area (Artifact Cards) -->
+  <div data-drawer-target="content" class="h-full p-6 overflow-y-hidden transition-all duration-300">
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-2">
+        <%= render_breadcrumbs builder: ::TailwindBreadcrumbsBuilder %>
+        <div class="flex items-center space-x-3">
+          <%= render 'filter' %>
+          <div class="flex space-x-2 ml-3">
+            <%= link_to new_artifact_path, class: 'flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 dark:bg-blue-500 border border-transparent rounded-md hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800' do %>
+              <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+              </svg>
+              Add Artifact
+            <% end %>
+            <!-- Actions Drawer Toggle -->
+            <button data-action="click->drawer#toggle" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">
+              <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+              Actions
+            </button>
+          </div>
+        </div>
+      </div>
+      <p class="text-gray-600 dark:text-gray-400">
+        <% if current_workspace %>
+          Manage artifacts and content in your workspace
+        <% else %>
+          No workspace selected. Please select a workspace to view artifacts.
         <% end %>
-      </div>
-      <div class="mt-10 flex items-center gap-x-6">
-        <%= link_to new_contact_path, class: 'text-sm font-semibold leading-6 text-white', data: { turbo: false } do %>
-          Interested to find out more? <span class="text-yellow-400">Get in touch <span aria-hidden="true">→</span></span>
-        <% end %>
-      </div>
-    </div>
-    <div class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
-      <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
-        <%= image_tag 'nodes.png', class: "w-[56rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10", title: 'Application screenshot' %>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<!-- Feature section -->
-<div class="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
-  <div class="mx-auto max-w-2xl text-center">
-    <h2 class="text-base font-semibold leading-7 text-yellow-400">Create impact</h2>
-    <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-      Address complex problems with the Tool for Systemic Change
-    </p>
-    <p class="mt-6 text-lg leading-8 text-gray-300">
-      Define your goals, identify key stakeholders, and map out your strategy.
-      Gather evidence, make informed decisions, and monitor progress to ensure your initiatives are impactful and effective.
-    </p>
-  </div>
-  <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-    <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-      <div class="flex flex-col">
-        <dt class="text-base font-semibold leading-7 text-white">
-          <div class="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-500">
-            <%= render_icon :monitor %>
-          </div>
-          Goal focused
-        </dt>
-        <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
-          <p class="flex-auto">
-            Keep tabs on your initiatives and monitor progress to ensure you're on track to meet your goals. Use the tool to gather data to make informed decisions and adjust your strategy as needed.
-          </p>
-        </dd>
-      </div>
-      <div class="flex flex-col">
-        <dt class="text-base font-semibold leading-7 text-white">
-          <div class="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-500">
-            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-            </svg>
-          </div>
-          Social network oriented
-        </dt>
-        <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
-          <p class="flex-auto">
-            Connect with stakeholders and build relationships to drive change. Use Obsekio to identify key players in your network and understand the relationships between them.                
-          </p>
-        </dd>
-      </div>
-      <div class="flex flex-col">
-        <dt class="text-base font-semibold leading-7 text-white">
-          <div class="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-500">
-            <%= render_icon :open_source %>
-          </div>
-          Community driven
-        </dt>
-        <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
-          <p class="flex-auto">Obsekio is an open-source project designed with community needs at its core. It thrives on collaborative input, ensuring the software evolves to serve and benefits the community.</p>
-        </dd>
-      </div>
-    </dl>
-  </div> 
-</div>
-
-<!-- Feature section -->
-<div class="mt-32 sm:mt-40">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl sm:text-center">
-      <h2 class="text-base font-semibold leading-7 text-yellow-400">Map stakeholders</h2>
-      <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">Identify key people</p>
-      <p class="mt-6 text-lg leading-8 text-gray-300">
-        Find significant participants in your network and understand the relationships between them. 
-        Use connections to boost your strategy and drive change.</p>
       </p>
     </div>
-  </div>
-  <div class="relative overflow-hidden pt-16">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <%= image_tag 'graph.png', class: "rounded-xl shadow-2xl ring-1 ring-white/10", title: 'App screenshot' %>
-      <%# <img src="graph.png" alt="App screenshot" class="mb-[-12%] rounded-xl shadow-2xl ring-1 ring-white/10" width="2432" height="1442"> %>
-      <div class="relative" aria-hidden="true">
-        <div class="absolute -inset-x-20 bottom-0 bg-linear-to-t from-gray-600 pt-[7%]"></div>
-      </div>
-    </div>
-  </div>
-</div>
+    
+    <% if current_workspace %>
+      <%= turbo_frame_tag :list do %>
+        <!-- Artifacts Cards Container -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <% @artifacts.each do |artifact| %>
+            <%= render 'artifact_card', artifact: artifact %>
+          <% end %>
 
-<!-- CTA section -->
-<div class="relative isolate mt-32 px-6 py-32 sm:mt-40 sm:py-40 lg:px-8">
-  <svg class="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
-    <defs>
-      <pattern id="1d4240dd-898f-445f-932d-e2872fd12de3" width="200" height="200" x="50%" y="0" patternUnits="userSpaceOnUse">
-        <path d="M.5 200V.5H200" fill="none" />
-      </pattern>
-    </defs>
-    <svg x="50%" y="0" class="overflow-visible fill-gray-800/20">
-      <path d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z" stroke-width="0" />
-    </svg>
-    <rect width="100%" height="100%" stroke-width="0" fill="url(#1d4240dd-898f-445f-932d-e2872fd12de3)" />
-  </svg>
-  <div class="absolute inset-x-0 top-10 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl" aria-hidden="true">
-    <div xclass="aspect-1108/632 w-[69.25rem] flex-none bg-linear-to-r from-[#80caff] to-[#4f46e5] opacity-20" style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)"></div>
-  </div>
-  <div class="mx-auto max-w-2xl text-center">
-    <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Work together to drive change.</h2>
-    <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
-      Contact us to discuss your goals and challenges, and together we'll figure out how Obsekio can help. Let's start the conversation today.
-    </p>
-    <div class="mt-10 flex items-center justify-center gap-x-6">
-      <%= link_to new_contact_path, class: 'text-sm font-semibold leading-6 text-white', data: { turbo: false } do %>
-        Get in touch <span aria-hidden="true">→</span>
+          <!-- Add Artifact Card -->
+          <%= link_to new_artifact_path, class: "flex", data: { turbo: false } do %>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border-2 border-dashed border-gray-300 dark:border-gray-600 p-6 hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 cursor-pointer">
+              <div class="text-center">
+                <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                </svg>
+                <h2 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">Create Artifact</h2>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Add a new artifact to this workspace</p>
+              </div>
+            </div>
+          <% end %>
+        </div>
       <% end %>
-    </div>
+    <% else %>
+      <!-- No Workspace Selected -->
+      <div class="text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+        </svg>
+        <h2 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No workspace selected</h2>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Please select a workspace to view and manage artifacts</p>
+        <div class="mt-6">
+          <%= link_to workspaces_path, class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do %>
+            View Workspaces
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
-</div>
 
-<%= render 'sponsors' %>
+  <%= render 'drawer' do %>
+    <%- if policy(Artifact).create? %>
+      <!-- Create Document Action -->
+      <div class="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors duration-200">
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <svg class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+          </div>
+          <div class="ml-3 flex-1">
+            <%= link_to new_impact_card_path do %>
+              <div class="block group cursor-pointer">
+                <h3 class="text-sm font-medium text-blue-900 dark:text-blue-100 group-hover:text-blue-800 dark:group-hover:text-blue-50">Create <%= Scorecard.model_name.human %></h3>
+                <p class="text-sm text-blue-700 dark:text-blue-300 mt-1">Add a new <%= Scorecard.model_name.human.downcase %></p>
+                <span class="mt-2 inline-block text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:text-blue-500 dark:group-hover:text-blue-300">
+                  Create <%= Scorecard.model_name.human %> →
+                </span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Create Decision Action -->
+      <div class="bg-purple-50 dark:bg-purple-900/30 rounded-lg p-4 border border-purple-200 dark:border-purple-800 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors duration-200">
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <svg class="h-6 w-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+            </svg>
+          </div>
+          <div class="ml-3 flex-1">
+            <%= link_to new_initiative_path do %>
+              <div class="block group cursor-pointer">
+                <h3 class="text-sm font-medium text-purple-900 dark:text-purple-100 group-hover:text-purple-800 dark:group-hover:text-purple-50">Create <%= Initiative.model_name.human %></h3>
+                <p class="text-sm text-purple-700 dark:text-purple-300 mt-1">Add a new <%= Initiative.model_name.human.downcase %></p>
+                <span class="mt-2 inline-block text-sm font-medium text-purple-600 dark:text-purple-400 group-hover:text-purple-500 dark:group-hover:text-purple-300">
+                  Create <%= Initiative.model_name.human %> →
+                </span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

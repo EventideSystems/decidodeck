@@ -20,7 +20,7 @@
                     confirmation_message_value: "Are you sure you want to delete this #{Scorecard.model_name.human.downcase}?"
                   }
                 },
-                class: TailwindClasses::DANGER_ZONE_BUTTON_CLASS
+                class: TailwindSupport::DANGER_ZONE_BUTTON_CLASS
               )
             %>
           </div>
@@ -38,7 +38,7 @@
               <%=
                 link_to 'Merge Cards',
                 new_impact_card_merge_path(impact_card),
-                class: TailwindClasses::DANGER_ZONE_BUTTON_CLASS
+                class: TailwindSupport::DANGER_ZONE_BUTTON_CLASS
               %>
             </div>
           </div>

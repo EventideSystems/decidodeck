@@ -2,7 +2,7 @@
 
 # Helper methods for form tags
 module CustomFormTagHelper
-  include TailwindClasses
+  include TailwindSupport
 
   def base_color_select_tag(name, selected = 'red', options = {})
     default_opts = { class: base_color_select_class(selected),
@@ -56,7 +56,36 @@ module CustomFormTagHelper
     end
   end
 
+  def custom_multi_select_tag(name, choices = nil, options = {}, html_options = {}, &block) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    placeholder = options.delete(:placeholder) || 'Select multiple options...'
+    toggleCountText = multi_select_toggle_count_text(name, options) # rubocop:disable Naming/VariableName
+    hs_select = CustomFormBuilder::MULTI_SELECT_DEFAULT_HS_SELECT.merge(placeholder:, toggleCountText:).to_json # rubocop:disable Naming/VariableName
+    choices = '<option disabled="">No options available</option>'.html_safe if choices.empty?
+    options[:multiple] = true
+    data_options = html_options.delete(:data) || {}
+    html_options[:data] = data_options.merge({ multi_select_target: 'select', hs_select: })
+    html_options[:class] = 'hidden'
+
+    content_tag(:div, class: 'flex', data: { controller: 'multi-select' }) do
+      concat(select_tag(name, choices, options.merge(html_options), &block))
+      concat(build_clear_button('multi-select'))
+    end
+  end
+
   private
+
+  def multi_select_toggle_count_text(method, options = {})
+    base_text = options[:base_text] || method.to_s.titleize.downcase.singularize
+    pluralized_text = base_text.pluralize
+
+    if pluralized_text.ends_with?('ies')
+      "#{base_text}/#{pluralized_text}"
+    else
+      diff = pluralized_text.gsub(base_text, '')
+
+      "#{base_text}(#{diff}) selected"
+    end
+  end
 
   def base_color_select_class(selected)
     "#{SELECT_FIELD_CLASS} bg-#{selected}-500"

@@ -9,6 +9,7 @@ class UsersController < ApplicationController # rubocop:disable Metrics/ClassLen
   before_action :set_workspace_role, only: %i[show edit]
 
   sidebar_item :teams
+  menu_item :people
 
   def index
     search_params = params.permit(:format, :page, q: [:name_or_email_cont])

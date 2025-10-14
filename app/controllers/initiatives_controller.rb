@@ -13,6 +13,7 @@ class InitiativesController < ApplicationController # rubocop:disable Style/Docu
   before_action :set_subsystem_tags, only: %i[index show]
 
   sidebar_item :initiatives
+  menu_item :workspace
 
   def index # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     search_params = params.permit(:format, :page, q: [:name_or_description_cont])

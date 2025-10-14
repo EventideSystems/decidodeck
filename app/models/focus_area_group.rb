@@ -37,7 +37,7 @@ class FocusAreaGroup < ApplicationRecord
   include ValidateUniqueCode
   include DataElementable
 
-  acts_as_paranoid
+  include Discardable
 
   default_scope { order(:position) }
 

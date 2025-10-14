@@ -33,7 +33,7 @@
         <%= render 'section_header', title: 'Merge Options', subtitle: 'Specify the type of merge operation you want to perform.' %>
         <%= render 'section_body' do %>
           <div class="sm:col-span-4">
-            <%= label_tag 'Merge Type', nil, class: TailwindClasses::LABEL_CLASS %>
+            <%= label_tag 'Merge Type', nil, class: TailwindSupport::LABEL_CLASS %>
             <div class="flex items-center space-x-2 mt-2 mb-2">
               <%=
                 radio_button_tag(:merge_type, 'deep', checked: true)

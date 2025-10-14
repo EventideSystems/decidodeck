@@ -161,6 +161,7 @@ Rails.application.routes.draw do
   get 'terms', to: 'home#terms'
   get 'data_retention', to: 'home#data_retention'
   get 'takedown', to: 'home#takedown'
+  get 'new_artifact', to: 'home#new_artifact'
 
   root to: 'home#index'  
 end

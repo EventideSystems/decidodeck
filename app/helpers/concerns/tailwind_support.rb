@@ -3,12 +3,16 @@
 require 'tailwind_merge'
 
 # Common Tailwind CSS classes
-module TailwindClasses
+module TailwindSupport
   extend ActiveSupport::Concern
 
   included do
     def merge_tailwind_class(base_classes, override_classes)
       TailwindMerge::Merger.new.merge([base_classes, override_classes])
+    end
+
+    def tw(*classes)
+      TailwindMerge::Merger.new.merge(classes.join(' '))
     end
   end
 

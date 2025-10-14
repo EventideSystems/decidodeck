@@ -14,6 +14,7 @@ class OrganisationsController < ApplicationController # rubocop:disable Metrics/
   respond_to :js, :html
 
   sidebar_item :stakeholders
+  menu_item :people
 
   def index # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @stakeholder_types = current_workspace.stakeholder_types

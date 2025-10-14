@@ -1,7 +1,13 @@
 <%= render 'labels/stylesheet', labels: @stakeholder_types %>
 <%= render 'expiry_warning' %>
-<div class="mx-auto max-w-6xl" data-controller="thematic-map">
-  <%= render 'impact_cards/summary', impact_card: @scorecard %>
-  <%= render 'impact_cards/tabs', impact_card: @scorecard %>
-  <%= render 'impact_cards/thematic_map/graph', impact_card: @scorecard %>
+<div class="h-screen w-full flex bg-gray-50 dark:bg-gray-900 relative" data-controller="thematic-map drawer">
+  <div data-drawer-target="content" class="h-full w-full p-6 overflow-y-hidden transition-all duration-300 ">
+    <%= render 'impact_cards/summary', impact_card: @scorecard %>
+    <%= render 'impact_cards/tabs', impact_card: @scorecard %>
+    <%= render 'impact_cards/thematic_map/graph', impact_card: @scorecard %>
+  </div>
+
+  <%= render 'drawer' do %>
+    <%= render 'impact_cards/drawer_actions', impact_card: @scorecard %>
+  <% end %>
 </div>

@@ -49,5 +49,10 @@ module Decidodeck
     config.action_view.default_form_builder = "CustomFormBuilder"
 
     config.active_job.queue_adapter = :good_job
+
+    config.to_prepare do
+      require 'ransack/helpers/form_builder'
+      Ransack::Helpers::FormBuilder.include MultiSelect
+    end
   end
 end

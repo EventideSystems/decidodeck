@@ -4,6 +4,7 @@ module ImpactCards
   # Controller for handling merging of impact cards
   class MergeController < ApplicationController
     sidebar_item :impact_cards
+    menu_item :workspace
 
     def new
       @target = Scorecard.find(params[:impact_card_id])

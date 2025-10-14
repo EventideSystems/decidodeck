@@ -24,7 +24,7 @@
 #  index_characteristics_on_position                (position)
 #
 class Characteristic < ApplicationRecord
-  acts_as_paranoid
+  include Discardable
 
   include ValidateUniqueCode
   include DataElementable
