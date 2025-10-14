@@ -88,7 +88,7 @@
 
       <div class="grid grid-cols-1 gap-x-8 gap-y-10 pb-12 md:grid-cols-3">
         <div>
-          <h2 class="text-base/7 font-semibold text-zinc-950 dark:text-white">Stakeholders</h2>
+          <h2 class="text-base/7 font-semibold text-zinc-950 dark:text-white"><%= Organisation.model_name.human.pluralize.titleize %></h2>
           <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400">Identify who might be interested in this <%= Initiative.model_name.human.downcase %>.</p>
         </div>
         <%= render 'initiatives_organisations/controls', initiative: %>

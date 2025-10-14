@@ -16,7 +16,7 @@
             form.multi_select(
               :subsystem_tags,
               multi_select_options_for_labels(@subsystem_tags, @selected_subsystem_tags),
-              { placeholder: 'Select subsytem tags...',  title: 'Filter by subsystem tag' }, # TODO: Get title to work
+              { placeholder: "Select #{SubsystemTag.model_name.human.pluralize.downcase}...",  title: "Filter by #{SubsystemTag.model_name.human.downcase}" }, # TODO: Get title to work
               { include_hidden: false, data: { grid_target: "subsystemTags" } }
             )
           %>

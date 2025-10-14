@@ -3,7 +3,7 @@
 <div class="mx-auto max-w-6xl">
   <div class="flex flex-wrap items-end justify-between gap-4">
     <div class="w-full">
-      <%= page_header_tag 'Initiative Details' %>
+      <%= page_header_tag "#{Initiative.model_name.human.titleize} Details" %>
       <div class="flex justify-between items-start mt-4">
         <div class="flex gap-6 py-6">
           <%= render partial: 'resource_summary', locals: { name: @initiative.name, background_color: 'bg-sky-600' } %>
@@ -27,7 +27,7 @@
         <div class="relative">
           <%- if policy(@initiative).edit? %>
             <div class="flex justify-end items-start mb-4">
-              <%= link_to_primary 'Edit Initiative', edit_initiative_path(@initiative), class: 'inline-flex items-start px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+              <%= link_to_primary "Edit #{Initiative.model_name.human.titleize}", edit_initiative_path(@initiative), class: 'inline-flex items-start px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
             </div>
           <%- end %>
         </div>
@@ -49,7 +49,7 @@
     <%= definition_list_element('Finished at', @initiative.finished_at) %>
   <% end %>
 
-  <%= render 'show_page_dl_section', title: 'Stakeholders' do %>
+  <%= render 'show_page_dl_section', title: Organisation.model_name.human.pluralize do %>
     <% @initiative.organisations.order('lower(trim(name))').each do |organisation| %>
       <%= definition_list_element(organisation.name, sanitize(organisation.description)) %>
     <% end %>

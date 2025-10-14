@@ -8,7 +8,7 @@
           custom_select_tag(
             "initiative[initiatives_organisations_attributes][#{index}][organisation_id]",
             options_for_organisation_select(initiatives_organisation.organisation),
-            include_blank: 'Select a stakeholder'
+            include_blank: "Select #{indefinite_article(Organisation.model_name.human)} #{Organisation.model_name.human.downcase}"
           )
         %>
         <%= link_to 'Remove', '#', class: 'text-red-500', data: { action: 'initiatives-organisations#removeTag' } %>

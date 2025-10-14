@@ -15,16 +15,16 @@
     </div>
   <% end %>
   <div class="mt-8 flex items-end justify-between">
-    <h2 class="text-base/7 font-semibold text-zinc-950 sm:text-sm/6 text-black dark:text-white">Overview</h2>
+    <h2 class="text-base/7 font-semibold sm:text-sm/6 text-black dark:text-white">Overview</h2>
   </div>
 
   <div class="mt-4 grid gap-8 sm:grid-cols-2 xl:grid-cols-4 text-black dark:text-white">
-    <%= render partial: 'card', locals: { title: 'Impact Cards', count: @scorecard_count, link: impact_cards_path, border_color: 'border-cyan-600' } %>
-    <%= render partial: 'card', locals: { title: 'Initiatives', count: @initiative_count, link: initiatives_path, border_color: 'border-sky-600' } %>
+    <%= render partial: 'card', locals: { title: Scorecard.model_name.human.pluralize, count: @scorecard_count, link: impact_cards_path, border_color: 'border-cyan-600' } %>
+    <%= render partial: 'card', locals: { title: Initiative.model_name.human.pluralize, count: @initiative_count, link: initiatives_path, border_color: 'border-sky-600' } %>
     <%- if policy(WickedProblem).index? %>
-      <%= render partial: 'card', locals: { title: 'Problems / Opportunities', count: @wicked_problem_count, link: labels_wicked_problems_path, border_color: 'border-teal-600' } %>
+      <%= render partial: 'card', locals: { title: WickedProblem.model_name.human.pluralize, count: @wicked_problem_count, link: labels_wicked_problems_path, border_color: 'border-teal-600' } %>
     <%- end %>
-    <%= render partial: 'card', locals: { title: 'Stakeholders', count: @organisation_count, link: organisations_path, border_color: 'border-teal-500' } %>
+    <%= render partial: 'card', locals: { title: Organisation.model_name.human.pluralize, count: @organisation_count, link: organisations_path, border_color: 'border-teal-500' } %>
   </div>
   <%= render 'dashboard/activities'%>
 </div>

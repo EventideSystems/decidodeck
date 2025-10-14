@@ -9,7 +9,10 @@
           form.multi_select(
             :stakeholder_types,
             multi_select_options_for_labels(@stakeholder_types, @selected_stakeholder_types),
-            { placeholder: 'Select stakeholder types...' },
+            { 
+              placeholder: "Select #{StakeholderType.model_name.human.pluralize.downcase}...", 
+              base_text: StakeholderType.model_name.human.downcase
+            },
             { include_hidden: false, data: { stakeholder_network_target: "stakeholderTypes" } }
           )
         %>

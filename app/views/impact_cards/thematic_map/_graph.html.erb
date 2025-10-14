@@ -9,7 +9,10 @@
           form.multi_select(
             :stakeholders,
             options_for_select(@stakeholders.pluck(:name), @selected_stakeholders.pluck(:name)),
-            { placeholder: 'Select stakeholders...' },
+            { 
+              placeholder: "Select #{Organisation.model_name.human.pluralize.downcase}...",
+              base_text: Organisation.model_name.human.downcase
+            },
             { include_hidden: false, hide_icons: true, data: { thematic_map_target: "stakeholders" } }
           )
         %>
@@ -20,7 +23,10 @@
           form.multi_select(
             :initiatives,
             options_for_select(@initiatives.pluck(:name), @selected_initiatives.pluck(:name)),
-            { placeholder: 'Select initiatives...' },
+            { 
+              placeholder: "Select #{Initiative.model_name.human.pluralize.downcase}...",
+              base_text: Initiative.model_name.human.downcase
+            },
             { include_hidden: false, hide_icons: true, data: { thematic_map_target: "initiatives" } }
           )
         %>

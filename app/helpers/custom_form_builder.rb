@@ -199,7 +199,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder # rubocop:disable Met
   def multi_select(method, choices = nil, options = {}, html_options = {}, &block) # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     placeholder = options.delete(:placeholder) || 'Select multiple options...'
     # rubocop:disable Naming/VariableName
-    toggleCountText = multi_select_toggle_count_text(method)
+    toggleCountText = multi_select_toggle_count_text(method, options)
     hs_select = MULTI_SELECT_DEFAULT_HS_SELECT.merge(placeholder:, toggleCountText:).to_json
     # rubocop:enable Naming/VariableName
 
@@ -311,13 +311,17 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder # rubocop:disable Met
     base_options.merge(options)
   end
 
-  def multi_select_toggle_count_text(method)
-    base_text = method.to_s.titleize.downcase.singularize
+  def multi_select_toggle_count_text(method, options = {})
+    base_text = options[:base_text] || method.to_s.titleize.downcase.singularize
     pluralized_text = base_text.pluralize
 
-    diff = pluralized_text.gsub(base_text, '')
+    if pluralized_text.ends_with?('ies')
+      "#{base_text}/#{pluralized_text}"
+    else
+      diff = pluralized_text.gsub(base_text, '')
 
-    "#{base_text}(#{diff}) selected"
+      "#{base_text}(#{diff}) selected"
+    end
   end
 
   def wrap_field(method, classes: 'mt-2')

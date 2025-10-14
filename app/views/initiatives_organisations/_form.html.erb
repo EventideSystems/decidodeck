@@ -9,14 +9,14 @@
       html: { class: 'form-horizontal record-form border-b border-zinc-950/10 dark:border-white/10 pb-5' }
     ) do |form| 
   %>
-    <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">New Stakeholder</h1>
+    <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">New <%= Organisation.model_name.human.titleize %></h1>
     <div class="flex space-x-2">
       <div class="flex-1">
         <%= form.label :name, class: 'block text-xs font-medium text-gray-700' %>
         <%=
           form.text_field(
             :name,
-            placeholder: 'Stakeholder name',
+            placeholder: "#{Organisation.model_name.human.downcase.upcase_first} name",
             autofocus: true,
             data: { 
               initiatives_organisations_form_target: 'nameField', 
@@ -30,7 +30,7 @@
       </div>
 
       <div class="flex-1">
-        <%= form.label :stakeholder_type_id, class: 'block text-xs font-medium text-gray-700' %>
+        <%= form.label :stakeholder_type_id, StakeholderType.model_name.human.downcase.upcase_first, class: 'block text-xs font-medium text-gray-700' %>
         <%=
           form.collection_select(
             :stakeholder_type_id, 
