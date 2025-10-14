@@ -115,7 +115,7 @@
 
         <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 dark:border-white/10 pb-12 md:grid-cols-3">
           <div>
-            <h3 class="pl-10 text-sm font-semibold text-zinc-950 dark:text-white text-right">Stakeholders</h3>
+            <h3 class="pl-10 text-sm font-semibold text-zinc-950 dark:text-white text-right"><%= Organisation.model_name.human.pluralize.titleize %></h3>
             <p class="mt-1 text-sm/6 text-gray-600 text-right">Identify who might be interested in this <%= Initiative.model_name.human.downcase %>.</p>
           </div>
           <%= render 'initiatives_organisations/controls', initiative: @impact_card.initiatives.first %>
