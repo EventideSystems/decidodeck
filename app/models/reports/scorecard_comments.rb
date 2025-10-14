@@ -112,7 +112,7 @@ module Reports
 
       sheet.add_row
 
-      sheet.add_row(['', 'Total initiatives', 'Total comments'] + initiatives.map(&:name))
+      sheet.add_row(['', "Total #{Initiative.model_name.human.pluralize}", 'Total comments'] + initiatives.map(&:name))
     end
 
     def utc_date_time_string_to_date_time(date_str)
