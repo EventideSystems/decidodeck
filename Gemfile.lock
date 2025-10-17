@@ -218,7 +218,7 @@ GEM
     ffi (1.17.2-x86-linux-gnu)
     ffi (1.17.2-x86_64-darwin)
     ffi (1.17.2-x86_64-linux-gnu)
-    fugit (1.12.0)
+    fugit (1.12.1)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
     fx (0.9.0)
@@ -226,7 +226,7 @@ GEM
       railties (>= 7.0)
     globalid (1.3.0)
       activesupport (>= 6.1)
-    good_job (4.12.0)
+    good_job (4.12.1)
       activejob (>= 6.1.0)
       activerecord (>= 6.1.0)
       concurrent-ruby (>= 1.3.1)
@@ -685,10 +685,10 @@ CHECKSUMS
   ffi (1.17.2-x86-linux-gnu) sha256=95d8f9ebea23c39888e2ab85a02c98f54acb2f4e79b829250d7267ce741dc7b0
   ffi (1.17.2-x86_64-darwin) sha256=981f2d4e32ea03712beb26e55e972797c2c5a7b0257955d8667ba58f2da6440e
   ffi (1.17.2-x86_64-linux-gnu) sha256=05d2026fc9dbb7cfd21a5934559f16293815b7ce0314846fee2ac8efbdb823ea
-  fugit (1.12.0) sha256=033ddf76b3b0149519be6e53ed83954a4df304b8588bafd48284b2a383ff6503
+  fugit (1.12.1) sha256=5898f478ede9b415f0804e42b8f3fd53f814bd85eebffceebdbc34e1107aaf68
   fx (0.9.0) sha256=9197b8ab2f7814da17d137cd98eb7a72706d7ab87aacf803237ed014baa06d0a
   globalid (1.3.0) sha256=05c639ad6eb4594522a0b07983022f04aa7254626ab69445a0e493aa3786ff11
-  good_job (4.12.0) sha256=c401b360293d3c2a6c877d124c91c470b0343a02d74b16c9c85d264d18926ae3
+  good_job (4.12.1) sha256=a8a981baf2ac9c40a85412d92ce2bf7a5e6d35d9dadb0900db57780583eafebb
   htmlentities (4.3.4) sha256=125a73c6c9f2d1b62100b7c3c401e3624441b663762afa7fe428476435a673da
   i18n (1.14.7) sha256=ceba573f8138ff2c0915427f1fc5bdf4aa3ab8ae88c8ce255eb3ecf0a11a5d0f
   i18n-active_record (1.4.0) sha256=d66be03d273fefda64080ac239bc814b79a8696bcab217c3e3f3fb1a50245404
