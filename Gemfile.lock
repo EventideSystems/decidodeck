@@ -331,7 +331,7 @@ GEM
     pretender (0.6.0)
       actionpack (>= 7.1)
     prettyprint (0.2.0)
-    prism (1.5.2)
+    prism (1.6.0)
     propshaft (1.3.1)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -453,10 +453,10 @@ GEM
     rubocop-factory_bot (2.27.1)
       lint_roller (~> 1.1)
       rubocop (~> 1.72, >= 1.72.1)
-    rubocop-performance (1.26.0)
+    rubocop-performance (1.26.1)
       lint_roller (~> 1.1)
       rubocop (>= 1.75.0, < 2.0)
-      rubocop-ast (>= 1.44.0, < 2.0)
+      rubocop-ast (>= 1.47.1, < 2.0)
     rubocop-rails (2.33.4)
       activesupport (>= 4.2.0)
       lint_roller (~> 1.1)
@@ -743,7 +743,7 @@ CHECKSUMS
   pp (0.6.3) sha256=2951d514450b93ccfeb1df7d021cae0da16e0a7f95ee1e2273719669d0ab9df6
   pretender (0.6.0) sha256=d4528df42dd0dc5424b5d077a23435341d31ddee09bc54c8301691f55afda63d
   prettyprint (0.2.0) sha256=2bc9e15581a94742064a3cc8b0fb9d45aae3d03a1baa6ef80922627a0766f193
-  prism (1.5.2) sha256=192741663a55af1ac1b987caa1092deb666e4ff46a30c5064ad5456acd05df1d
+  prism (1.6.0) sha256=bfc0281a81718c4872346bc858dc84abd3a60cae78336c65ad35c8fbff641c6b
   propshaft (1.3.1) sha256=9acc664ef67e819ffa3d95bd7ad4c3623ea799110c5f4dee67fa7e583e74c392
   psych (5.2.6) sha256=814328aa5dcb6d604d32126a20bc1cbcf05521a5b49dbb1a8b30a07e580f316e
   public_suffix (6.0.2) sha256=bfa7cd5108066f8c9602e0d6d4114999a5df5839a63149d3e8b0f9c1d3558394
@@ -782,7 +782,7 @@ CHECKSUMS
   rubocop-ast (1.47.1) sha256=592682017855408b046a8190689490763aecea175238232b1b526826349d01ae
   rubocop-capybara (2.22.1) sha256=ced88caef23efea53f46e098ff352f8fc1068c649606ca75cb74650970f51c0c
   rubocop-factory_bot (2.27.1) sha256=9d744b5916778c1848e5fe6777cc69855bd96548853554ec239ba9961b8573fe
-  rubocop-performance (1.26.0) sha256=7bb0d9d9fb2ea122bf6f9a596dd7cf9dc93ab4950923d26c4ae4f328cef71ca9
+  rubocop-performance (1.26.1) sha256=cd19b936ff196df85829d264b522fd4f98b6c89ad271fa52744a8c11b8f71834
   rubocop-rails (2.33.4) sha256=34ec8f6637706dc224483d949ccc88b3e41596a81a11a1ec0c7d74ecbea356b5
   rubocop-rails-omakase (1.1.0) sha256=2af73ac8ee5852de2919abbd2618af9c15c19b512c4cfc1f9a5d3b6ef009109d
   rubocop-rspec (3.7.0) sha256=b7b214da112034db9c6d00f2d811a354847e870f7b6ed2482b29649c3d42058f
