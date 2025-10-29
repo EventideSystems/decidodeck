@@ -17,6 +17,7 @@ class ImpactCardsController < ApplicationController
   menu_item :workspace
   tab_item :grid
 
+  add_breadcrumb 'Artifacts', :root_path
   add_breadcrumb Scorecard.model_name.human.pluralize, :impact_cards_path
 
   def index # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
@@ -84,12 +85,16 @@ class ImpactCardsController < ApplicationController
 
     authorize(@impact_card, policy_class: ScorecardPolicy)
 
+    add_breadcrumb "Add #{Scorecard.model_name.human}"
+
     @impact_card.data_model = current_workspace.data_models.first if current_workspace.data_models.count == 1
     @impact_card.initiatives.build.initiatives_organisations.build
     @impact_card.initiatives.first.initiatives_subsystem_tags.build
   end
 
   def edit
+    add_breadcrumb @scorecard.display_name, impact_card_path(@scorecard)
+    add_breadcrumb 'Edit'
     # source_scorecard = @scorecard
     # target_scorecard = @scorecard.linked_scorecard
 

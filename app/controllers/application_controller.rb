@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
     end
   end
 
-  add_breadcrumb home_icon, '/'
+  add_breadcrumb home_icon, :root_path, options: { title: 'Home' }
 
   def current_account
     current_workspace&.account

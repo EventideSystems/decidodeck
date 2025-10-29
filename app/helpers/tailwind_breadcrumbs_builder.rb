@@ -14,7 +14,7 @@ class TailwindBreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Builder
 
   private
 
-  BASE_CLASSES = 'truncate transition-colors duration-200'
+  BASE_CLASSES = 'truncate transition-colors duration-200 max-w-md'
   FIRST_ELEMENT_CLASSES = 'flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium' # rubocop:disable Layout/LineLength
 
   def render_elements_with_separators
@@ -37,7 +37,8 @@ class TailwindBreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Builder
           compute_name(element),
           compute_path(element),
           element.options.merge(
-            class: "#{BASE_CLASSES} #{FIRST_ELEMENT_CLASSES}"
+            class: "#{BASE_CLASSES} #{FIRST_ELEMENT_CLASSES}",
+            title: compute_title(element)
           )
         )
       end
@@ -66,6 +67,10 @@ class TailwindBreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Builder
     SVG
   end
 
+  def compute_title(element)
+    element.options[:title] || compute_name(element)
+  end
+
   def link_or_text(element, current)
     if current
       render_text(element)
@@ -78,7 +83,8 @@ class TailwindBreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Builder
     context.content_tag(
       :span, compute_name(element),
       class: "#{BASE_CLASSES} text-gray-900 dark:text-gray-100 font-medium",
-      aria: { current: 'page' }
+      aria: { current: 'page' },
+      title: compute_title(element)
     )
   end
 
@@ -87,7 +93,8 @@ class TailwindBreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Builder
       compute_name(element),
       compute_path(element),
       element.options.merge(
-        class: "#{BASE_CLASSES} text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+        class: "#{BASE_CLASSES} text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200",
+        title: compute_title(element)
       )
     )
   end

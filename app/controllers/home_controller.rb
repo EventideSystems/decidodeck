@@ -48,7 +48,7 @@ class HomeController < ApplicationController
     if @available_workspaces.count > 1 || !current_workspace.in?(@available_workspaces)
       add_breadcrumb workspace_switcher_html
     else
-      add_breadcrumb(workspace_home_html, workspace_path(current_workspace))
+      add_breadcrumb(workspace_home_html, workspace_path(current_workspace), title: 'Home')
     end
 
     add_breadcrumb 'Artifacts'

@@ -1,14 +1,15 @@
 
 
-<div class="mx-auto max-w-6xl">
-  <%= form_with model: @scorecard, url: impact_card_path(@scorecard), scope: :impact_card, class: 'mx-auto max-w-4xl' do |form| %>
-    <%= render 'form_header', record: @scorecard %>
-    <%= render 'form_body' do %>
-      <%= render 'overview_section', form: %>
-      <%= render 'context_section', form: %>
-      <%= render 'form_buttons', form:, cancel_path: @scorecard.persisted? ? impact_card_path(@scorecard) : impact_cards_path %>
+<div class="h-screen w-full bg-gray-50 dark:bg-gray-900 relative">
+  <div class="h-full p-6">
+    <%= form_with model: @scorecard, url: impact_card_path(@scorecard), scope: :impact_card do |form| %>
+      <%= render_breadcrumbs builder: ::TailwindBreadcrumbsBuilder %>
+      <%= render 'form_body' do %>
+        <%= render 'overview_section', form: %>
+        <%= render 'context_section', form: %>
+        <%= render 'form_buttons', form:, cancel_path: @scorecard.persisted? ? impact_card_path(@scorecard) : impact_cards_path %>
+      <% end %>
     <% end %>
-  <% end %>
-  <%= render 'danger_zone', impact_card: @scorecard %>
+    <%= render 'danger_zone', impact_card: @scorecard %>
+  </div>
 </div>
-

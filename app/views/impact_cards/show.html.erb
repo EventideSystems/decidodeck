@@ -2,7 +2,7 @@
 <%= render 'expiry_warning' %>  
 <div class="h-screen w-full bg-gray-50 dark:bg-gray-900 relative" data-controller="drawer">
   <!-- Main Content Area (Artifact Cards) -->
-  <div data-drawer-target="content" class="h-full p-6 overflow-y-hidden transition-all duration-300">
+  <div data-drawer-target="content" class="h-full p-6">
     <%= render 'impact_cards/summary', impact_card: @scorecard, print_description: true %>
     <%= render 'impact_cards/tabs', impact_card: @scorecard %>
     <div>
