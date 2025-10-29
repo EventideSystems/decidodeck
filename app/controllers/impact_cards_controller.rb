@@ -14,7 +14,11 @@ class ImpactCardsController < ApplicationController
   before_action :require_workspace_selected, only: %i[new create edit update show_shared_link]
 
   sidebar_item :impact_cards
+  menu_item :workspace
   tab_item :grid
+
+  add_breadcrumb 'Artifacts', :root_path
+  add_breadcrumb Scorecard.model_name.human.pluralize, :impact_cards_path
 
   def index # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @communities = current_workspace.communities
@@ -37,6 +41,8 @@ class ImpactCardsController < ApplicationController
   end
 
   def show # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    add_breadcrumbs_for_scorecard
+
     @legend_items = fetch_legend_items(@scorecard)
 
     @date = params[:date]
@@ -79,12 +85,16 @@ class ImpactCardsController < ApplicationController
 
     authorize(@impact_card, policy_class: ScorecardPolicy)
 
+    add_breadcrumb "Add #{Scorecard.model_name.human}"
+
     @impact_card.data_model = current_workspace.data_models.first if current_workspace.data_models.count == 1
     @impact_card.initiatives.build.initiatives_organisations.build
     @impact_card.initiatives.first.initiatives_subsystem_tags.build
   end
 
   def edit
+    add_breadcrumb @scorecard.display_name, impact_card_path(@scorecard)
+    add_breadcrumb 'Edit'
     # source_scorecard = @scorecard
     # target_scorecard = @scorecard.linked_scorecard
 
@@ -176,6 +186,10 @@ class ImpactCardsController < ApplicationController
   end
 
   private
+
+  def add_breadcrumbs_for_scorecard
+    add_breadcrumb @scorecard.name, impact_card_path(@scorecard)
+  end
 
   def fetch_legend_items(impact_card)
     FocusArea

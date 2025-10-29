@@ -41,7 +41,7 @@ class Scorecard < ApplicationRecord
   include Searchable
 
   has_paper_trail
-  acts_as_paranoid
+  include Discardable
 
   after_initialize :ensure_shared_link_id, if: :new_record?
 
@@ -79,6 +79,8 @@ class Scorecard < ApplicationRecord
   validate :linked_scorecard_must_be_in_same_workspace
 
   before_save :set_inverse_linked_scorecard, if: :linked_scorecard_id_changed?
+
+  alias_attribute :display_name, :name
 
   def set_inverse_linked_scorecard
     Scorecard.find(linked_scorecard_id_was).update(linked_scorecard_id: nil) if linked_scorecard_id_was.present?

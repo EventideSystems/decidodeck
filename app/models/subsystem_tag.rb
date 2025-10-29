@@ -5,7 +5,7 @@
 # Table name: subsystem_tags
 #
 #  id           :integer          not null, primary key
-#  color        :string           default("#eeef11"), not null
+#  color        :string           default("#7bed21"), not null
 #  deleted_at   :datetime
 #  description  :string
 #  name         :string
@@ -24,7 +24,7 @@ class SubsystemTag < ApplicationRecord
   include ExportToCsv
 
   has_paper_trail
-  acts_as_paranoid
+  include Discardable
 
   belongs_to :workspace
   has_many :initiatives_subsystem_tags, dependent: :delete_all

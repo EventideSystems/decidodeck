@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_27_112028) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "hstore"
@@ -20,67 +20,67 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
 
   create_table "account_members", force: :cascade do |t|
     t.bigint "account_id", null: false
-    t.bigint "user_id", null: false
-    t.string "role", default: "member", null: false
-    t.datetime "deleted_at"
     t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.string "role", default: "member", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["account_id", "user_id"], name: "index_account_members_on_account_id_and_user_id"
     t.index ["user_id", "account_id"], name: "index_account_members_on_user_id_and_account_id"
   end
 
   create_table "accounts", force: :cascade do |t|
-    t.citext "name"
-    t.string "description"
-    t.bigint "default_workspace_id"
+    t.datetime "created_at", null: false
+    t.string "default_locale", default: "en", null: false
     t.string "default_workspace_grid_mode", default: "classic", null: false
-    t.integer "max_users", default: 1
-    t.integer "max_impact_cards", default: 1
+    t.bigint "default_workspace_id"
+    t.datetime "deleted_at"
+    t.string "description"
     t.date "expires_on"
-    t.date "expiry_initial_reminder_sent_on"
+    t.integer "expiry_final_reminder_days", default: 3
     t.date "expiry_final_reminder_sent_on"
     t.integer "expiry_initial_reminder_days", default: 30
-    t.integer "expiry_final_reminder_days", default: 3
-    t.string "subscription_type", default: "invoiced", null: false
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.date "expiry_initial_reminder_sent_on"
     t.jsonb "log_data"
+    t.integer "max_impact_cards", default: 1
+    t.integer "max_users", default: 1
+    t.citext "name"
     t.integer "owner_id"
-    t.string "default_locale", default: "en", null: false
+    t.string "subscription_type", default: "invoiced", null: false
+    t.datetime "updated_at", null: false
     t.index ["default_workspace_id"], name: "index_accounts_on_default_workspace_id"
     t.index ["owner_id"], name: "index_accounts_on_owner_id"
   end
 
   create_table "action_text_rich_texts", force: :cascade do |t|
-    t.string "name", null: false
     t.text "body"
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
     t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", precision: nil, null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
+    t.string "content_type"
     t.datetime "created_at", precision: nil, null: false
+    t.string "filename", null: false
+    t.string "key", null: false
+    t.text "metadata"
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -91,15 +91,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   end
 
   create_table "activities", id: :serial, force: :cascade do |t|
-    t.string "trackable_type"
-    t.integer "trackable_id"
-    t.string "owner_type"
-    t.integer "owner_id"
-    t.string "key"
-    t.text "parameters"
-    t.string "recipient_type"
-    t.integer "recipient_id"
     t.datetime "created_at", precision: nil
+    t.string "key"
+    t.integer "owner_id"
+    t.string "owner_type"
+    t.text "parameters"
+    t.integer "recipient_id"
+    t.string "recipient_type"
+    t.integer "trackable_id"
+    t.string "trackable_type"
     t.datetime "updated_at", precision: nil
     t.integer "workspace_id"
     t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
@@ -109,16 +109,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   end
 
   create_table "characteristics", id: :serial, force: :cascade do |t|
-    t.string "name"
+    t.string "code"
+    t.string "color"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
     t.string "description"
     t.integer "focus_area_id"
+    t.string "name"
     t.integer "position"
-    t.datetime "deleted_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.string "code"
     t.string "short_name"
-    t.string "color"
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["deleted_at"], name: "index_characteristics_on_deleted_at"
     t.index ["focus_area_id", "code"], name: "index_characteristics_on_focus_area_id_and_code", unique: true
     t.index ["focus_area_id"], name: "index_characteristics_on_focus_area_id"
@@ -126,29 +126,29 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   end
 
   create_table "checklist_item_changes", force: :cascade do |t|
-    t.bigint "checklist_item_id", null: false
-    t.bigint "user_id", null: false
-    t.string "starting_status"
-    t.string "ending_status"
-    t.string "comment"
     t.string "action"
     t.string "activity"
+    t.bigint "checklist_item_id", null: false
+    t.string "comment"
     t.datetime "created_at"
+    t.string "ending_status"
+    t.string "starting_status"
+    t.bigint "user_id", null: false
     t.index ["checklist_item_id"], name: "index_checklist_item_changes_on_checklist_item_id"
     t.index ["user_id"], name: "index_checklist_item_changes_on_user_id"
   end
 
   create_table "checklist_items", id: :serial, force: :cascade do |t|
+    t.integer "characteristic_id"
     t.boolean "checked"
     t.text "comment"
-    t.integer "characteristic_id"
-    t.integer "initiative_id"
-    t.datetime "deleted_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.string "status", default: "no_comment"
-    t.bigint "user_id"
+    t.datetime "deleted_at", precision: nil
+    t.integer "initiative_id"
     t.bigint "previous_characteristic_id"
+    t.string "status", default: "no_comment"
+    t.datetime "updated_at", precision: nil, null: false
+    t.bigint "user_id"
     t.index ["characteristic_id"], name: "index_checklist_items_on_characteristic_id"
     t.index ["deleted_at"], name: "index_checklist_items_on_deleted_at"
     t.index ["initiative_id"], name: "index_checklist_items_on_initiative_id"
@@ -156,22 +156,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   end
 
   create_table "communities", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "workspace_id"
-    t.datetime "deleted_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
     t.string "color", default: "#14b8a6", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
+    t.string "description"
+    t.string "name"
+    t.datetime "updated_at", precision: nil, null: false
+    t.integer "workspace_id"
     t.index ["deleted_at"], name: "index_communities_on_deleted_at"
     t.index ["workspace_id"], name: "index_communities_on_workspace_id"
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.string "name"
+    t.datetime "created_at", null: false
     t.string "email"
     t.text "message"
-    t.datetime "created_at", null: false
+    t.string "name"
     t.datetime "updated_at", null: false
   end
 
@@ -179,19 +179,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   end
 
   create_table "data_models", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "short_name"
-    t.string "description"
-    t.string "status", default: "active", null: false
-    t.string "color", default: "#0d9488", null: false
-    t.bigint "workspace_id"
-    t.boolean "public_model", default: false
-    t.datetime "deleted_at"
-    t.jsonb "metadata", default: {}
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "author"
+    t.string "color", default: "#0d9488", null: false
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.string "description"
     t.string "license"
+    t.jsonb "metadata", default: {}
+    t.string "name", null: false
+    t.boolean "public_model", default: false
+    t.string "short_name"
+    t.string "status", default: "active", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "workspace_id"
     t.index ["name", "workspace_id"], name: "index_data_models_on_name_and_workspace_id", unique: true, where: "((workspace_id IS NOT NULL) AND (deleted_at IS NULL))"
     t.index ["workspace_id"], name: "index_data_models_on_workspace_id"
   end
@@ -199,26 +199,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   create_table "deprecated_checklist_item_comments", force: :cascade do |t|
     t.bigint "checklist_item_id"
     t.string "comment"
-    t.datetime "deleted_at", precision: nil
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "deleted_at", precision: nil
     t.string "status", default: "actual"
+    t.datetime "updated_at", null: false
     t.index ["checklist_item_id"], name: "index_deprecated_checklist_item_comments_on_checklist_item_id"
   end
 
   create_table "focus_area_groups", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "position"
-    t.datetime "deleted_at", precision: nil
+    t.string "code"
+    t.string "color"
     t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.bigint "data_model_id"
+    t.datetime "deleted_at", precision: nil
     t.string "deprecated_scorecard_type", default: "TransitionCard"
     t.bigint "deprecated_workspace_id"
-    t.bigint "data_model_id"
-    t.string "code"
+    t.string "description"
+    t.string "name"
+    t.integer "position"
     t.string "short_name"
-    t.string "color"
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["data_model_id", "code"], name: "index_focus_area_groups_on_data_model_id_and_code", unique: true
     t.index ["data_model_id"], name: "index_focus_area_groups_on_data_model_id"
     t.index ["deleted_at"], name: "index_focus_area_groups_on_deleted_at"
@@ -228,17 +228,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   end
 
   create_table "focus_areas", id: :serial, force: :cascade do |t|
-    t.string "name"
+    t.string "code"
+    t.string "color"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
     t.string "description"
     t.integer "focus_area_group_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.integer "position"
-    t.datetime "deleted_at", precision: nil
     t.string "icon_name", default: ""
-    t.string "color"
-    t.string "code"
+    t.string "name"
+    t.integer "position"
     t.string "short_name"
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["deleted_at"], name: "index_focus_areas_on_deleted_at"
     t.index ["focus_area_group_id", "code"], name: "index_focus_areas_on_focus_area_group_id_and_code", unique: true
     t.index ["focus_area_group_id"], name: "index_focus_areas_on_focus_area_group_id"
@@ -246,78 +246,78 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   end
 
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "description"
-    t.jsonb "serialized_properties"
-    t.text "on_finish"
-    t.text "on_success"
-    t.text "on_discard"
-    t.text "callback_queue_name"
     t.integer "callback_priority"
-    t.datetime "enqueued_at"
+    t.text "callback_queue_name"
+    t.datetime "created_at", null: false
+    t.text "description"
     t.datetime "discarded_at"
+    t.datetime "enqueued_at"
     t.datetime "finished_at"
     t.datetime "jobs_finished_at"
+    t.text "on_discard"
+    t.text "on_finish"
+    t.text "on_success"
+    t.jsonb "serialized_properties"
+    t.datetime "updated_at", null: false
   end
 
   create_table "good_job_executions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.uuid "active_job_id", null: false
-    t.text "job_class"
-    t.text "queue_name"
-    t.jsonb "serialized_params"
-    t.datetime "scheduled_at"
-    t.datetime "finished_at"
-    t.text "error"
-    t.integer "error_event", limit: 2
-    t.text "error_backtrace", array: true
-    t.uuid "process_id"
+    t.datetime "created_at", null: false
     t.interval "duration"
+    t.text "error"
+    t.text "error_backtrace", array: true
+    t.integer "error_event", limit: 2
+    t.datetime "finished_at"
+    t.text "job_class"
+    t.uuid "process_id"
+    t.text "queue_name"
+    t.datetime "scheduled_at"
+    t.jsonb "serialized_params"
+    t.datetime "updated_at", null: false
     t.index ["active_job_id", "created_at"], name: "index_good_job_executions_on_active_job_id_and_created_at"
     t.index ["process_id", "created_at"], name: "index_good_job_executions_on_process_id_and_created_at"
   end
 
   create_table "good_job_processes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.jsonb "state"
     t.integer "lock_type", limit: 2
+    t.jsonb "state"
+    t.datetime "updated_at", null: false
   end
 
   create_table "good_job_settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.text "key"
+    t.datetime "updated_at", null: false
     t.jsonb "value"
     t.index ["key"], name: "index_good_job_settings_on_key", unique: true
   end
 
   create_table "good_jobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "queue_name"
-    t.integer "priority"
-    t.jsonb "serialized_params"
-    t.datetime "scheduled_at"
-    t.datetime "performed_at"
-    t.datetime "finished_at"
-    t.text "error"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.uuid "active_job_id"
-    t.text "concurrency_key"
-    t.text "cron_key"
-    t.uuid "retried_good_job_id"
-    t.datetime "cron_at"
-    t.uuid "batch_id"
     t.uuid "batch_callback_id"
-    t.boolean "is_discrete"
-    t.integer "executions_count"
-    t.text "job_class"
+    t.uuid "batch_id"
+    t.text "concurrency_key"
+    t.datetime "created_at", null: false
+    t.datetime "cron_at"
+    t.text "cron_key"
+    t.text "error"
     t.integer "error_event", limit: 2
+    t.integer "executions_count"
+    t.datetime "finished_at"
+    t.boolean "is_discrete"
+    t.text "job_class"
     t.text "labels", array: true
-    t.uuid "locked_by_id"
     t.datetime "locked_at"
+    t.uuid "locked_by_id"
+    t.datetime "performed_at"
+    t.integer "priority"
+    t.text "queue_name"
+    t.uuid "retried_good_job_id"
+    t.datetime "scheduled_at"
+    t.jsonb "serialized_params"
+    t.datetime "updated_at", null: false
     t.index ["active_job_id", "created_at"], name: "index_good_jobs_on_active_job_id_and_created_at"
     t.index ["batch_callback_id"], name: "index_good_jobs_on_batch_callback_id", where: "(batch_callback_id IS NOT NULL)"
     t.index ["batch_id"], name: "index_good_jobs_on_batch_id", where: "(batch_id IS NOT NULL)"
@@ -336,23 +336,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   end
 
   create_table "initiatives", id: :serial, force: :cascade do |t|
-    t.string "name"
+    t.datetime "archived_on"
+    t.string "contact_email"
+    t.string "contact_name"
+    t.string "contact_phone"
+    t.string "contact_position"
+    t.string "contact_website"
+    t.datetime "created_at", precision: nil, null: false
+    t.boolean "dates_confirmed"
+    t.datetime "deleted_at", precision: nil
     t.string "description"
+    t.date "finished_at"
+    t.boolean "linked", default: false
+    t.string "name"
+    t.text "old_notes"
     t.integer "scorecard_id"
     t.date "started_at"
-    t.date "finished_at"
-    t.boolean "dates_confirmed"
-    t.string "contact_name"
-    t.string "contact_email"
-    t.string "contact_phone"
-    t.string "contact_website"
-    t.string "contact_position"
-    t.datetime "deleted_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.text "old_notes"
-    t.boolean "linked", default: false
-    t.datetime "archived_on"
     t.index ["archived_on"], name: "index_initiatives_on_archived_on"
     t.index ["deleted_at"], name: "index_initiatives_on_deleted_at"
     t.index ["finished_at"], name: "index_initiatives_on_finished_at"
@@ -362,10 +362,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   end
 
   create_table "initiatives_organisations", id: :serial, force: :cascade do |t|
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
     t.integer "initiative_id", null: false
     t.integer "organisation_id", null: false
-    t.datetime "deleted_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["deleted_at"], name: "index_initiatives_organisations_on_deleted_at"
     t.index ["initiative_id", "organisation_id"], name: "index_initiatives_organisations_on_initiative_organisation_id", unique: true
@@ -373,44 +373,44 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   end
 
   create_table "initiatives_subsystem_tags", id: :serial, force: :cascade do |t|
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
     t.integer "initiative_id", null: false
     t.integer "subsystem_tag_id", null: false
-    t.datetime "deleted_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["deleted_at"], name: "index_initiatives_subsystem_tags_on_deleted_at"
     t.index ["initiative_id", "subsystem_tag_id"], name: "idx_initiatives_subsystem_tags_initiative_and_subsystem_tag_id", unique: true
   end
 
   create_table "organisations", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "workspace_id"
-    t.integer "stakeholder_type_id"
-    t.string "weblink"
-    t.datetime "deleted_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
+    t.string "description"
+    t.string "name"
+    t.integer "stakeholder_type_id"
     t.datetime "updated_at", precision: nil, null: false
+    t.string "weblink"
+    t.integer "workspace_id"
     t.index ["deleted_at"], name: "index_organisations_on_deleted_at"
     t.index ["workspace_id"], name: "index_organisations_on_workspace_id"
   end
 
   create_table "scorecards", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "description"
     t.integer "community_id"
-    t.integer "workspace_id"
-    t.integer "wicked_problem_id"
-    t.string "shared_link_id"
-    t.datetime "deleted_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.bigint "data_model_id"
+    t.datetime "deleted_at", precision: nil
     t.string "deprecated_type", default: "TransitionCard"
+    t.string "description"
     t.integer "linked_scorecard_id"
+    t.string "name"
     t.boolean "share_ecosystem_map", default: true
     t.boolean "share_thematic_network_map", default: true
-    t.bigint "data_model_id"
+    t.string "shared_link_id"
     t.jsonb "stakeholder_network_cache", default: {}, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.integer "wicked_problem_id"
+    t.integer "workspace_id"
     t.index ["data_model_id"], name: "index_scorecards_on_data_model_id"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["deprecated_type"], name: "index_scorecards_on_deprecated_type"
@@ -418,81 +418,81 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   end
 
   create_table "stakeholder_types", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.datetime "deleted_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
     t.string "color"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
+    t.string "description"
+    t.string "name"
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "workspace_id"
     t.index ["workspace_id"], name: "index_stakeholder_types_on_workspace_id"
   end
 
   create_table "subsystem_tags", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "workspace_id"
-    t.datetime "deleted_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
     t.string "color", default: "#14b8a6", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
+    t.string "description"
+    t.string "name"
+    t.datetime "updated_at", precision: nil, null: false
+    t.integer "workspace_id"
     t.index ["deleted_at"], name: "index_subsystem_tags_on_deleted_at"
     t.index ["workspace_id"], name: "index_subsystem_tags_on_workspace_id"
   end
 
   create_table "thematic_mappings", force: :cascade do |t|
-    t.bigint "focus_area_id"
     t.bigint "characteristic_id"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.bigint "data_model_id"
+    t.bigint "focus_area_id"
+    t.datetime "updated_at", null: false
     t.index ["characteristic_id"], name: "index_thematic_mappings_on_characteristic_id"
     t.index ["focus_area_id"], name: "index_thematic_mappings_on_focus_area_id"
   end
 
   create_table "translations", force: :cascade do |t|
-    t.string "scope"
-    t.string "locale"
-    t.string "key"
-    t.text "value"
+    t.datetime "created_at", null: false
     t.text "interpolations"
     t.boolean "is_proc", default: false
-    t.datetime "created_at", null: false
+    t.string "key"
+    t.string "locale"
+    t.string "scope"
     t.datetime "updated_at", null: false
+    t.text "value"
     t.index ["scope", "locale", "key"], name: "index_translations_on_scope_and_locale_and_key", unique: true
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: nil
-    t.datetime "remember_created_at", precision: nil
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at", precision: nil
-    t.datetime "last_sign_in_at", precision: nil
-    t.inet "current_sign_in_ip"
-    t.inet "last_sign_in_ip"
-    t.string "invitation_token"
-    t.datetime "invitation_created_at", precision: nil
-    t.datetime "invitation_sent_at", precision: nil
-    t.datetime "invitation_accepted_at", precision: nil
-    t.integer "invitation_limit"
-    t.string "invited_by_type"
-    t.integer "invited_by_id"
-    t.integer "invitations_count", default: 0
-    t.datetime "deleted_at", precision: nil
-    t.string "profile_picture"
-    t.integer "system_role", default: 0
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.string "time_zone", default: "Adelaide"
+    t.datetime "accepted_terms_at"
+    t.datetime "confirmation_sent_at"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "current_sign_in_at", precision: nil
+    t.inet "current_sign_in_ip"
+    t.datetime "deleted_at", precision: nil
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.datetime "invitation_accepted_at", precision: nil
+    t.datetime "invitation_created_at", precision: nil
+    t.integer "invitation_limit"
+    t.datetime "invitation_sent_at", precision: nil
+    t.string "invitation_token"
+    t.integer "invitations_count", default: 0
+    t.integer "invited_by_id"
+    t.string "invited_by_type"
+    t.datetime "last_sign_in_at", precision: nil
+    t.inet "last_sign_in_ip"
+    t.string "name"
+    t.string "profile_picture"
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "reset_password_sent_at", precision: nil
+    t.string "reset_password_token"
+    t.integer "sign_in_count", default: 0, null: false
+    t.integer "system_role", default: 0
+    t.string "time_zone", default: "Adelaide"
     t.string "unconfirmed_email"
-    t.datetime "accepted_terms_at"
+    t.datetime "updated_at", precision: nil
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true, where: "(deleted_at IS NULL)"
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
@@ -504,70 +504,70 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
   end
 
   create_table "versions", id: :serial, force: :cascade do |t|
-    t.string "item_type", null: false
-    t.integer "item_id", null: false
-    t.string "event", null: false
-    t.string "whodunnit"
-    t.text "old_object"
     t.datetime "created_at", precision: nil
-    t.integer "workspace_id"
+    t.string "event", null: false
+    t.integer "item_id", null: false
+    t.string "item_type", null: false
     t.jsonb "object"
+    t.text "old_object"
+    t.string "whodunnit"
+    t.integer "workspace_id"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
     t.index ["workspace_id"], name: "index_versions_on_workspace_id"
   end
 
   create_table "wicked_problems", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "workspace_id"
-    t.datetime "deleted_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
     t.string "color", default: "#14b8a6", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
+    t.string "description"
+    t.string "name"
+    t.datetime "updated_at", precision: nil, null: false
+    t.integer "workspace_id"
     t.index ["deleted_at"], name: "index_wicked_problems_on_deleted_at"
     t.index ["workspace_id"], name: "index_wicked_problems_on_workspace_id"
   end
 
   create_table "workspace_members", id: :serial, force: :cascade do |t|
+    t.datetime "created_at", precision: nil, null: false
+    t.string "role", default: "member"
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "user_id"
     t.integer "workspace_id"
-    t.string "role", default: "member"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_workspace_members_on_user_id"
     t.index ["workspace_id", "user_id"], name: "index_workspace_members_on_workspace_id_and_user_id", unique: true
     t.index ["workspace_id"], name: "index_workspace_members_on_workspace_id"
   end
 
   create_table "workspaces", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.string "deprecated_weblink"
-    t.text "deprecated_welcome_message"
+    t.bigint "account_id"
+    t.boolean "classic_grid_mode", default: false
+    t.boolean "community_labels", default: false
+    t.datetime "created_at", precision: nil, null: false
     t.boolean "deactivated"
     t.datetime "deleted_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.date "deprecated_expires_on"
-    t.integer "max_users", default: 1
-    t.integer "max_scorecards", default: 1
-    t.boolean "deprecated_solution_ecosystem_maps"
-    t.boolean "deprecated_allow_transition_cards", default: true
     t.boolean "deprecated_allow_sustainable_development_goal_alignment_cards", default: false
+    t.boolean "deprecated_allow_transition_cards", default: true
+    t.date "deprecated_expires_on"
     t.date "deprecated_expiry_warning_sent_on"
-    t.string "transition_card_model_name", default: "Transition Card"
-    t.string "transition_card_focus_area_group_model_name", default: "Focus Area Group"
-    t.string "transition_card_focus_area_model_name", default: "Focus Area"
-    t.string "transition_card_characteristic_model_name", default: "Characteristic"
-    t.string "sdgs_alignment_card_model_name", default: "SDGs Alignment Card"
+    t.boolean "deprecated_solution_ecosystem_maps"
+    t.string "deprecated_weblink"
+    t.text "deprecated_welcome_message"
+    t.string "description"
+    t.jsonb "log_data"
+    t.integer "max_scorecards", default: 1
+    t.integer "max_users", default: 1
+    t.string "name"
+    t.boolean "problem_opportunity_labels", default: false
+    t.string "sdgs_alignment_card_characteristic_model_name", default: "Targets"
     t.string "sdgs_alignment_card_focus_area_group_model_name", default: "Focus Area Group"
     t.string "sdgs_alignment_card_focus_area_model_name", default: "Focus Area"
-    t.string "sdgs_alignment_card_characteristic_model_name", default: "Targets"
-    t.boolean "classic_grid_mode", default: false
-    t.bigint "account_id"
-    t.jsonb "log_data"
-    t.boolean "community_labels", default: false
-    t.boolean "problem_opportunity_labels", default: false
+    t.string "sdgs_alignment_card_model_name", default: "SDGs Alignment Card"
+    t.string "transition_card_characteristic_model_name", default: "Characteristic"
+    t.string "transition_card_focus_area_group_model_name", default: "Focus Area Group"
+    t.string "transition_card_focus_area_model_name", default: "Focus Area"
+    t.string "transition_card_model_name", default: "Transition Card"
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["account_id"], name: "index_workspaces_on_account_id"
   end
 
@@ -743,6 +743,28 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_084006) do
               NULL::text AS text,
               NULL::text AS text
              FROM scorecards) events_transition_card_activities_v02;
+  SQL
+  create_view "artifacts", sql_definition: <<-SQL
+      SELECT scorecards.id,
+      'Scorecard'::text AS artifact_type,
+      scorecards.name,
+      scorecards.description,
+      scorecards.workspace_id,
+      scorecards.created_at,
+      scorecards.updated_at,
+      scorecards.deleted_at
+     FROM scorecards
+  UNION
+   SELECT initiatives.id,
+      'Initiative'::text AS artifact_type,
+      initiatives.name,
+      initiatives.description,
+      scorecards.workspace_id,
+      initiatives.created_at,
+      initiatives.updated_at,
+      initiatives.deleted_at
+     FROM (initiatives
+       JOIN scorecards ON ((initiatives.scorecard_id = scorecards.id)));
   SQL
   create_view "checklist_item_updated_comments_view", sql_definition: <<-SQL
       SELECT DISTINCT ON (versions.id) 'updated_comment'::text AS event,

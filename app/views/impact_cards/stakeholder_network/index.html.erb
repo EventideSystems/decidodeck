@@ -1,7 +1,14 @@
 <%= render 'labels/stylesheet', labels: @stakeholder_types %>
 <%= render 'expiry_warning' %>
-<div class="mx-auto max-w-6xl" data-controller="stakeholder-network">
-  <%= render 'impact_cards/summary', impact_card: @scorecard %>
-  <%= render 'impact_cards/tabs', impact_card: @scorecard %>
-  <%= render 'impact_cards/stakeholder_network/graph', impact_card: @scorecard %>
+<div class="h-screen w-full flex bg-gray-50 dark:bg-gray-900 relative" data-controller="stakeholder-network drawer">
+  <div data-drawer-target="content" class="h-full p-6 transition-all duration-300 ">
+    <%= render 'impact_cards/summary', impact_card: @scorecard %>
+    <%= render 'impact_cards/tabs', impact_card: @scorecard %>
+    <div>
+      <%= render 'impact_cards/stakeholder_network/graph', impact_card: @scorecard %>
+    </div>
+  </div>
+  <%= render 'drawer' do %>
+    <%= render 'impact_cards/drawer_actions', impact_card: @scorecard %>
+  <% end %>
 </div>

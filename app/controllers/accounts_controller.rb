@@ -6,6 +6,8 @@ class AccountsController < ApplicationController
 
   before_action :set_account, only: %i[show edit update destroy]
 
+  menu_item :accounts
+
   def index
     search_params = params.permit(:format, :page, q: [:name_or_description_cont])
 

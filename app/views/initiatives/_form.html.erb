@@ -1,6 +1,6 @@
 <div class="mx-auto max-w-6xl">
   <%= form_with model: initiative, class: 'mx-auto max-w-6xl' do |form| %>
-    <%= render 'form_header', record: initiative %>
+    <%= render_breadcrumbs builder: ::TailwindBreadcrumbsBuilder %>
     <%= render 'form_body' do %>
 
       <%= render 'section', first_section: true do %>

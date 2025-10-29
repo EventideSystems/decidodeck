@@ -4,6 +4,7 @@
 class ApplicationController < ActionController::Base # rubocop:disable Metrics/ClassLength
   include Pundit::Authorization
   include ActiveSidebarItem
+  include ActiveMenuItem
   include Pagy::Backend
 
   before_action :set_session_workspace_id
@@ -22,6 +23,18 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
   rescue_from ActiveRecord::RecordNotFound, with: :flash_resource_not_found
 
   sidebar_item :home
+
+  class << self
+    def home_icon
+      <<~SVG.html_safe # rubocop:disable Rails/OutputSafety
+        <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5 shrink-0 w-6 h-6">
+          <path d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" fill-rule="evenodd" />
+        </svg>
+      SVG
+    end
+  end
+
+  add_breadcrumb home_icon, :root_path, options: { title: 'Home' }
 
   def current_account
     current_workspace&.account
@@ -53,7 +66,7 @@ class ApplicationController < ActionController::Base # rubocop:disable Metrics/C
     when :obsekio
       'Obsekio'
     when :tool_for_systemic_change
-      'Obsekio'
+      'Tool for Systemic Change'
     else
       'Decidodeck'
     end

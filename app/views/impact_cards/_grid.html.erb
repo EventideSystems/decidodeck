@@ -10,18 +10,21 @@
           <%= form.label :date, class: "sr-only" %>
           <%= custom_date_field_tag :date, @date, title: 'Filter by date', class: 'py-1.5', data: { grid_target: "date" }  %>
         </div>
-        <div>
+        <div class="mt-2">
           <%= form.label :subsystem_tags, class: "sr-only" %>
           <%=
             form.multi_select(
               :subsystem_tags,
               multi_select_options_for_labels(@subsystem_tags, @selected_subsystem_tags),
-              { placeholder: "Select #{SubsystemTag.model_name.human.pluralize.downcase}...",  title: "Filter by #{SubsystemTag.model_name.human.downcase}" }, # TODO: Get title to work
+              { 
+                placeholder: "Select #{SubsystemTag.model_name.human.pluralize.downcase}...",  
+                title: "Filter by #{SubsystemTag.model_name.human.downcase}" 
+              }, # TODO: Get title to work
               { include_hidden: false, data: { grid_target: "subsystemTags" } }
             )
           %>
         </div>
-        <div>
+        <div class="mt-2">
           <%= form.label :statuses, class: "sr-only" %>
           <%=
             form.multi_select(
@@ -32,8 +35,8 @@
             )
           %>
         </div>
-        <div class="flex">
-          <%= button_tag class: merge_tailwind_class(CustomFormBuilder::MULTI_SELECT_BUTTON_CLASS, '-ml-3'), title: 'Highlight gap', data: { grid_target: "highlightButton" } do %>
+        <div class="flex mt-2">
+          <%= button_tag class: merge_tailwind_class(CustomFormBuilder::MULTI_SELECT_BUTTON_CLASS, '-ml-3 w-auto h-auto'), title: 'Highlight gap', data: { grid_target: "highlightButton" } do %>
             <%= render_icon :highlight %>
           <% end %>
         </div>

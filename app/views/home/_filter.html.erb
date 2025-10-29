@@ -1,0 +1,46 @@
+<div class="flex space-x-2">
+
+  <%= search_form_for @q, { url: root_path, data: { turbo_frame: :list }, class: 'flex space-x-2' } do |f| %>
+    <%# <button class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">
+      <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5v4m8-4v4"/>
+      </svg>
+      Sort
+    </button> %>
+  
+    <%= f.label :name_or_description_cont, 'Search', class: 'sr-only'  %>
+    <%=
+      f.search_field(
+        :name_or_description_cont,
+        placeholder: 'Search workspace...',
+        class: "form-input w-60 h-10 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800",
+        oninput: 'this.form.requestSubmit()',
+        autofocus: false,
+        autocomplete: 'off'
+      )
+    %>
+
+
+    <%= f.label :artifact_type_in, 'Artifact Types', class: 'sr-only'  %>
+    <%= 
+      f.multi_select(
+        :artifact_type_in, 
+        multi_select_options_for_artifact_types(@artifact_types), 
+        { 
+          include_hidden: false, 
+          placeholder: 'Filter', 
+          base_text: 'Filter',
+          use_badge: true,
+          toggle_classes: 'flex items-center min-w-32 px-3 py-2 h-10 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800',
+        },
+        onchange: 'this.form.requestSubmit()'
+      )  
+    %>
+
+    <%# <button class="flex items-center px-3 py-2 h-10 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">
+      Reset
+    </button> %>
+  <% end %>
+
+</div>

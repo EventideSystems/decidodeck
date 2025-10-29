@@ -30,7 +30,7 @@
           'Archive',
           update_status_data_model_path(data_model, data_model: { status: 'archived' }),
           method: :patch,
-          class: TailwindClasses::DANGER_ZONE_BUTTON_CLASS + ' text-xs', 
+          class: TailwindSupport::DANGER_ZONE_BUTTON_CLASS + ' text-xs', 
           data: { turbo_stream: true }
         ) 
       %>

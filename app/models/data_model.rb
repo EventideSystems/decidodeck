@@ -33,7 +33,7 @@
 class DataModel < ApplicationRecord
   include Searchable
 
-  acts_as_paranoid
+  include Discardable
 
   string_enum status: %i[active draft archived]
 

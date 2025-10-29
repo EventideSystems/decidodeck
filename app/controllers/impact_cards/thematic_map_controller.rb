@@ -6,11 +6,15 @@ module ImpactCards
     include ActiveTabItem
 
     sidebar_item :impact_cards
+    menu_item :workspace
     tab_item :thematic_map
 
     def index # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
       @scorecard = Scorecard.find(params[:impact_card_id])
       authorize(@scorecard, :show?)
+
+      add_breadcrumb @scorecard.class.model_name.human.pluralize, :impact_cards_path
+      add_breadcrumb @scorecard.name, impact_card_thematic_map_index_path(@scorecard)
 
       @legend_items = fetch_legend_items(@scorecard)
       @graph = Insights::TargetsNetwork.new(@scorecard)

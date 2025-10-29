@@ -1,0 +1,13 @@
+<%
+  base_class = "text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition duration-200"
+  if active
+    options = {
+      class: base_class  + ' underline',
+      aria: { current: "page" }
+    }
+  else
+    options = { class: base_class }
+  end
+%>
+
+<%= link_to title, path, options %>

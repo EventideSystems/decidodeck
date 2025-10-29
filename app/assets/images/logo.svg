@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="120"
+   height="180"
+   viewBox="0 0 120 180"
+   version="1.1"
+   id="svg3"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="namedview3"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="5.8033264"
+     inkscape:cx="59.879452"
+     inkscape:cy="68.925987"
+     inkscape:window-width="2304"
+     inkscape:window-height="1430"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3" />
+  <!-- Back card -->
+  <rect
+     x="39.227776"
+     y="10.872838"
+     width="80"
+     height="120"
+     rx="10"
+     fill="#1e2a38"
+     id="rect1"
+     style="stroke:#fafafa;stroke-width:6;stroke-dasharray:none;stroke-opacity:0.972561"
+     transform="rotate(7)" />
+  <!-- Middle card -->
+  <rect
+     x="11.491886"
+     y="39.86784"
+     width="80"
+     height="120"
+     rx="10"
+     fill="#1E2A38"
+     id="rect2"
+     style="fill:#a2b6cd;fill-opacity:1;stroke:#fafafa;stroke-width:4;stroke-dasharray:none;stroke-opacity:0.972561"
+     transform="rotate(-5)" />
+  <!-- Front orange card -->
+  <rect
+     x="30"
+     y="45"
+     width="80"
+     height="120"
+     rx="10"
+     fill="#f4a02b"
+     id="rect3"
+     style="stroke:#fafafa;stroke-width:4.3;stroke-dasharray:none;stroke-opacity:0.972561" />
+  <!-- Checkmark -->
+  <path
+     d="M 50,105 65,120 90,85"
+     fill="none"
+     stroke="#1e2a38"
+     stroke-width="8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path3" />
+</svg>

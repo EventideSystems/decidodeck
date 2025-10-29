@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 ruby '3.4.6'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 8.0'
+gem 'rails', '~> 8.1'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 # gem 'sprockets-rails'
@@ -49,8 +49,9 @@ gem 'bootsnap', require: false
 
 gem 'ostruct' # TODO: Remove once we migrate away from it
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+gem 'breadcrumbs_on_rails'
 gem 'image_processing', '~> 1.2'
-gem 'shadcn-ui', '~> 0.0.13'
+gem 'tailwind_merge'
 gem 'view_component'
 
 gem 'fast_jsonparser'
@@ -77,10 +78,10 @@ gem 'aws-sdk-rails'
 
 gem 'data_migrate'
 
+gem 'discard'
 gem 'net-http'
 gem 'pagy'
 gem 'paper_trail' # NOTE: We will be dropping this in favor of logidze
-gem 'paranoia'
 gem 'ransack'
 gem 'recaptcha'
 

@@ -1,0 +1,58 @@
+<div class="h-screen bg-gray-50 dark:bg-gray-900 relative">
+  <!-- Main Content Area (Artifact Cards) -->
+  <div class="h-full p-6">
+    <div class="mb-6 space-y-4">
+      <%= render_breadcrumbs separator: ' / ', builder: ::TailwindBreadcrumbsBuilder %>
+      <p class="text-gray-600 dark:text-gray-400">
+        Select an artifact type to create.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <%- if policy(Artifact).create? %>
+          <!-- Create Document Action -->
+          <div class="bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/50 p-6 hover:shadow-md dark:hover:shadow-lg transition-shadow duration-200 flex flex-col h-full">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <svg class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </div>
+              <div class="ml-3 flex-1">
+                <%= link_to new_impact_card_path do %>
+                  <div class="block group cursor-pointer">
+                    <h3 class="text-sm font-medium text-blue-900 dark:text-blue-100 group-hover:text-blue-800 dark:group-hover:text-blue-50">Create <%= Scorecard.model_name.human %></h3>
+                    <p class="text-sm text-blue-700 dark:text-blue-300 mt-1">Add a new <%= Scorecard.model_name.human.downcase %></p>
+                    <span class="mt-2 inline-block text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:text-blue-500 dark:group-hover:text-blue-300">
+                      Create <%= Scorecard.model_name.human %>
+                    </span>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Create Decision Action -->
+          <div class="bg-purple-50 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-800 hover:bg-purple-100 dark:hover:bg-purple-900/50 p-6 hover:shadow-md dark:hover:shadow-lg transition-shadow duration-200 flex flex-col h-full">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <svg class="h-6 w-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                </svg>
+              </div>
+              <div class="ml-3 flex-1">
+                <%= link_to new_initiative_path do %>
+                  <div class="block group cursor-pointer">
+                    <h3 class="text-sm font-medium text-purple-900 dark:text-purple-100 group-hover:text-purple-800 dark:group-hover:text-purple-50">Create <%= Initiative.model_name.human %></h3>
+                    <p class="text-sm text-purple-700 dark:text-purple-300 mt-1">Add a new <%= Initiative.model_name.human.downcase %></p>
+                    <span class="mt-2 inline-block text-sm font-medium text-purple-600 dark:text-purple-400 group-hover:text-purple-500 dark:group-hover:text-purple-300">
+                      Create <%= Initiative.model_name.human %>
+                    </span>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

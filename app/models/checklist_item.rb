@@ -30,7 +30,7 @@
 #
 class ChecklistItem < ApplicationRecord
   has_paper_trail
-  acts_as_paranoid
+  include Discardable
 
   string_enum status: %i[no_comment actual planned more_information suggestion]
 

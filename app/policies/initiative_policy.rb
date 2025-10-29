@@ -9,7 +9,7 @@ class InitiativePolicy < ApplicationPolicy # rubocop:disable Style/Documentation
         scope.joins(:scorecard).not_archived.where('scorecards.workspace_id': current_workspace.id)
       else
         scope.joins(:scorecard).none
-      end
+      end.kept
     end
   end
 

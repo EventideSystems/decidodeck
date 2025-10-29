@@ -1,0 +1,47 @@
+<%- if policy(Artifact).create? %>
+  <!-- Export Comments Action -->
+  <div class="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors duration-200">
+    <div class="flex items-start">
+      <div class="flex-shrink-0">
+        <svg class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+      <div class="ml-3 flex-1">
+        <%= link_to impact_card_path(impact_card, format: :csv), data: { turbo: false }  do %>
+          <div class="block group cursor-pointer">
+            <h3 class="text-sm font-medium text-blue-900 dark:text-blue-100 group-hover:text-blue-800 dark:group-hover:text-blue-50">Export Comments</h3>
+            <p class="text-sm text-blue-700 dark:text-blue-300 mt-1">Export comments and status for this card</p>
+            <span class="mt-2 inline-block text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:text-blue-500 dark:group-hover:text-blue-300">
+              Export Comments →
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Create Decision Action -->
+  <% if policy(impact_card).update? %>
+    <div class="bg-purple-50 dark:bg-purple-900/30 rounded-lg p-4 border border-purple-200 dark:border-purple-800 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors duration-200">
+      <div class="flex items-start">
+        <div class="flex-shrink-0">
+          <svg class="h-6 w-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="ml-3 flex-1">
+          <%= link_to import_comments_impact_card_path(impact_card) do %>
+            <div class="block group cursor-pointer">
+              <h3 class="text-sm font-medium text-purple-900 dark:text-purple-100 group-hover:text-purple-800 dark:group-hover:text-purple-50">Import Comments</h3>
+              <p class="text-sm text-purple-700 dark:text-purple-300 mt-1">Update comments in this card</p>
+              <span class="mt-2 inline-block text-sm font-medium text-purple-600 dark:text-purple-400 group-hover:text-purple-500 dark:group-hover:text-purple-300">
+                Import Comments →
+              </span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

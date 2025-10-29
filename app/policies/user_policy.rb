@@ -7,7 +7,7 @@ class UserPolicy < ApplicationPolicy # rubocop:disable Style/Documentation
         base_scope
       else
         base_scope.where(invitation_token: nil)
-      end
+      end.kept
     end
 
     def base_scope

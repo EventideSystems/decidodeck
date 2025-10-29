@@ -1,0 +1,63 @@
+<div class="relative" data-controller="dropdown" data-turbo-permanent id="workspace-switcher">
+  <button 
+    type="button"
+    data-action="click->dropdown#toggle"
+    data-dropdown-target="button"
+    class="flex items-center px-3 py-2 h-10 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800"
+    aria-expanded="false"
+  >
+    <%= render_icon :home, classes: "h-4 w-4 mr-2" %>
+    <span class="truncate max-w-32">
+      <% if current_workspace %>
+        <%= current_workspace.name %>
+      <% else %>
+        Select Workspace
+      <% end %>
+    </span>
+    <svg class="h-4 w-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+
+  <div 
+    data-dropdown-target="menu"
+    class="hidden absolute xright-0 z-50 mt-2 w-72 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg"
+  >
+    <div class="py-1 max-h-60 overflow-y-auto">
+      <% available_workspaces.each do |workspace| %>
+        <%= link_to switch_workspace_path(workspace),
+            class: "flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 #{'bg-gray-50 dark:bg-gray-700' if workspace == current_workspace}" do %>
+          <%= render_icon :home, classes: "h-4 w-4 mr-3 text-gray-400" %>
+          <div class="flex-1 min-w-0">
+            <p class="font-medium truncate"><%= workspace.name %></p>
+            <% if workspace.description.present? %>
+              <p class="text-xs text-gray-500 dark:text-gray-400 truncate"><%= workspace.description %></p>
+            <% end %>
+          </div>
+          <% if workspace == current_workspace %>
+            <svg class="h-4 w-4 ml-2 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if available_workspaces.empty? %>
+        <div class="px-4 py-2 text-sm text-gray-500 dark:text-gray-400">
+          No workspaces available
+        </div>
+      <% end %>
+
+      <div class="border-t border-gray-200 dark:border-gray-700 mt-1 pt-1">
+        <%= link_to workspaces_path,
+            class: "flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700" do %>
+          <svg class="h-4 w-4 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          Manage Workspaces
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

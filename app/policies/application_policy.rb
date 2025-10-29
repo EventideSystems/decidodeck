@@ -18,7 +18,8 @@ class ApplicationPolicy
     end
 
     def resolve_to_current_workspace
-      current_workspace.present? ? scope.where(workspace: current_workspace) : scope.none
+      base_scope = current_workspace.present? ? scope.where(workspace: current_workspace) : scope.none
+      base_scope.respond_to?(:kept) ? base_scope.kept : base_scope
     end
 
     # SMELL Move all these to a concern

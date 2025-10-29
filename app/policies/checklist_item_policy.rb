@@ -3,7 +3,9 @@
 class ChecklistItemPolicy < ApplicationPolicy # rubocop:disable Style/Documentation
   class Scope < Scope # rubocop:disable Style/Documentation
     def resolve
-      scope.joins(initiative: :scorecard).where('scorecards.workspace_id': current_workspace.id)
+      scope.joins(initiative: :scorecard)
+           .where('scorecards.workspace_id': current_workspace.id)
+           .kept
     end
   end
 

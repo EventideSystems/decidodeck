@@ -1,20 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" class="text-zinc-950 antialiased lg:bg-zinc-100 dark:bg-zinc-900 dark:text-white dark:lg:bg-zinc-950">
-  <%= render 'head' %>
-  <body>
+<html lang="<%= html_lang %>">
+  <head>
+    <title><%= content_for(:title) || "Decidodeck" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
+    <nav class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+      <div class="container mx-auto px-5">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo/Brand -->
+          <div class="flex items-center">
+            <%= image_tag current_theme_logo, alt: "Decidodeck Logo", class: "h-8 w-auto mr-3" %>
+            <%= link_to root_path, class: "text-xl font-bold text-gray-800 dark:text-white hover:text-gray-600 dark:hover:text-gray-300", aria: { hidden: true } do %>
+              <%= current_theme_display_name %>
+            <% end %>
+          </div>
+
+          <!-- Navigation Links -->
+          <div class="hidden md:flex items-center space-x-6">
+            <%= render_menu_item(title: "Workspace", path: root_path, active_menu: :workspace) %>
+            <%= render_menu_item(title: "People", path: organisations_path, active_menu: :people) %>
+            <%= render_menu_item(title: "Library", path: data_models_path, active_menu: :library) %>
+            <%- if policy(Account).index? %>
+              <%= render_menu_item(title: "Accounts", path: accounts_path, active_menu: :accounts) %>
+            <% end %>
+          </div>
+
+          <!-- User Menu -->
+          <div class="flex items-center space-x-4">
+            <% if user_signed_in? %>
+              <span class="text-sm text-gray-600 dark:text-gray-300"><%= link_to "Hello, #{current_user.display_name}", user_path(current_user) %></span>
+              <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, 
+                          class: "bg-red-500 hover:bg-red-600 dark:bg-amber-600 dark:hover:bg-amber-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200" %>
+            <% else %>
+              <%= link_to "Sign In", new_user_session_path, 
+                          class: "bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
     <!-- Flash notifications container -->
     <div id="flash-notifications" class="fixed top-4 right-4 z-50 space-y-2">
       <%= render 'flash_notifications' %>
     </div>
 
-    <div class="relative isolate flex min-h-svh w-full bg-white max-lg:flex-col dark:bg-zinc-900 dark:lg:bg-zinc-950 print:bg-white print:dark:bg-white">
-      <%#= render partial: 'layouts/shared/sidebar_mobile' %>
-      <%= render partial: 'layouts/shared/sidebar_desktop' %>
-      <main class="flex flex-1 flex-col pb-2 lg:min-w-0 lg:pl-60 m-3 print:m-0 print:p-0">
-        <div class="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 dark:bg-zinc-900 print:bg-white dark:print:bg-white lg:ring-zinc-950/5 dark:lg:ring-white/10 print:rounded-none print:p-0 print:shadow-none print:ring-none">
-          <%= yield %>
-        </div>
-      </main>
-    </div>
+    <main class="container mx-auto mt-8 px-5 flex min-h-screen bg-white dark:bg-gray-900">
+      <%= yield %>
+    </main>
   </body>
 </html>

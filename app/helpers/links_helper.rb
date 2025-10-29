@@ -2,7 +2,7 @@
 
 # Helper for links
 module LinksHelper
-  include TailwindClasses
+  include TailwindSupport
 
   # rubocop:disable Layout/LineLength
   PRIMARY_CLASS = 'relative isolate inline-flex items-center justify-center gap-x-2 rounded-lg border border-zinc-500 text-sm font-semibold rounded-md bg-zinc-950 dark:bg-zinc-600 px-3 py-1 font-semibold text-white shadow-xs hover:bg-zinc-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500 whitespace-nowrap'
@@ -14,6 +14,19 @@ module LinksHelper
 
   def button_to_primary(text, url, options = {})
     button_to(text, url, options.merge(class: PRIMARY_CLASS))
+  end
+
+  def link_to_artifact(artifact, options = { data: { turbo: false } })
+    return '' if artifact.nil?
+
+    path = case artifact.artifact_type
+           when 'Scorecard' then impact_card_path(id: artifact.id)
+           when 'Initiative' then initiative_path(id: artifact.id)
+           end
+
+    link_to path, options do
+      yield(artifact) if block_given?
+    end
   end
 
   def link_to_primary(text, url, options = {})

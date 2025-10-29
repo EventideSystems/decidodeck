@@ -13,6 +13,7 @@ class InitiativesController < ApplicationController # rubocop:disable Style/Docu
   before_action :set_subsystem_tags, only: %i[index show]
 
   sidebar_item :initiatives
+  menu_item :workspace
 
   def index # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     search_params = params.permit(:format, :page, q: [:name_or_description_cont])
@@ -42,7 +43,27 @@ class InitiativesController < ApplicationController # rubocop:disable Style/Docu
     @initiative.create_missing_checklist_items!
   end
 
-  def new
+  def edit
+    @impact_card = @initiative.scorecard
+
+    @initiative.initiatives_organisations.build if @initiative.initiatives_organisations.empty?
+    @initiative.initiatives_subsystem_tags.build if @initiative.initiatives_subsystem_tags.empty?
+  end
+
+  def update
+    if @initiative.update(initiative_params)
+      update_stakeholders!(@initiative, initiatives_organisations_params)
+      update_subsystem_tags!(@initiative, initiatives_subsystem_tags_params)
+
+      # TODO: Put some smarts in here to redirect to the impact cards page if the user was on the impact cards page
+      #      when they clicked the edit button, and to the initiative show page if they were on the initiatives page
+      redirect_to(initiative_path(@initiative), notice: 'Initiative was successfully updated.')
+    else
+      render(:edit)
+    end
+  end
+
+  def new # rubocop:disable Metrics/AbcSize
     @impact_card = Scorecard.find_by(id: params[:impact_card_id])
     @initiative = Initiative.new(scorecard: @impact_card)
 
@@ -50,13 +71,10 @@ class InitiativesController < ApplicationController # rubocop:disable Style/Docu
     @initiative.initiatives_subsystem_tags.build if @initiative.initiatives_subsystem_tags.empty?
 
     authorize(@initiative)
-  end
 
-  def edit
-    @impact_card = @initiative.scorecard
-
-    @initiative.initiatives_organisations.build if @initiative.initiatives_organisations.empty?
-    @initiative.initiatives_subsystem_tags.build if @initiative.initiatives_subsystem_tags.empty?
+    add_breadcrumb Scorecard.model_name.human.pluralize, :impact_cards_path
+    add_breadcrumb @impact_card.name, impact_card_path(@impact_card)
+    add_breadcrumb "Add #{Initiative.model_name.human}"
   end
 
   def create # rubocop:disable Metrics/MethodLength
@@ -73,19 +91,6 @@ class InitiativesController < ApplicationController # rubocop:disable Style/Docu
       redirect_to(impact_card_path(@impact_card), notice: 'Initiative was successfully created.')
     else
       render(:new)
-    end
-  end
-
-  def update
-    if @initiative.update(initiative_params)
-      update_stakeholders!(@initiative, initiatives_organisations_params)
-      update_subsystem_tags!(@initiative, initiatives_subsystem_tags_params)
-
-      # TODO: Put some smarts in here to redirect to the impact cards page if the user was on the impact cards page
-      #      when they clicked the edit button, and to the initiative show page if they were on the initiatives page
-      redirect_to(initiative_path(@initiative), notice: 'Initiative was successfully updated.')
-    else
-      render(:edit)
     end
   end
 

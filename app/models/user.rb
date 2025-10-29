@@ -51,7 +51,7 @@ class User < ApplicationRecord
   include Searchable
 
   has_paper_trail
-  acts_as_paranoid
+  include Discardable
 
   enum :system_role, %i[member admin], default: :member # rubocop:disable Rails/EnumHash
 
@@ -100,6 +100,10 @@ class User < ApplicationRecord
   # Used by Devise to determine if the user is active and can sign in.
   def active_for_authentication?
     super && (admin? || default_workspace.present?)
+  end
+
+  def available_workspaces
+    (workspaces_from_admin_accounts + workspaces_from_owned_accounts + workspaces).uniq
   end
 
   # TODO: Consider converting this to symbols, or move to a helper method

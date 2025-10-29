@@ -7,6 +7,7 @@ class DataModelsController < ApplicationController # rubocop:disable Metrics/Cla
   after_action :verify_authorized, except: :index
 
   sidebar_item :library
+  menu_item :library
 
   def index # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     search_params = params.permit(:format, :page, q: [:name_or_description_cont])

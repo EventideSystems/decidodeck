@@ -5,7 +5,7 @@
       f.search_field(
         (local_assigns[:search_field].present? ? search_field : :name_or_description_cont),
         placeholder:,
-        class: "form-input w-60 border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white",
+  class: "form-input w-60 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800",
         oninput: 'this.form.requestSubmit()',
         autofocus: true,
         autocomplete: 'off'

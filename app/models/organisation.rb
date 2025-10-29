@@ -23,7 +23,7 @@ class Organisation < ApplicationRecord
   include Searchable
 
   has_paper_trail
-  acts_as_paranoid
+  include Discardable
 
   belongs_to :workspace
   belongs_to :stakeholder_type

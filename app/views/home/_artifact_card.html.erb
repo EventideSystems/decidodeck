@@ -1,0 +1,66 @@
+<%= link_to_artifact(artifact) do %>
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md dark:hover:shadow-lg transition-shadow duration-200 flex flex-col h-full">
+    <div class="flex items-start justify-between mb-4">
+      <div class="flex items-center overflow-hidden">
+        <%- case artifact.artifact_type %>
+        <%- when 'Scorecard' %>
+          <div class="h-12 w-12 bg-gradient-to-br from-green-500 to-teal-600 dark:from-green-600 dark:to-teal-700 rounded-lg flex items-center justify-center text-white font-semibold flex-shrink-0">
+            <%= image_tag 'artifacts/impact_card.svg', class: 'h-6 w-6', alt: 'Impact Card' %>
+          </div>
+        <%- when 'Initiative' %>
+          <div class="h-12 w-12 bg-gradient-to-br from-yellow-500 to-orange-600 dark:from-yellow-600 dark:to-orange-700 rounded-lg flex items-center justify-center text-white font-semibold flex-shrink-0">
+            <%= image_tag 'artifacts/initiative.svg', class: 'h-6 w-6', alt: 'Initiative' %>
+          </div>
+        <%- end %>
+        <div class="ml-3 overflow-hidden">
+          <h2 class="truncate text-lg font-medium text-gray-900 dark:text-white overflow-hidden text-ellipsis whitespace-nowrap">
+            <% if artifact.respond_to?(:display_name) %>
+              <span alt="<%= artifact.display_name %>"><%= artifact.display_name %></span>
+            <% else %>
+              Artifact #<%= artifact.id.to_s.first(8) %>
+            <% end %>
+          </h2>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            <%= artifact.model_human_name %>
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Content Preview -->
+    <div class="flex-1 mb-4">
+      <% if artifact.respond_to?(:markdown) && artifact.markdown.present? %>
+        <div class="line-clamp-3 markdown-content-constrained">
+          <%= markdown(truncate(artifact.markdown, length: 200, separator: ' ', omission: '...')) %>
+        </div>
+      <% else %>
+        <div class="text-sm text-gray-500 dark:text-gray-500 italic">
+          No preview available
+        </div>
+      <% end %>
+    </div>
+    
+    <!-- Tags -->
+    <div class="mb-4">
+      <% if artifact.respond_to?(:tags) && artifact.tags.present? %>
+        <div class="flex flex-wrap gap-2">
+          <% artifact.tags.each do |tag| %>
+            <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400">
+              <%= tag %>
+            </span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    
+    <!-- Artifact Metadata -->
+    <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pt-4 border-t border-gray-100 dark:border-gray-700">
+      <div class="flex items-center">
+        <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Last updated <%= time_ago_in_words(artifact.updated_at) %> ago
+      </div>
+    </div>
+  </div>
+<% end %>
