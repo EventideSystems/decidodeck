@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-source "https://rubygems.org"
+source "https://gem.coop"
 
 gem "hanami", "~> 2.3.0"
 gem "hanami-assets", "~> 2.3.0"
@@ -12,9 +12,17 @@ gem "hanami-view", "~> 2.3.0"
 
 gem "dry-types", "~> 1.7"
 gem "dry-operation", ">= 1.0.1"
+gem "dry-struct"
 gem "puma"
 gem "rake"
 gem "pg"
+
+# Authentication
+gem "rodauth"
+gem "bcrypt"
+
+# Mail
+gem "mail"
 
 group :development do
   gem "hanami-webconsole", "~> 2.3.0"

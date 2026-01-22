@@ -6,3 +6,5 @@ public/*
 !public/500.html
 node_modules/
 spec/examples.txt
+tmp/*
+.DS_Store
