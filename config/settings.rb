@@ -5,5 +5,7 @@ module Decidodeck
     # Define your app settings here, for example:
     #
     # setting :my_flag, default: false, constructor: Types::Params::Bool
+    setting :session_secret, constructor: Types::String.constrained(filled: true)
+    
   end
 end
