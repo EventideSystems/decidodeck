@@ -8,3 +8,4 @@ node_modules/
 spec/examples.txt
 tmp/*
 .DS_Store
+app/assets/builds/

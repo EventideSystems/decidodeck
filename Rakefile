@@ -10,7 +10,7 @@ namespace :tailwind do
   task :compile do
     system(
       "npx",
-      "tailwindcss",
+      "@tailwindcss/cli",
       "--input", "app/assets/css/tailwind.css",
       "--output", "app/assets/builds/tailwind.css",
       "--minify"
@@ -21,7 +21,7 @@ namespace :tailwind do
   task :watch do
     system(
       "npx",
-      "tailwindcss",
+      "@tailwindcss/cli",
       "--input", "app/assets/css/tailwind.css",
       "--output", "app/assets/builds/tailwind.css",
       "--minify",
@@ -29,3 +29,6 @@ namespace :tailwind do
     )
   end
 end
+
+
+# npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch

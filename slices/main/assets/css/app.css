@@ -1,3 +1,5 @@
+@import "../../../../app/assets/builds/tailwind.css";
+
 body {
   background-color: #fff;
   color: #000;
