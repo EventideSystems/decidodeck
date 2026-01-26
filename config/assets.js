@@ -12,6 +12,13 @@ await assets.run({
     // Use the `args.watch` boolean as a condition to apply diffierent options
     // when running `hanami assets watch` vs `hanami assets compile`.
 
+    // Add SVG loader for all assets (main app and slices)
+    if (!esbuildOptions.loader) {
+      esbuildOptions.loader = {};
+    }
+
+    esbuildOptions.loader['.svg'] = 'copy';
+    
     return esbuildOptions;
   },
 });
