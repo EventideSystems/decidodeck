@@ -1,6 +1,6 @@
 # Decidodeck
 
-🌸 Welcome to your Hanami app!
+A new adaptive decision‑support framework built from first principles.
 
 ## Getting started
 
